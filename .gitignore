@@ -2,10 +2,11 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+.idea/
 # C extensions
 *.so
-
+trashdir/
+dataset/*/*-refactored-dataset.json
 # Distribution / packaging
 .Python
 build/
