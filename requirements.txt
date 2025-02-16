@@ -1,0 +1,12 @@
+pre-commit
+scikit-learn
+python-dotenv
+transformers
+torch
+peft
+tqdm
+openai
+pandas
+pydantic
+trl
+datasets
