@@ -1,7 +1,5 @@
-<span style="color:red">🚨🚨🚨 We will release the models on Hugging Face along with a Python library once the work is made public. 🚨🚨🚨 </span>
+<span style="color:red">🚨🚨🚨 We will release the models on Hugging Face along with a Python library once the work is made public.  </span>
 
-
----
 
 <div align="center">
   <img src="images/logo.png" width="50%" height="30%"/>
