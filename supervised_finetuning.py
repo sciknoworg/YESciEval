@@ -10,27 +10,15 @@ from datetime import date
 
 date_string: str = date.today().strftime("%d %b %Y")
 
-# orkg-synthesis-adv  --> max_length: 5292
-# orkg-synthesis-org  --> max_length: 4645
-
-# bioasq-adv  --> max_length:9448
-# bioasq-org  --> max_length:8874
-
 prompts = Prompts()
-
 dataset_sft_obj = SciQAEvalSFTDataset(prompts)
-
 remove_columns = ['sample_id', 'eval_type', 'quality', 'synthesizer_model', 'evaluator_model', 
                   'research_question', 'synthesizer_synthesis', 'synthesis_evaluation_rating', 
                   'synthesis_evaluation_rationale', 'papers', 'original-synthesis', 'evaluation']
-
-
 metadata = [
-    # ["orkg-synthesis-org", 4645, 1], # Done
-    
-    ["bioasq-org", 8874, 1]  # 
+    ["orkg-synthesis-org", 4645, 1],
+    ["bioasq-org", 8874, 1]
 ]
-
 num_train_epochs = 5
 
 for data_key, max_len, batch_size in metadata:
@@ -38,17 +26,15 @@ for data_key, max_len, batch_size in metadata:
     print(data_key, max_len, batch_size)
     path = config.datasets_path[data_key]
     dataset = utils.read_json(path)
-    
     model, tokenizer, peft_params = llm_loader.load_qlora_model(model_id=config.evaluator_model_id, 
                                                                 token=config.huggingface_key)
     if tokenizer.chat_template is None:
         model, tokenizer = setup_chat_format(model, tokenizer)
-    
+
     def preprocess_chat_data(examples):
         input_ids = []
         attention_masks = []
         labels = []
-
         for research_question, synthesis, papers, quality, rationale, rating in zip(examples['research_question'], 
                                                                                     examples['synthesizer_synthesis'], 
                                                                                     examples['papers'],
@@ -63,9 +49,7 @@ for data_key, max_len, batch_size in metadata:
                 'synthesis_evaluation_rationale': rationale,
                 'synthesis_evaluation_rating': rating
             }
-
             conversation, label = dataset_sft_obj.preprocess_chat_data_sft(example_dict)
-
             # Format the conversation into a string
             formatted_input = tokenizer.apply_chat_template(conversation, date_string=date_string, 
                                                             tokenize=False, add_generation_prompt=True)
@@ -77,8 +61,6 @@ for data_key, max_len, batch_size in metadata:
             input_ids.append(tokenized_input["input_ids"])
             attention_masks.append(tokenized_input["attention_mask"])
             # labels.append(tokenized_label["input_ids"])
-
-        # Return all tokenized outputs as a dictionary
         return {
             "input_ids": input_ids, 
             "attention_mask": attention_masks, 
@@ -89,10 +71,7 @@ for data_key, max_len, batch_size in metadata:
     preprocess_train = train.map(preprocess_chat_data, batched=True, remove_columns=remove_columns)
     
     tks = [len(sample['input_ids']) for sample in preprocess_train]
-    print("max tokens formatted_input:", max(tks))
-    # tks = [len(sample['labels']) for sample in preprocess_train]
-    # print("max tokens labels:", max(tks))
-    
+
     max_length = max_len
     training_params = TrainingArguments(
         output_dir=output_dir,
@@ -113,8 +92,6 @@ for data_key, max_len, batch_size in metadata:
         report_to="tensorboard",
         # max_seq_length=max_len,
     )
-
-    # Initialize the trainer
     trainer = SFTTrainer(
         model=model,
         train_dataset=preprocess_train,
@@ -124,9 +101,5 @@ for data_key, max_len, batch_size in metadata:
         tokenizer=tokenizer,
         args=training_params,
     )
-    
-    # Train the model
     trainer.train()
-
-    # Save the model
     trainer.save_model(output_dir)

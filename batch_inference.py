@@ -9,11 +9,9 @@ from concurrent.futures import ThreadPoolExecutor
 
 date_string: str = date.today().strftime("%d %b %Y")
 
-
 def process_batch(model, tokenizer, batch_samples):
     """Process a batch of inputs."""
     conversations = [dataset_sft_obj.preprocess_chat_data_inf(sample) for sample in batch_samples]
-    
     inputs = tokenizer.apply_chat_template(
         conversations,
         add_generation_prompt=True,
@@ -23,20 +21,15 @@ def process_batch(model, tokenizer, batch_samples):
         truncation=True,
     )
     inputs.to(model.device)
-
-    # Generate outputs in a batch
-    # with torch.no_grad():
     outputs = model.generate(**inputs, max_new_tokens=max_new_tokens, pad_token_id=tokenizer.eos_token_id)
-    
     outputs_texts = [
         tokenizer.decode(output[len(input_ids):], skip_special_tokens=True)
         for output, input_ids in zip(outputs, inputs["input_ids"])
     ]
-    
     return outputs_texts
 
 def gpt4o_eval(outputs_texts):
-    """Use GPT-4o API to evaluate outputs in parallel."""
+    """Use GPT-4o API to extract evaluation outputs only in a parallel mode."""
     def call_api(text):
         while True:
             try:
@@ -48,18 +41,13 @@ def gpt4o_eval(outputs_texts):
                 return eval(completion.choices[0].message.function_call.arguments)
             except:
                 time.sleep(3)
-    
     with ThreadPoolExecutor(max_workers=4) as executor:  # Adjust workers based on API limits
         results = list(executor.map(call_api, outputs_texts))
-    
     return results
 
 prompts = Prompts()
-
 dataset_sft_obj = SciQAEvalSFTDataset(prompts)
-
 client = OpenAI(api_key=config.openai_key)
-
 functions = [
   {
     "name": "evaluate_characteristic",
@@ -82,47 +70,33 @@ functions = [
     }
   }
 ]
-
 metadata = [
-    
     # SFT (ORG)
-    # ["assets/sft-orkg-synthesis-org",  "orkg-synthesis-test", "assets/sft-orkg-synthesis-org-test.json"],  
-    # ["assets/sft-bioasq-org",  "bioasq-test", "assets/sft-bioasq-org-test.json"],
-    
+    ["assets/sft-orkg-synthesis-org",  "orkg-synthesis-test", "assets/sft-orkg-synthesis-org-test.json"],
+    ["assets/sft-bioasq-org",  "bioasq-test", "assets/sft-bioasq-org-test.json"],
     # SFT (ORG) + RL (ADV)
-    # ["assets/rlhf-orkg-synthesis-adv",  "orkg-synthesis-test", "assets/rlhf-orkg-synthesis-adv-test.json"],  
-    # ["assets/rlhf-bioasq-adv",  "bioasq-test", "assets/rlhf-bioasq-adv-test.json"], 
-    
+    ["assets/rlhf-orkg-synthesis-adv",  "orkg-synthesis-test", "assets/rlhf-orkg-synthesis-adv-test.json"],
+    ["assets/rlhf-bioasq-adv",  "bioasq-test", "assets/rlhf-bioasq-adv-test.json"],
     # SFT (ORG) + RL (ADV + ORG)
-    # ["assets/rlhf-orkg-synthesis-adv-org",  "orkg-synthesis-test", "assets/rlhf-orkg-synthesis-adv-org-test.json"],  
+    ["assets/rlhf-orkg-synthesis-adv-org",  "orkg-synthesis-test", "assets/rlhf-orkg-synthesis-adv-org-test.json"],
     ["assets/rlhf-bioasq-adv-org",  "bioasq-test", "assets/rlhf-bioasq-adv-org-test.json"], 
 ]
 
 batch_size = 4  
 max_new_tokens = 150 
 
-# Iterate over metadata
 for model_id, data_key, output_path in metadata:
     print("Working on:", model_id)
-
     path = config.datasets_path[data_key]
     dataset = utils.read_json(path)
-
     model, tokenizer = llm_loader.load_tuned_model(model_id=model_id, token=config.huggingface_key)
-
     for i in tqdm(range(0, len(dataset), batch_size)):
         batch_samples = dataset[i:i+batch_size]
-
-        # Process in batches
         outputs_texts = process_batch(model, tokenizer, batch_samples)
-
-        # GPT-4o evaluation extraction in parallel
         evaluations = gpt4o_eval(outputs_texts)
-
         for j, evaluation in enumerate(evaluations):
             dataset[i + j]['synthesis_evaluation_rating'] = evaluation['rating']
             dataset[i + j]['synthesis_evaluation_rationale'] = evaluation['rationale']
-
     utils.save_json(data=dataset, file_path=output_path)
     
     

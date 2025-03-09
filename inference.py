@@ -8,22 +8,14 @@ import time
 
 date_string: str = date.today().strftime("%d %b %Y")
 
-
 prompts = Prompts()
-
 dataset_sft_obj = SciQAEvalSFTDataset(prompts)
-
 remove_columns = ['sample_id', 'eval_type', 'quality', 'synthesizer_model', 'evaluator_model', 
                   'research_question', 'synthesizer_synthesis', 'synthesis_evaluation_rating', 
                   'synthesis_evaluation_rationale', 'papers', 'original-synthesis', 'evaluation']
-
-
-
-
 max_new_tokens = 150
 
 client = OpenAI(api_key=config.openai_key)
-
 functions = [
   {
     "name": "evaluate_characteristic",
@@ -46,31 +38,25 @@ functions = [
     }
   }
 ]
-
 metadata = [
-    
     # SFT (ORG)
-    # ["assets/sft-orkg-synthesis-org",  "orkg-synthesis-test", "assets/sft-orkg-synthesis-org-test.json"],  
-    # ["assets/sft-bioasq-org",  "bioasq-test", "assets/sft-bioasq-org-test.json"],
+    ["assets/sft-orkg-synthesis-org",  "orkg-synthesis-test", "assets/sft-orkg-synthesis-org-test.json"],
+    ["assets/sft-bioasq-org",  "bioasq-test", "assets/sft-bioasq-org-test.json"],
     
     # SFT (ORG) + RL (ADV)
-    # ["assets/rlhf-orkg-synthesis-adv",  "orkg-synthesis-test", "assets/rlhf-orkg-synthesis-adv-test.json"],  
-    # ["assets/rlhf-bioasq-adv",  "bioasq-test", "assets/rlhf-bioasq-adv-test.json"], 
+    ["assets/rlhf-orkg-synthesis-adv",  "orkg-synthesis-test", "assets/rlhf-orkg-synthesis-adv-test.json"],
+    ["assets/rlhf-bioasq-adv",  "bioasq-test", "assets/rlhf-bioasq-adv-test.json"],
     
     # SFT (ORG) + RL (ADV + ORG)
     ["assets/rlhf-orkg-synthesis-adv-org",  "orkg-synthesis-test", "assets/rlhf-orkg-synthesis-adv-org-test.json"],  
-    # ["assets/rlhf-bioasq-adv-org",  "bioasq-test", "assets/rlhf-bioasq-adv-org-test.json"], 
+    ["assets/rlhf-bioasq-adv-org",  "bioasq-test", "assets/rlhf-bioasq-adv-org-test.json"],
 ]
 
 for model_id, data_key, output_path in metadata:
     print("working on:", model_id)
-    
     path = config.datasets_path[data_key]
-    
     dataset = utils.read_json(path)
-    
     model, tokenizer = llm_loader.load_tuned_model(model_id=model_id, token=config.huggingface_key)
-    
     for index, sample in tqdm(enumerate(dataset)):
         while True:
             try:
@@ -90,12 +76,10 @@ for model_id, data_key, output_path in metadata:
                     messages=[{"role": "user", "content": outputs_text}],
                     functions=functions
                 )
-
                 inference = eval(completion.choices[0].message.function_call.arguments)
                 break
             except:
                 time.sleep(3)
         dataset[index]['synthesis_evaluation_rating'] = inference['rating']
         dataset[index]['synthesis_evaluation_rationale'] = inference['rationale']
-        
     utils.save_json(data=dataset, file_path=output_path)

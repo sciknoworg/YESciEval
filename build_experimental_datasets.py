@@ -10,7 +10,6 @@ def build_experimental_sets(path, root_dir, data_file_prefix):
     print("Dataset size is:", len(dataset))
     print("Dataset keys:", dataset[0].keys())
     data_obj = SciQAEvalDataset(config=config)
-    
 
     print("----------------------------EXP-1 SFT (ORG) ----------------------------")
     original_data = data_obj.get_sft_dataset(dataset, data_type='original')
@@ -49,7 +48,6 @@ path = config.datasets_path['orkg-synthesis-combined'] if dataset_name == "ORKG-
 data_file_prefix = "llm4syn" if dataset_name == "ORKG-Synthesis" else "BioASQ"
 root_dir = os.path.join("dataset", dataset_name)
 build_experimental_sets(path, root_dir, data_file_prefix)
-
 
 dataset_name = "BioASQ"
 path = config.datasets_path['orkg-synthesis-combined'] if dataset_name == "ORKG-Synthesis" else config.datasets_path['bioasq-combined']

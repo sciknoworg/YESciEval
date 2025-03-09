@@ -7,7 +7,6 @@ from pydantic import BaseModel
 import time
 from tqdm import tqdm
 import math
-
 from sciqaeval import config, utils
 
 client = OpenAI(api_key=config.openai_key)
@@ -18,11 +17,9 @@ synthesizers = [
     "qwen2.5-72b-instruct",
     "mistral-large-instruct"
 ]
-
 instruction = ("You are given a detailed evaluation of a scientific synthesis across various characteristics. "
                "Your task is to extract and structure the evaluation information for specific characteristic. "
                "Do not generate generate new rational.")
-
 
 class Rationale(BaseModel):
     rationale: str
@@ -105,16 +102,13 @@ def refactor(dataset_name, config, split='train', evaluator = "meta-llama-3.1-8b
             sample_id = df[sample_id_column].tolist()[df_index]
             for synthesizer in synthesizers:
                 synthesis = df[f"{synthesizer}_synthesis"].tolist()[df_index]
-
                 for quality in criteria:
                     synthesizer_scores_str = df[f"{evaluator}_evaluation_scores_{synthesizer}"].tolist()[df_index]
                     synthesis_evaluation_rating = df[f"{evaluator}_{synthesizer}_{quality}"].tolist()[df_index]
-                    
                     if eval_type != 'original':
                         synthesizer_synthesis = df[f"{synthesizer}_{eval_type}_{quality.lower()}"].tolist()[df_index]
                     else:
                         synthesizer_synthesis = df[f"{synthesizer}_synthesis"].tolist()[df_index]
-
                     synthesis_evaluation_rationale = find_rational(quality, synthesis_evaluation_rating, synthesizer_scores_str) 
                     if len(synthesis_evaluation_rationale) == 0:
                         error_in_rationale += 1
@@ -140,8 +134,6 @@ def refactor(dataset_name, config, split='train', evaluator = "meta-llama-3.1-8b
     print(f"{data_file_prefix} size:", len(dataset))
     print(f"{data_file_prefix} error in rationale:", error_in_rationale)
 
-
-
 print("refactor ORKG-Synthesis-train....")
 refactor(dataset_name="ORKG-Synthesis", config=config, split='train')
 print("refactor ORKG-Synthesis-test....")
@@ -152,7 +144,6 @@ refactor(dataset_name="ORKG-Synthesis", config=config, split='train', evaluator=
 refactor(dataset_name="ORKG-Synthesis", config=config, split='test', evaluator="qwen2.5-72b-instruct")
 refactor(dataset_name="ORKG-Synthesis", config=config, split='train', evaluator="mistral-large-instruct")
 refactor(dataset_name="ORKG-Synthesis", config=config, split='test', evaluator="mistral-large-instruct")
-
 
 print("refactor BioASQ-train....")
 refactor(dataset_name="BioASQ", config=config, split='train')
