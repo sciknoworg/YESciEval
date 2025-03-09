@@ -1,4 +1,10 @@
 <div align="center">
+    <h4 style="color: red;">We will share the models in Hugging Face and a Python library within this work as soon as we make the work public!</h4>
+</div>
+
+---
+
+<div align="center">
   <img src="images/logo.png" width="50%" height="30%"/>
 </div>
 
@@ -37,5 +43,5 @@ mv .env-example .env
 Next, update your tokens in `.env`  to use `LLaMA-3` LLMs. Once you installed the requirements and prepared the `.env` file, you can move forward with experimentation.
 
 
-## ScienceQ&A
+## ScienceQ&A Dataset
 
