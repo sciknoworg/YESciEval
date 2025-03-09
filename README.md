@@ -1,6 +1,5 @@
-<div align="center">
-    <h4 style="color: red;">We will share the models in Hugging Face and a Python library within this work as soon as we make the work public!</h4>
-</div>
+<span style="color:red">🚨🚨🚨 We will release the models on Hugging Face along with a Python library once the work is made public. 🚨🚨🚨 </span>
+
 
 ---
 
