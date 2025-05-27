@@ -5,7 +5,6 @@ __pycache__/
 .idea/
 # C extensions
 *.so
-yescieval/
 trashdir/
 dataset/*/*-refactored-dataset.json
 # Distribution / packaging
