@@ -1,6 +1,6 @@
-from sciqaeval import config, utils, llm_loader
-from sciqaeval.prompt import Prompts
-from sciqaeval.dataset import SciQAEvalSFTDataset
+from YESciEval import config, utils, llm_loader
+from YESciEval.prompt import Prompts
+from YESciEval.dataset import SciQAEvalSFTDataset
 from datetime import date
 from tqdm import tqdm
 from openai import OpenAI
