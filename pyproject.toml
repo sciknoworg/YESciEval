@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "YESciEval"
 
-version = "0.1.0"
+version = "0.2.0"
 
 description = "YESciEval: Robust LLM-as-a-Judge for Scientific Question Answering."
 authors = ["Hamed Babaei Giglou <hamedbabaeigiglou@gmail.com>"]

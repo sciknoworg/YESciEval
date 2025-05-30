@@ -5,7 +5,7 @@ with open("README.md", encoding="utf-8") as f:
 
 setup(
     name="YESciEval",
-    version="0.1.0",
+    version="0.2.0",
     author="Hamed Babaei Giglou",
     author_email="hamedbabaeigiglou@gmail.com",
     description="YESciEval: Robust LLM-as-a-Judge for Scientific Question Answering.",
