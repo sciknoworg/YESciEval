@@ -12,10 +12,10 @@ class Rubric(BaseModel, ABC):
     system_prompt_template: str
     papers: Dict[str, str]
     question: str
-    synthesis: str
+    answer: str
     user_prompt_template: str = ("Evaluate and rate the quality of the following scientific synthesis "
                              "according to the characteristics given in the system prompt.\n"
-                             "\n<scientific-synthesis>{synthesis}</scientific-synthesis>\n"
+                             "\n<scientific-synthesis>{answer}</scientific-synthesis>\n"
                              "\n<research-question>{question}</research-question>\n"
                              "\n<paper-titles-and-abstracts>\n{content}</paper-titles-and-abstracts>\n\n###")
 
@@ -26,7 +26,7 @@ class Rubric(BaseModel, ABC):
         return paper_content
 
     def verbalize(self):
-        return self.user_prompt_template.format(synthesis=self.synthesis,
+        return self.user_prompt_template.format(answer=self.answer,
                                                 question=self.question,
                                                 content=self.render_papers())
 
