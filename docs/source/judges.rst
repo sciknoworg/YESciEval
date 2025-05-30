@@ -73,14 +73,14 @@ The difference between **AskAutoJudge** and **BioASQAutoJudge** compared to **Au
 Custom Judge
 --------------------
 
-The `AutoJudge` class provides flexibility to load any compatible LLM model from Hugging Face by specifying the model ID. This allows you to use any pre-trained or fine-tuned model beyond the default specialized judges using YESciEval.
+The `CustomAutoJudge` class provides flexibility to load any compatible LLM model from Hugging Face by specifying the model ID. This allows you to use any pre-trained or fine-tuned model beyond the default specialized judges using YESciEval.
 
 For example, you can load a model and evaluate a rubric like this:
 
 .. code-block:: python
 
     # Initialize and load a custom model by specifying its Hugging Face model ID
-    judge = AutoJudge()
+    judge = CustomAutoJudge()
     judge.from_pretrained(model_id="Qwen/Qwen3-8B", device="cpu", token="your_huggingface_token")
 
     # Evaluate the rubric using the loaded model
