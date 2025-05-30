@@ -1,26 +1,18 @@
 <div align="center">
-  <img src="images/logo.png" width="50%" height="30%"/>
+     <img src="https://raw.githubusercontent.com/sciknoworg/YESciEval/main/images/logo.png" alt="OntoLearner Logo" width="500"/>
 </div>
 
 <div align="center">
-
-
-[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+ <a href="https://badge.fury.io/py/YESciEval"><img src="https://badge.fury.io/py/YESciEval.svg" alt="PyPI version"></a>
+ <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+ <a href="https://yescieval.readthedocs.io/"><img src="https://app.readthedocs.org/projects/yescieval/badge/" alt="Documentation Status"></a>
 
 
 </div>
 
+Large Language Models (LLMs) have become pivotal in powering scientific question-answering across modern search engines, yet their evaluation robustness remains largely underexplored. To address this gap, we introduce **YESciEval** — an open-source framework that leverages fine-grained rubric-based assessments combined with reinforcement learning to reduce optimism bias in LLM evaluators.
 
-## 📋 What is the YESciEval?
-
-
-Large Language Models (LLMs) drive scientific question-answering on modern search engines, yet their evaluation robustness remains underexplored. We introduce **YESciEval**, an open-source framework that combines fine-grained rubric-based assessment with reinforcement learning to mitigate optimism bias in LLM evaluators. The framework is presented as f ollows:
-
-
-We release multidisciplinary scienceQ&A datasets, including adversarial variants, with evaluation scores from multiple LLMs. Independent of proprietary models and human feedback, our approach enables scalable, cost-free evaluation. By advancing reliable LLM-as-a-judge models, this work supports AI alignment and fosters robust, transparent evaluation essential for scientific inquiry and artificial general intelligence.
+YESciEval provides a comprehensive library for evaluating the quality of synthesized scientific answers using predefined rubrics and sophisticated LLM-based judgment models. This framework enables you to assess answers on key criteria by utilizing pretrained judges and parsing LLM outputs into structured JSON formats for detailed analysis.
 
 ## 📃 License
 
