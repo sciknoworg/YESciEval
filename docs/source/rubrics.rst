@@ -6,18 +6,20 @@ A total of nine evaluation rubrics were defined as part of the YESciEval test fr
 
 **Linguistic & Stylistic Quality** concerns grammar, clarity, and adherence to academic writing conventions.
 
-+--------------------+-------------------------------------------------------------+
-| Evaluation Rubric   | Description                                                 |
-+====================+=============================================================+
-| **1. Cohesion:**    | Are the sentences connected appropriately to make the      |
-|                    | resulting synthesis cohesive?                               |
-+--------------------+-------------------------------------------------------------+
-| **2. Conciseness:** | Is the answer short and clear, without redundant statements?|
-+--------------------+-------------------------------------------------------------+
-| **3. Readability:** | Does the answer follow appropriate style and structure     |
-|                    | conventions for academic writing, particularly for          |
-|                    | readability?                                                |
-+--------------------+-------------------------------------------------------------+
+.. table::
+
+    +--------------------+-------------------------------------------------------------+
+    | Evaluation Rubric   | Description                                                 |
+    +====================+=============================================================+
+    | **1. Cohesion:**    | Are the sentences connected appropriately to make the      |
+    |                    | resulting synthesis cohesive?                               |
+    +--------------------+-------------------------------------------------------------+
+    | **2. Conciseness:** | Is the answer short and clear, without redundant statements?|
+    +--------------------+-------------------------------------------------------------+
+    | **3. Readability:** | Does the answer follow appropriate style and structure     |
+    |                    | conventions for academic writing, particularly for          |
+    |                    | readability?                                                |
+    +--------------------+-------------------------------------------------------------+
 
 **Logical & Structural Integrity** focuses on the reasoning and organization of information.
 
