@@ -18,6 +18,7 @@
    <br>
    <br>
 
+YESciEval provides a comprehensive library for evaluating the quality of synthesized scientific answers using predefined rubrics and sophisticated LLM-based judgment models. This framework enables you to assess answers on key criteria by utilizing pretrained judges and parsing LLM outputs into structured JSON formats for detailed analysis.
 
 YESciEval was created by `Scientific Knowledge Organization (SciKnowOrg group) <https://github.com/sciknoworg/>`_ at `Technische Informationsbibliothek (TIB) <https://www.tib.eu/de/>`_. Don't hesitate to open an issue on the `YESciEval repository <https://github.com/sciknoworg/YESciEval>`_ if something is broken or if you have further questions.
 
@@ -40,7 +41,6 @@ If you find this repository helpful, feel free to cite our publication `YESciEva
 
 
 
-
 .. toctree::
    :maxdepth: 1
    :caption: Getting Started
@@ -56,8 +56,6 @@ If you find this repository helpful, feel free to cite our publication `YESciEva
 
    rubrics
    judges
-
-
 
 .. toctree::
    :maxdepth: 1

@@ -10,7 +10,7 @@ YESciEval is a library designed to evaluate the quality of synthesized scientifi
 
    from yescieval import Informativeness, AskAutoJudge, GPTParser
 
-   # Sample papers used as context
+   # Sample papers used in form of {"title": "abstract", ... }
    papers = {
        "A Study on AI": "This paper discusses recent advances in artificial intelligence, including deep learning.",
        "Machine Learning Basics": "An overview of supervised learning methods such as decision trees and SVMs.",
