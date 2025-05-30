@@ -49,3 +49,20 @@ class BioASQAutoJudge(AutoJudge):
                          device: str = "auto",
                          token: str = ""):
         return super()._from_pretrained(model_id=model_id, device=device, token=token)
+
+
+
+class CustomAutoJudge(AutoJudge):
+
+    def _from_pretrained(self, model_id:str, device:str="auto", token:str =""):
+        tokenizer = AutoTokenizer.from_pretrained(model_id,
+                                                  padding_side="left",
+                                                  token=token)
+        tokenizer.pad_token = tokenizer.eos_token
+        model = AutoModelForCausalLM.from_pretrained(
+            model_id,
+            torch_dtype=torch.float32,
+            device_map=device,
+            token=token
+        )
+        return model, tokenizer
