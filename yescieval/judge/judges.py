@@ -44,7 +44,7 @@ class AskAutoJudge(AutoJudge):
                          token:str =""):
         return super()._from_pretrained(model_id=model_id, device=device, token=token)
 
-class BioASAutoJudge(AutoJudge):
+class BioASQAutoJudge(AutoJudge):
     def from_pretrained(self, model_id: str = "SciKnowOrg/YESciEval-BioASQ-Llama-3.1-8B",
                          device: str = "auto",
                          token: str = ""):

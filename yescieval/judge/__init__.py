@@ -1,7 +1,7 @@
-from .judges import AutoJudge, AskAutoJudge, BioASAutoJudge
+from .judges import AutoJudge, AskAutoJudge, BioASQAutoJudge
 
 __all__ = [
     "AutoJudge",
     "AskAutoJudge",
-    "BioASAutoJudge"
+    "BioASQAutoJudge"
 ]
