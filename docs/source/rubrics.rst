@@ -1,10 +1,13 @@
 
-Evaluation Rubrics
+Rubrics
 ===================
 
-A total of nine evaluation rubrics were defined as part of the YESciEval test framework:
+A total of nine evaluation rubrics were defined as part of the YESciEval test framework.
 
-**Linguistic & Stylistic Quality** concerns grammar, clarity, and adherence to academic writing conventions.
+Linguistic & Stylistic Quality
+---------------------------------
+
+Following ``Linguistic & Stylistic Quality`` concerns grammar, clarity, and adherence to academic writing conventions.
 
 
 .. list-table::
@@ -20,7 +23,9 @@ A total of nine evaluation rubrics were defined as part of the YESciEval test fr
    * - **3. Readability:**
      - Does the answer follow appropriate style and structure conventions for academic writing, particularly for readability?
 
-**Logical & Structural Integrity** focuses on the reasoning and organization of information.
+Logical & Structural Integrity
+---------------------------------
+Following ``Logical & Structural Integrity`` focuses on the reasoning and organization of information.
 
 .. list-table::
    :header-rows: 1
@@ -35,8 +40,10 @@ A total of nine evaluation rubrics were defined as part of the YESciEval test fr
    * - **6. Relevancy:**
      - Is the information in the answer relevant to the problem?
 
+Content Accuracy & Informativeness
+---------------------------------
 
-**Content Accuracy & Informativeness** ensures that the response is both correct and useful.
+Following ``Content Accuracy & Informativeness`` ensures that the response is both correct and useful.
 
 
 .. list-table::
@@ -54,7 +61,8 @@ A total of nine evaluation rubrics were defined as part of the YESciEval test fr
 
 
 
-**Usage Example**
+Usage Example
+--------------------------
 
 Here is a simple example of how to import rubrics in your code:
 
