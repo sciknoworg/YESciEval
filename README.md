@@ -16,14 +16,20 @@ Large Language Models (LLMs) have become pivotal in powering scientific question
 YESciEval provides a comprehensive library for evaluating the quality of synthesized scientific answers using predefined rubrics and sophisticated LLM-based judgment models. This framework enables you to assess answers on key criteria by utilizing pretrained judges and parsing LLM outputs into structured JSON formats for detailed analysis.
 
 
-## Installation
+## 🧪 Installation
+You can install ``YESciEval`` from PyPI using pip:
 
 ```bash
 pip install yescieval
 ```
+Next, verify the installation:
+```python
+import yescieval
 
+print(yescieval.__version__)
+```
 
-## Judges
+## 🔗  Essential Resources
 
 Specialized Judges within YESciEval are:
 
@@ -31,9 +37,13 @@ Specialized Judges within YESciEval are:
 |----------------|------------------------------------|-------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
 | **Ask Judge**  | Multidisciplinary (33 disciplines) | [ORKGSyn (Open Research Knowledge Graph)](https://data.uni-hannover.de/dataset/yescieval-corpus) | [SciKnowOrg/YESciEval-ASK-Llama-3.1-8B](https://huggingface.co/SciKnowOrg/YESciEval-ASK-Llama-3.1-8B)       |
 | **BioASQ Judge**| Biomedical                         | [BioASQ](https://data.uni-hannover.de/dataset/yescieval-corpus)                                                                             | [SciKnowOrg/YESciEval-BioASQ-Llama-3.1-8B](https://huggingface.co/SciKnowOrg/YESciEval-BioASQ-Llama-3.1-8B) |
+ 
 
+For further information dive into YESciEval's extensive documentation to explore its models and usage at **[📚 YESciEval Documentation](https://yescieval.readthedocs.io/)**.    
+## 🚀 Quick Tour
 
-## Quickstart Example
+Get started with YESciEval in just a few lines of code. This guide demonstrates how to initialize inputs, load judge, and initiate rubric for evaluation of the answer.
+
 
 ```python
 from yescieval import Readability, AutoJudge
@@ -62,7 +72,6 @@ judge = AutoJudge()
 judge.from_pretrained(
     model_id="SciKnowOrg/YESciEval-ASK-Llama-3.1-8B",
     token="your_huggingface_token",
-    device="cpu"
 )
 
 # Step 3: Evaluate the answer
@@ -71,28 +80,37 @@ print("Raw Evaluation Output:")
 print(result)
 ```
 
-| Class Name        | Description                                                                                  |
-| ----------------- | -------------------------------------------------------------------------------------------- |
-| `AutoJudge`       | Base class for loading and running evaluation models with PEFT adapters.                     |
-| `AskAutoJudge`    | Multidisciplinary judge tuned on the ORKGSyn dataset from the Open Research Knowledge Graph. |
+Judges within YESciEval are defined as follows:
+
+| Class Name       | Description                                                                                  |
+| ---------------- |----------------------------------------------------------------------------------------------|
+| `AutoJudge`      | Base class for loading and running evaluation models with PEFT adapters.                     |
+| `AskAutoJudge`   | Multidisciplinary judge tuned on the ORKGSyn dataset from the Open Research Knowledge Graph. |
 | `BioASQAutoJudge` | Biomedical domain judge tuned on the BioASQ dataset from the BioASQ challenge.               |
+| `CustomAutoJudge`| Custom LLM that can be used as a judge within YESciEval rubrics                              |
 
+A total of nine evaluation rubrics were defined as part of the YESciEval test framework and can be used via ``yescieval``. Following simple example shows how to import rubrics in your code:
 
-## Citation
+```python
+from yescieval import Informativeness, Correctness, Completeness, 
+                      Coherence, Relevancy, Integration, 
+                      Cohesion, Readability, Conciseness
+```
+
+A complete list of rubrics are available at YESciEval [📚 Rubrics](https://yescieval.readthedocs.io/rubrics.html) page.
+
+## 💡 Acknowledgements
 
 If you use YESciEval in your research, please cite:
 
 ```bibtex
-@misc{yescieval2025,
-  title={YESciEval: Scientific Text Evaluation with LLM Judges},
-  author={Your Name or Organization},
-  year={2025},
-  howpublished={\url{https://github.com/YourRepo/yescieval}},
-}
+@article{d2025yescieval,
+      title={YESciEval: Robust LLM-as-a-Judge for Scientific Question Answering},
+      author={D'Souza, Jennifer and Giglou, Hamed Babaei and M{\"u}nch, Quentin},
+      journal={arXiv preprint arXiv:2505.14279},
+      year={2025}
+   }
 ```
-
-
-## 📃 License
 
 This work is licensed under a [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT).
 
