@@ -6,3 +6,4 @@ openai
 pandas
 numpy
 pydantic
+pytest

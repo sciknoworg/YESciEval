@@ -22,6 +22,7 @@ setup(
         "pandas",
         "numpy",
         "pydantic",
+        "pytest"
     ],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
