@@ -10,6 +10,7 @@
 
    <div align="center">
      <a href="https://badge.fury.io/py/YESciEval"><img src="https://badge.fury.io/py/YESciEval.svg" alt="PyPI version"></a>
+     <a href="https://huggingface.co/collections/SciKnowOrg/yescieval-judges-6839d27aac00da416d25ee66"><img src="https://img.shields.io/badge/huggingface-YESciEval-blue?logo=huggingface" alt="YESciEval HF"></a>
      <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
      <a href="https://yescieval.readthedocs.io/"><img src="https://app.readthedocs.org/projects/yescieval/badge/" alt="Documentation Status"></a>
 
