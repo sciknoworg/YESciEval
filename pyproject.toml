@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "YESciEval"
+
+version = "0.2.0"
+
+description = "YESciEval: Robust LLM-as-a-Judge for Scientific Question Answering."
+authors = ["Hamed Babaei Giglou <hamedbabaeigiglou@gmail.com>"]
+license = "MIT License"
+readme = "README.md"
+homepage = "https://yescieval.readthedocs.io/"
+repository = "https://github.com/sciknoworg/YESciEval/"
+include = ["images/logo.png"]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<4.0.0"
+pre-commit="*"
+transformers="*"
+torch="*"
+peft="*"
+openai="*"
+pandas="*"
+numpy="*"
+pydantic="*"
+
+[tool.poetry.dev-dependencies]
+ruff = "*"
+pre-commit = "*"
+setuptools = "*"
+wheel = "*"
+twine = "*"
+pytest = "*"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

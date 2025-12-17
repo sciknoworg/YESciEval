@@ -1,12 +1,9 @@
 pre-commit
-scikit-learn
-python-dotenv
 transformers
 torch
 peft
-tqdm
 openai
 pandas
+numpy
 pydantic
-trl
-datasets
+pytest
