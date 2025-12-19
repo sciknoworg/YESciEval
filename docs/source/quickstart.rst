@@ -1,7 +1,7 @@
 Quickstart
 =================
 
-YESciEval is a library designed to evaluate the quality of synthesized scientific answers using predefined rubrics and advanced LLM-based judgment models. This guide walks you through how to evaluate answers based on **informativeness** & **gap identification** using a pretrained & a custom judge and parse LLM output into structured JSON.
+YESciEval is a library designed to evaluate the quality of synthesized scientific answers using predefined rubrics and advanced LLM-based judgment models. This guide walks you through how to evaluate answers based on **informativeness** and **gap identification** using a pretrained & a custom judge and parse LLM output into structured JSON.
 
 
 **Example: Evaluating an Answer Using Informativeness + AskAutoJudge**
@@ -51,23 +51,7 @@ YESciEval is a library designed to evaluate the quality of synthesized scientifi
 
 .. code-block:: python
 
-   from yescieval import GapIdentification, CustomAutoJudge, GPTParser
-
-   # Sample papers used in form of {"title": "abstract", ... }
-   papers = {
-       "A Study on AI": "This paper discusses recent advances in artificial intelligence, including deep learning.",
-       "Machine Learning Basics": "An overview of supervised learning methods such as decision trees and SVMs.",
-       "Neural Networks Explained": "Explains backpropagation and gradient descent for training networks.",
-       "Ethics in AI": "Explores ethical concerns in automated decision-making systems.",
-       "Applications of AI in Healthcare": "Details how AI improves diagnostics and personalized medicine."
-   }
-
-   # Input question and synthesized answer
-   question = "How is AI used in modern healthcare systems?"
-   answer = (
-       "AI is being used in healthcare for diagnosing diseases, predicting patient outcomes, "
-       "and assisting in treatment planning. It also supports personalized medicine and medical imaging."
-   )
+   from yescieval import GapIdentification, CustomAutoJudge
 
    # Step 1: Create a rubric
    rubric = GapIdentification(papers=papers, question=question, answer=answer)
@@ -79,7 +63,6 @@ YESciEval is a library designed to evaluate the quality of synthesized scientifi
 
    # Step 3: Evaluate the answer
    result = judge.evaluate(rubric=rubric)
-
    print("Raw Evaluation Output:")
    print(result)
 
