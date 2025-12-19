@@ -22,18 +22,18 @@ A user will provide you with a synthesis which has been generated as an answer t
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. Correctness: is the information in the answer a correct representation of the content of the provided abstracts?
+1. geographic_coverage: is the information in the answer a correct representation of the spatial scope of the provided abstracts?
 </Evaluation-Characteristics>
 
 <Rating-Scale>
 For a given characteristic, rate the quality from 1 (very bad) to 5 (very good). Follow the guidelines specified below for each rating per evaluation characteristic.
 
-1. Correctness
-Rating 1. Very bad: The synthesis consistently misrepresents or inaccurately portrays the content of the provided abstracts, showing a significant deviation from the original sources.
-Rating 2. Bad: The synthesis contains several inaccuracies or misinterpretations of the source abstracts.
-Rating 3. Moderate: The synthesis accurately represents most of the content from the provided abstracts but may contain minor errors.
-Rating 4. Good: The synthesis provides an accurate representation of the content from the provided abstracts with minor exceptions.
-Rating 5. Very good: The information in the synthesis is an accurate and faithful representation of the content from the provided abstracts, without any factual errors or misinterpretations.
+1. Geographic Coverage
+Rating 1. Very bad: The synthesis consistently misrepresents or inaccurately portrays the geographic scope of the provided abstracts, covering only a single context or ignoring relevant regions.
+Rating 2. Bad: The synthesis represents some regions correctly but overlooks several important biogeographic zones or scales, showing limited breadth.
+Rating 3. Moderate: The synthesis captures most relevant regions and some scale diversity, but may miss minor zones or nuances in spatial coverage.
+Rating 4. Good: The synthesis provides a broad and accurate representation of multiple regions and scales, triangulating evidence across sources with minor omissions.
+Rating 5. Very good: The synthesis comprehensively represents all relevant regions, scales, and contexts from the provided abstracts, accurately covering the geographic breadth without omissions.
 </Rating-Scale>
 
 <Response-Format>
@@ -42,7 +42,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 
 <Example-Response>
 {
-  "Correctness": {"rating": "4", "rationale": "The synthesis represents the content of the provided abstract, but with minor inrelevant information."}
+  "geographic_coverage": {"rating": "4", "rationale": "The synthesis accurately represents multiple regions and scales from the provided abstracts, with only minor omissions or irrelevant details."}
 }
 </Example-Response>
 </Response-Format>
@@ -75,18 +75,18 @@ A user will provide you with a synthesis which has been generated as an answer t
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. Completeness: is the answer a comprehensive encapsulation of the relevant information in the provided abstracts?
+1. intervention_diversity: is the answer a comprehensive encapsulation of the relevant information in the provided abstracts, measured by the number of unique management practices?
 </Evaluation-Characteristics>
 
 <Rating-Scale>
 For a given characteristic, rate the quality from 1 (very bad) to 5 (very good). Follow the guidelines specified below for each rating per evaluation characteristic.
 
-1. Completeness
-Rating 1. Very bad: The synthesis omits most of the relevant information, failing to capture the essential points or details from the provided abstracts.
-Rating 2. Bad: Significant portions of relevant information from the provided abstracts are missing.
-Rating 3. Moderate: The synthesis captures a fair amount of the relevant information, though it may overlook some details.
-Rating 4. Good: The synthesis includes almost all relevant information, missing only minor details.
-Rating 5. Very good: The synthesis comprehensively encapsulates all relevant information from the provided abstracts, leaving no pertinent details or points unaddressed.
+1. Intervention Diversity
+Rating 1. Very bad: The synthesis omits most of the relevant interventions, capturing very few management practices from the provided abstracts.
+Rating 2. Bad: The synthesis misses several important interventions, representing only a limited subset of management practices.
+Rating 3. Moderate: The synthesis captures a fair number of interventions, but some relevant management practices are overlooked.
+Rating 4. Good: The synthesis includes nearly all relevant interventions, missing only minor management practices.
+Rating 5. Very good: The synthesis comprehensively captures all relevant interventions and management practices from the provided abstracts, without omissions.
 </Rating-Scale>
 
 <Response-Format>
@@ -95,7 +95,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 
 <Example-Response>
 {
-  "Completeness": {"rating": "4", "rationale": "Only minor details are missing in the synthesis."}
+  "intervention_diversity": {"rating": "4", "rationale": "The answer includes almost all relevant interventions from the provided abstracts, with only minor details missing."}
 }
 </Example-Response>
 </Response-Format>
@@ -128,18 +128,18 @@ A user will provide you with a synthesis which has been generated as an answer t
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. Informativeness: is the answer a useful and informative reply to the question?
+1. biodiversity_dimensions: is the answer a comprehensive representation of the relevant biodiversity information in the provided abstracts, measured by the presence of terms related to taxonomic, functional, phylogenetic, and spatial diversity?
 </Evaluation-Characteristics>
 
 <Rating-Scale>
 For a given characteristic, rate the quality from 1 (very bad) to 5 (very good). Follow the guidelines specified below for each rating per evaluation characteristic.
 
-1. Informativeness
-Rating 1. Very bad: The synthesis offers no valuable insights or useful information in response to the research question, lacking depth and utility.
-Rating 2. Bad: The answer provides limited new insights or useful information in response to the research question.
-Rating 3. Moderate: The answer is somewhat informative, offering insights or useful information but not in a comprehensive or detailed manner.
-Rating 4. Good: The answer is informative and insightful, providing comprehensive information in response to the research question.
-Rating 5. Very good: The synthesis is highly informative, providing valuable insights and detailed information that thoroughly addresses the research question.
+1. Biodiversity Dimensions
+Rating 1. Very bad: The synthesis omits most of the relevant biodiversity information, capturing very few or none of the taxonomic, functional, phylogenetic, or spatial diversity aspects.
+Rating 2. Bad: The synthesis covers some biodiversity dimensions but misses several key aspects or contexts.
+Rating 3. Moderate: The synthesis captures a fair number of biodiversity dimensions, but some relevant terms or contexts are overlooked.
+Rating 4. Good: The synthesis includes nearly all relevant biodiversity dimensions, touching multiple contexts and scales, with only minor omissions.
+Rating 5. Very good: The synthesis comprehensively captures all relevant biodiversity dimensions from the provided abstracts, accurately representing taxonomic, functional, phylogenetic, and spatial diversity without omissions.
 </Rating-Scale>
 
 <Response-Format>
@@ -148,7 +148,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 
 <Example-Response>
 {
-  "Informativeness": {"rating": "4", "rationale": "Most information is informative for the research question."}
+  "biodiversity_dimensions": {"rating": "4", "rationale": "Most information is informative for the research question, capturing the key biodiversity dimensions with minor omissions."}
 }
 </Example-Response>
 </Response-Format>
@@ -181,18 +181,18 @@ A user will provide you with a synthesis which has been generated as an answer t
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. Informativeness: is the answer a useful and informative reply to the question?
+1. ecosystem_services: is the answer a useful and informative reply to the question, measured by the presence of terms matched against a vocabulary aligned with the Millennium Ecosystem Assessment?
 </Evaluation-Characteristics>
 
 <Rating-Scale>
 For a given characteristic, rate the quality from 1 (very bad) to 5 (very good). Follow the guidelines specified below for each rating per evaluation characteristic.
 
-1. Informativeness
-Rating 1. Very bad: The synthesis offers no valuable insights or useful information in response to the research question, lacking depth and utility.
-Rating 2. Bad: The answer provides limited new insights or useful information in response to the research question.
-Rating 3. Moderate: The answer is somewhat informative, offering insights or useful information but not in a comprehensive or detailed manner.
-Rating 4. Good: The answer is informative and insightful, providing comprehensive information in response to the research question.
-Rating 5. Very good: The synthesis is highly informative, providing valuable insights and detailed information that thoroughly addresses the research question.
+1. Ecosystem Services
+Rating 1. Very bad: The synthesis omits most relevant ecosystem services, capturing very few or none of the terms from the Millennium Ecosystem Assessment vocabulary.
+Rating 2. Bad: The synthesis covers some ecosystem services but misses several key services or contexts.
+Rating 3. Moderate: The synthesis captures a fair number of ecosystem services, but some relevant terms or contexts are overlooked.
+Rating 4. Good: The synthesis includes nearly all relevant ecosystem services, touching multiple contexts and scales, with only minor omissions.
+Rating 5. Very good: The synthesis comprehensively captures all relevant ecosystem services from the provided abstracts, accurately representing terms aligned with the Millennium Ecosystem Assessment vocabulary without omissions.
 </Rating-Scale>
 
 <Response-Format>
@@ -201,7 +201,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 
 <Example-Response>
 {
-  "Informativeness": {"rating": "4", "rationale": "Most information is informative for the research question."}
+  "ecosystem_services": {"rating": "4", "rationale": "The synthesis includes nearly all relevant ecosystem services from the provided abstracts, with only minor omissions."}
 }
 </Example-Response>
 </Response-Format>
@@ -234,18 +234,18 @@ A user will provide you with a synthesis which has been generated as an answer t
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. Informativeness: is the answer a useful and informative reply to the question?
+1. spatial_scale: is the answer a useful and informative reply to the question, measured by the presence of explicit scale terms (e.g., “local,” “regional,” “continental”) and area measures?
 </Evaluation-Characteristics>
 
 <Rating-Scale>
 For a given characteristic, rate the quality from 1 (very bad) to 5 (very good). Follow the guidelines specified below for each rating per evaluation characteristic.
 
-1. Informativeness
-Rating 1. Very bad: The synthesis offers no valuable insights or useful information in response to the research question, lacking depth and utility.
-Rating 2. Bad: The answer provides limited new insights or useful information in response to the research question.
-Rating 3. Moderate: The answer is somewhat informative, offering insights or useful information but not in a comprehensive or detailed manner.
-Rating 4. Good: The answer is informative and insightful, providing comprehensive information in response to the research question.
-Rating 5. Very good: The synthesis is highly informative, providing valuable insights and detailed information that thoroughly addresses the research question.
+1. Spatial Scale
+Rating 1. Very bad: The synthesis omits most relevant spatial scale information, capturing very few or none of the scale terms or area measures.
+Rating 2. Bad: The synthesis covers some scale information but misses several key scales or contexts.
+Rating 3. Moderate: The synthesis captures a fair amount of spatial scale information, but some relevant terms or area measures are overlooked.
+Rating 4. Good: The synthesis includes nearly all relevant spatial scale information, touching multiple scales and contexts, with only minor omissions.
+Rating 5. Very good: The synthesis comprehensively captures all relevant spatial scale information from the provided abstracts, accurately representing scale terms and area measures without omissions.
 </Rating-Scale>
 
 <Response-Format>
@@ -254,7 +254,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 
 <Example-Response>
 {
-  "Informativeness": {"rating": "4", "rationale": "Most information is informative for the research question."}
+  "spatial_scale": {"rating": "4", "rationale": "The synthesis includes nearly all relevant spatial scale information from the provided abstracts, with only minor omissions."}
 }
 </Example-Response>
 </Response-Format>
