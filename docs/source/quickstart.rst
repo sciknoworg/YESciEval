@@ -1,7 +1,7 @@
 Quickstart
 =================
 
-YESciEval is a library designed to evaluate the quality of synthesized scientific answers using predefined rubrics and advanced LLM-based judgment models. This guide walks you through how to evaluate answers based on **informativeness** using a pretrained judge and parse LLM output into structured JSON.
+YESciEval is a library designed to evaluate the quality of synthesized scientific answers using predefined rubrics and advanced LLM-based judgment models. This guide walks you through how to evaluate answers based on **informativeness** & **gap identification** using a pretrained & a custom judge and parse LLM output into structured JSON.
 
 
 **Example: Evaluating an Answer Using Informativeness + AskAutoJudge**
@@ -45,6 +45,43 @@ YESciEval is a library designed to evaluate the quality of synthesized scientifi
     - Ensure your Hugging Face model token has access to the model (e.g., ``YESciEval-ASK-Llama-3.1-8B``).
     - Use the ``device="cuda"`` if running on GPU for better performance.
     - Add more rubrics such as ``Informativeness``, ``Relevancy``, etc for multi-criteria evaluation.
+
+
+**Example: Evaluating an Answer Using GapIdentification + CustomAutoJudge**
+
+.. code-block:: python
+
+   from yescieval import GapIdentification, CustomAutoJudge, GPTParser
+
+   # Sample papers used in form of {"title": "abstract", ... }
+   papers = {
+       "A Study on AI": "This paper discusses recent advances in artificial intelligence, including deep learning.",
+       "Machine Learning Basics": "An overview of supervised learning methods such as decision trees and SVMs.",
+       "Neural Networks Explained": "Explains backpropagation and gradient descent for training networks.",
+       "Ethics in AI": "Explores ethical concerns in automated decision-making systems.",
+       "Applications of AI in Healthcare": "Details how AI improves diagnostics and personalized medicine."
+   }
+
+   # Input question and synthesized answer
+   question = "How is AI used in modern healthcare systems?"
+   answer = (
+       "AI is being used in healthcare for diagnosing diseases, predicting patient outcomes, "
+       "and assisting in treatment planning. It also supports personalized medicine and medical imaging."
+   )
+
+   # Step 1: Create a rubric
+   rubric = GapIdentification(papers=papers, question=question, answer=answer)
+   instruction_prompt = rubric.instruct()
+
+   # Step 2: Load the evaluation model (judge)
+   judge = CustomAutoJudge()
+   judge.from_pretrained(model_id="Qwen/Qwen3-8B", device="cpu", token="your_huggingface_token")
+
+   # Step 3: Evaluate the answer
+   result = judge.evaluate(rubric=rubric)
+
+   print("Raw Evaluation Output:")
+   print(result)
 
 **Parsing Raw Output with GPTParser**
 
