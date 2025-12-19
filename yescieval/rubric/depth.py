@@ -22,19 +22,18 @@ A user will provide you with a synthesis which has been generated as an answer t
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. Correctness: is the information in the answer a correct representation of the content of the provided abstracts?
+1. mechanistic_understanding: does the answer reflect understanding of ecological processes by explicitly mentioning recognized mechanisms such as feedbacks, nutrient cycling, or trophic cascades?
 </Evaluation-Characteristics>
 
 <Rating-Scale>
 For a given characteristic, rate the quality from 1 (very bad) to 5 (very good). Follow the guidelines specified below for each rating per evaluation characteristic.
 
-1. Correctness
-Rating 1. Very bad: The synthesis consistently misrepresents or inaccurately portrays the content of the provided abstracts, showing a significant deviation from the original sources.
-Rating 2. Bad: The synthesis contains several inaccuracies or misinterpretations of the source abstracts.
-Rating 3. Moderate: The synthesis accurately represents most of the content from the provided abstracts but may contain minor errors.
-Rating 4. Good: The synthesis provides an accurate representation of the content from the provided abstracts with minor exceptions.
-Rating 5. Very good: The information in the synthesis is an accurate and faithful representation of the content from the provided abstracts, without any factual errors or misinterpretations.
-</Rating-Scale>
+1. Mechanistic Understanding
+Rating 1. Very bad: The synthesis contains only vague statements (e.g., “X affects Y”) with no explanation of how or why; no causal language or mechanisms.
+Rating 2. Bad: The synthesis mentions a relationship but remains single-step; mechanisms are implied but not described; no mediators or temporal aspects.
+Rating 3. Moderate: The synthesis identifies at least one mechanism or causal link but lacks depth; limited causal connectors and no explicit assumptions or timing.
+Rating 4. Good: The synthesis describes multi-step mechanisms (driver → mediator → outcome) using causal language; may include some temporal or conditional detail.
+Rating 5. Very good: The information in the synthesis provides detailed, explicit multi-step causal mechanisms with clear mediators, temporal specificity, and stated assumptions or boundary conditions.
 
 <Response-Format>
 For each characteristic rate the quality from 1 (very bad) to 5 (very good).  Provide a short rationale for each rating. 
@@ -42,7 +41,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 
 <Example-Response>
 {
-  "Correctness": {"rating": "4", "rationale": "The synthesis represents the content of the provided abstract, but with minor inrelevant information."}
+  "mechanistic_understanding": {"rating": "4", "rationale": "The answer explains a clear multi-step ecological mechanism using causal language, but some temporal or boundary details are only briefly addressed."}
 }
 </Example-Response>
 </Response-Format>
@@ -75,18 +74,18 @@ A user will provide you with a synthesis which has been generated as an answer t
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. Completeness: is the answer a comprehensive encapsulation of the relevant information in the provided abstracts?
+1. causal_reasoning: does the answer explicitly express cause–effect relationships using causal connectives (e.g., “because,” “due to”), result indicators (e.g., “results in,” “induces”), or mechanistic verbs (e.g., “drives,” “regulates”) when describing ecological processes?
 </Evaluation-Characteristics>
 
 <Rating-Scale>
 For a given characteristic, rate the quality from 1 (very bad) to 5 (very good). Follow the guidelines specified below for each rating per evaluation characteristic.
 
-1. Completeness
-Rating 1. Very bad: The synthesis omits most of the relevant information, failing to capture the essential points or details from the provided abstracts.
-Rating 2. Bad: Significant portions of relevant information from the provided abstracts are missing.
-Rating 3. Moderate: The synthesis captures a fair amount of the relevant information, though it may overlook some details.
-Rating 4. Good: The synthesis includes almost all relevant information, missing only minor details.
-Rating 5. Very good: The synthesis comprehensively encapsulates all relevant information from the provided abstracts, leaving no pertinent details or points unaddressed.
+1. Causal Reasoning
+Rating 1. Very bad: The synthesis uses vague statements (e.g., “X affects Y”) with no causal connectors,
+Rating 2. Bad: The synthesis identifies a cause–effect relationship but only as a single-step claim; causal language is minimal and mediators are ignored.
+Rating 3. Moderate: The synthesis includes explicit causal connectors or verbs and at least one cause–effect link, but remains shallow.
+Rating 4. Good: The synthesis describes multi-step causal chains (driver → mediator → outcome) using clear causal language.
+Rating 5. Very good: The synthesis presents detailed, explicit multi-step causal reasoning with clear mediators, temporal specificity, and stated assumptions or boundary conditions.
 </Rating-Scale>
 
 <Response-Format>
@@ -95,7 +94,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 
 <Example-Response>
 {
-  "Completeness": {"rating": "4", "rationale": "Only minor details are missing in the synthesis."}
+  "causal_reasoning": {"rating": "4", "rationale": "The answer uses clear causal connectors and describes a multi-step cause–effect relationship."}
 }
 </Example-Response>
 </Response-Format>
@@ -128,18 +127,18 @@ A user will provide you with a synthesis which has been generated as an answer t
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. Informativeness: is the answer a useful and informative reply to the question?
+1. temporal_precision: does the answer include specific and explicit temporal references, such as quantified time intervals or dated events, rather than vague or unspecific timing?
 </Evaluation-Characteristics>
 
 <Rating-Scale>
 For a given characteristic, rate the quality from 1 (very bad) to 5 (very good). Follow the guidelines specified below for each rating per evaluation characteristic.
 
-1. Informativeness
-Rating 1. Very bad: The synthesis offers no valuable insights or useful information in response to the research question, lacking depth and utility.
-Rating 2. Bad: The answer provides limited new insights or useful information in response to the research question.
-Rating 3. Moderate: The answer is somewhat informative, offering insights or useful information but not in a comprehensive or detailed manner.
-Rating 4. Good: The answer is informative and insightful, providing comprehensive information in response to the research question.
-Rating 5. Very good: The synthesis is highly informative, providing valuable insights and detailed information that thoroughly addresses the research question.
+1. Temporal Precision
+Rating 1. Very bad: The synthesis contains no temporal references; timing is entirely vague or absent.
+Rating 2. Bad: The answer includes implicit or generic timing (e.g., “over time,” “eventually”) but no specific intervals, dates, or durations.
+Rating 3. Moderate: The answer provides at least one explicit temporal reference (e.g., a rough duration or time window) but lacks consistency or clear linkage to effects.
+Rating 4. Good: The answer includes multiple specific temporal references (e.g., quantified intervals or dated events) that are clearly tied to described processes or outcomes.
+Rating 5. Very good: The answer demonstrates high temporal precision, with detailed and explicit timeframes (lags, durations, windows, or dates) systematically linked to multi-step processes and their effects.
 </Rating-Scale>
 
 <Response-Format>
@@ -148,7 +147,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 
 <Example-Response>
 {
-  "Informativeness": {"rating": "4", "rationale": "Most information is informative for the research question."}
+  "temporal_precision": {"rating": "4", "rationale": "The answer includes several specific timeframes or durations that are clearly linked to the described processes, though some timing details could be more precise."}
 }
 </Example-Response>
 </Response-Format>
