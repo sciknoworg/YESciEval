@@ -1,11 +1,12 @@
 from setuptools import setup, find_packages
+import os
 
 with open("README.md", encoding="utf-8") as f:
     long_description = f.read()
 
 setup(
     name="YESciEval",
-    version="0.2.0",
+    version=open(os.path.join(os.path.dirname(__file__), 'yescieval/VERSION')).read().strip(),
     author="Hamed Babaei Giglou",
     author_email="hamedbabaeigiglou@gmail.com",
     description="YESciEval: Robust LLM-as-a-Judge for Scientific Question Answering.",

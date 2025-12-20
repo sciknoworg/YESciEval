@@ -1,8 +1,7 @@
 [tool.poetry]
 name = "YESciEval"
 
-version = "0.2.0"
-
+version = "0.0.0"
 description = "YESciEval: Robust LLM-as-a-Judge for Scientific Question Answering."
 authors = ["Hamed Babaei Giglou <hamedbabaeigiglou@gmail.com>"]
 license = "MIT License"
@@ -30,6 +29,12 @@ wheel = "*"
 twine = "*"
 pytest = "*"
 
+[tool.poetry-dynamic-versioning]
+enable = true
+style = "semver"
+source = "attr"
+attr = "yescieval.__version__"
+
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning>=1.4.0"]
+build-backend = "poetry_dynamic_versioning.backend"
