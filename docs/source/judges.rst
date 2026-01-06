@@ -89,3 +89,23 @@ For example, you can load a model and evaluate a rubric like this:
     print(result)
 
 This approach allows full control over which model is used for evaluation, supporting any LLM..
+
+GPT Custom Judge
+--------------------
+
+The `GPTCustomAutoJudge` class provides a generic, flexible interface to evaluate scientific syntheses using OpenAI GPT models. 
+
+You can use it to evaluate a rubric by providing your OpenAI API key and specifying the model ID:
+
+.. code-block:: python
+
+    # Initialize and load a custom model by specifying its Hugging Face model ID
+    judge = GPTCustomAutoJudge()
+    judge.from_pretrained("gpt-5.2", api_key=OPEN_AI_API_KEY)
+
+    # Evaluate the rubric using the loaded model
+    result = judge.evaluate(rubric=rubric)
+
+    print(result)
+
+This allows you to leverage the capabilities of OpenAI's GPT models for scientific text evaluation.
