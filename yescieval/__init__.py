@@ -8,6 +8,6 @@ from .rubric import (Informativeness, Correctness, Completeness, Coherence, Rele
                     MechanisticUnderstanding, CausalReasoning, TemporalPrecision, GapIdentification, 
                     StatisticalSophistication, CitationPractices, UncertaintyAcknowledgment, 
                     SpeculativeStatements, NoveltyIndicators)
-from .judge import AutoJudge, AskAutoJudge, BioASQAutoJudge, CustomAutoJudge
+from .judge import AutoJudge, AskAutoJudge, BioASQAutoJudge, CustomAutoJudge, GPTCustomAutoJudge
 from .parser import GPTParser
 
