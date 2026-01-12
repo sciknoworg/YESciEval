@@ -106,18 +106,34 @@ A complete list of rubrics are available at YESciEval [📚 Rubrics](https://yes
 
 ## 💡 Acknowledgements
 
-If you use YESciEval in your research, please cite:
+If you find this repository helpful or use YESciEval in your work or research, feel free to cite our publication:
+
 
 ```bibtex
-@article{d2025yescieval,
-      title={YESciEval: Robust LLM-as-a-Judge for Scientific Question Answering},
-      author={D'Souza, Jennifer and Giglou, Hamed Babaei and M{\"u}nch, Quentin},
-      journal={arXiv preprint arXiv:2505.14279},
-      year={2025}
-   }
+@inproceedings{dsouza-etal-2025-yescieval,
+    title = "{YES}ci{E}val: Robust {LLM}-as-a-Judge for Scientific Question Answering",
+    author = {D{'}Souza, Jennifer  and
+              Babaei Giglou, Hamed  and
+              M{\"u}nch, Quentin},
+    editor = "Che, Wanxiang  and
+      Nabende, Joyce  and
+      Shutova, Ekaterina  and
+      Pilehvar, Mohammad Taher",
+    booktitle = "Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+    month = jul,
+    year = "2025",
+    address = "Vienna, Austria",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2025.acl-long.675/",
+    doi = "10.18653/v1/2025.acl-long.675",
+    pages = "13749--13783",
+    ISBN = "979-8-89176-251-0"
+}
 ```
+> For other type of citations please refer to https://aclanthology.org/2025.acl-long.675/.
 
-This work is licensed under a [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT).
+
+This software is licensed under a [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT).
 
 
 

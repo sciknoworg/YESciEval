@@ -1,5 +1,6 @@
+from pathlib import Path
 
-__version__ = "0.2.0"
+__version__ = (Path(__file__).parent / "VERSION").read_text().strip()
 
 from .base import Rubric, Parser
 from .rubric import (Informativeness, Correctness, Completeness, Coherence, Relevancy,
