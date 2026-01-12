@@ -101,10 +101,10 @@ You can use it to evaluate a rubric by providing your OpenAI API key and specify
 
     # Initialize and load a custom model by specifying its Hugging Face model ID
     judge = GPTCustomAutoJudge()
-    judge.from_pretrained("gpt-5.2", api_key=OPEN_AI_API_KEY)
+    judge.from_pretrained("gpt-5.2", token=OPEN_AI_API_KEY)
 
     # Evaluate the rubric using the loaded model
-    result = judge.evaluate(rubric=rubric)
+    result = judge.judge(rubric=rubric)
 
     print(result)
 

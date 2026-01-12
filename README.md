@@ -88,13 +88,18 @@ Judges within YESciEval are defined as follows:
 | `AskAutoJudge`   | Multidisciplinary judge tuned on the ORKGSyn dataset from the Open Research Knowledge Graph. |
 | `BioASQAutoJudge` | Biomedical domain judge tuned on the BioASQ dataset from the BioASQ challenge.               |
 | `CustomAutoJudge`| Custom LLM that can be used as a judge within YESciEval rubrics                              |
+| `GPTCustomAutoJudge`| Custom GPT-based LLM that can be used as a judge within YESciEval                     |
 
-A total of nine evaluation rubrics were defined as part of the YESciEval test framework and can be used via ``yescieval``. Following simple example shows how to import rubrics in your code:
+
+A total of twenty three (23) evaluation rubrics were defined as part of the YESciEval test framework and can be used via ``yescieval``. Following simple example shows how to import rubrics in your code:
 
 ```python
-from yescieval import Informativeness, Correctness, Completeness, 
-                      Coherence, Relevancy, Integration, 
-                      Cohesion, Readability, Conciseness
+ from yescieval import Informativeness, Correctness, Completeness, Coherence, Relevancy,
+                          Integration, Cohesion, Readability, Conciseness, GeographicCoverage, 
+                          InterventionDiversity, BiodiversityDimensions, EcosystemServices, SpatialScale,
+                          MechanisticUnderstanding, CausalReasoning, TemporalPrecision, GapIdentification, 
+                          StatisticalSophistication, CitationPractices, UncertaintyAcknowledgment, 
+                          SpeculativeStatements, NoveltyIndicators
 ```
 
 A complete list of rubrics are available at YESciEval [📚 Rubrics](https://yescieval.readthedocs.io/rubrics.html) page.

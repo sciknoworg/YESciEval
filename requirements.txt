@@ -7,4 +7,3 @@ pandas
 numpy
 pydantic
 pytest
-openai
