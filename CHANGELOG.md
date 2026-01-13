@@ -1,5 +1,11 @@
 ## Changelog
 
+### v0.4.0 (January 13, 2026)
+- Add a GPT custom jude (PR #5)
+- Update documentation 
+- Minor bug fixing in deep research rubrics and judges
+- Update Readme
+
 ### v0.3.0 (December 20, 2025)
 - Add more rubrics (PR #3)
 - Update documentation for new rubrics
