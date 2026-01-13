@@ -51,4 +51,5 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
 </Note>"""
 class GapIdentification(Rubric):
+    name: str = "Gap Identification"
     system_prompt_template: str = gap_identification_prompt

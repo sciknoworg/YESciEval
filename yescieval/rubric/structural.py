@@ -51,6 +51,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
 </Note>"""
 class Coherence(Rubric):
+    name: str = "Coherence"
     system_prompt_template: str = coherence_prompt
 
 integration_prompt = """<Context> 
@@ -104,6 +105,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
 </Note>"""
 class Integration(Rubric):
+    name: str = "Integration"
     system_prompt_template: str = integration_prompt
 
 relevancy_prompt = """<Context> 
@@ -157,4 +159,5 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
 </Note>"""
 class Relevancy(Rubric):
+    name: str = "Relevancy"
     system_prompt_template: str = relevancy_prompt

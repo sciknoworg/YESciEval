@@ -50,6 +50,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
 </Note>"""
 class MechanisticUnderstanding(Rubric):
+    name: str = "Mechanistic Understanding"
     system_prompt_template: str = mechanistic_understanding_prompt
 
 causal_reasoning_prompt = """<Context> 
@@ -103,6 +104,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
 </Note>"""
 class CausalReasoning(Rubric):
+    name: str = "Causal Reasoning"
     system_prompt_template: str = causal_reasoning_prompt
 
 temporal_precision_prompt = """<Context> 
@@ -156,5 +158,6 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
 </Note>"""
 class TemporalPrecision(Rubric):
+    name: str = "Temporal Precision"
     system_prompt_template: str = temporal_precision_prompt
 

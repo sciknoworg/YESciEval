@@ -51,6 +51,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
 </Note>"""
 class SpeculativeStatements(Rubric):
+    name: str = "Speculative Statements"
     system_prompt_template: str = speculative_statements_prompt
 
 novelty_indicators_prompt = """<Context> 
@@ -104,6 +105,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
 </Note>"""
 class NoveltyIndicators(Rubric):
+    name: str = "Novelty Indicators"
     system_prompt_template: str = novelty_indicators_prompt
 
 

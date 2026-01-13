@@ -51,6 +51,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
 </Note>"""
 class GeographicCoverage(Rubric):
+    name: str = "Geographic Coverage"
     system_prompt_template: str = geographic_coverage_prompt
 
 intervention_diversity_prompt = """<Context> 
@@ -104,6 +105,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
 </Note>"""
 class InterventionDiversity(Rubric):
+    name: str = "Intervention Diversity"
     system_prompt_template: str = intervention_diversity_prompt
 
 biodiversity_dimensions_prompt = """<Context> 
@@ -157,6 +159,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
 </Note>"""
 class BiodiversityDimensions(Rubric):
+    name: str = "Biodiversity Dimensions"
     system_prompt_template: str = biodiversity_dimensions_prompt
 
 ecosystem_services_prompt = """<Context> 
@@ -210,6 +213,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
 </Note>"""
 class EcosystemServices(Rubric):
+    name: str = "Ecosystem Services"
     system_prompt_template: str = ecosystem_services_prompt
 
 spatial_scale_prompt = """<Context> 
@@ -263,6 +267,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
 </Note>"""
 class SpatialScale(Rubric):
+    name: str = "Spatial Scale"
     system_prompt_template: str = spatial_scale_prompt
 
 

@@ -51,6 +51,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
 </Note>"""
 class StatisticalSophistication(Rubric):
+    name: str = "Statistical Sophistication"
     system_prompt_template: str = statistical_sophistication_prompt
 
 citation_practices_prompt = """<Context> 
@@ -104,6 +105,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
 </Note>"""
 class CitationPractices(Rubric):
+    name: str = "Citation Practices"
     system_prompt_template: str = citation_practices_prompt
 
 uncertainty_acknowledgement_prompt = """<Context> 
@@ -157,5 +159,6 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
 </Note>"""
 class UncertaintyAcknowledgment(Rubric):
+    name: str = "Uncertainty Acknowledgement"
     system_prompt_template: str = uncertainty_acknowledgement_prompt
 

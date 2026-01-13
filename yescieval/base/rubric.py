@@ -10,6 +10,7 @@ class Rubric(BaseModel, ABC):
     Subclasses must implement `verbalize`.
     """
     system_prompt_template: str
+    name: str = "Rubric"
     papers: Dict[str, str]
     question: str
     answer: str
