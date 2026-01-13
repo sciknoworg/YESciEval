@@ -48,7 +48,7 @@ The following example demonstrates how to create an evaluation rubric, load a ju
                           device="cpu")
 
     # Step 3: Evaluate the answer
-    result = judge.evaluate(rubric=rubric)
+    result = judge.judge(rubric=rubric)
 
     print("Raw Evaluation Output:")
     print(result)
@@ -84,7 +84,7 @@ For example, you can load a model and evaluate a rubric like this:
     judge.from_pretrained(model_id="Qwen/Qwen3-8B", device="cpu", token="your_huggingface_token")
 
     # Evaluate the rubric using the loaded model
-    result = judge.evaluate(rubric=rubric)
+    result = judge.judge(rubric=rubric)
 
     print(result)
 
@@ -101,11 +101,20 @@ You can use it to evaluate a rubric by providing your OpenAI API key and specify
 
     # Initialize and load a custom model by specifying its Hugging Face model ID
     judge = GPTCustomAutoJudge()
-    judge.from_pretrained("gpt-5.2", token=OPEN_AI_API_KEY)
+    judge.from_pretrained(model_id="gpt-5.2", token=OPEN_AI_API_KEY)
 
     # Evaluate the rubric using the loaded model
     result = judge.judge(rubric=rubric)
 
-    print(result)
+    print(result.model_dump())
+
+as a result output will be in the following format
+
+.. code-block:: json
+
+   {
+     "rating": rating-value,
+     "rationale": "rationale-text"
+   }
 
 This allows you to leverage the capabilities of OpenAI's GPT models for scientific text evaluation.
