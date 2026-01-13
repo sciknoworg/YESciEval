@@ -22,7 +22,7 @@ A user will provide you with a synthesis which has been generated as an answer t
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. gap_identification: To what extent does the answer explicitly identify research gaps or unanswered questions indicated by the provided abstracts?
+1. Gap Identification: To what extent does the answer explicitly identify research gaps or unanswered questions indicated by the provided abstracts?
 </Evaluation-Characteristics>
 
 <Rating-Scale>
@@ -42,7 +42,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 
 <Example-Response>
 {
-  "gap_identification": {"rating": "4", "rationale": "Identifies a relevant gap supported by the abstracts, with limited elaboration."}
+  "Gap Identification": {"rating": "4", "rationale": "Identifies a relevant gap supported by the abstracts, with limited elaboration."}
 }
 </Example-Response>
 </Response-Format>

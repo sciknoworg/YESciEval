@@ -22,7 +22,7 @@ A user will provide you with a synthesis which has been generated as an answer t
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. mechanistic_understanding: does the answer reflect understanding of ecological processes by explicitly mentioning recognized mechanisms such as feedbacks, nutrient cycling, or trophic cascades?
+1. Mechanistic Understanding: does the answer reflect understanding of ecological processes by explicitly mentioning recognized mechanisms such as feedbacks, nutrient cycling, or trophic cascades?
 </Evaluation-Characteristics>
 
 <Rating-Scale>
@@ -41,7 +41,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 
 <Example-Response>
 {
-  "mechanistic_understanding": {"rating": "4", "rationale": "The answer explains a clear multi-step ecological mechanism using causal language, but some temporal or boundary details are only briefly addressed."}
+  "Mechanistic Understanding": {"rating": "4", "rationale": "The answer explains a clear multi-step ecological mechanism using causal language, but some temporal or boundary details are only briefly addressed."}
 }
 </Example-Response>
 </Response-Format>
@@ -75,7 +75,7 @@ A user will provide you with a synthesis which has been generated as an answer t
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. causal_reasoning: does the answer explicitly express cause–effect relationships using causal connectives (e.g., “because,” “due to”), result indicators (e.g., “results in,” “induces”), or mechanistic verbs (e.g., “drives,” “regulates”) when describing ecological processes?
+1. Causal Reasoning: does the answer explicitly express cause–effect relationships using causal connectives (e.g., “because,” “due to”), result indicators (e.g., “results in,” “induces”), or mechanistic verbs (e.g., “drives,” “regulates”) when describing ecological processes?
 </Evaluation-Characteristics>
 
 <Rating-Scale>
@@ -95,7 +95,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 
 <Example-Response>
 {
-  "causal_reasoning": {"rating": "4", "rationale": "The answer uses clear causal connectors and describes a multi-step cause–effect relationship."}
+  "Causal Reasoning": {"rating": "4", "rationale": "The answer uses clear causal connectors and describes a multi-step cause–effect relationship."}
 }
 </Example-Response>
 </Response-Format>
@@ -129,7 +129,7 @@ A user will provide you with a synthesis which has been generated as an answer t
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. temporal_precision: does the answer include specific and explicit temporal references, such as quantified time intervals or dated events, rather than vague or unspecific timing?
+1. Temporal Precision: does the answer include specific and explicit temporal references, such as quantified time intervals or dated events, rather than vague or unspecific timing?
 </Evaluation-Characteristics>
 
 <Rating-Scale>
@@ -149,7 +149,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 
 <Example-Response>
 {
-  "temporal_precision": {"rating": "4", "rationale": "The answer includes several specific timeframes or durations that are clearly linked to the described processes, though some timing details could be more precise."}
+  "Temporal Precision": {"rating": "4", "rationale": "The answer includes several specific timeframes or durations that are clearly linked to the described processes, though some timing details could be more precise."}
 }
 </Example-Response>
 </Response-Format>

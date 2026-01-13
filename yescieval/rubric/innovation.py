@@ -22,7 +22,7 @@ A user will provide you with a synthesis which has been generated as an answer t
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. speculative_statement: Does the answer clearly distinguish speculation (e.g., “might,” “could”) from established findings in the provided abstracts?
+1. Speculative Statements: Does the answer clearly distinguish speculation (e.g., “might,” “could”) from established findings in the provided abstracts?
 </Evaluation-Characteristics>
 
 <Rating-Scale>
@@ -42,7 +42,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 
 <Example-Response>
 {
-  "speculative_statement": {"rating": "4", "rationale": "Uses hedging appropriately and clearly distinguishes speculation from established findings."}
+  "Speculative Statements": {"rating": "4", "rationale": "Uses hedging appropriately and clearly distinguishes speculation from established findings."}
 }
 </Example-Response>
 </Response-Format>
@@ -76,7 +76,7 @@ A user will provide you with a synthesis which has been generated as an answer t
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. novelty_indicators: Does the answer appropriately use self-declared innovation terms (e.g., “novel,” “pioneering,” “emerging”) and clearly indicate whether such claims are supported by the provided abstracts?
+1. Novelty Indicators: Does the answer appropriately use self-declared innovation terms (e.g., “novel,” “pioneering,” “emerging”) and clearly indicate whether such claims are supported by the provided abstracts?
 </Evaluation-Characteristics>
 
 <Rating-Scale>
@@ -96,7 +96,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 
 <Example-Response>
 {
-  "novelty_indicators": {"rating": "4", "rationale": "Shows a clear novel angle, but lacks full detail."}
+  "Novelty Indicators": {"rating": "4", "rationale": "Shows a clear novel angle, but lacks full detail."}
 }
 </Example-Response>
 </Response-Format>

@@ -22,7 +22,7 @@ A user will provide you with a synthesis which has been generated as an answer t
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. statistical_sophistication: Does the answer reflect quantitative depth through the use of inferential statistics or analysis methods described in the abstracts?
+1. Statistical Sophistication: Does the answer reflect quantitative depth through the use of inferential statistics or analysis methods described in the abstracts?
 </Evaluation-Characteristics>
 
 <Rating-Scale>
@@ -42,7 +42,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 
 <Example-Response>
 {
-  "statistical_sophistication": {"rating": "3", "rationale": "The synthesis provides some methodological details and basic statistics, but does not fully discuss limitations or reproducibility.""}
+  "Statistical Sophistication": {"rating": "3", "rationale": "The synthesis provides some methodological details and basic statistics, but does not fully discuss limitations or reproducibility.""}
 }
 </Example-Response>
 </Response-Format>
@@ -76,7 +76,7 @@ A user will provide you with a synthesis which has been generated as an answer t
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. citation_practices: is the answer supported by appropriate references, using parenthetical or narrative citations, for the relevant information in the provided abstracts?
+1. Citation Practices: is the answer supported by appropriate references, using parenthetical or narrative citations, for the relevant information in the provided abstracts?
 </Evaluation-Characteristics>
 
 <Rating-Scale>
@@ -96,7 +96,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 
 <Example-Response>
 {
-  "citation_practices": {"rating": "3", "rationale": "Some claims are supported with citations, but several important points lack references or use inconsistent citation style."}
+  "Citation Practices": {"rating": "3", "rationale": "Some claims are supported with citations, but several important points lack references or use inconsistent citation style."}
 }
 </Example-Response>
 </Response-Format>
@@ -130,7 +130,7 @@ A user will provide you with a synthesis which has been generated as an answer t
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. uncertainty_acknowledgement: does the answer explicitly discuss limitations, uncertainty, or gaps in evidence (e.g., using terms like “unknown,” “limited evidence,” or “unclear”)?
+1. Uncertainty Acknowledgement: does the answer explicitly discuss limitations, uncertainty, or gaps in evidence (e.g., using terms like “unknown,” “limited evidence,” or “unclear”)?
 </Evaluation-Characteristics>
 
 <Rating-Scale>
@@ -150,7 +150,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 
 <Example-Response>
 {
-  "uncertainty_acknowledgement": {"rating": "4", "rationale": "The answer clearly acknowledges key uncertainties and limitations in the study."}
+  "Uncertainty Acknowledgement": {"rating": "4", "rationale": "The answer clearly acknowledges key uncertainties and limitations in the study."}
 }
 </Example-Response>
 </Response-Format>
