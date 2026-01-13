@@ -29,7 +29,7 @@ class AutoJudge(Judge):
         model = PeftModel.from_pretrained(base_model, model_id)
         return model, tokenizer
 
-    def evaluate(self, rubric: Rubric, max_new_tokens: int=150) -> Dict[str, Dict[str, str]]:
+    def judge(self, rubric: Rubric, max_new_tokens: int=150) -> str:
         inputs = self.tokenizer.apply_chat_template(rubric.instruct(),
                                                     add_generation_prompt=True,
                                                     return_dict=True,
