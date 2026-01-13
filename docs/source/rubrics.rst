@@ -188,3 +188,4 @@ And to use rubrics:
     instruction = rubric.instruct()
 
     print(instruction)
+    print(rubric.name)
