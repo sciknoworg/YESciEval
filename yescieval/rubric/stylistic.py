@@ -52,6 +52,7 @@ Your evaluation should be based solely on the content of the provided synthesis 
 </Note>"""
 
 class Cohesion(Rubric):
+    name: str = "Cohesion"
     system_prompt_template: str = cohesion_prompt
 
 
@@ -106,6 +107,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
 </Note>"""
 class Conciseness(Rubric):
+    name: str = "Conciseness"
     system_prompt_template: str = conciseness_prompt
 
 readability_prompt = """<Context> 
@@ -159,5 +161,6 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
 </Note>"""
 class Readability(Rubric):
+    name: str = "Readability"
     system_prompt_template: str = readability_prompt
 

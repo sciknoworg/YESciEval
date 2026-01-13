@@ -35,7 +35,7 @@ YESciEval is a library designed to evaluate the quality of synthesized scientifi
    judge.from_pretrained(token="your_huggingface_token", device="cpu")
 
    # Step 3: Evaluate the answer
-   result = judge.evaluate(rubric=rubric)
+   result = judge.judge(rubric=rubric)
 
    print("Raw Evaluation Output:")
    print(result)
@@ -62,7 +62,7 @@ YESciEval is a library designed to evaluate the quality of synthesized scientifi
    judge.from_pretrained(model_id="Qwen/Qwen3-8B", device="cpu", token="your_huggingface_token")
 
    # Step 3: Evaluate the answer
-   result = judge.evaluate(rubric=rubric)
+   result = judge.judge(rubric=rubric)
    print("Raw Evaluation Output:")
    print(result)
 
@@ -81,7 +81,7 @@ If the model outputs unstructured or loosely structured text, you can use GPTPar
    parsed = parser.parse(raw_output=raw_output)
 
    print("Parsed Output:")
-   print(parsed)
+   print(parsed.model_dump())
 
 **Expected Output Format**
 
@@ -91,6 +91,30 @@ If the model outputs unstructured or loosely structured text, you can use GPTPar
      "rating": 4,
      "rationale": "The answer covers key aspects of how AI is applied in healthcare, such as diagnostics and personalized medicine."
    }
+
+The output schema is as a following (if you do not prefer to use ``.model_dump()``) to be able to use like ``result.rating`` to access the rating value or ``result.rationale`` to access the textual explanation for rating.
+
+.. code-block::
+
+	{
+		'properties': {
+			'rating': {
+				'description': 'Rating from 1 to 5',
+				'maximum': 5,
+				'minimum': 1,
+				'title': 'Rating',
+				'type': 'integer'
+			},
+			'rationale': {
+				'description': 'Textual explanation for the rating',
+				'title': 'Rationale',
+				'type': 'string'
+			}
+		},
+		'required': ['rating', 'rationale'],
+		'title': 'RubricLikertScale',
+		'type': 'object'
+	}
 
 .. hint:: Key Components
 

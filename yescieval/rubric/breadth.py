@@ -22,7 +22,7 @@ A user will provide you with a synthesis which has been generated as an answer t
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. geographic_coverage: is the information in the answer a correct representation of the spatial scope of the provided abstracts?
+1. Geographic Coverage: is the information in the answer a correct representation of the spatial scope of the provided abstracts?
 </Evaluation-Characteristics>
 
 <Rating-Scale>
@@ -42,7 +42,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 
 <Example-Response>
 {
-  "geographic_coverage": {"rating": "4", "rationale": "The synthesis accurately represents multiple regions and scales from the provided abstracts, with only minor omissions or irrelevant details."}
+  "Geographic Coverage": {"rating": "4", "rationale": "The synthesis accurately represents multiple regions and scales from the provided abstracts, with only minor omissions or irrelevant details."}
 }
 </Example-Response>
 </Response-Format>
@@ -51,6 +51,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
 </Note>"""
 class GeographicCoverage(Rubric):
+    name: str = "Geographic Coverage"
     system_prompt_template: str = geographic_coverage_prompt
 
 intervention_diversity_prompt = """<Context> 
@@ -75,7 +76,7 @@ A user will provide you with a synthesis which has been generated as an answer t
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. intervention_diversity: is the answer a comprehensive encapsulation of the relevant information in the provided abstracts, measured by the number of unique management practices?
+1. Intervention Diversity: is the answer a comprehensive encapsulation of the relevant information in the provided abstracts, measured by the number of unique management practices?
 </Evaluation-Characteristics>
 
 <Rating-Scale>
@@ -95,7 +96,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 
 <Example-Response>
 {
-  "intervention_diversity": {"rating": "4", "rationale": "The answer includes almost all relevant interventions from the provided abstracts, with only minor details missing."}
+  "Intervention Diversity": {"rating": "4", "rationale": "The answer includes almost all relevant interventions from the provided abstracts, with only minor details missing."}
 }
 </Example-Response>
 </Response-Format>
@@ -104,6 +105,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
 </Note>"""
 class InterventionDiversity(Rubric):
+    name: str = "Intervention Diversity"
     system_prompt_template: str = intervention_diversity_prompt
 
 biodiversity_dimensions_prompt = """<Context> 
@@ -128,7 +130,7 @@ A user will provide you with a synthesis which has been generated as an answer t
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. biodiversity_dimensions: is the answer a comprehensive representation of the relevant biodiversity information in the provided abstracts, measured by the presence of terms related to taxonomic, functional, phylogenetic, and spatial diversity?
+1. Biodiversity Dimensions: is the answer a comprehensive representation of the relevant biodiversity information in the provided abstracts, measured by the presence of terms related to taxonomic, functional, phylogenetic, and spatial diversity?
 </Evaluation-Characteristics>
 
 <Rating-Scale>
@@ -148,7 +150,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 
 <Example-Response>
 {
-  "biodiversity_dimensions": {"rating": "4", "rationale": "Most information is informative for the research question, capturing the key biodiversity dimensions with minor omissions."}
+  "Biodiversity Dimensions": {"rating": "4", "rationale": "Most information is informative for the research question, capturing the key biodiversity dimensions with minor omissions."}
 }
 </Example-Response>
 </Response-Format>
@@ -157,6 +159,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
 </Note>"""
 class BiodiversityDimensions(Rubric):
+    name: str = "Biodiversity Dimensions"
     system_prompt_template: str = biodiversity_dimensions_prompt
 
 ecosystem_services_prompt = """<Context> 
@@ -181,7 +184,7 @@ A user will provide you with a synthesis which has been generated as an answer t
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. ecosystem_services: is the answer a useful and informative reply to the question, measured by the presence of terms matched against a vocabulary aligned with the Millennium Ecosystem Assessment?
+1. Ecosystem Services: is the answer a useful and informative reply to the question, measured by the presence of terms matched against a vocabulary aligned with the Millennium Ecosystem Assessment?
 </Evaluation-Characteristics>
 
 <Rating-Scale>
@@ -201,7 +204,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 
 <Example-Response>
 {
-  "ecosystem_services": {"rating": "4", "rationale": "The synthesis includes nearly all relevant ecosystem services from the provided abstracts, with only minor omissions."}
+  "Ecosystem Services": {"rating": "4", "rationale": "The synthesis includes nearly all relevant ecosystem services from the provided abstracts, with only minor omissions."}
 }
 </Example-Response>
 </Response-Format>
@@ -210,6 +213,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
 </Note>"""
 class EcosystemServices(Rubric):
+    name: str = "Ecosystem Services"
     system_prompt_template: str = ecosystem_services_prompt
 
 spatial_scale_prompt = """<Context> 
@@ -234,7 +238,7 @@ A user will provide you with a synthesis which has been generated as an answer t
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. spatial_scale: is the answer a useful and informative reply to the question, measured by the presence of explicit scale terms (e.g., “local,” “regional,” “continental”) and area measures?
+1. Spatial Scale: is the answer a useful and informative reply to the question, measured by the presence of explicit scale terms (e.g., “local,” “regional,” “continental”) and area measures?
 </Evaluation-Characteristics>
 
 <Rating-Scale>
@@ -254,7 +258,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 
 <Example-Response>
 {
-  "spatial_scale": {"rating": "4", "rationale": "The synthesis includes nearly all relevant spatial scale information from the provided abstracts, with only minor omissions."}
+  "Spatial Scale": {"rating": "4", "rationale": "The synthesis includes nearly all relevant spatial scale information from the provided abstracts, with only minor omissions."}
 }
 </Example-Response>
 </Response-Format>
@@ -263,6 +267,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
 </Note>"""
 class SpatialScale(Rubric):
+    name: str = "Spatial Scale"
     system_prompt_template: str = spatial_scale_prompt
 
 

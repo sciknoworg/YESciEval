@@ -4,7 +4,9 @@ from typing import Dict
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from peft import PeftModel, PeftConfig
 import torch
+import logging
 
+logger = logging.getLogger(__name__)
 
 
 class AutoJudge(Judge):
@@ -25,7 +27,7 @@ class AutoJudge(Judge):
         model = PeftModel.from_pretrained(base_model, model_id)
         return model, tokenizer
 
-    def evaluate(self, rubric: Rubric, max_new_tokens: int=150) -> Dict[str, Dict[str, str]]:
+    def judge(self, rubric: Rubric, max_new_tokens: int=150) -> str:
         inputs = self.tokenizer.apply_chat_template(rubric.instruct(),
                                                     add_generation_prompt=True,
                                                     return_dict=True,
@@ -49,20 +51,3 @@ class BioASQAutoJudge(AutoJudge):
                          device: str = "auto",
                          token: str = ""):
         self.model, self.tokenizer = super()._from_pretrained(model_id=model_id, device=device, token=token)
-
-
-
-class CustomAutoJudge(AutoJudge):
-
-    def _from_pretrained(self, model_id:str, device:str="auto", token:str =""):
-        tokenizer = AutoTokenizer.from_pretrained(model_id,
-                                                  padding_side="left",
-                                                  token=token)
-        tokenizer.pad_token = tokenizer.eos_token
-        model = AutoModelForCausalLM.from_pretrained(
-            model_id,
-            torch_dtype=torch.float32,
-            device_map=device,
-            token=token
-        )
-        return model, tokenizer
