@@ -1,163 +1,205 @@
 from ..base import Rubric
 
-mechanistic_understanding_prompt = """<Context> 
-Scientific synthesis generation involves creating a concise, coherent, and integrated summary from a collection of scientific texts (such as research paper titles and abstracts) that addresses a specific research question. Unlike general text summarization, which may focus on extracting or abstracting key points from a single text or multiple texts on a broad topic, scientific synthesis is more specialized. It requires:
+from ..base import Rubric
 
-- Understanding and Addressing a Specific Research Question: The synthesis must specifically answer a research question, requiring a deep understanding of the subject matter and the ability to extract and integrate relevant information from various sources.
-- Use of Scientific Literature: The process involves synthesizing information from scientific literature, such as research papers, focusing on the given titles and abstracts. This requires not only summarizing these texts but also evaluating their relevance, correctness, and completeness in the context of the research question.
-- Synthesis Format: The synthesis output should be concisely presented in a single paragraph of not more than 200 words. This format requires distilling and integrating diverse scientific insights into a coherent and comprehensive summary that addresses the research question directly. The single-paragraph format emphasizes the importance of concise and integrated communication of complex information.
-- Synthesize vs. Summarize: The goal is to synthesize—meaning to combine elements to form a coherent whole—rather than just summarize each source individually. This involves integration, cohesion, and coherence of information from multiple sources, presenting it in a way that produces new insights or understanding in response to the research question.
-- Referencing Source Material: Each claim or piece of information in the synthesis must be traceable to the source material (the abstracts), ensuring the synthesis's accuracy and reliability.
-- Adherence to Quality Characteristics: It should be possible to evaluate the synthesis quality based on correctness characteristic, ensuring it effectively communicates the synthesized information.
+mechanistic_understanding_prompt = """<Context>
+Scientific question answering and synthesis often require more than listing findings: high-quality scientific writing explains not only what is believed to be true, but also how and why it may be true. This is commonly expressed through mechanistic understanding, where the text describes processes, interactions, intermediate steps, or pathways that connect conditions or components to outcomes.
 
-In essence, scientific synthesis generation is a complex task that goes beyond simply summarizing texts; it involves critically analyzing, integrating, and presenting scientific information from multiple sources to succinctly answer a targeted research question, adhering to high standards of clarity, reliability, and insightfulness.
+The response may be a single paragraph or a long-form report with multiple sections. There are no strict requirements on length or formatting; mechanistic explanation should be evaluated independently of presentation style.
+
+This rubric focuses exclusively on the presence and quality of mechanistic explanation within the provided text, emphasizing explanations of how and why phenomena occur rather than descriptions of what is observed. Other aspects of scientific quality (such as factual accuracy, evidential grounding, or completeness) are intentionally outside its scope and are assessed by separate evaluation criteria.
 </Context>
 
 <Role>
-You are tasked as a scientific syntheses quality evaluator.
+You are tasked as a scientific writing quality evaluator.
 </Role>
 
 <Task-Description>
-A user will provide you with a synthesis which has been generated as an answer to a research question using the titles and abstracts of relevant research works.  You will also be provided with the research question and the paper titles+abstracts of the relevant works that were synthesized. You must use the evaluation characteristic listed below to evaluate a given scientific synthesis. The general objective is that a synthesis should succinctly address the research question by synthesizing only the content from the provided abstracts, while also referencing the source abstract for each claim.
+A user will provide you with:
+1) a research question, and
+2) a written response intended to address that question.
+
+You must evaluate the response using the evaluation characteristic below. Focus on whether the response offers mechanistic understanding (how/why explanations) rather than only descriptive statements (what/that). Your judgment should be based solely on the provided question and response.
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. Mechanistic Understanding: does the answer reflect understanding of ecological processes by explicitly mentioning recognized mechanisms such as feedbacks, nutrient cycling, or trophic cascades?
+MechanisticUnderstanding: Does the response explain mechanisms relevant to the research question by describing processes, interactions, intermediate steps, or pathways (i.e., “how/why”), rather than only stating observations or outcomes (“what”)?
 </Evaluation-Characteristics>
 
-<Rating-Scale>
-For a given characteristic, rate the quality from 1 (very bad) to 5 (very good). Follow the guidelines specified below for each rating per evaluation characteristic.
+<Domain-Vocabulary-Examples>
+Below are domain-specific terms and phrases that often signal mechanistic discussion. They are examples only: their presence is not required, and their presence alone is not sufficient for a high score.
 
-1. Mechanistic Understanding
-Rating 1. Very bad: The synthesis contains only vague statements (e.g., “X affects Y”) with no explanation of how or why; no causal language or mechanisms.
-Rating 2. Bad: The synthesis mentions a relationship but remains single-step; mechanisms are implied but not described; no mediators or temporal aspects.
-Rating 3. Moderate: The synthesis identifies at least one mechanism or causal link but lacks depth; limited causal connectors and no explicit assumptions or timing.
-Rating 4. Good: The synthesis describes multi-step mechanisms (driver → mediator → outcome) using causal language; may include some temporal or conditional detail.
-Rating 5. Very good: The information in the synthesis provides detailed, explicit multi-step causal mechanisms with clear mediators, temporal specificity, and stated assumptions or boundary conditions.
+{MECHANISTIC_VOCAB}
+</Domain-Vocabulary-Examples>
+
+<Rating-Scale>
+For the characteristic above, rate the quality from 1 (very bad) to 5 (very good). Follow the guidelines specified below.
+
+MechanisticUnderstanding
+Rating 1. Very bad: The response is purely descriptive, listing facts or outcomes with no meaningful “how/why” explanation relevant to the research question.
+Rating 2. Bad: The response contains occasional mechanistic terms or phrases, but explanations are superficial, generic, or weakly connected to the research question.
+Rating 3. Moderate: The response provides some mechanistic explanation with partial detail, but important steps, interactions, or pathways are missing, unclear, or inconsistently developed.
+Rating 4. Good: The response offers clear mechanistic explanations with multiple concrete steps, interactions, or pathways that are relevant to the research question; minor gaps or imprecision may remain.
+Rating 5. Very good: The response provides a detailed, coherent mechanistic account tightly aligned with the research question, explicitly articulating multiple intermediate steps or process-level linkages and clearly distinguishing mechanistic explanation (“how/why”) from descriptive reporting (“what”).
+
+</Rating-Scale>
 
 <Response-Format>
-For each characteristic rate the quality from 1 (very bad) to 5 (very good).  Provide a short rationale for each rating. 
-Return your response in JSON format: {characteristic : {‘rating’ : ‘’, ‘rationale’ : ‘’}}
+Rate the quality from 1 (very bad) to 5 (very good). Provide a short rationale that points to specific parts of the response demonstrating the presence or absence of mechanistic explanation relevant to the research question.
 
-<Example-Response>
+Return your response in JSON format:
 {
-  "Mechanistic Understanding": {"rating": "4", "rationale": "The answer explains a clear multi-step ecological mechanism using causal language, but some temporal or boundary details are only briefly addressed."}
+  "MechanisticUnderstanding": {"rating": "", "rationale": ""}
 }
-</Example-Response>
 </Response-Format>
 
+<Example-Responses>
+
+{EXAMPLE_RESPONSES}
+
+</Example-Responses>
+
 <Note>
-Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
+Your evaluation must be based solely on the provided research question and response. Do not reward length by itself; reward mechanistic clarity, relevance to the question, and explanatory coherence. This rubric does not assess factual correctness, evidential grounding, or completeness.
 </Note>"""
+
 class MechanisticUnderstanding(Rubric):
-    name: str = "Mechanistic Understanding"
+    name: str = "MechanisticUnderstanding"
     system_prompt_template: str = mechanistic_understanding_prompt
 
-causal_reasoning_prompt = """<Context> 
-Scientific synthesis generation involves creating a concise, coherent, and integrated summary from a collection of scientific texts (such as research paper titles and abstracts) that addresses a specific research question. Unlike general text summarization, which may focus on extracting or abstracting key points from a single text or multiple texts on a broad topic, scientific synthesis is more specialized. It requires:
+causal_reasoning_prompt = """<Context>
+Scientific question answering and synthesis often require more than listing findings: high-quality scientific writing explains not only what is believed to be true, but also how and why it may be true. One important aspect of this is causal reasoning, where the text articulates cause–effect relationships, conditions, mediators, moderators, and causal chains, rather than only describing associations or co-occurrences.
 
-- Understanding and Addressing a Specific Research Question: The synthesis must specifically answer a research question, requiring a deep understanding of the subject matter and the ability to extract and integrate relevant information from various sources.
-- Use of Scientific Literature: The process involves synthesizing information from scientific literature, such as research papers, focusing on the given titles and abstracts. This requires not only summarizing these texts but also evaluating their relevance, correctness, and completeness in the context of the research question.
-- Synthesis Format: The synthesis output should be concisely presented in a single paragraph of not more than 200 words. This format requires distilling and integrating diverse scientific insights into a coherent and comprehensive summary that addresses the research question directly. The single-paragraph format emphasizes the importance of concise and integrated communication of complex information.
-- Synthesize vs. Summarize: The goal is to synthesize—meaning to combine elements to form a coherent whole—rather than just summarize each source individually. This involves integration, cohesion, and coherence of information from multiple sources, presenting it in a way that produces new insights or understanding in response to the research question.
-- Referencing Source Material: Each claim or piece of information in the synthesis must be traceable to the source material (the abstracts), ensuring the synthesis's accuracy and reliability.
-- Adherence to Quality Characteristics: It should be possible to evaluate the synthesis quality based on completeness characteristic, ensuring it effectively communicates the synthesized information.
+The response may be a single paragraph or a long-form report with multiple sections. There are no strict requirements on length or formatting; causal reasoning should be evaluated independently of presentation style.
 
-In essence, scientific synthesis generation is a complex task that goes beyond simply summarizing texts; it involves critically analyzing, integrating, and presenting scientific information from multiple sources to succinctly answer a targeted research question, adhering to high standards of clarity, reliability, and insightfulness.
+This rubric focuses exclusively on the presence and quality of causal reasoning within the provided text, emphasizing language and structure that express why something happens (cause → effect) rather than only what is observed or correlated. Other aspects of scientific quality (such as factual accuracy, evidential grounding, or completeness) are intentionally outside its scope and are assessed by separate evaluation criteria.
 </Context>
 
 <Role>
-You are tasked as a scientific syntheses quality evaluator.
+You are tasked as a scientific writing quality evaluator.
 </Role>
 
 <Task-Description>
-A user will provide you with a synthesis which has been generated as an answer to a research question using the titles and abstracts of relevant research works.  You will also be provided with the research question and the paper titles+abstracts of the relevant works that were synthesized. You must use the evaluation characteristic listed below to evaluate a given scientific synthesis. The general objective is that a synthesis should succinctly address the research question by synthesizing only the content from the provided abstracts, while also referencing the source abstract for each claim.
+A user will provide you with:
+1) a research question, and
+2) a written response intended to address that question.
+
+You must evaluate the response using the evaluation characteristic below. Focus on whether the response expresses causal relationships relevant to the research question (cause–effect, mediators/moderators, conditions), rather than only descriptive or correlational statements. Your judgment should be based solely on the provided question and response.
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. Causal Reasoning: does the answer explicitly express cause–effect relationships using causal connectives (e.g., “because,” “due to”), result indicators (e.g., “results in,” “induces”), or mechanistic verbs (e.g., “drives,” “regulates”) when describing ecological processes?
+CausalReasoning: Does the response demonstrate causal reasoning relevant to the research question by explicitly articulating cause–effect relationships (including causal chains, mediators, moderators, or conditional causal statements), rather than only reporting associations, trends, or co-occurrences?
 </Evaluation-Characteristics>
 
-<Rating-Scale>
-For a given characteristic, rate the quality from 1 (very bad) to 5 (very good). Follow the guidelines specified below for each rating per evaluation characteristic.
+<Domain-Vocabulary-Examples>
+Below are examples of causal connectives and expressions that often signal causal reasoning (across domains). They are examples only: their presence is not required, and their presence alone is not sufficient for a high score.
 
-1. Causal Reasoning
-Rating 1. Very bad: The synthesis uses vague statements (e.g., “X affects Y”) with no causal connectors,
-Rating 2. Bad: The synthesis identifies a cause–effect relationship but only as a single-step claim; causal language is minimal and mediators are ignored.
-Rating 3. Moderate: The synthesis includes explicit causal connectors or verbs and at least one cause–effect link, but remains shallow.
-Rating 4. Good: The synthesis describes multi-step causal chains (driver → mediator → outcome) using clear causal language.
-Rating 5. Very good: The synthesis presents detailed, explicit multi-step causal reasoning with clear mediators, temporal specificity, and stated assumptions or boundary conditions.
+Causal connectives / triggers (examples): because, due to, therefore, thus, hence, leads to, results in, causes, contributes to, drives, produces, induces, triggers, promotes, suppresses, mediates, moderates, modulates, depends on, under conditions of, only if, unless.
+
+{CAUSAL_VOCAB}
+</Domain-Vocabulary-Examples>
+
+<Rating-Scale>
+For the characteristic above, rate the quality from 1 (very bad) to 5 (very good). Follow the guidelines specified below.
+
+CausalReasoning
+Rating 1. Very bad: The response is purely descriptive or correlational, offering no meaningful cause–effect statements relevant to the research question.
+Rating 2. Bad: The response uses occasional causal words (e.g., “leads to”, “because”) but causal links are unclear, generic, or asserted without coherent cause–effect structure (often indistinguishable from correlation).
+Rating 3. Moderate: The response includes some clear causal claims relevant to the question, but they are limited in number, shallow (single-step), inconsistently developed, or mixed with ambiguous association language.
+Rating 4. Good: The response provides clear cause–effect reasoning with multiple relevant causal links and some structure (e.g., conditions, mediators/moderators, or short causal chains); minor ambiguity or gaps may remain.
+Rating 5. Very good: The response demonstrates strong causal reasoning throughout, using explicit and coherent cause–effect structure aligned to the research question, including multiple well-articulated causal chains and/or conditional pathways (e.g., A → B → C; “A affects C via B”; “A increases B only under condition D”), and clearly distinguishes causation from association.
+
 </Rating-Scale>
 
 <Response-Format>
-For each characteristic rate the quality from 1 (very bad) to 5 (very good).  Provide a short rationale for each rating. 
-Return your response in JSON format: {characteristic : {‘rating’ : ‘’, ‘rationale’ : ‘’}}
+Rate the quality from 1 (very bad) to 5 (very good). Provide a short rationale that points to specific parts of the response demonstrating the presence or absence of causal reasoning relevant to the research question.
 
-<Example-Response>
+Return your response in JSON format:
 {
-  "Causal Reasoning": {"rating": "4", "rationale": "The answer uses clear causal connectors and describes a multi-step cause–effect relationship."}
+  "CausalReasoning": {"rating": "", "rationale": ""}
 }
-</Example-Response>
 </Response-Format>
 
+<Example-Responses>
+
+{EXAMPLE_RESPONSES}
+
+</Example-Responses>
+
 <Note>
-Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
+Your evaluation must be based solely on the provided research question and response. Do not reward length by itself; reward clarity and coherence of causal structure, relevance to the question, and explicit differentiation between causation and association. This rubric does not assess factual correctness, evidential grounding, or completeness.
 </Note>"""
+
 class CausalReasoning(Rubric):
-    name: str = "Causal Reasoning"
+    name: str = "CausalReasoning"
     system_prompt_template: str = causal_reasoning_prompt
 
-temporal_precision_prompt = """<Context> 
-Scientific synthesis generation involves creating a concise, coherent, and integrated summary from a collection of scientific texts (such as research paper titles and abstracts) that addresses a specific research question. Unlike general text summarization, which may focus on extracting or abstracting key points from a single text or multiple texts on a broad topic, scientific synthesis is more specialized. It requires:
+temporal_precision_prompt = """<Context>
+Scientific question answering and synthesis often require more than listing findings: high-quality scientific writing is precise about time when time matters. Temporal precision refers to how clearly the text specifies when something occurs, over what duration, or across what interval. Precise temporal expressions include calendar dates, numeric durations, bounded year ranges, or clearly delimited intervals; vague temporal markers include expressions like “historically”, “recently”, “long-term”, or “soon” without further specification.
 
-- Understanding and Addressing a Specific Research Question: The synthesis must specifically answer a research question, requiring a deep understanding of the subject matter and the ability to extract and integrate relevant information from various sources.
-- Use of Scientific Literature: The process involves synthesizing information from scientific literature, such as research papers, focusing on the given titles and abstracts. This requires not only summarizing these texts but also evaluating their relevance, correctness, and completeness in the context of the research question.
-- Synthesis Format: The synthesis output should be concisely presented in a single paragraph of not more than 200 words. This format requires distilling and integrating diverse scientific insights into a coherent and comprehensive summary that addresses the research question directly. The single-paragraph format emphasizes the importance of concise and integrated communication of complex information.
-- Synthesize vs. Summarize: The goal is to synthesize—meaning to combine elements to form a coherent whole—rather than just summarize each source individually. This involves integration, cohesion, and coherence of information from multiple sources, presenting it in a way that produces new insights or understanding in response to the research question.
-- Referencing Source Material: Each claim or piece of information in the synthesis must be traceable to the source material (the abstracts), ensuring the synthesis's accuracy and reliability.
-- Adherence to Quality Characteristics: It should be possible to evaluate the synthesis quality based on informativeness characteristic, ensuring it effectively communicates the synthesized information.
+The response may be a single paragraph or a long-form report with multiple sections. There are no strict requirements on length or formatting; temporal precision should be evaluated independently of presentation style.
 
-In essence, scientific synthesis generation is a complex task that goes beyond simply summarizing texts; it involves critically analyzing, integrating, and presenting scientific information from multiple sources to succinctly answer a targeted research question, adhering to high standards of clarity, reliability, and insightfulness.
+This rubric focuses exclusively on the presence and quality of temporal precision within the provided text, emphasizing specific and bounded time expressions (when/for how long/over what interval) rather than vague temporal language. Other aspects of scientific quality (such as factual accuracy, evidential grounding, or completeness) are intentionally outside its scope and are assessed by separate evaluation criteria.
 </Context>
 
 <Role>
-You are tasked as a scientific syntheses quality evaluator.
+You are tasked as a scientific writing quality evaluator.
 </Role>
 
 <Task-Description>
-A user will provide you with a synthesis which has been generated as an answer to a research question using the titles and abstracts of relevant research works.  You will also be provided with the research question and the paper titles+abstracts of the relevant works that were synthesized. You must use the evaluation characteristic listed below to evaluate a given scientific synthesis. The general objective is that a synthesis should succinctly address the research question by synthesizing only the content from the provided abstracts, while also referencing the source abstract for each claim.
+A user will provide you with:
+1) a research question, and
+2) a written response intended to address that question.
+
+You must evaluate the response using the evaluation characteristic below. Focus on whether the response uses specific, bounded temporal expressions when making temporally-relevant statements, rather than relying on vague time markers. Your judgment should be based solely on the provided question and response.
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. Temporal Precision: does the answer include specific and explicit temporal references, such as quantified time intervals or dated events, rather than vague or unspecific timing?
+TemporalPrecision: Does the response use specific, bounded, and meaningful temporal expressions (e.g., dates, durations, intervals, year ranges) when discussing time-relevant aspects of the research question, rather than vague temporal markers?
 </Evaluation-Characteristics>
 
-<Rating-Scale>
-For a given characteristic, rate the quality from 1 (very bad) to 5 (very good). Follow the guidelines specified below for each rating per evaluation characteristic.
+<Domain-Vocabulary-Examples>
+Below are examples of temporal expressions. They are examples only: their presence is not required, and their presence alone is not sufficient for a high score.
 
-1. Temporal Precision
-Rating 1. Very bad: The synthesis contains no temporal references; timing is entirely vague or absent.
-Rating 2. Bad: The answer includes implicit or generic timing (e.g., “over time,” “eventually”) but no specific intervals, dates, or durations.
-Rating 3. Moderate: The answer provides at least one explicit temporal reference (e.g., a rough duration or time window) but lacks consistency or clear linkage to effects.
-Rating 4. Good: The answer includes multiple specific temporal references (e.g., quantified intervals or dated events) that are clearly tied to described processes or outcomes.
-Rating 5. Very good: The answer demonstrates high temporal precision, with detailed and explicit timeframes (lags, durations, windows, or dates) systematically linked to multi-step processes and their effects.
+Specific temporal expressions (examples): in 2019; between 2010–2015; over 6 months; within 2–5 years; a 3-year follow-up; from March 2020 to June 2021; after 12 weeks; pre- vs post-intervention; before/after fine-tuning; during pretraining.
+
+Vague temporal markers (examples): historically; in the past; long-term; recently; soon; over time; nowadays; for some time; at times; in earlier work.
+
+{TEMPORAL_VOCAB}
+</Domain-Vocabulary-Examples>
+
+<Rating-Scale>
+For the characteristic above, rate the quality from 1 (very bad) to 5 (very good). Follow the guidelines specified below.
+
+TemporalPrecision
+Rating 1. Very bad: The response uses time-related language only vaguely (or not at all when time is relevant), relying on unspecific markers such as “historically” or “long-term” without any bounded dates, durations, or intervals.
+Rating 2. Bad: The response includes a few temporal references, but they are mostly vague or inconsistently specified; precise dates/durations/intervals are rare and do not meaningfully clarify timing.
+Rating 3. Moderate: The response provides some specific temporal expressions (dates, durations, ranges), but many temporal references remain vague, or precision is applied only in isolated parts of the response.
+Rating 4. Good: The response frequently uses specific, bounded temporal expressions that help interpret timing and change (dates, durations, intervals, ranges), with only minor reliance on vague temporal markers.
+Rating 5. Very good: The response is consistently temporally precise wherever time is relevant, using specific and bounded expressions (dates, numeric durations, delimited intervals/ranges) and minimizing vague markers; temporal comparisons and sequences are clearly specified (e.g., pre/post, before/after, within X–Y, from A to B).
+
 </Rating-Scale>
 
 <Response-Format>
-For each characteristic rate the quality from 1 (very bad) to 5 (very good).  Provide a short rationale for each rating. 
-Return your response in JSON format: {characteristic : {‘rating’ : ‘’, ‘rationale’ : ‘’}}
+Rate the quality from 1 (very bad) to 5 (very good). Provide a short rationale that points to specific parts of the response demonstrating temporal specificity or vagueness.
 
-<Example-Response>
+Return your response in JSON format:
 {
-  "Temporal Precision": {"rating": "4", "rationale": "The answer includes several specific timeframes or durations that are clearly linked to the described processes, though some timing details could be more precise."}
+  "TemporalPrecision": {"rating": "", "rationale": ""}
 }
-</Example-Response>
 </Response-Format>
 
+<Example-Responses>
+
+{EXAMPLE_RESPONSES}
+
+</Example-Responses>
+
 <Note>
-Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
+Your evaluation must be based solely on the provided research question and response. Do not reward length by itself; reward specificity of temporal expressions and clarity of temporal sequencing when time is relevant. This rubric does not assess factual correctness, evidential grounding, or completeness.
 </Note>"""
+
 class TemporalPrecision(Rubric):
-    name: str = "Temporal Precision"
+    name: str = "TemporalPrecision"
     system_prompt_template: str = temporal_precision_prompt
 
