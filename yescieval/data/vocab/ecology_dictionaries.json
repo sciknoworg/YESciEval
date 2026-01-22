@@ -80,35 +80,5 @@
   ],
   "complexity_terms": [
     "nonlinear", "emergent", "synergistic", "interconnected", "complex", "multifaceted"
-  ],
-
-  "weights": {
-    "alpha": {
-      "depth": 0.31,
-      "breadth": 0.27,
-      "rigor": 0.17,
-      "innov": 0.17,
-      "gap": 0.08
-    },
-    "depth": {
-      "mech": 0.40,
-      "causal": 0.30,
-      "temp": 0.30
-    },
-    "breadth": {
-      "regions": 0.25,
-      "interventions": 0.25,
-      "biodiversity": 0.25,
-      "services": 0.15,
-      "scale": 0.10
-    },
-    "rigor": {
-      "stats": 0.67,
-      "uncert": 0.33
-    },
-    "innovation": {
-      "spec": 0.52,
-      "novel": 0.48
-    }
-  }
+  ]
 }

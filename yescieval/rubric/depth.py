@@ -1,7 +1,5 @@
 from ..base import Rubric
 
-from ..base import Rubric
-
 mechanistic_understanding_prompt = """<Context>
 Scientific question answering and synthesis often require more than listing findings: high-quality scientific writing explains not only what is believed to be true, but also how and why it may be true. This is commonly expressed through mechanistic understanding, where the text describes processes, interactions, intermediate steps, or pathways that connect conditions or components to outcomes.
 
