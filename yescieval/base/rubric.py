@@ -1,8 +1,7 @@
 from abc import ABC
 from pydantic import BaseModel
 from typing import Dict, List, Optional
-from .vocab import VocabLoader
-from .example import ExampleLoader
+from ..injector import ExampleInjector, VocabularyInjector
 
 class Rubric(BaseModel, ABC):
     """
@@ -21,10 +20,11 @@ class Rubric(BaseModel, ABC):
                                  "\n<paper-titles-and-abstracts>\n{content}</paper-titles-and-abstracts>\n\n###")
 
     domain: Optional[str] = None
-    vocab_manager: Optional[VocabLoader] = None
-    example_manager: Optional[ExampleLoader] = None
-    model_config = {"arbitrary_types_allowed": True}
+    vocabulary: Optional[VocabularyInjector] = None
+    example: Optional[ExampleInjector] = None
 
+    model_config = {"arbitrary_types_allowed": True} # Not used in the class but unable to generate
+                                                     # pydantic-core schema for vocab and example injectors
 
     def render_papers(self) -> str:
         paper_content = ""
@@ -32,38 +32,26 @@ class Rubric(BaseModel, ABC):
             paper_content += f"{idx + 1}. {title}\n\n{abstract}\n\n"
         return paper_content
 
-    def preprocess_user_prompt(self, template: str) -> str:
-        """
-        Fills vocabulary and example placeholders in the system prompt.
-        """
-        filled = template
+    def verbalize_user_prompt(self):
+        return self.user_prompt_template.format(answer=self.answer,
+                                                question=self.question,
+                                                content=self.render_papers())
 
-        if self.vocab_manager and self.domain:
-            filled = self.vocab_manager.fill_prompt(filled, self.domain)
-            
-        if self.example_manager and self.domain:
-            
-            filled = self.example_manager.fill_prompt(
-                template=filled, 
-                domain=self.domain, 
-                rubric_name=self.name
-            )
-            
-        return filled
-
-    def verbalize(self) -> str:
-        """
-        Fill placeholders first, then format with answer, question, and papers.
-        """
-        filled_template = self.preprocess_user_prompt(self.user_prompt_template)
-        return filled_template.format(
-            answer=self.answer,
-            question=self.question,
-            content=self.render_papers()
-        )
+    def verbalize_system_prompt(self):
+        system_prompt_template = self.system_prompt_template
+        if self.domain:
+            if self.vocabulary:
+                system_prompt_template = self.vocabulary.format_prompt(prompt=system_prompt_template, domain=self.domain)
+            if self.example:
+                system_prompt_template = self.example.format_prompt(prompt=system_prompt_template,
+                                                                      domain=self.domain,
+                                                                      rubric_id=self.name)
+        return system_prompt_template
 
     def instruct(self) -> List[Dict[str, str]]:
-        return [
-            {"role": "system", "content": self.system_prompt_template},
-            {"role": "user", "content": self.verbalize()},
+        message = [
+            {"role": "system", "content":  self.verbalize_system_prompt()},
+            {"role": "user", "content": self.verbalize_user_prompt()},
         ]
+        return message
+
