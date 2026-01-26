@@ -20,7 +20,7 @@ The following example demonstrates how to create an evaluation rubric, load a ju
 
 .. code-block:: python
 
-    from yescieval import Readability, AutoJudge
+    from yescieval import Readability, AutoJudge, ExampleInjector, VocabularyInjector
 
     papers = {
         "A Study on AI": "This paper discusses recent advances in artificial intelligence, including deep learning.",
@@ -38,7 +38,7 @@ The following example demonstrates how to create an evaluation rubric, load a ju
     )
 
     # Step 1: Create a rubric
-    rubric = Readability(papers=papers, question=question, answer=answer)
+    rubric = Readability(papers=papers, question=question, answer=answer, domain="nlp", vocabulary=VocabularyInjector(), example=ExampleInjector())
     instruction_prompt = rubric.instruct()
 
     # Step 2: Load the evaluation model (judge)

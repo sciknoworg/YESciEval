@@ -1,14 +1,14 @@
 Quickstart
 =================
 
-YESciEval is a library designed to evaluate the quality of synthesized scientific answers using predefined rubrics and advanced LLM-based judgment models. This guide walks you through how to evaluate answers based on **informativeness** and **gap identification** using a pretrained & a custom judge and parse LLM output into structured JSON.
+YESciEval is a library designed to evaluate the quality of synthesized scientific answers using predefined rubrics and advanced LLM-based judgment models. This guide walks you through how to evaluate answers based on **informativeness** and **mechanistic understanding** using a pretrained & a custom judge and parse LLM output into structured JSON.
 
 
 **Example: Evaluating an Answer Using Informativeness + AskAutoJudge**
 
 .. code-block:: python
 
-   from yescieval import Informativeness, AskAutoJudge, GPTParser
+   from yescieval import Informativeness, AskAutoJudge, GPTParser, ExampleInjector, VocabularyInjector
 
    # Sample papers used in form of {"title": "abstract", ... }
    papers = {
@@ -27,7 +27,7 @@ YESciEval is a library designed to evaluate the quality of synthesized scientifi
    )
 
    # Step 1: Create a rubric
-   rubric = Informativeness(papers=papers, question=question, answer=answer)
+   rubric = Informativeness(papers=papers, question=question, answer=answer, domain="nlp", vocabulary=VocabularyInjector(), example=ExampleInjector())
    instruction_prompt = rubric.instruct()
 
    # Step 2: Load the evaluation model (judge)
@@ -47,14 +47,14 @@ YESciEval is a library designed to evaluate the quality of synthesized scientifi
     - Add more rubrics such as ``Informativeness``, ``Relevancy``, etc for multi-criteria evaluation.
 
 
-**Example: Evaluating an Answer Using GapIdentification + CustomAutoJudge**
+**Example: Evaluating an Answer Using MechanisticUnderstanding + CustomAutoJudge**
 
 .. code-block:: python
 
-   from yescieval import GapIdentification, CustomAutoJudge
+   from yescieval import MechanisticUnderstanding, CustomAutoJudge, ExampleInjector, VocabularyInjector
 
    # Step 1: Create a rubric
-   rubric = GapIdentification(papers=papers, question=question, answer=answer)
+   rubric = MechanisticUnderstanding(papers=papers, question=question, answer=answer, domain="nlp", vocabulary=VocabularyInjector(), example=ExampleInjector())
    instruction_prompt = rubric.instruct()
 
    # Step 2: Load the evaluation model (judge)
