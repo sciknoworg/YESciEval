@@ -92,8 +92,6 @@ CausalReasoning: Does the response demonstrate causal reasoning relevant to the 
 <Domain-Vocabulary-Examples>
 Below are examples of causal connectives and expressions that often signal causal reasoning (across domains). They are examples only: their presence is not required, and their presence alone is not sufficient for a high score.
 
-Causal connectives / triggers (examples): because, due to, therefore, thus, hence, leads to, results in, causes, contributes to, drives, produces, induces, triggers, promotes, suppresses, mediates, moderates, modulates, depends on, under conditions of, only if, unless.
-
 {CAUSAL_VOCAB}
 </Domain-Vocabulary-Examples>
 
@@ -158,10 +156,6 @@ TemporalPrecision: Does the response use specific, bounded, and meaningful tempo
 
 <Domain-Vocabulary-Examples>
 Below are examples of temporal expressions. They are examples only: their presence is not required, and their presence alone is not sufficient for a high score.
-
-Specific temporal expressions (examples): in 2019; between 2010–2015; over 6 months; within 2–5 years; a 3-year follow-up; from March 2020 to June 2021; after 12 weeks; pre- vs post-intervention; before/after fine-tuning; during pretraining.
-
-Vague temporal markers (examples): historically; in the past; long-term; recently; soon; over time; nowadays; for some time; at times; in earlier work.
 
 {TEMPORAL_VOCAB}
 </Domain-Vocabulary-Examples>
