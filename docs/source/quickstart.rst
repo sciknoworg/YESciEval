@@ -8,7 +8,7 @@ YESciEval is a library designed to evaluate the quality of synthesized scientifi
 
 .. code-block:: python
 
-   from yescieval import Informativeness, AskAutoJudge, GPTParser, ExampleInjector, VocabularyInjector
+   from yescieval import Informativeness, AskAutoJudge, GPTParser
 
    # Sample papers used in form of {"title": "abstract", ... }
    papers = {
@@ -27,7 +27,7 @@ YESciEval is a library designed to evaluate the quality of synthesized scientifi
    )
 
    # Step 1: Create a rubric
-   rubric = Informativeness(papers=papers, question=question, answer=answer, domain="nlp", vocabulary=VocabularyInjector(), example=ExampleInjector())
+   rubric = Informativeness(papers=papers, question=question, answer=answer)
    instruction_prompt = rubric.instruct()
 
    # Step 2: Load the evaluation model (judge)
@@ -47,6 +47,53 @@ YESciEval is a library designed to evaluate the quality of synthesized scientifi
     - Add more rubrics such as ``Informativeness``, ``Relevancy``, etc for multi-criteria evaluation.
 
 
+Customizing Rubric Prompts with Injectors
+-----------------------------------------
+
+Injectors allow you to augment rubric prompts with additional guidance, such as example responses or domain-specific vocabulary, to improve evaluation alignment. Each injector is rubric-specific, meaning different rubrics can receive different injected content. They are domain-dependent, so the examples and vocabulary injected are automatically selected based on the domain you specify (e.g., "nlp", "ecology"). Multiple injectors, such as examples and vocabulary, can be used together in a composable way. Available injectors are listed below:
+
+- **Example Injector**: Injects curated example responses for the chosen rubric and domain.
+- **Vocabulary Injector**: Injects domain and rubric-specific terminology to guide model reasoning.
+
+**Usage Example**
+
+.. code-block:: python
+
+   rubric = MechanisticUnderstanding(
+       papers=papers,
+       question=question,
+       answer=answer,
+       domain="nlp",
+       vocabulary=VocabularyInjector(),
+       example=ExampleInjector()
+   )
+
+In this example, ``VocabularyInjector`` and ``ExampleInjector`` provide content aligned with the NLP domain for the *Mechanistic Understanding* rubric.
+
+**Example Injected Responses for Mechanistic Understanding**
+
+.. code-block:: json
+
+   "MechanisticUnderstanding": [
+       {
+           "rating": "1",
+           "rationale": "The response reports results or model performance but does not explain how the model architecture or training process leads to those outcomes."
+       },
+       {
+           "rating": "4",
+           "rationale": "The response provides a clear mechanistic explanation of how the model works, describing the role of transformer-based architectures, the effects of pretraining and fine-tuning, and insights from ablation studies that show how specific components contribute to performance."
+       }
+   ]
+
+**Example Injected Vocabulary for Mechanistic Understanding in the NLP Domain**
+
+.. code-block:: json
+
+   "training_terms": [
+      "pretraining", "fine-tuning", "instruction tuning", "rlhf", "dpo", "lora", "qlora", "quantization",
+      "distillation", "curriculum", "data augmentation", "continual learning"
+   ]
+
 **Example: Evaluating an Answer Using MechanisticUnderstanding + CustomAutoJudge**
 
 .. code-block:: python
@@ -65,6 +112,8 @@ YESciEval is a library designed to evaluate the quality of synthesized scientifi
    result = judge.judge(rubric=rubric)
    print("Raw Evaluation Output:")
    print(result)
+
+
 
 **Parsing Raw Output with GPTParser**
 

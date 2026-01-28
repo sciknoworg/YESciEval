@@ -2,7 +2,7 @@
 Rubrics
 ===================
 
-A total of twelve (12) evaluation rubrics were defined as part of the YESciEval test framework.
+A total of twenty one (21) evaluation rubrics were defined as part of the YESciEval test framework.
 
 Linguistic & Stylistic Quality
 ---------------------------------
@@ -79,6 +79,78 @@ Following ``Research Depth Assessment`` quantifies the mechanistic and analytica
      - Does the answer include specific time references, like intervals (“within 6 months”) or dates (“1990–2020”)?
 
 
+Research Breadth Assessment
+---------------------------------
+
+Following ``Research Breadth Assessment`` evaluates the diversity of evidence across dimensions, scope, and methodological contexts.
+
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 80
+
+   * - Evaluation Rubric
+     - Description
+   * - **13. Context Coverage:**
+     - Does the answer demonstrate breadth by addressing several distinct and relevant contexts related to the research question?
+   * - **14. Method Coverage:**
+     - Does the answer address multiple distinct methods or interventions relevant to the research question?
+   * - **15. Dimension Coverage:**
+     - Does the answer distribute attention across multiple distinct descriptive or evaluative dimensions relevant to the research question?
+   * - **16. Scope Coverage:**
+     - Does the answer distribute attention across multiple distinct scopes of applicability or impact relevant to the research question?
+   * - **17. Scale Coverage:**
+     - Does the answer distribute attention across multiple distinct scales relevant to the research question?
+
+Scientific Rigor Assessment
+---------------------------------
+
+Following ``Scientific Rigor Assessment`` assesses the evidentiary and methodological integrity of the synthesis.
+
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 80
+
+   * - Evaluation Rubric
+     - Description
+   * - **18. Quantitative Evidence And Uncertainty:**
+     - Does the answer appropriately handle quantitative evidence and uncertainty relevant to the research question?
+   * - **19. Epistemic Calibration:**
+     - Does the answer clearly align claim strength with evidential support by marking uncertainty, assumptions, and limitations where relevant?
+
+Innovation Capacity Assessment
+---------------------------------
+
+Following ``Innovation Capacity Assessment`` evaluates the novelty of the synthesis.
+
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 80
+
+   * - Evaluation Rubric
+     - Description
+   * - **20. State-Of-The-Art And Novelty :**
+     - Does the response identify and contextualize relevant state-of-the-art or novel contributions relative to prior work?
+
+
+Research Gap Assessment
+---------------------------------
+
+Following ``Research Gap Assessment`` detects explicit acknowledgment of unanswered questions or understudied areas in the synthesis.
+
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 80
+
+   * - Evaluation Rubric
+     - Description
+   * - **21. Gap Identification:**
+     - Does the answer point out unanswered questions or understudied areas, using terms like “research gap” or “understudied”?
+
+
 Usage Example
 --------------------------
 
@@ -87,8 +159,12 @@ Here is a simple example of how to import rubrics in your code:
 .. code-block:: python
 
     from yescieval import Informativeness, Correctness, Completeness, Coherence, Relevancy,
-                          Integration, Cohesion, Readability, Conciseness,
-                          MechanisticUnderstanding, CausalReasoning, TemporalPrecision
+                          Integration, Cohesion, Readability, Conciseness, ContextCoverage, MethodCoverage,
+                          DimensionCoverage, ScopeCoverage, ScaleCoverage, MechanisticUnderstanding,
+                          CausalReasoning, TemporalPrecision, GapIdentification, 
+                          QuantitativeEvidenceAndUncertainty, EpistemicCalibration,
+                          StateOfTheArtAndNovelty
+
 
 And to use rubrics:
 
@@ -106,7 +182,7 @@ And to use rubrics:
     answer = "The synthesis answer summarizing the papers."
 
     # Instantiate a rubric, e.g. Coherence
-    rubric = Coherence(papers=papers, question=question, answer=answer, domain="nlp", vocabulary=VocabularyInjector(), example=ExampleInjector())
+    rubric = Coherence(papers=papers, question=question, answer=answer)
     instruction = rubric.instruct()
 
     print(instruction)
