@@ -2,10 +2,30 @@
 Rubrics
 ===================
 
-A total of twenty one (21) evaluation rubrics were defined as part of the YESciEval test framework.
+A total of **21** evaluation rubrics were defined as part of the YESciEval test framework within two categories presented as following:
+
+.. hint::
+
+
+	Here is a simple example of how to import rubrics in your code:
+
+	.. code-block:: python
+
+	    from yescieval import Informativeness, Correctness, Completeness, Coherence, Relevancy,
+	                          Integration, Cohesion, Readability, Conciseness, ContextCoverage, MethodCoverage,
+	                          DimensionCoverage, ScopeCoverage, ScaleCoverage, MechanisticUnderstanding,
+	                          CausalReasoning, TemporalPrecision, GapIdentification,
+	                          QuantitativeEvidenceAndUncertainty, EpistemicCalibration,
+	                          StateOfTheArtAndNovelty
+
+	The rubrics are presented as following:
+
+
+Question Answering
+---------------------------------
 
 Linguistic & Stylistic Quality
----------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Following ``Linguistic & Stylistic Quality`` concerns grammar, clarity, and adherence to academic writing conventions.
 
@@ -24,7 +44,7 @@ Following ``Linguistic & Stylistic Quality`` concerns grammar, clarity, and adhe
      - Does the answer follow appropriate style and structure conventions for academic writing, particularly for readability?
 
 Logical & Structural Integrity
----------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Following ``Logical & Structural Integrity`` focuses on the reasoning and organization of information.
 
 .. list-table::
@@ -40,10 +60,10 @@ Following ``Logical & Structural Integrity`` focuses on the reasoning and organi
    * - **6. Relevancy:**
      - Is the information in the answer relevant to the problem?
 
-Content Accuracy & Informativeness
----------------------------------
+Evidence Fidelity
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Following ``Content Accuracy & Informativeness`` ensures that the response is both correct and useful.
+Following ``Evidence Fidelity`` ensures that the response is both correct and useful.
 
 
 .. list-table::
@@ -59,8 +79,36 @@ Following ``Content Accuracy & Informativeness`` ensures that the response is bo
    * - **9. Informativeness:**
      - Is the answer a useful and informative reply to the problem?
 
+Usage
+~~~~~~~~~~~~~~~~~
+
+.. code-block:: python
+
+    from yescieval import Coherence
+
+    papers = {
+        "Paper 1 title": "abstract of paper 1 ...",
+        "Paper 2 title": "abstract of paper 2 ...",
+        "Paper 3 title": "abstract of paper 3 ...",
+        "Paper 4 title": "abstract of paper 4 ...",
+        "Paper 5 title": "abstract of paper 5 ..."
+    }
+    question = "What are the key findings on AI in these papers?"
+    answer = "The synthesis answer summarizing the papers."
+
+    # Instantiate a rubric, e.g. Coherence
+    rubric = Coherence(papers=papers, question=question, answer=answer)
+    instruction = rubric.instruct()
+
+    print(instruction)
+    print(rubric.name)
+
+
+Deep Research
+-------------------
+
 Research Depth Assessment
----------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Following ``Research Depth Assessment`` quantifies the mechanistic and analytical sophistication of synthesis outputs.
 
@@ -80,7 +128,7 @@ Following ``Research Depth Assessment`` quantifies the mechanistic and analytica
 
 
 Research Breadth Assessment
----------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Following ``Research Breadth Assessment`` evaluates the diversity of evidence across dimensions, scope, and methodological contexts.
 
@@ -103,7 +151,7 @@ Following ``Research Breadth Assessment`` evaluates the diversity of evidence ac
      - Does the answer distribute attention across multiple distinct scales relevant to the research question?
 
 Scientific Rigor Assessment
----------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Following ``Scientific Rigor Assessment`` assesses the evidentiary and methodological integrity of the synthesis.
 
@@ -120,7 +168,7 @@ Following ``Scientific Rigor Assessment`` assesses the evidentiary and methodolo
      - Does the answer clearly align claim strength with evidential support by marking uncertainty, assumptions, and limitations where relevant?
 
 Innovation Capacity Assessment
----------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Following ``Innovation Capacity Assessment`` evaluates the novelty of the synthesis.
 
@@ -136,7 +184,7 @@ Following ``Innovation Capacity Assessment`` evaluates the novelty of the synthe
 
 
 Research Gap Assessment
----------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Following ``Research Gap Assessment`` detects explicit acknowledgment of unanswered questions or understudied areas in the synthesis.
 
@@ -151,39 +199,91 @@ Following ``Research Gap Assessment`` detects explicit acknowledgment of unanswe
      - Does the answer point out unanswered questions or understudied areas, using terms like “research gap” or “understudied”?
 
 
-Usage Example
---------------------------
+Usage
+~~~~~~~~~~~~~~
 
-Here is a simple example of how to import rubrics in your code:
+Injectors allow you to augment rubric prompts with additional guidance, such as example responses or domain-specific vocabulary, to improve evaluation alignment. Each injector is rubric-specific, meaning different rubrics can receive different injected content. They are domain-dependent, so the examples and vocabulary injected are automatically selected based on the domain you specify (e.g., "nlp", "ecology"). Multiple injectors, such as examples and vocabulary, can be used together in a composable way. Available injectors are listed below:
 
-.. code-block:: python
+- **Example Injector**: Injects curated example responses for the chosen rubric and domain.
+- **Vocabulary Injector**: Injects domain and rubric-specific terminology to guide model reasoning.
 
-    from yescieval import Informativeness, Correctness, Completeness, Coherence, Relevancy,
-                          Integration, Cohesion, Readability, Conciseness, ContextCoverage, MethodCoverage,
-                          DimensionCoverage, ScopeCoverage, ScaleCoverage, MechanisticUnderstanding,
-                          CausalReasoning, TemporalPrecision, GapIdentification, 
-                          QuantitativeEvidenceAndUncertainty, EpistemicCalibration,
-                          StateOfTheArtAndNovelty
-
-
-And to use rubrics:
+Here is how to define the deep research rubric:
 
 .. code-block:: python
 
-    # Example inputs
-    papers = {
-        "Paper 1 title": "abstract of paper 1 ...",
-        "Paper 2 title": "abstract of paper 2 ...",
-        "Paper 3 title": "abstract of paper 3 ...",
-        "Paper 4 title": "abstract of paper 4 ...",
-        "Paper 5 title": "abstract of paper 5 ..."
-    }
-    question = "What are the key findings on AI in these papers?"
-    answer = "The synthesis answer summarizing the papers."
+   from yescieval import MechanisticUnderstanding
 
-    # Instantiate a rubric, e.g. Coherence
-    rubric = Coherence(papers=papers, question=question, answer=answer)
-    instruction = rubric.instruct()
+   rubric = MechanisticUnderstanding(
+       papers=papers,
+       question=question,
+       answer=answer,
+       domain="nlp",
+       vocabulary=VocabularyInjector(),
+       example=ExampleInjector()
+   )
 
-    print(instruction)
-    print(rubric.name)
+In this example, ``VocabularyInjector`` and ``ExampleInjector`` provide content aligned with the NLP domain for the *Mechanistic Understanding* rubric.
+
+.. tab:: Injected Responses
+
+	::
+
+	   "MechanisticUnderstanding": [
+	       {
+	           "rating": "1",
+	           "rationale": "The response reports results or model performance but does not explain how the model architecture or training process leads to those outcomes."
+	       },
+	       {
+	           "rating": "4",
+	           "rationale": "The response provides a clear mechanistic explanation of how the model works, describing the role of transformer-based architectures, the effects of pretraining and fine-tuning, and insights from ablation studies that show how specific components contribute to performance."
+	       }
+	   ]
+
+.. tab::  Injected Vocabulary
+
+	::
+
+	   "training_terms": [
+	      "pretraining", "fine-tuning", "instruction tuning", "rlhf", "dpo", "lora", "qlora", "quantization",
+	      "distillation", "curriculum", "data augmentation", "continual learning"
+	   ]
+
+Here is an complete example of how evaluation on can be done:
+
+.. code-block:: python
+
+   from yescieval import MechanisticUnderstanding, CustomAutoJudge, ExampleInjector, VocabularyInjector
+
+   # Step 1: Create a rubric
+   rubric = MechanisticUnderstanding(papers=papers,
+                                     question=question,
+                                     answer=answer,
+                                     domain="nlp",
+                                     vocabulary=VocabularyInjector(),
+                                     example=ExampleInjector())
+   instruction_prompt = rubric.instruct()
+
+   # Step 2: Load the evaluation model (judge)
+   judge = CustomAutoJudge()
+   judge.from_pretrained(model_id="Qwen/Qwen3-8B", device="cpu", token="your_huggingface_token")
+
+   # Step 3: Evaluate the answer
+   result = judge.judge(rubric=rubric)
+   print("Raw Evaluation Output:")
+   print(result)
+
+
+.. hint::
+
+	There are specific domains incorporated in YESCiEval for injectors presented as following, however using injector is also optional!
+
+	.. list-table::
+	   :header-rows: 1
+	   :widths: 50 30
+
+	   * - Domain
+	     - ID
+	   * - **Natural Language Processing**
+	     - ``nlp``
+	   * - **Ecology**
+	     - ``ecology``

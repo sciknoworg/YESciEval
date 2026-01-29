@@ -1,10 +1,11 @@
 Quickstart
 =================
 
-YESciEval is a library designed to evaluate the quality of synthesized scientific answers using predefined rubrics and advanced LLM-based judgment models. This guide walks you through how to evaluate answers based on **informativeness** and **mechanistic understanding** using a pretrained & a custom judge and parse LLM output into structured JSON.
+YESciEval is a library designed to evaluate the quality of synthesized scientific answers using predefined rubrics and advanced LLM-based judgment models. This guide walks you through how to evaluate answers based given rubrics (i.e. **informativeness**) using a pretrained or a custom judge and parse LLM output into structured JSON.
 
 
-**Example: Evaluating an Answer Using Informativeness + AskAutoJudge**
+The following example shows the how to run a ``AskAutoJudge`` on ``Informativeness`` rubric:
+
 
 .. code-block:: python
 
@@ -46,78 +47,7 @@ YESciEval is a library designed to evaluate the quality of synthesized scientifi
     - Use the ``device="cuda"`` if running on GPU for better performance.
     - Add more rubrics such as ``Informativeness``, ``Relevancy``, etc for multi-criteria evaluation.
 
-
-Customizing Rubric Prompts with Injectors
------------------------------------------
-
-Injectors allow you to augment rubric prompts with additional guidance, such as example responses or domain-specific vocabulary, to improve evaluation alignment. Each injector is rubric-specific, meaning different rubrics can receive different injected content. They are domain-dependent, so the examples and vocabulary injected are automatically selected based on the domain you specify (e.g., "nlp", "ecology"). Multiple injectors, such as examples and vocabulary, can be used together in a composable way. Available injectors are listed below:
-
-- **Example Injector**: Injects curated example responses for the chosen rubric and domain.
-- **Vocabulary Injector**: Injects domain and rubric-specific terminology to guide model reasoning.
-
-**Usage Example**
-
-.. code-block:: python
-
-   rubric = MechanisticUnderstanding(
-       papers=papers,
-       question=question,
-       answer=answer,
-       domain="nlp",
-       vocabulary=VocabularyInjector(),
-       example=ExampleInjector()
-   )
-
-In this example, ``VocabularyInjector`` and ``ExampleInjector`` provide content aligned with the NLP domain for the *Mechanistic Understanding* rubric.
-
-**Example Injected Responses for Mechanistic Understanding**
-
-.. code-block:: json
-
-   "MechanisticUnderstanding": [
-       {
-           "rating": "1",
-           "rationale": "The response reports results or model performance but does not explain how the model architecture or training process leads to those outcomes."
-       },
-       {
-           "rating": "4",
-           "rationale": "The response provides a clear mechanistic explanation of how the model works, describing the role of transformer-based architectures, the effects of pretraining and fine-tuning, and insights from ablation studies that show how specific components contribute to performance."
-       }
-   ]
-
-**Example Injected Vocabulary for Mechanistic Understanding in the NLP Domain**
-
-.. code-block:: json
-
-   "training_terms": [
-      "pretraining", "fine-tuning", "instruction tuning", "rlhf", "dpo", "lora", "qlora", "quantization",
-      "distillation", "curriculum", "data augmentation", "continual learning"
-   ]
-
-**Example: Evaluating an Answer Using MechanisticUnderstanding + CustomAutoJudge**
-
-.. code-block:: python
-
-   from yescieval import MechanisticUnderstanding, CustomAutoJudge, ExampleInjector, VocabularyInjector
-
-   # Step 1: Create a rubric
-   rubric = MechanisticUnderstanding(papers=papers, question=question, answer=answer, domain="nlp", vocabulary=VocabularyInjector(), example=ExampleInjector())
-   instruction_prompt = rubric.instruct()
-
-   # Step 2: Load the evaluation model (judge)
-   judge = CustomAutoJudge()
-   judge.from_pretrained(model_id="Qwen/Qwen3-8B", device="cpu", token="your_huggingface_token")
-
-   # Step 3: Evaluate the answer
-   result = judge.judge(rubric=rubric)
-   print("Raw Evaluation Output:")
-   print(result)
-
-
-
-**Parsing Raw Output with GPTParser**
-
-If the model outputs unstructured or loosely structured text, you can use GPTParser to parse it into valid JSON.
+**Output Parser**: If the model outputs unstructured or loosely structured text, you can use GPTParser to parse it into valid JSON.
 
 .. code-block:: python
 
@@ -132,7 +62,7 @@ If the model outputs unstructured or loosely structured text, you can use GPTPar
    print("Parsed Output:")
    print(parsed.model_dump())
 
-**Expected Output Format**
+Expected outputfFormat is:
 
 .. code-block:: json
 
@@ -165,16 +95,20 @@ The output schema is as a following (if you do not prefer to use ``.model_dump()
 		'type': 'object'
 	}
 
+
 .. hint:: Key Components
 
-    +------------------+-------------------------------------------------------+
-    | Component        | Purpose                                               |
-    +==================+=======================================================+
-    | Informativeness  | Defines rubric to evaluate relevance to source papers |
-    +------------------+-------------------------------------------------------+
-    | AskAutoJudge     | Loads and uses a judgment model to evaluate answers   |
-    +------------------+-------------------------------------------------------+
-    | GPTParser        | Parses loosely formatted text from LLMs into JSON     |
-    +------------------+-------------------------------------------------------+
 
+	.. list-table::
+	   :header-rows: 1
+	   :widths: 30 60
+
+	   * - Component
+	     - Purpose
+	   * - **Informativeness**
+	     - Defines rubric to evaluate relevance to source papers
+	   * - **AskAutoJudge**
+	     - Loads and uses a judgment model to evaluate answers
+	   * - **GPTParser**
+	     - Parses loosely formatted text from LLMs into JSON
 
