@@ -1,4 +1,4 @@
-from .informativeness import Informativeness, Correctness, Completeness
+from .fidelity import Informativeness, Correctness, Completeness
 from .structural import Coherence, Relevancy, Integration
 from .stylistic import Cohesion, Readability, Conciseness
 from .depth import MechanisticUnderstanding, CausalReasoning, TemporalPrecision
