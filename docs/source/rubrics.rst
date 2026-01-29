@@ -12,11 +12,10 @@ A total of **21** evaluation rubrics were defined as part of the YESciEval test 
 	.. code-block:: python
 
 	    from yescieval import Informativeness, Correctness, Completeness, Coherence, Relevancy,
-	                          Integration, Cohesion, Readability, Conciseness, ContextCoverage, MethodCoverage,
-	                          DimensionCoverage, ScopeCoverage, ScaleCoverage, MechanisticUnderstanding,
-	                          CausalReasoning, TemporalPrecision, GapIdentification,
-	                          QuantitativeEvidenceAndUncertainty, EpistemicCalibration,
-	                          StateOfTheArtAndNovelty
+	                          Integration, Cohesion, Readability, Conciseness,
+	                          MechanisticUnderstanding, CausalReasoning, TemporalPrecision, GapIdentification,
+	                          StatisticalSophistication, CitationPractices, UncertaintyAcknowledgment,
+	                          SpeculativeStatements, NoveltyIndicators
 
 	The rubrics are presented as following:
 
