@@ -94,12 +94,11 @@ Judges within YESciEval are defined as follows:
 A total of **23** evaluation rubrics were defined as part of the YESciEval test framework and can be used via ``yescieval``. Following simple example shows how to import rubrics in your code:
 
 ```python
-from yescieval import Informativeness, Correctness, Completeness, Coherence, Relevancy, \
-                      Integration, Cohesion, Readability, Conciseness, GeographicCoverage, \ 
-                      InterventionDiversity, BiodiversityDimensions, EcosystemServices, SpatialScale, \
-                      MechanisticUnderstanding, CausalReasoning, TemporalPrecision, GapIdentification, \
-                      StatisticalSophistication, CitationPractices, UncertaintyAcknowledgment, \
-                      SpeculativeStatements, NoveltyIndicators 
+from yescieval import Informativeness, Correctness, Completeness, Coherence, Relevancy,\
+                      Integration, Cohesion, Readability, Conciseness,\
+                      MechanisticUnderstanding, CausalReasoning, TemporalPrecision, GapIdentification,\
+                      StatisticalSophistication, CitationPractices, UncertaintyAcknowledgment,\
+                      SpeculativeStatements, NoveltyIndicators
 ```
 
 A complete list of rubrics are available at YESciEval [📚 Rubrics](https://yescieval.readthedocs.io/rubrics.html) page.

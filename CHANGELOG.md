@@ -1,5 +1,10 @@
 ## Changelog
 
+### v0.5.0 (January 29, 2026)
+- Added Example and Vocab Injectors for Deep Research Rubric (PR #13)
+- Updated documentations (PR #13)
+- Minor refactoring (#11)
+
 ### v0.4.0 (January 13, 2026)
 - Add a GPT custom jude (PR #5)
 - Update documentation 
