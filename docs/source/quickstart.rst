@@ -1,10 +1,11 @@
 Quickstart
 =================
 
-YESciEval is a library designed to evaluate the quality of synthesized scientific answers using predefined rubrics and advanced LLM-based judgment models. This guide walks you through how to evaluate answers based on **informativeness** and **gap identification** using a pretrained & a custom judge and parse LLM output into structured JSON.
+YESciEval is a library designed to evaluate the quality of synthesized scientific answers using predefined rubrics and advanced LLM-based judgment models. This guide walks you through how to evaluate answers based given rubrics (i.e. **informativeness**) using a pretrained or a custom judge and parse LLM output into structured JSON.
 
 
-**Example: Evaluating an Answer Using Informativeness + AskAutoJudge**
+The following example shows the how to run a ``AskAutoJudge`` on ``Informativeness`` rubric:
+
 
 .. code-block:: python
 
@@ -46,29 +47,7 @@ YESciEval is a library designed to evaluate the quality of synthesized scientifi
     - Use the ``device="cuda"`` if running on GPU for better performance.
     - Add more rubrics such as ``Informativeness``, ``Relevancy``, etc for multi-criteria evaluation.
 
-
-**Example: Evaluating an Answer Using GapIdentification + CustomAutoJudge**
-
-.. code-block:: python
-
-   from yescieval import GapIdentification, CustomAutoJudge
-
-   # Step 1: Create a rubric
-   rubric = GapIdentification(papers=papers, question=question, answer=answer)
-   instruction_prompt = rubric.instruct()
-
-   # Step 2: Load the evaluation model (judge)
-   judge = CustomAutoJudge()
-   judge.from_pretrained(model_id="Qwen/Qwen3-8B", device="cpu", token="your_huggingface_token")
-
-   # Step 3: Evaluate the answer
-   result = judge.judge(rubric=rubric)
-   print("Raw Evaluation Output:")
-   print(result)
-
-**Parsing Raw Output with GPTParser**
-
-If the model outputs unstructured or loosely structured text, you can use GPTParser to parse it into valid JSON.
+**Output Parser**: If the model outputs unstructured or loosely structured text, you can use GPTParser to parse it into valid JSON.
 
 .. code-block:: python
 
@@ -83,7 +62,7 @@ If the model outputs unstructured or loosely structured text, you can use GPTPar
    print("Parsed Output:")
    print(parsed.model_dump())
 
-**Expected Output Format**
+Expected outputfFormat is:
 
 .. code-block:: json
 
@@ -116,16 +95,20 @@ The output schema is as a following (if you do not prefer to use ``.model_dump()
 		'type': 'object'
 	}
 
+
 .. hint:: Key Components
 
-    +------------------+-------------------------------------------------------+
-    | Component        | Purpose                                               |
-    +==================+=======================================================+
-    | Informativeness  | Defines rubric to evaluate relevance to source papers |
-    +------------------+-------------------------------------------------------+
-    | AskAutoJudge     | Loads and uses a judgment model to evaluate answers   |
-    +------------------+-------------------------------------------------------+
-    | GPTParser        | Parses loosely formatted text from LLMs into JSON     |
-    +------------------+-------------------------------------------------------+
 
+	.. list-table::
+	   :header-rows: 1
+	   :widths: 30 60
+
+	   * - Component
+	     - Purpose
+	   * - **Informativeness**
+	     - Defines rubric to evaluate relevance to source papers
+	   * - **AskAutoJudge**
+	     - Loads and uses a judgment model to evaluate answers
+	   * - **GPTParser**
+	     - Parses loosely formatted text from LLMs into JSON
 
