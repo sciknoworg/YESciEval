@@ -97,6 +97,58 @@ example_responses = {
                 "rationale": "The response uses specific and bounded temporal expressions, for example describing changes occurring within 2-5 years, after 3 months, or every 2 weeks, and referencing defined time periods such as 1998-2004 or June 2012."
             }
         ]
+    },
+    "Breadth": {
+        "ContextCoverage": [
+            {
+                "rating": "1",
+                "rationale": "The response discusses only a single ecological setting and does not reference any alternative regions or biomes relevant to the research question."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response covers multiple distinct ecological contexts, such as different regions and ecosystem types, and distributes attention across them rather than focusing on a single setting."
+            }
+        ],
+        "MethodCoverage": [
+            {
+                "rating": "1",
+                "rationale": "The response focuses exclusively on a single management or intervention approach (e.g., controlled burning) and does not reference any alternative methods relevant to the research question."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response discusses multiple distinct interventions or management approaches, such as controlled burning, grazing management, habitat restoration, and protected areas, distributing attention across them rather than focusing on a single method."
+            }
+        ],
+        "DimensionCoverage": [
+            {
+                "rating": "1",
+                "rationale": "The response focuses on a single ecological dimension and does not meaningfully address other relevant dimensions."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response covers multiple ecological dimensions, including taxonomic, functional, and phylogenetic diversity, as well as measures such as species richness, evenness, abundance, and genetic and structural diversity, rather than focusing on just one single dimension."
+            }
+        ],
+        "ScopeCoverage": [
+            {
+                "rating": "1",
+                "rationale": "The response addresses only a very narrow aspect of ecological impact and remains vague, providing little indication that the findings apply beyond a single, limited scope."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response discusses several types of ecosystem services, from provisioning and regulating services to supporting and cultural services, rather than focusing on just one single, limited scope"
+            }
+        ],
+        "ScaleCoverage": [
+            {
+                "rating": "1",
+                "rationale": "The response focuses on a single ecological scale and does not meaningfully consider how the findings apply at other relevant scales."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response addresses multiple ecological scales, ranging from the individual and population level to community and ecosystem scales, and also considers broader spatial scales such as local, regional, and global contexts, rather than focusing on just one scale."
+            }
+        ]
     }
 }
 

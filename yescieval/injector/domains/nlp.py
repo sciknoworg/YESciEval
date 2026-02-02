@@ -108,6 +108,58 @@ example_responses = {
                 "rationale": "The response includes precise temporal details, such as model behavior observed after 3 months of training, performance changes within 2-5 years of development, or evaluations conducted every 2 weeks, with references to specific time ranges like 1998-2004 or June 2012."
             }
         ]
+    },
+    "Breadth": {
+        "ContextCoverage": [
+            {
+                "rating": "1",
+                "rationale": "The response focuses entirely on a single NLP task or application setting and does not mention any alternative tasks relevant to the research question."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response addresses multiple distinct NLP tasks or application settings and distributes attention across them rather than concentrating on a single task."
+            }
+        ],
+        "MethodCoverage": [
+            {
+                "rating": "1",
+                "rationale": "The response focuses entirely on a single training or modeling approach (e.g., fine-tuning) and does not mention any alternative methods or settings relevant to the research question."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response addresses multiple distinct methods or settings, such as pretraining, fine-tuning, instruction tuning, and reinforcement learning from human feedback, rather than concentrating on a single approach."
+            }
+        ],
+        "DimensionCoverage": [
+            {
+                "rating": "1",
+                "rationale": "The response relies on a single evaluation dimension and does not indicate consideration of alternative evaluation perspectives."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response evaluates performance across multiple dimensions, using metrics such as accuracy, precision, recall, F1, BLEU, ROUGE, and perplexity, providing a more complete assessment rather than relying on a single metric."
+            }
+        ],
+        "ScopeCoverage": [
+            {
+                "rating": "1",
+                "rationale": "The response is limited to a single, narrowly defined scope and does not indicate that the findings generalize across different linguistic settings or usage scenarios."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response covers a wide range of linguistic scopes, including multiple languages such as English, German, French, and Chinese, as well as multilingual, cross-lingual, and low-resource settings, distributing attention across these distinct applicability scopes with only minor omissions."
+            }
+        ],
+        "ScaleCoverage": [
+            {
+                "rating": "1",
+                "rationale": "The response considers only a single computational scale and does not indicate how the approach behaves under different resource or deployment settings."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response discusses multiple computational scales, including model size in terms of parameters and billion-parameter regimes, compute resources such as GPUs and TPUs, and efficiency-related aspects like inference time, latency, throughput, and memory footprint, providing a multi-scale perspective."
+            }
+        ]
     }
 }
 
