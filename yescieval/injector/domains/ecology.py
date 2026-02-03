@@ -152,8 +152,20 @@ example_responses = {
     }
 }
 
+vocab_block_specs = {
+    "mechanistic_vocab_block": {"label": "Mechanistic terms", "keys": ["mechanistic_terms"]},
+    "causal_vocab_block": {"label": "Causal connectives / triggers", "keys": ["causal_terms"]},
+    "temporal_vocab_block": {"label": "Temporal expressions", "keys": ["temporal_terms"]},
+    "context_coverage_vocab_block": {"label": "Context Coverage", "keys": ["regions"]},
+    "method_coverage_vocab_block": {"label": "Method Coverage", "keys": ["interventions"]},
+    "dimension_coverage_vocab_block": {"label": "Dimension Coverage", "keys": ["diversity_dimensions"]},
+    "scope_coverage_vocab_block": {"label": "Scope Coverage", "keys": ["ecosystem_services"]},
+    "scale_coverage_vocab_block": {"label": "Scale Coverage", "keys": ["scale_terms"]},
+}
+
 class Ecology(Domain):
     examples: Dict[str, Dict] = example_responses
     vocab: Dict[str, Dict] = vocabulary
     ID: str = "ecology"
     verbalized: str = "Ecology"
+    vocab_block_specs: Dict[str, Dict[str, object]] = vocab_block_specs

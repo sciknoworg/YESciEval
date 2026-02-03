@@ -163,8 +163,20 @@ example_responses = {
     }
 }
 
+vocab_block_specs = {
+    "mechanistic_vocab_block": {"label": "Mechanistic terms", "keys": ["training_terms", "arch_terms", "ablation_terms"]},
+    "causal_vocab_block": {"label": "Causal connectives / triggers", "keys": ["causal_terms"]},
+    "temporal_vocab_block": {"label": "Temporal expressions", "keys": ["temporal_terms"]},
+    "context_coverage_vocab_block": {"label": "Context Coverage", "keys": ["tasks"]},
+    "method_coverage_vocab_block": {"label": "Method Coverage", "keys": ["training_terms", "arch_terms"]},
+    "dimension_coverage_vocab_block": {"label": "Dimension Coverage", "keys": ["eval_metrics"]},
+    "scope_coverage_vocab_block": {"label": "Scope Coverage", "keys": ["languages"]},
+    "scale_coverage_vocab_block": {"label": "Scale Coverage", "keys": ["compute_terms"]},
+}
+
 class NLP(Domain):
     examples: Dict[str, Dict]  = example_responses
     vocab: Dict[str, Dict] = vocabulary
     ID: str = 'nlp'
     verbalized: str = "NLP"
+    vocab_block_specs: Dict[str, Dict[str, object]] = vocab_block_specs

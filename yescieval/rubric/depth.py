@@ -26,7 +26,6 @@ MechanisticUnderstanding: Does the response explain mechanisms relevant to the r
 
 <Domain-Vocabulary-Examples>
 Below are domain-specific terms and phrases that often signal mechanistic discussion. They are examples only: their presence is not required, and their presence alone is not sufficient for a high score.
-
 {MECHANISTIC_VOCAB}
 </Domain-Vocabulary-Examples>
 
@@ -91,7 +90,6 @@ CausalReasoning: Does the response demonstrate causal reasoning relevant to the 
 
 <Domain-Vocabulary-Examples>
 Below are examples of causal connectives and expressions that often signal causal reasoning (across domains). They are examples only: their presence is not required, and their presence alone is not sufficient for a high score.
-
 {CAUSAL_VOCAB}
 </Domain-Vocabulary-Examples>
 
@@ -156,7 +154,6 @@ TemporalPrecision: Does the response use specific, bounded, and meaningful tempo
 
 <Domain-Vocabulary-Examples>
 Below are examples of temporal expressions. They are examples only: their presence is not required, and their presence alone is not sufficient for a high score.
-
 {TEMPORAL_VOCAB}
 </Domain-Vocabulary-Examples>
 

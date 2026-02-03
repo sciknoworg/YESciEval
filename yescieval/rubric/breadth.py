@@ -26,7 +26,6 @@ ContextCoverage: Does the response distribute attention across multiple distinct
 
 <Domain-Vocabulary-Examples>
 Below are domain-specific examples of terms that often signal different contexts. They are examples only: their presence is not required, and repetition of the same context does not increase the score.
-
 {CONTEXT_VOCAB}
 </Domain-Vocabulary-Examples>
 
@@ -90,7 +89,6 @@ MethodCoverage: Does the response distribute attention across multiple distinct 
 
 <Domain-Vocabulary-Examples>
 Below are domain-specific examples of terms that often signal different methods or interventions. They are examples only: their presence is not required, and repetition of the same method does not increase the score.
-
 {METHOD_VOCAB}
 </Domain-Vocabulary-Examples>
 
@@ -155,7 +153,6 @@ DimensionCoverage: Does the response distribute attention across multiple distin
 
 <Domain-Vocabulary-Examples>
 Below are domain-specific examples of terms that often signal different dimensions. They are examples only: their presence is not required, and repetition of the same dimension does not increase the score.
-
 {DIMENSION_VOCAB}
 </Domain-Vocabulary-Examples>
 
@@ -220,7 +217,6 @@ ScopeCoverage: Does the response distribute attention across multiple distinct s
 
 <Domain-Vocabulary-Examples>
 Below are domain-specific examples of terms that often signal different scopes. They are examples only: their presence is not required, and repetition of the same scope does not increase the score.
-
 {SCOPE_VOCAB}
 </Domain-Vocabulary-Examples>
 
@@ -286,7 +282,6 @@ ScaleCoverage: Does the response distribute attention across multiple distinct s
 
 <Domain-Vocabulary-Examples>
 Below are domain-specific examples of terms that often signal different scales. They are examples only: their presence is not required, and repetition of the same scale does not increase the score.
-
 {SCALE_VOCAB}
 </Domain-Vocabulary-Examples>
 

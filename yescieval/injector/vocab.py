@@ -1,6 +1,6 @@
 from abc import ABC
 from typing import Dict, List
-from .domains import vocabs, verbalized_domains
+from .domains import verbalized_domains, vocab_block_specs, vocabs
 
 class VocabularyInjector(ABC):
     """
@@ -17,7 +17,7 @@ class VocabularyInjector(ABC):
         "{SCOPE_VOCAB}": "scope_coverage_vocab_block",
         "{SCALE_VOCAB}": "scale_coverage_vocab_block",       
     }
-
+    
     def _clean_terms(self, terms) -> List[str]:
         seen_terms = set()
         cleaned_terms = []
@@ -31,101 +31,47 @@ class VocabularyInjector(ABC):
             cleaned_terms.append(term)
         return cleaned_terms
     
-    def _get_domain_vocab(self, domain_id: str) -> dict:
-        return vocabs.get(domain_id, {}) or {}
+    def _build_vocab_block(self, domain_id: str, block_name: str) -> str:
+        spec = vocab_block_specs.get(domain_id, {}).get(block_name, {})
+        keys = spec.get("keys", [])
+        terms = []
+        domain_vocab = vocabs.get(domain_id, {})
+        for key in keys:
+            terms.extend(domain_vocab.get(key, []) or [])
+        terms = self._clean_terms(terms)
+        if not terms:
+            return ""
+        label = spec.get("label", block_name.replace("_", " ").title())
+        if verbalized_domains.get(domain_id):
+            label += f" ({verbalized_domains[domain_id]})"
+        return f"{label}: " + ", ".join(terms)
+
 
     def mechanistic_vocab_block(self, domain_id: str) -> str:
-        terms = vocabs[domain_id].get("mechanistic_terms")
-        label = "Mechanistic terms"
-        label += f" ({verbalized_domains.get(domain_id)})" if verbalized_domains.get(domain_id) else ""
-        if domain_id == "nlp":
-            terms = (vocabs[domain_id].get("training_terms") +
-                     vocabs[domain_id].get("arch_terms") +
-                     vocabs[domain_id].get("ablation_terms"))
-        terms = self._clean_terms(terms)
-        return f"{label}: " + ", ".join(terms)
+        return self._build_vocab_block(domain_id, "mechanistic_vocab_block")
 
     def causal_vocab_block(self, domain_id: str) -> str:
-        terms = self._clean_terms(vocabs[domain_id].get("causal_terms"))
-        return "Causal connectives / triggers: " + ", ".join(terms)
+        return self._build_vocab_block(domain_id, "causal_vocab_block")
 
     def temporal_vocab_block(self, domain_id: str) -> str:
-        terms = self._clean_terms(vocabs[domain_id].get("temporal_terms"))
-        return "Temporal expressions: " + ", ".join(terms)
-    
-    def context_coverage_vocab_block(self, domain_id: str) -> str:
-        domain_vocab = self._get_domain_vocab(domain_id)
-        label = "Context Coverage"
-        if verbalized_domains.get(domain_id):
-            label += f" ({verbalized_domains[domain_id]})"
-        if domain_id == "ecology":
-            terms = domain_vocab.get("regions", [])
-        elif domain_id == "nlp":
-            terms = domain_vocab.get("tasks", [])
-        else:
-            terms = []
-        terms = self._clean_terms(terms)
-        return f"{label}: " + ", ".join(terms)
-    
-    def method_coverage_vocab_block(self, domain_id: str) -> str:
-        domain_vocab = self._get_domain_vocab(domain_id)
-        label = "Method Coverage"
-        if verbalized_domains.get(domain_id):
-            label += f" ({verbalized_domains[domain_id]})"
-        if domain_id == "nlp":
-            terms = (
-                domain_vocab.get("training_terms", []) +
-                domain_vocab.get("arch_terms", [])
-            )
-        elif domain_id == "ecology":
-            terms = domain_vocab.get("interventions", [])
-        else:
-            terms = []
-        terms = self._clean_terms(terms)
-        return f"{label}: " + ", ".join(terms)
-    
-    def dimension_coverage_vocab_block(self, domain_id: str) -> str:
-        domain_vocab = self._get_domain_vocab(domain_id)
-        label = "Dimension Coverage"
-        if verbalized_domains.get(domain_id):
-            label += f" ({verbalized_domains[domain_id]})"
-        if domain_id == "ecology":
-            terms = domain_vocab.get("diversity_dimensions", [])
-        elif domain_id == "nlp":
-            terms = domain_vocab.get("eval_metrics", [])
-        else:
-            return ""
-        terms = self._clean_terms(terms)
-        return f"{label}: " + ", ".join(terms)
-    
-    def scope_coverage_vocab_block(self, domain_id: str) -> str:
-        domain_vocab = self._get_domain_vocab(domain_id)
-        label = "Scope Coverage"
-        if verbalized_domains.get(domain_id):
-            label += f" ({verbalized_domains[domain_id]})"
-        if domain_id == "ecology":
-            terms = domain_vocab.get("ecosystem_services", [])
-        elif domain_id == "nlp":
-            terms = domain_vocab.get("languages", [])
-        else:
-            return ""
-        terms = self._clean_terms(terms)
-        return f"{label}: " + ", ".join(terms)
-    
-    def scale_coverage_vocab_block(self, domain_id: str) -> str:
-        domain_vocab = self._get_domain_vocab(domain_id)
-        label = "Scale Coverage"
-        if verbalized_domains.get(domain_id):
-            label += f" ({verbalized_domains[domain_id]})"
-        if domain_id == "ecology":
-            terms = domain_vocab.get("scale_terms", [])
-        elif domain_id == "nlp":
-            terms = domain_vocab.get("compute_terms", [])
-        else:
-            return ""
-        terms = self._clean_terms(terms)
-        return f"{label}: " + ", ".join(terms)
+        return self._build_vocab_block(domain_id, "temporal_vocab_block")
 
+    def context_coverage_vocab_block(self, domain_id: str) -> str:
+        return self._build_vocab_block(domain_id, "context_coverage_vocab_block")
+
+    def method_coverage_vocab_block(self, domain_id: str) -> str:
+        return self._build_vocab_block(domain_id, "method_coverage_vocab_block")
+
+    def dimension_coverage_vocab_block(self, domain_id: str) -> str:
+        return self._build_vocab_block(domain_id, "dimension_coverage_vocab_block")
+
+    def scope_coverage_vocab_block(self, domain_id: str) -> str:
+        return self._build_vocab_block(domain_id, "scope_coverage_vocab_block")
+
+    def scale_coverage_vocab_block(self, domain_id: str) -> str:
+        return self._build_vocab_block(domain_id, "scale_coverage_vocab_block")
+
+  
     def format_prompt(self, prompt: str, domain: str) -> str:
         """
         Replaces known placeholders in the prompt with vocab blocks
