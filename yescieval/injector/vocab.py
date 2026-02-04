@@ -46,40 +46,14 @@ class VocabularyInjector(ABC):
             label += f" ({verbalized_domains[domain_id]})"
         return f"{label}: " + ", ".join(terms)
 
-
-    def mechanistic_vocab_block(self, domain_id: str) -> str:
-        return self._build_vocab_block(domain_id, "mechanistic_vocab_block")
-
-    def causal_vocab_block(self, domain_id: str) -> str:
-        return self._build_vocab_block(domain_id, "causal_vocab_block")
-
-    def temporal_vocab_block(self, domain_id: str) -> str:
-        return self._build_vocab_block(domain_id, "temporal_vocab_block")
-
-    def context_coverage_vocab_block(self, domain_id: str) -> str:
-        return self._build_vocab_block(domain_id, "context_coverage_vocab_block")
-
-    def method_coverage_vocab_block(self, domain_id: str) -> str:
-        return self._build_vocab_block(domain_id, "method_coverage_vocab_block")
-
-    def dimension_coverage_vocab_block(self, domain_id: str) -> str:
-        return self._build_vocab_block(domain_id, "dimension_coverage_vocab_block")
-
-    def scope_coverage_vocab_block(self, domain_id: str) -> str:
-        return self._build_vocab_block(domain_id, "scope_coverage_vocab_block")
-
-    def scale_coverage_vocab_block(self, domain_id: str) -> str:
-        return self._build_vocab_block(domain_id, "scale_coverage_vocab_block")
-
-  
     def format_prompt(self, prompt: str, domain: str) -> str:
         """
         Replaces known placeholders in the prompt with vocab blocks
         based on the domain.
         """
         domain_id = domain.strip().lower()
-        for placeholder, method in self.placeholders.items():
+        for placeholder, block_name in self.placeholders.items():
             if placeholder in prompt:
-                block_fn = getattr(self, method)
-                prompt = prompt.replace(placeholder, block_fn(domain_id))
+                vocab_block = self._build_vocab_block(domain_id, block_name)
+                prompt = prompt.replace(placeholder, vocab_block)
         return prompt
