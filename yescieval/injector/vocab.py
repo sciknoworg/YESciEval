@@ -1,6 +1,6 @@
 from abc import ABC
 from typing import Dict, List
-from .domains import vocabs, verbalized_domains
+from .domains import verbalized_domains, vocab_block_specs, vocabs
 
 class VocabularyInjector(ABC):
     """
@@ -11,8 +11,13 @@ class VocabularyInjector(ABC):
         "{MECHANISTIC_VOCAB}": "mechanistic_vocab_block",
         "{CAUSAL_VOCAB}": "causal_vocab_block",
         "{TEMPORAL_VOCAB}": "temporal_vocab_block",
+        "{CONTEXT_VOCAB}": "context_coverage_vocab_block",
+        "{METHOD_VOCAB}": "method_coverage_vocab_block",
+        "{DIMENSION_VOCAB}": "dimension_coverage_vocab_block",
+        "{SCOPE_VOCAB}": "scope_coverage_vocab_block",
+        "{SCALE_VOCAB}": "scale_coverage_vocab_block",       
     }
-
+    
     def _clean_terms(self, terms) -> List[str]:
         seen_terms = set()
         cleaned_terms = []
@@ -25,25 +30,21 @@ class VocabularyInjector(ABC):
             seen_terms.add(term)
             cleaned_terms.append(term)
         return cleaned_terms
-
-    def mechanistic_vocab_block(self, domain_id: str) -> str:
-        terms = vocabs[domain_id].get("mechanistic_terms")
-        label = "Mechanistic terms"
-        label += f" ({verbalized_domains.get(domain_id)})" if verbalized_domains.get(domain_id) else ""
-        if domain_id == "nlp":
-            terms = (vocabs[domain_id].get("training_terms") +
-                     vocabs[domain_id].get("arch_terms") +
-                     vocabs[domain_id].get("ablation_terms"))
+    
+    def _build_vocab_block(self, domain_id: str, block_name: str) -> str:
+        spec = vocab_block_specs.get(domain_id, {}).get(block_name, {})
+        keys = spec.get("keys", [])
+        terms = []
+        domain_vocab = vocabs.get(domain_id, {})
+        for key in keys:
+            terms.extend(domain_vocab.get(key, []) or [])
         terms = self._clean_terms(terms)
+        if not terms:
+            return ""
+        label = spec.get("label", block_name.replace("_", " ").title())
+        if verbalized_domains.get(domain_id):
+            label += f" ({verbalized_domains[domain_id]})"
         return f"{label}: " + ", ".join(terms)
-
-    def causal_vocab_block(self, domain_id: str) -> str:
-        terms = self._clean_terms(vocabs[domain_id].get("causal_terms"))
-        return "Causal connectives / triggers: " + ", ".join(terms)
-
-    def temporal_vocab_block(self, domain_id: str) -> str:
-        terms = self._clean_terms(vocabs[domain_id].get("temporal_terms"))
-        return "Temporal expressions: " + ", ".join(terms)
 
     def format_prompt(self, prompt: str, domain: str) -> str:
         """
@@ -51,8 +52,8 @@ class VocabularyInjector(ABC):
         based on the domain.
         """
         domain_id = domain.strip().lower()
-        for placeholder, method in self.placeholders.items():
+        for placeholder, block_name in self.placeholders.items():
             if placeholder in prompt:
-                block_fn = getattr(self, method)
-                prompt = prompt.replace(placeholder, block_fn(domain_id))
+                vocab_block = self._build_vocab_block(domain_id, block_name)
+                prompt = prompt.replace(placeholder, vocab_block)
         return prompt

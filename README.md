@@ -97,6 +97,7 @@ A total of **23** evaluation rubrics were defined as part of the YESciEval test 
 from yescieval import Informativeness, Correctness, Completeness, Coherence, Relevancy,\
                       Integration, Cohesion, Readability, Conciseness,\
                       MechanisticUnderstanding, CausalReasoning, TemporalPrecision, GapIdentification,\
+                      ContextCoverage, MethodCoverage, DimensionCoverage, ScaleCoverage, ScopeCoverage,\
                       StatisticalSophistication, CitationPractices, UncertaintyAcknowledgment,\
                       SpeculativeStatements, NoveltyIndicators
 ```
