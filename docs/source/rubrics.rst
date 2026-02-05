@@ -2,7 +2,7 @@
 Rubrics
 ===================
 
-A total of **23** evaluation rubrics were defined as part of the YESciEval test framework within two categories presented as following:
+A total of **22** evaluation rubrics were defined as part of the YESciEval test framework within two categories presented as following:
 
 .. hint::
 
@@ -16,7 +16,7 @@ A total of **23** evaluation rubrics were defined as part of the YESciEval test 
                               MechanisticUnderstanding, CausalReasoning, TemporalPrecision, GapIdentification,
                               ContextCoverage, MethodCoverage, DimensionCoverage, ScopeCoverage, ScaleCoverage,
                               StatisticalSophistication, CitationPractices, UncertaintyAcknowledgment,
-                              SpeculativeStatements, NoveltyIndicators
+                              StateOfTheArtAndNovelty
 
     The rubrics are presented as following:
 
@@ -181,11 +181,8 @@ Following ``Innovation Capacity Assessment`` evaluates the novelty of the synthe
 
    * - Evaluation Rubric
      - Description
-   * - **21. Speculative Statements:**
-     - Does the answer include cautious or hypothetical statements, using words like “might,” “could,” or “hypothetical”?
-   * - **22. Novelty Indicators :**
-     - Does the answer highlight innovation using terms like “novel,” “pioneering,” or “emerging”?
-
+   * - **21. State Of The Art And Novelty:**
+     - Does the response identify specific state-of-the-art and/or novel contributions relevant to the research question, using terms like “novel,” “state-of-the-art”?
 
 Research Gap Assessment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -199,7 +196,7 @@ Following ``Research Gap Assessment`` detects explicit acknowledgment of unanswe
 
    * - Evaluation Rubric
      - Description
-   * - **23. Gap Identification:**
+   * - **22. Gap Identification:**
      - Does the answer point out unanswered questions or understudied areas, using terms like “research gap” or “understudied”?
 
 

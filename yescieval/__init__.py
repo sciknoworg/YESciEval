@@ -8,7 +8,7 @@ from .rubric import (Informativeness, Correctness, Completeness, Coherence, Rele
                     ScaleCoverage, ContextCoverage, ScopeCoverage, MethodCoverage, DimensionCoverage,
                     MechanisticUnderstanding, CausalReasoning, TemporalPrecision, GapIdentification, 
                     StatisticalSophistication, CitationPractices, UncertaintyAcknowledgment, 
-                    SpeculativeStatements, NoveltyIndicators)
+                    StateOfTheArtAndNovelty)
 from .injector import ExampleInjector, VocabularyInjector
 from .judge import AutoJudge, AskAutoJudge, BioASQAutoJudge, CustomAutoJudge, GPTCustomAutoJudge
 from .parser import GPTParser
