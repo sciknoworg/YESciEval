@@ -64,9 +64,9 @@ vocabulary = {
     ],
     "complexity_terms": ["nonlinear", "emergent", "synergistic", "interconnected", "complex", "multifaceted"],
     "gap_identification": [
-    "remains unclear", "unknown", "not well understood", "limited evidence", "mixed findings", "inconsistent results", "lack of consensus",
-    "understudied", "data scarce", "few studies", "limited sample size", "short time horizon", "lack of longitudinal data",
-    "geographic bias", "taxonomic bias", "context dependence", "limited external validity", "missing comparison", "unresolved"
+        "remains unclear", "unknown", "not well understood", "limited evidence", "mixed findings", "inconsistent results", "lack of consensus",
+        "understudied", "data scarce", "few studies", "limited sample size", "short time horizon", "lack of longitudinal data",
+        "geographic bias", "taxonomic bias", "context dependence", "limited external validity", "missing comparison", "unresolved"
     ]
 }
 

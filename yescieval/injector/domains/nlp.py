@@ -75,9 +75,9 @@ vocabulary = {
       "bias", "fairness", "toxicity", "privacy", "safety", "data leakage", "red teaming", "harmful content"
     ],
     "gap_identification": [
-    "remains unclear", "unknown", "limited evidence", "mixed results", "understudied", "few studies", "lack of benchmark", "no standard evaluation",
-    "dataset bias", "annotation bias", "label noise", "generalization gap", "out-of-distribution", "OOD",
-    "low-resource languages", "domain shift", "not evaluated", "unexplored", "open question", "unresolved"
+      "remains unclear", "unknown", "limited evidence", "mixed results", "understudied", "few studies", "lack of benchmark", "no standard evaluation",
+      "dataset bias", "annotation bias", "label noise", "generalization gap", "out-of-distribution", "OOD",
+      "low-resource languages", "domain shift", "not evaluated", "unexplored", "open question", "unresolved"
     ]
 }
 
