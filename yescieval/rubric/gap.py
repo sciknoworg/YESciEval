@@ -53,9 +53,7 @@ Return your response in JSON format:
 </Response-Format>
 
 <Example-Responses>
-
 {EXAMPLE_RESPONSES}
-
 </Example-Responses>
 
 <Note>
