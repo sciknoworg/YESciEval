@@ -1,55 +1,67 @@
 from ..base import Rubric
 
-gap_identification_prompt = """<Context> 
-Scientific synthesis generation involves creating a concise, coherent, and integrated summary from a collection of scientific texts (such as research paper titles and abstracts) that addresses a specific research question. Unlike general text summarization, which may focus on extracting or abstracting key points from a single text or multiple texts on a broad topic, scientific synthesis is more specialized. It requires:
+gap_identification_prompt = """<Context>
+Scientific question answering and synthesis often require more than listing findings: high-quality scientific writing identifies what remains unknown, insufficiently addressed, or unresolved in existing research. This is commonly expressed through gap identification, where the text specifies limitations, missing knowledge, unresolved inconsistencies, or missing connections in prior work and explains why they matter for the research question.
 
-- Understanding and Addressing a Specific Research Question: The synthesis must specifically answer a research question, requiring a deep understanding of the subject matter and the ability to extract and integrate relevant information from various sources.
-- Use of Scientific Literature: The process involves synthesizing information from scientific literature, such as research papers, focusing on the given titles and abstracts. This requires not only summarizing these texts but also evaluating their relevance, correctness, and completeness in the context of the research question.
-- Synthesis Format: The synthesis output should be concisely presented in a single paragraph of not more than 200 words. This format requires distilling and integrating diverse scientific insights into a coherent and comprehensive summary that addresses the research question directly. The single-paragraph format emphasizes the importance of concise and integrated communication of complex information.
-- Synthesize vs. Summarize: The goal is to synthesize—meaning to combine elements to form a coherent whole—rather than just summarize each source individually. This involves integration, cohesion, and coherence of information from multiple sources, presenting it in a way that produces new insights or understanding in response to the research question.
-- Referencing Source Material: Each claim or piece of information in the synthesis must be traceable to the source material (the abstracts), ensuring the synthesis's accuracy and reliability.
-- Adherence to Quality Characteristics: It should be possible to evaluate the synthesis quality based on informativeness characteristic, ensuring it effectively communicates the synthesized information.
+Gap identification can refer to (a) field-level gaps across the literature (e.g., missing populations/settings, inconsistent measures, lack of comparative studies, limited external validity), and/or (b) recurring study-level limitations that materially constrain conclusions (e.g., small samples, short time horizons) when framed as evidence-base limitations. High-quality gap statements are specific and scoped (what is missing, where, and why), rather than generic (“more research is needed”). If gap emphasis is not central to the user's question, it should not be forced; however, when included, it should remain relevant and well-defined.
 
-In essence, scientific synthesis generation is a complex task that goes beyond simply summarizing texts; it involves critically analyzing, integrating, and presenting scientific information from multiple sources to succinctly answer a targeted research question, adhering to high standards of clarity, reliability, and insightfulness.
+The response may be a single paragraph or a long-form report with multiple sections. There are no strict requirements on length or formatting; gap identification should be evaluated independently of presentation style.
+
+This rubric focuses exclusively on the presence and quality of gap identification within the provided text, emphasizing explicit and relevant statements of limitations, unanswered questions, or missing connections in prior work rather than summaries of what is already known. Other aspects of scientific quality (such as factual accuracy, evidential grounding, completeness, or innovation) are intentionally outside its scope and are assessed by separate evaluation criteria.
 </Context>
 
 <Role>
-You are tasked as a scientific syntheses quality evaluator.
+You are tasked as a scientific writing quality evaluator.
 </Role>
 
 <Task-Description>
-A user will provide you with a synthesis which has been generated as an answer to a research question using the titles and abstracts of relevant research works.  You will also be provided with the research question and the paper titles+abstracts of the relevant works that were synthesized. You must use the evaluation characteristic listed below to evaluate a given scientific synthesis. The general objective is that a synthesis should succinctly address the research question by synthesizing only the content from the provided abstracts, while also referencing the source abstract for each claim.
+A user will provide you with:
+1) a research question, and
+2) a written response intended to address that question.
+
+You must evaluate the response using the evaluation characteristic below. Focus on whether the response identifies what is missing or unresolved in the evidence base relevant to the research question, rather than only describing existing findings. Your judgment should be based solely on the provided question and response.
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. Gap Identification: To what extent does the answer explicitly identify research gaps or unanswered questions indicated by the provided abstracts?
+GapIdentification: Does the response identify gaps relevant to the research question by specifying limitations, missing knowledge, unresolved issues, or missing connections in prior work (preferably at the evidence-base/field level), rather than only describing existing findings?
 </Evaluation-Characteristics>
 
-<Rating-Scale>
-For a given characteristic, rate the quality from 1 (very bad) to 5 (very good). Follow the guidelines specified below for each rating per evaluation characteristic.
+<Domain-Vocabulary-Examples>
+Below are terms and phrases that often signal gap identification. They are examples only: their presence is not required, and their presence alone is not sufficient for a high score.
+{GAP_IDENTIFICATION_VOCAB}
+</Domain-Vocabulary-Examples>
 
-1. Gap Identification
-Rating 1. Very bad: The synthesis does not identify any research gaps or unanswered questions, or it introduces gaps that are contradictory to or unsupported by the provided abstracts.
-Rating 2. Bad: The synthesis refers to research gaps only in a vague or generic manner (e.g., “more research is needed”) without clearly specifying what is missing or grounding the claims in the provided abstracts.
-Rating 3. Moderate: The synthesis identifies potential research gaps, but the description is partially vague, weakly justified, or only loosely connected to the content of the provided abstracts.
-Rating 4. Good: The synthesis clearly identifies one or more research gaps that are supported by the provided abstracts, though the gaps may lack full operational detail or discussion of implications.
-Rating 5. Very good: The synthesis explicitly and clearly identifies well-defined research gaps or unanswered questions that are directly supported by the provided abstracts, specifying what is missing, where, and why it matters, without relying on vague or generic statements.
+<Rating-Scale>
+For the characteristic above, rate the quality from 1 (very bad) to 5 (very good). Follow the guidelines specified below.
+
+GapIdentification
+Rating 1. Very bad: The response is purely descriptive, summarizing existing findings or observations with no identification of missing, unknown, inconsistent, or unresolved aspects relevant to the research question.
+Rating 2. Bad: The response refers to gaps only in a vague or generic manner (e.g., “more research is needed”) without clearly specifying what is missing or unresolved in the context of the research question.
+Rating 3. Moderate: The response identifies one or more potential gaps with partial clarity, but the nature, scope, location (where in the literature), or relevance of the gaps is incomplete, unclear, or inconsistently articulated.
+Rating 4. Good: The response clearly identifies specific gaps or limitations in the evidence base that are relevant to the research question (e.g., missing comparisons, populations, settings, measures, time horizons, or conflicting results) and provides some explanation of why they matter; minor ambiguity or imprecision may remain.
+Rating 5. Very good: The response explicitly and clearly identifies well-defined gaps or unanswered questions, specifying what is missing, where it occurs in the evidence base (or across studies), and why it matters for the research question, without relying on vague statements. Gap statements are appropriately scoped (avoiding absolute claims like “no research exists” unless clearly justified within the response).
+
 </Rating-Scale>
 
 <Response-Format>
-For each characteristic rate the quality from 1 (very bad) to 5 (very good).  Provide a short rationale for each rating. 
-Return your response in JSON format: {characteristic : {‘rating’ : ‘’, ‘rationale’ : ‘’}}
+Rate the quality from 1 (very bad) to 5 (very good). Provide a short rationale that cites specific statements indicating whether the response clearly identifies research gaps in the context of the research question (what is missing/unresolved, where, and why it matters).
 
-<Example-Response>
+Return your response in JSON format:
 {
-  "Gap Identification": {"rating": "4", "rationale": "Identifies a relevant gap supported by the abstracts, with limited elaboration."}
+  "GapIdentification": {"rating": "", "rationale": ""}
 }
-</Example-Response>
 </Response-Format>
 
+<Example-Responses>
+
+{EXAMPLE_RESPONSES}
+
+</Example-Responses>
+
 <Note>
-Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
+Your evaluation must be based solely on the provided research question and response. Do not reward keyword mentions; reward distinct, clearly described gaps in existing knowledge that are relevant to the research question and scoped appropriately. This rubric does not assess factual correctness, evidential grounding, completeness, or innovation.
 </Note>"""
+
 class GapIdentification(Rubric):
-    name: str = "Gap Identification"
+    name: str = "GapIdentification"
     system_prompt_template: str = gap_identification_prompt

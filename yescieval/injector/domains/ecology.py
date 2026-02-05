@@ -27,7 +27,7 @@ vocabulary = {
         "genetic diversity", "structural diversity", "shannon", "simpson", "hill numbers"
     ],
     "temporal_terms" :[
-        "within 2–5 years", "lag of ~6 months", "after 3 months", "before 12 weeks", "1998–2004",
+        "within 2-5 years", "lag of ~6 months", "after 3 months", "before 12 weeks", "1998-2004",
         "June 2012", "every 2 weeks"
     ],
     "ecosystem_services": [
@@ -62,7 +62,12 @@ vocabulary = {
         "climate change", "global warming", "drought", "heatwave", "extreme weather", "phenology", "range shift",
         "sea level rise", "ocean acidification", "greenhouse gas", "carbon dioxide", "thermal stress", "precipitation"
     ],
-    "complexity_terms": ["nonlinear", "emergent", "synergistic", "interconnected", "complex", "multifaceted"]
+    "complexity_terms": ["nonlinear", "emergent", "synergistic", "interconnected", "complex", "multifaceted"],
+    "gap_identification": [
+    "remains unclear", "unknown", "not well understood", "limited evidence", "mixed findings", "inconsistent results", "lack of consensus",
+    "understudied", "data scarce", "few studies", "limited sample size", "short time horizon", "lack of longitudinal data",
+    "geographic bias", "taxonomic bias", "context dependence", "limited external validity", "missing comparison", "unresolved"
+    ]
 }
 
 example_responses = {
@@ -149,6 +154,18 @@ example_responses = {
                 "rationale": "The response addresses multiple ecological scales, ranging from the individual and population level to community and ecosystem scales, and also considers broader spatial scales such as local, regional, and global contexts, rather than focusing on just one scale."
             }
         ]
+    },
+    "Gap": {
+        "GapIdentification": [
+            {
+                "rating": "1",
+                "rationale": "The response is purely descriptive, summarizing existing ecological findings, observations, or reported patterns (e.g., species distributions, biodiversity metrics, or observed correlations) without identifying any missing, unknown, inconsistent, or unresolved aspects relevant to the research question."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response clearly identifies specific gaps or limitations in the ecological evidence base that are relevant to the research question (e.g., missing data for certain regions, taxa, or time periods; limited experimental studies; or conflicting empirical findings) and provides some explanation of why these gaps matter; minor ambiguity or imprecision may remain."
+            }
+        ]
     }
 }
 
@@ -161,6 +178,7 @@ vocab_block_specs = {
     "dimension_coverage_vocab_block": {"label": "Dimension Coverage", "keys": ["diversity_dimensions"]},
     "scope_coverage_vocab_block": {"label": "Scope Coverage", "keys": ["ecosystem_services"]},
     "scale_coverage_vocab_block": {"label": "Scale Coverage", "keys": ["scale_terms"]},
+    "gap_identification_vocab_block": {"label": "Gap Identification", "keys": ["gap_identification"]}
 }
 
 class Ecology(Domain):

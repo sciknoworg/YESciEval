@@ -21,7 +21,7 @@ vocabulary = {
       "multilingual", "cross-lingual", "low-resource"
     ],
     "temporal_terms" :[
-      "within 2–5 years", "lag of ~6 months", "after 3 months", "before 12 weeks", "1998–2004", "June 2012", "every 2 weeks"
+      "within 2-5 years", "lag of ~6 months", "after 3 months", "before 12 weeks", "1998-2004", "June 2012", "every 2 weeks"
     ],
     "eval_metrics": [
       "accuracy", "f1", "precision", "recall", "bleu", "chrf", "rouge", "meteor", "bertscore", "perplexity",
@@ -73,6 +73,11 @@ vocabulary = {
     ],
     "safety_terms": [
       "bias", "fairness", "toxicity", "privacy", "safety", "data leakage", "red teaming", "harmful content"
+    ],
+    "gap_identification": [
+    "remains unclear", "unknown", "limited evidence", "mixed results", "understudied", "few studies", "lack of benchmark", "no standard evaluation",
+    "dataset bias", "annotation bias", "label noise", "generalization gap", "out-of-distribution", "OOD",
+    "low-resource languages", "domain shift", "not evaluated", "unexplored", "open question", "unresolved"
     ]
 }
 
@@ -160,6 +165,18 @@ example_responses = {
                 "rationale": "The response discusses multiple computational scales, including model size in terms of parameters and billion-parameter regimes, compute resources such as GPUs and TPUs, and efficiency-related aspects like inference time, latency, throughput, and memory footprint, providing a multi-scale perspective."
             }
         ]
+    },
+    "Gap": {
+        "GapIdentification": [
+            {
+                "rating": "1",
+                "rationale": "The response is purely descriptive, summarizing existing findings or benchmark results (e.g., model architectures, datasets, or reported scores) with no identification of missing, unknown, inconsistent, or unresolved aspects relevant to the research question."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response clearly identifies specific gaps or limitations in the evidence base that are relevant to the research question (e.g., missing evaluations, underexplored domains or tasks, lack of ablation studies, limited robustness or generalization analysis, dataset biases, or conflicting benchmark results) and provides some explanation of why these gaps matter; minor ambiguity or imprecision may remain."
+            }
+        ]
     }
 }
 
@@ -172,6 +189,7 @@ vocab_block_specs = {
     "dimension_coverage_vocab_block": {"label": "Dimension Coverage", "keys": ["eval_metrics"]},
     "scope_coverage_vocab_block": {"label": "Scope Coverage", "keys": ["languages"]},
     "scale_coverage_vocab_block": {"label": "Scale Coverage", "keys": ["compute_terms"]},
+    "gap_identification_vocab_block": {"label": "Gap Identification", "keys": ["gap_identification"]}
 }
 
 class NLP(Domain):
