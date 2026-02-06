@@ -1,111 +1,65 @@
 from ..base import Rubric
 
-speculative_statements_prompt = """<Context> 
-Scientific synthesis generation involves creating a concise, coherent, and integrated summary from a collection of scientific texts (such as research paper titles and abstracts) that addresses a specific research question. Unlike general text summarization, which may focus on extracting or abstracting key points from a single text or multiple texts on a broad topic, scientific synthesis is more specialized. It requires:
+state_of_the_art_and_novelty_prompt = """<Context>
+Scientific question answering and synthesis often require more than listing findings: high-quality scientific writing can surface what is genuinely innovative in the literature and explain how it differs from prior or established approaches. In synthesis settings (e.g., reports summarizing multiple papers), this is expressed by identifying specific novel contributions (e.g., new methods, new datasets, new capabilities, new theoretical framings, proof-of-concept results) and situating them relative to an implicit or explicit baseline (what was done before, what limitation is addressed, what capability is newly enabled).
 
-- Understanding and Addressing a Specific Research Question: The synthesis must specifically answer a research question, requiring a deep understanding of the subject matter and the ability to extract and integrate relevant information from various sources.
-- Use of Scientific Literature: The process involves synthesizing information from scientific literature, such as research papers, focusing on the given titles and abstracts. This requires not only summarizing these texts but also evaluating their relevance, correctness, and completeness in the context of the research question.
-- Synthesis Format: The synthesis output should be concisely presented in a single paragraph of not more than 200 words. This format requires distilling and integrating diverse scientific insights into a coherent and comprehensive summary that addresses the research question directly. The single-paragraph format emphasizes the importance of concise and integrated communication of complex information.
-- Synthesize vs. Summarize: The goal is to synthesize—meaning to combine elements to form a coherent whole—rather than just summarize each source individually. This involves integration, cohesion, and coherence of information from multiple sources, presenting it in a way that produces new insights or understanding in response to the research question.
-- Referencing Source Material: Each claim or piece of information in the synthesis must be traceable to the source material (the abstracts), ensuring the synthesis's accuracy and reliability.
-- Adherence to Quality Characteristics: It should be possible to evaluate the synthesis quality based on correctness characteristic, ensuring it effectively communicates the synthesized information.
+Importantly, this rubric is not about using buzzwords like “breakthrough” or “state-of-the-art” in isolation. High scores require novelty to be concrete and meaningfully contextualized (new relative to what, and why it matters). Also, not every research question requires emphasizing novelty: some questions primarily ask for established consensus or background. In such cases, it can be appropriate to focus on established knowledge; however, a strong response may still note whether the field is mature versus rapidly evolving, or explicitly state that novelty emphasis is not central to the question.
 
-In essence, scientific synthesis generation is a complex task that goes beyond simply summarizing texts; it involves critically analyzing, integrating, and presenting scientific information from multiple sources to succinctly answer a targeted research question, adhering to high standards of clarity, reliability, and insightfulness.
+The response may be a single paragraph or a long-form report with multiple sections. There are no strict requirements on length or formatting; innovation should be evaluated independently of presentation style.
+
+This rubric focuses exclusively on the presence and quality of innovation identification within the provided text—i.e., whether the response highlights specific novel contributions and explains their significance relative to prior work—rather than merely summarizing established knowledge or using generic novelty language. Other aspects of scientific quality (such as factual accuracy, evidential grounding, completeness, or mechanistic depth) are intentionally outside its scope and are assessed by separate evaluation criteria.
 </Context>
 
 <Role>
-You are tasked as a scientific syntheses quality evaluator.
+You are tasked as a scientific writing quality evaluator.
 </Role>
 
 <Task-Description>
-A user will provide you with a synthesis which has been generated as an answer to a research question using the titles and abstracts of relevant research works.  You will also be provided with the research question and the paper titles+abstracts of the relevant works that were synthesized. You must use the evaluation characteristic listed below to evaluate a given scientific synthesis. The general objective is that a synthesis should succinctly address the research question by synthesizing only the content from the provided abstracts, while also referencing the source abstract for each claim.
+A user will provide you with:
+1) a research question, and
+2) a written response intended to address that question.
+
+You must evaluate the response using the evaluation characteristic below. Focus on whether the response identifies and contextualizes innovation in a concrete, relevant way (what is new, relative to what, and why it matters), rather than relying on vague novelty indicators or merely repeating established knowledge. Your judgment should be based solely on the provided question and response.
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. Speculative Statements: Does the answer clearly distinguish speculation (e.g., “might,” “could”) from established findings in the provided abstracts?
+StateOfTheArtAndNovelty: Does the response identify specific state-of-the-art and/or novel contributions relevant to the research question (e.g., new methods, datasets, capabilities, theoretical framings, proof-of-concept results), and meaningfully contextualize them relative to prior or established work (i.e., new relative to what, and why it matters)? If novelty emphasis is not central to the question, does the response avoid forced novelty and (optionally) state that the evidence base is mature or that innovation is not the focus?
 </Evaluation-Characteristics>
 
-<Rating-Scale>
-For a given characteristic, rate the quality from 1 (very bad) to 5 (very good). Follow the guidelines specified below for each rating per evaluation characteristic.
+<Domain-Vocabulary-Examples>
+Below are terms and phrases that often co-occur with innovation claims. They are examples only: their presence is not required, and their presence alone is not sufficient for a high score.
+{NOVELTY_INDICATORS_VOCAB}
+</Domain-Vocabulary-Examples>
 
-1. Speculative Statement
-Rating 1. Very bad: No innovation is present; the synthesis does not differ from prior work and may present speculation as fact.
-Rating 2. Bad: The synthesis shows little originality, relies on vague statements (e.g., “more research is needed”), and does not clearly distinguish from prior work.
-Rating 3. Moderate: The synthesis shows some originality, but the novel aspects are weak, underspecified, or not clearly differentiated from prior work.
-Rating 4. Good: The synthesis presents a clear novel angle or synthesis compared to prior work, with speculation appropriately flagged but limited in depth or specificity.
-Rating 5. Very good: The synthesis offers a genuinely novel synthesis or perspective, clearly distinguishes itself from prior work, appropriately bounds speculation, and proposes concrete, testable next steps.
+<Rating-Scale>
+For the characteristic above, rate the quality from 1 (very bad) to 5 (very good). Follow the guidelines specified below.
+
+StateOfTheArtAndNovelty
+Rating 1. Very bad: The response provides only established/background knowledge or a generic summary, with no identification of specific state-of-the-art or novel contributions where such identification would be relevant; or it uses novelty buzzwords (“breakthrough”, “SOTA”) without any concrete explanation.
+Rating 2. Bad: The response occasionally signals state-of-the-art or novelty, but claims are vague, generic, or weakly connected to the research question; novelty is not contextualized (no clear “new relative to what”) and/or seems forced.
+Rating 3. Moderate: The response identifies at least one potentially state-of-the-art or novel contribution, but description, relevance, or significance is partially unclear; contextualization relative to prior work is limited or inconsistent; proof-of-concept vs established advances may be conflated.
+Rating 4. Good: The response clearly highlights multiple specific state-of-the-art and/or innovative contributions relevant to the research question and provides reasonable contextualization (what limitation is addressed or what capability is newly enabled), with minor gaps in baseline comparison or scope.
+Rating 5. Very good: The response provides a coherent, well-structured account of state-of-the-art and novelty tightly aligned with the research question: it identifies multiple specific novel contributions, clearly explains how each differs from prior/established approaches (explicit or implicit baseline), and articulates why it matters (capabilities, limitations addressed, or new directions), while appropriately scoping claims (e.g., proof-of-concept vs broadly validated). If novelty emphasis is not central to the question, it avoids forced novelty and explicitly frames the maturity/innovation relevance appropriately.
+
 </Rating-Scale>
 
 <Response-Format>
-For each characteristic rate the quality from 1 (very bad) to 5 (very good).  Provide a short rationale for each rating. 
-Return your response in JSON format: {characteristic : {‘rating’ : ‘’, ‘rationale’ : ‘’}}
+Rate the quality from 1 (very bad) to 5 (very good). Provide a short rationale pointing to specific parts of the response that (a) identify concrete state-of-the-art/novel contributions and (b) contextualize them relative to prior work (or, if innovation is not central, show that the response appropriately avoids forced novelty).
 
-<Example-Response>
+Return your response in JSON format:
 {
-  "Speculative Statements": {"rating": "4", "rationale": "Uses hedging appropriately and clearly distinguishes speculation from established findings."}
+  "StateOfTheArtAndNovelty": {"rating": "", "rationale": ""}
 }
-</Example-Response>
 </Response-Format>
 
-<Note>
-Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
-</Note>"""
-class SpeculativeStatements(Rubric):
-    name: str = "Speculative Statements"
-    system_prompt_template: str = speculative_statements_prompt
-
-novelty_indicators_prompt = """<Context> 
-Scientific synthesis generation involves creating a concise, coherent, and integrated summary from a collection of scientific texts (such as research paper titles and abstracts) that addresses a specific research question. Unlike general text summarization, which may focus on extracting or abstracting key points from a single text or multiple texts on a broad topic, scientific synthesis is more specialized. It requires:
-
-- Understanding and Addressing a Specific Research Question: The synthesis must specifically answer a research question, requiring a deep understanding of the subject matter and the ability to extract and integrate relevant information from various sources.
-- Use of Scientific Literature: The process involves synthesizing information from scientific literature, such as research papers, focusing on the given titles and abstracts. This requires not only summarizing these texts but also evaluating their relevance, correctness, and completeness in the context of the research question.
-- Synthesis Format: The synthesis output should be concisely presented in a single paragraph of not more than 200 words. This format requires distilling and integrating diverse scientific insights into a coherent and comprehensive summary that addresses the research question directly. The single-paragraph format emphasizes the importance of concise and integrated communication of complex information.
-- Synthesize vs. Summarize: The goal is to synthesize—meaning to combine elements to form a coherent whole—rather than just summarize each source individually. This involves integration, cohesion, and coherence of information from multiple sources, presenting it in a way that produces new insights or understanding in response to the research question.
-- Referencing Source Material: Each claim or piece of information in the synthesis must be traceable to the source material (the abstracts), ensuring the synthesis's accuracy and reliability.
-- Adherence to Quality Characteristics: It should be possible to evaluate the synthesis quality based on completeness characteristic, ensuring it effectively communicates the synthesized information.
-
-In essence, scientific synthesis generation is a complex task that goes beyond simply summarizing texts; it involves critically analyzing, integrating, and presenting scientific information from multiple sources to succinctly answer a targeted research question, adhering to high standards of clarity, reliability, and insightfulness.
-</Context>
-
-<Role>
-You are tasked as a scientific syntheses quality evaluator.
-</Role>
-
-<Task-Description>
-A user will provide you with a synthesis which has been generated as an answer to a research question using the titles and abstracts of relevant research works.  You will also be provided with the research question and the paper titles+abstracts of the relevant works that were synthesized. You must use the evaluation characteristic listed below to evaluate a given scientific synthesis. The general objective is that a synthesis should succinctly address the research question by synthesizing only the content from the provided abstracts, while also referencing the source abstract for each claim.
-</Task-Description>
-
-<Evaluation-Characteristics>
-1. Novelty Indicators: Does the answer appropriately use self-declared innovation terms (e.g., “novel,” “pioneering,” “emerging”) and clearly indicate whether such claims are supported by the provided abstracts?
-</Evaluation-Characteristics>
-
-<Rating-Scale>
-For a given characteristic, rate the quality from 1 (very bad) to 5 (very good). Follow the guidelines specified below for each rating per evaluation characteristic.
-
-1. Novelty Indicators
-Rating 1. Very bad: No novelty indicators are present, or novelty claims are incorrect or unsupported.
-Rating 2. Bad: Uses vague novelty claims (e.g., “more research is needed”) or presents speculation as fact, with no clear distinction from prior work.
-Rating 3. Moderate: Indicates some novelty, but the claims are weak, generic, or not clearly differentiated from prior work.
-Rating 4. Good: Shows a clear novel angle or synthesis compared to prior work, with speculation appropriately flagged but limited in detail.
-Rating 5. Very good: Clearly signals innovation with a distinct novel synthesis or perspective, properly bounds speculation, and proposes concrete, testable next steps.
-</Rating-Scale>
-
-<Response-Format>
-For each characteristic rate the quality from 1 (very bad) to 5 (very good).  Provide a short rationale for each rating. 
-Return your response in JSON format: {characteristic : {‘rating’ : ‘’, ‘rationale’ : ‘’}}
-
-<Example-Response>
-{
-  "Novelty Indicators": {"rating": "4", "rationale": "Shows a clear novel angle, but lacks full detail."}
-}
-</Example-Response>
-</Response-Format>
+<Example-Responses>
+{EXAMPLE_RESPONSES}
+</Example-Responses>
 
 <Note>
-Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
+Your evaluation must be based solely on the provided research question and response. Do not reward novelty buzzwords by themselves; reward specific, relevant identification of what is new, contextualization relative to prior work (“new compared to what”), and appropriate scoping of innovation claims. This rubric does not assess factual correctness, evidential grounding, completeness, or mechanistic depth.
 </Note>"""
-class NoveltyIndicators(Rubric):
-    name: str = "Novelty Indicators"
-    system_prompt_template: str = novelty_indicators_prompt
 
-
+class StateOfTheArtAndNovelty(Rubric):
+    name: str = "StateOfTheArtAndNovelty"
+    system_prompt_template: str = state_of_the_art_and_novelty_prompt

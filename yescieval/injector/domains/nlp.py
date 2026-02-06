@@ -78,6 +78,13 @@ vocabulary = {
       "remains unclear", "unknown", "limited evidence", "mixed results", "understudied", "few studies", "lack of benchmark", "no standard evaluation",
       "dataset bias", "annotation bias", "label noise", "generalization gap", "out-of-distribution", "OOD",
       "low-resource languages", "domain shift", "not evaluated", "unexplored", "open question", "unresolved"
+    ],
+    "novelty_indicators": [
+      "state of the art", "SOTA", "new benchmark", "new dataset", "new architecture", "novel architecture",
+      "training objective", "pretraining", "fine-tuning", "instruction tuning", "RLHF", "DPO",
+      "retrieval-augmented", "RAG", "agentic", "tool use", "function calling", "multimodal", 
+      "vision-language", "few-shot", "zero-shot", "scaling law", "parameter-efficient", "LoRA",
+      "distillation", "quantization", "compared to baselines", "outperforms prior work", "improves over", "ablation"
     ]
 }
 
@@ -177,6 +184,18 @@ example_responses = {
                 "rationale": "The response clearly identifies specific gaps or limitations in the evidence base that are relevant to the research question (e.g., missing evaluations, underexplored domains or tasks, lack of ablation studies, limited robustness or generalization analysis, dataset biases, or conflicting benchmark results) and provides some explanation of why these gaps matter; minor ambiguity or imprecision may remain."
             }
         ]
+    },
+    "Innovation": {
+        "StateOfTheArtAndNovelty": [
+            {
+                "rating": "1",
+                "rationale": "The response gives a generic overview of common NLP methods without identifying any specific state-of-the-art systems or novel contributions; or it uses buzzwords like SOTA or state of the art without explaining what is new."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response identifies concrete state-of-the-art or novel NLP contributions (e.g., a new dataset or benchmark, a new or modified model architecture, RAG, instruction tuning, RLHF/DPO, multimodal models, or parameter-efficient methods like LoRA) and briefly explains what improvement or new capability they provide, with minor gaps in comparison or detail."
+            }
+        ]
     }
 }
 
@@ -189,7 +208,8 @@ vocab_block_specs = {
     "dimension_coverage_vocab_block": {"label": "Dimension Coverage", "keys": ["eval_metrics"]},
     "scope_coverage_vocab_block": {"label": "Scope Coverage", "keys": ["languages"]},
     "scale_coverage_vocab_block": {"label": "Scale Coverage", "keys": ["compute_terms"]},
-    "gap_identification_vocab_block": {"label": "Gap Identification", "keys": ["gap_identification"]}
+    "gap_identification_vocab_block": {"label": "Gap Identification", "keys": ["gap_identification"]},
+    "novelty_indicators_vocab_block": {"label": "State of the Art and Novelty Indicators", "keys": ["novelty_indicators"]}
 }
 
 class NLP(Domain):

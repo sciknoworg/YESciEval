@@ -67,6 +67,14 @@ vocabulary = {
         "remains unclear", "unknown", "not well understood", "limited evidence", "mixed findings", "inconsistent results", "lack of consensus",
         "understudied", "data scarce", "few studies", "limited sample size", "short time horizon", "lack of longitudinal data",
         "geographic bias", "taxonomic bias", "context dependence", "limited external validity", "missing comparison", "unresolved"
+    ],
+    "novelty_indicators": [
+        "first to", "novel", "new approach", "new method", "recent advances", "state of the art", "cutting-edge",
+        "proof-of-concept", "pilot study", "new dataset", "long-term dataset", "high-resolution data",
+        "remote sensing", "satellite", "LiDAR", "eDNA", "metabarcoding", "new sampling protocol", "new monitoring approach",
+        "hierarchical model", "Bayesian", "causal inference", "counterfactual", "difference-in-differences", "instrumental variable",
+        "meta-analysis", "systematic review", "scenario analysis", "climate projection", "compared to previous studies",
+        "unlike prior work", "addresses a limitation"
     ]
 }
 
@@ -166,6 +174,18 @@ example_responses = {
                 "rationale": "The response clearly identifies specific gaps or limitations in the ecological evidence base that are relevant to the research question (e.g., missing data for certain regions, taxa, or time periods; limited experimental studies; or conflicting empirical findings) and provides some explanation of why these gaps matter; minor ambiguity or imprecision may remain."
             }
         ]
+    },
+    "Innovation": {
+        "StateOfTheArtAndNovelty": [
+            {
+                "rating": "1",
+                "rationale": "The response gives a generic overview of known ecological findings or methods without identifying any specific state-of-the-art approaches or novel contributions; or it uses buzzwords like state of the art or cutting-edge without explaining what is new."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response identifies concrete state-of-the-art or novel ecological contributions (e.g., new datasets, long-term or high-resolution data, remote sensing such as satellite or LiDAR, eDNA/metabarcoding, or new modeling or monitoring approaches) and briefly explains what improvement or new capability they provide, with minor gaps in comparison or detail."
+            }
+        ]
     }
 }
 
@@ -178,7 +198,8 @@ vocab_block_specs = {
     "dimension_coverage_vocab_block": {"label": "Dimension Coverage", "keys": ["diversity_dimensions"]},
     "scope_coverage_vocab_block": {"label": "Scope Coverage", "keys": ["ecosystem_services"]},
     "scale_coverage_vocab_block": {"label": "Scale Coverage", "keys": ["scale_terms"]},
-    "gap_identification_vocab_block": {"label": "Gap Identification", "keys": ["gap_identification"]}
+    "gap_identification_vocab_block": {"label": "Gap Identification", "keys": ["gap_identification"]},
+    "novelty_indicators_vocab_block": {"label": "State of the Art and Novelty Indicators", "keys": ["novelty_indicators"]}
 }
 
 class Ecology(Domain):
