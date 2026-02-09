@@ -2,22 +2,23 @@
 Rubrics
 ===================
 
-A total of **21** evaluation rubrics were defined as part of the YESciEval test framework within two categories presented as following:
+A total of **22** evaluation rubrics were defined as part of the YESciEval test framework within two categories presented as following:
 
 .. hint::
 
 
-	Here is a simple example of how to import rubrics in your code:
+    Here is a simple example of how to import rubrics in your code:
 
-	.. code-block:: python
+    .. code-block:: python
 
-	    from yescieval import Informativeness, Correctness, Completeness, Coherence, Relevancy,
-	                          Integration, Cohesion, Readability, Conciseness,
-	                          MechanisticUnderstanding, CausalReasoning, TemporalPrecision, GapIdentification,
-	                          StatisticalSophistication, CitationPractices, UncertaintyAcknowledgment,
-	                          SpeculativeStatements, NoveltyIndicators
+        from yescieval import Informativeness, Correctness, Completeness, Coherence, Relevancy,
+                              Integration, Cohesion, Readability, Conciseness,
+                              MechanisticUnderstanding, CausalReasoning, TemporalPrecision, GapIdentification,
+                              ContextCoverage, MethodCoverage, DimensionCoverage, ScopeCoverage, ScaleCoverage,
+                              StatisticalSophistication, CitationPractices, UncertaintyAcknowledgment,
+                              StateOfTheArtAndNovelty
 
-	The rubrics are presented as following:
+    The rubrics are presented as following:
 
 
 Question Answering
@@ -150,7 +151,7 @@ Following ``Research Breadth Assessment`` evaluates the diversity of evidence ac
      - Does the answer distribute attention across multiple distinct scales relevant to the research question?
 
 Scientific Rigor Assessment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Following ``Scientific Rigor Assessment`` assesses the evidentiary and methodological integrity of the synthesis.
 
@@ -161,13 +162,15 @@ Following ``Scientific Rigor Assessment`` assesses the evidentiary and methodolo
 
    * - Evaluation Rubric
      - Description
-   * - **18. Quantitative Evidence And Uncertainty:**
-     - Does the answer appropriately handle quantitative evidence and uncertainty relevant to the research question?
-   * - **19. Epistemic Calibration:**
-     - Does the answer clearly align claim strength with evidential support by marking uncertainty, assumptions, and limitations where relevant?
+   * - **18. Statistical Sophistication:**
+     - Does the answer use statistical methods or analyses, showing quantitative rigor and depth?
+   * - **19. Citation Practices:**
+     - Does the answer properly cite sources, using parenthetical or narrative citations (e.g., “(Smith et al., 2021)”)?
+   * - **20. Uncertainty Acknowledgment:**
+     - Does the answer explicitly mention limitations or uncertainty, using terms like “unknown,” “limited evidence,” or “unclear”?
 
 Innovation Capacity Assessment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Following ``Innovation Capacity Assessment`` evaluates the novelty of the synthesis.
 
@@ -178,9 +181,8 @@ Following ``Innovation Capacity Assessment`` evaluates the novelty of the synthe
 
    * - Evaluation Rubric
      - Description
-   * - **20. State-Of-The-Art And Novelty :**
-     - Does the response identify and contextualize relevant state-of-the-art or novel contributions relative to prior work?
-
+   * - **21. State Of The Art And Novelty:**
+     - Does the response identify specific state-of-the-art and/or novel contributions relevant to the research question, using terms like “novel,” “state-of-the-art”?
 
 Research Gap Assessment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -194,7 +196,7 @@ Following ``Research Gap Assessment`` detects explicit acknowledgment of unanswe
 
    * - Evaluation Rubric
      - Description
-   * - **21. Gap Identification:**
+   * - **22. Gap Identification:**
      - Does the answer point out unanswered questions or understudied areas, using terms like “research gap” or “understudied”?
 
 

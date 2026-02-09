@@ -21,7 +21,7 @@ vocabulary = {
       "multilingual", "cross-lingual", "low-resource"
     ],
     "temporal_terms" :[
-      "within 2–5 years", "lag of ~6 months", "after 3 months", "before 12 weeks", "1998–2004", "June 2012", "every 2 weeks"
+      "within 2-5 years", "lag of ~6 months", "after 3 months", "before 12 weeks", "1998-2004", "June 2012", "every 2 weeks"
     ],
     "eval_metrics": [
       "accuracy", "f1", "precision", "recall", "bleu", "chrf", "rouge", "meteor", "bertscore", "perplexity",
@@ -73,6 +73,18 @@ vocabulary = {
     ],
     "safety_terms": [
       "bias", "fairness", "toxicity", "privacy", "safety", "data leakage", "red teaming", "harmful content"
+    ],
+    "gap_identification": [
+      "remains unclear", "unknown", "limited evidence", "mixed results", "understudied", "few studies", "lack of benchmark", "no standard evaluation",
+      "dataset bias", "annotation bias", "label noise", "generalization gap", "out-of-distribution", "OOD",
+      "low-resource languages", "domain shift", "not evaluated", "unexplored", "open question", "unresolved"
+    ],
+    "novelty_indicators": [
+      "state of the art", "SOTA", "new benchmark", "new dataset", "new architecture", "novel architecture",
+      "training objective", "pretraining", "fine-tuning", "instruction tuning", "RLHF", "DPO",
+      "retrieval-augmented", "RAG", "agentic", "tool use", "function calling", "multimodal", 
+      "vision-language", "few-shot", "zero-shot", "scaling law", "parameter-efficient", "LoRA",
+      "distillation", "quantization", "compared to baselines", "outperforms prior work", "improves over", "ablation"
     ]
 }
 
@@ -108,7 +120,96 @@ example_responses = {
                 "rationale": "The response includes precise temporal details, such as model behavior observed after 3 months of training, performance changes within 2-5 years of development, or evaluations conducted every 2 weeks, with references to specific time ranges like 1998-2004 or June 2012."
             }
         ]
+    },
+    "Breadth": {
+        "ContextCoverage": [
+            {
+                "rating": "1",
+                "rationale": "The response focuses entirely on a single NLP task or application setting and does not mention any alternative tasks relevant to the research question."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response addresses multiple distinct NLP tasks or application settings and distributes attention across them rather than concentrating on a single task."
+            }
+        ],
+        "MethodCoverage": [
+            {
+                "rating": "1",
+                "rationale": "The response focuses entirely on a single training or modeling approach (e.g., fine-tuning) and does not mention any alternative methods or settings relevant to the research question."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response addresses multiple distinct methods or settings, such as pretraining, fine-tuning, instruction tuning, and reinforcement learning from human feedback, rather than concentrating on a single approach."
+            }
+        ],
+        "DimensionCoverage": [
+            {
+                "rating": "1",
+                "rationale": "The response relies on a single evaluation dimension and does not indicate consideration of alternative evaluation perspectives."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response evaluates performance across multiple dimensions, using metrics such as accuracy, precision, recall, F1, BLEU, ROUGE, and perplexity, providing a more complete assessment rather than relying on a single metric."
+            }
+        ],
+        "ScopeCoverage": [
+            {
+                "rating": "1",
+                "rationale": "The response is limited to a single, narrowly defined scope and does not indicate that the findings generalize across different linguistic settings or usage scenarios."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response covers a wide range of linguistic scopes, including multiple languages such as English, German, French, and Chinese, as well as multilingual, cross-lingual, and low-resource settings, distributing attention across these distinct applicability scopes with only minor omissions."
+            }
+        ],
+        "ScaleCoverage": [
+            {
+                "rating": "1",
+                "rationale": "The response considers only a single computational scale and does not indicate how the approach behaves under different resource or deployment settings."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response discusses multiple computational scales, including model size in terms of parameters and billion-parameter regimes, compute resources such as GPUs and TPUs, and efficiency-related aspects like inference time, latency, throughput, and memory footprint, providing a multi-scale perspective."
+            }
+        ]
+    },
+    "Gap": {
+        "GapIdentification": [
+            {
+                "rating": "1",
+                "rationale": "The response is purely descriptive, summarizing existing findings or benchmark results (e.g., model architectures, datasets, or reported scores) with no identification of missing, unknown, inconsistent, or unresolved aspects relevant to the research question."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response clearly identifies specific gaps or limitations in the evidence base that are relevant to the research question (e.g., missing evaluations, underexplored domains or tasks, lack of ablation studies, limited robustness or generalization analysis, dataset biases, or conflicting benchmark results) and provides some explanation of why these gaps matter; minor ambiguity or imprecision may remain."
+            }
+        ]
+    },
+    "Innovation": {
+        "StateOfTheArtAndNovelty": [
+            {
+                "rating": "1",
+                "rationale": "The response gives a generic overview of common NLP methods without identifying any specific state-of-the-art systems or novel contributions; or it uses buzzwords like SOTA or state of the art without explaining what is new."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response identifies concrete state-of-the-art or novel NLP contributions (e.g., a new dataset or benchmark, a new or modified model architecture, RAG, instruction tuning, RLHF/DPO, multimodal models, or parameter-efficient methods like LoRA) and briefly explains what improvement or new capability they provide, with minor gaps in comparison or detail."
+            }
+        ]
     }
+}
+
+vocab_block_specs = {
+    "mechanistic_vocab_block": {"label": "Mechanistic terms", "keys": ["training_terms", "arch_terms", "ablation_terms"]},
+    "causal_vocab_block": {"label": "Causal connectives / triggers", "keys": ["causal_terms"]},
+    "temporal_vocab_block": {"label": "Temporal expressions", "keys": ["temporal_terms"]},
+    "context_coverage_vocab_block": {"label": "Context Coverage", "keys": ["tasks"]},
+    "method_coverage_vocab_block": {"label": "Method Coverage", "keys": ["training_terms", "arch_terms"]},
+    "dimension_coverage_vocab_block": {"label": "Dimension Coverage", "keys": ["eval_metrics"]},
+    "scope_coverage_vocab_block": {"label": "Scope Coverage", "keys": ["languages"]},
+    "scale_coverage_vocab_block": {"label": "Scale Coverage", "keys": ["compute_terms"]},
+    "gap_identification_vocab_block": {"label": "Gap Identification", "keys": ["gap_identification"]},
+    "novelty_indicators_vocab_block": {"label": "State of the Art and Novelty Indicators", "keys": ["novelty_indicators"]}
 }
 
 class NLP(Domain):
@@ -116,3 +217,4 @@ class NLP(Domain):
     vocab: Dict[str, Dict] = vocabulary
     ID: str = 'nlp'
     verbalized: str = "NLP"
+    vocab_block_specs: Dict[str, Dict[str, object]] = vocab_block_specs

@@ -91,14 +91,15 @@ Judges within YESciEval are defined as follows:
 | `GPTCustomAutoJudge`| Custom GPT-based LLM that can be used as a judge within YESciEval                     |
 
 
-A total of **23** evaluation rubrics were defined as part of the YESciEval test framework and can be used via ``yescieval``. Following simple example shows how to import rubrics in your code:
+A total of **22** evaluation rubrics were defined as part of the YESciEval test framework and can be used via ``yescieval``. Following simple example shows how to import rubrics in your code:
 
 ```python
 from yescieval import Informativeness, Correctness, Completeness, Coherence, Relevancy,\
                       Integration, Cohesion, Readability, Conciseness,\
                       MechanisticUnderstanding, CausalReasoning, TemporalPrecision, GapIdentification,\
+                      ContextCoverage, MethodCoverage, DimensionCoverage, ScaleCoverage, ScopeCoverage,\
                       StatisticalSophistication, CitationPractices, UncertaintyAcknowledgment,\
-                      SpeculativeStatements, NoveltyIndicators
+                      StateOfTheArtAndNovelty
 ```
 
 A complete list of rubrics are available at YESciEval [📚 Rubrics](https://yescieval.readthedocs.io/rubrics.html) page.

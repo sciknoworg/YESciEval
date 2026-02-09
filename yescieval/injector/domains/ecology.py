@@ -27,7 +27,7 @@ vocabulary = {
         "genetic diversity", "structural diversity", "shannon", "simpson", "hill numbers"
     ],
     "temporal_terms" :[
-        "within 2–5 years", "lag of ~6 months", "after 3 months", "before 12 weeks", "1998–2004",
+        "within 2-5 years", "lag of ~6 months", "after 3 months", "before 12 weeks", "1998-2004",
         "June 2012", "every 2 weeks"
     ],
     "ecosystem_services": [
@@ -62,7 +62,20 @@ vocabulary = {
         "climate change", "global warming", "drought", "heatwave", "extreme weather", "phenology", "range shift",
         "sea level rise", "ocean acidification", "greenhouse gas", "carbon dioxide", "thermal stress", "precipitation"
     ],
-    "complexity_terms": ["nonlinear", "emergent", "synergistic", "interconnected", "complex", "multifaceted"]
+    "complexity_terms": ["nonlinear", "emergent", "synergistic", "interconnected", "complex", "multifaceted"],
+    "gap_identification": [
+        "remains unclear", "unknown", "not well understood", "limited evidence", "mixed findings", "inconsistent results", "lack of consensus",
+        "understudied", "data scarce", "few studies", "limited sample size", "short time horizon", "lack of longitudinal data",
+        "geographic bias", "taxonomic bias", "context dependence", "limited external validity", "missing comparison", "unresolved"
+    ],
+    "novelty_indicators": [
+        "first to", "novel", "new approach", "new method", "recent advances", "state of the art", "cutting-edge",
+        "proof-of-concept", "pilot study", "new dataset", "long-term dataset", "high-resolution data",
+        "remote sensing", "satellite", "LiDAR", "eDNA", "metabarcoding", "new sampling protocol", "new monitoring approach",
+        "hierarchical model", "Bayesian", "causal inference", "counterfactual", "difference-in-differences", "instrumental variable",
+        "meta-analysis", "systematic review", "scenario analysis", "climate projection", "compared to previous studies",
+        "unlike prior work", "addresses a limitation"
+    ]
 }
 
 example_responses = {
@@ -97,7 +110,96 @@ example_responses = {
                 "rationale": "The response uses specific and bounded temporal expressions, for example describing changes occurring within 2-5 years, after 3 months, or every 2 weeks, and referencing defined time periods such as 1998-2004 or June 2012."
             }
         ]
+    },
+    "Breadth": {
+        "ContextCoverage": [
+            {
+                "rating": "1",
+                "rationale": "The response discusses only a single ecological setting and does not reference any alternative regions or biomes relevant to the research question."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response covers multiple distinct ecological contexts, such as different regions and ecosystem types, and distributes attention across them rather than focusing on a single setting."
+            }
+        ],
+        "MethodCoverage": [
+            {
+                "rating": "1",
+                "rationale": "The response focuses exclusively on a single management or intervention approach (e.g., controlled burning) and does not reference any alternative methods relevant to the research question."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response discusses multiple distinct interventions or management approaches, such as controlled burning, grazing management, habitat restoration, and protected areas, distributing attention across them rather than focusing on a single method."
+            }
+        ],
+        "DimensionCoverage": [
+            {
+                "rating": "1",
+                "rationale": "The response focuses on a single ecological dimension and does not meaningfully address other relevant dimensions."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response covers multiple ecological dimensions, including taxonomic, functional, and phylogenetic diversity, as well as measures such as species richness, evenness, abundance, and genetic and structural diversity, rather than focusing on just one single dimension."
+            }
+        ],
+        "ScopeCoverage": [
+            {
+                "rating": "1",
+                "rationale": "The response addresses only a very narrow aspect of ecological impact and remains vague, providing little indication that the findings apply beyond a single, limited scope."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response discusses several types of ecosystem services, from provisioning and regulating services to supporting and cultural services, rather than focusing on just one single, limited scope"
+            }
+        ],
+        "ScaleCoverage": [
+            {
+                "rating": "1",
+                "rationale": "The response focuses on a single ecological scale and does not meaningfully consider how the findings apply at other relevant scales."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response addresses multiple ecological scales, ranging from the individual and population level to community and ecosystem scales, and also considers broader spatial scales such as local, regional, and global contexts, rather than focusing on just one scale."
+            }
+        ]
+    },
+    "Gap": {
+        "GapIdentification": [
+            {
+                "rating": "1",
+                "rationale": "The response is purely descriptive, summarizing existing ecological findings, observations, or reported patterns (e.g., species distributions, biodiversity metrics, or observed correlations) without identifying any missing, unknown, inconsistent, or unresolved aspects relevant to the research question."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response clearly identifies specific gaps or limitations in the ecological evidence base that are relevant to the research question (e.g., missing data for certain regions, taxa, or time periods; limited experimental studies; or conflicting empirical findings) and provides some explanation of why these gaps matter; minor ambiguity or imprecision may remain."
+            }
+        ]
+    },
+    "Innovation": {
+        "StateOfTheArtAndNovelty": [
+            {
+                "rating": "1",
+                "rationale": "The response gives a generic overview of known ecological findings or methods without identifying any specific state-of-the-art approaches or novel contributions; or it uses buzzwords like state of the art or cutting-edge without explaining what is new."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response identifies concrete state-of-the-art or novel ecological contributions (e.g., new datasets, long-term or high-resolution data, remote sensing such as satellite or LiDAR, eDNA/metabarcoding, or new modeling or monitoring approaches) and briefly explains what improvement or new capability they provide, with minor gaps in comparison or detail."
+            }
+        ]
     }
+}
+
+vocab_block_specs = {
+    "mechanistic_vocab_block": {"label": "Mechanistic terms", "keys": ["mechanistic_terms"]},
+    "causal_vocab_block": {"label": "Causal connectives / triggers", "keys": ["causal_terms"]},
+    "temporal_vocab_block": {"label": "Temporal expressions", "keys": ["temporal_terms"]},
+    "context_coverage_vocab_block": {"label": "Context Coverage", "keys": ["regions"]},
+    "method_coverage_vocab_block": {"label": "Method Coverage", "keys": ["interventions"]},
+    "dimension_coverage_vocab_block": {"label": "Dimension Coverage", "keys": ["diversity_dimensions"]},
+    "scope_coverage_vocab_block": {"label": "Scope Coverage", "keys": ["ecosystem_services"]},
+    "scale_coverage_vocab_block": {"label": "Scale Coverage", "keys": ["scale_terms"]},
+    "gap_identification_vocab_block": {"label": "Gap Identification", "keys": ["gap_identification"]},
+    "novelty_indicators_vocab_block": {"label": "State of the Art and Novelty Indicators", "keys": ["novelty_indicators"]}
 }
 
 class Ecology(Domain):
@@ -105,3 +207,4 @@ class Ecology(Domain):
     vocab: Dict[str, Dict] = vocabulary
     ID: str = "ecology"
     verbalized: str = "Ecology"
+    vocab_block_specs: Dict[str, Dict[str, object]] = vocab_block_specs
