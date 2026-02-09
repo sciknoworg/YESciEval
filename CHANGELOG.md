@@ -1,5 +1,11 @@
 ## Changelog
 
+### v0.6.0 (February 9, 2026)
+- Added prompt and integration for the GapIdentification rubric  (Issue #14) (PR #20)
+- Added prompt and integration for the StateOfTheArtAndNovelty rubric (Issue #15) (PR #21)
+- Added rubrics for Breadth Dimension (Issue #12) (PR #19)
+- Updated documentations
+
 ### v0.5.0 (January 29, 2026)
 - Added Example and Vocab Injectors for Deep Research Rubric (PR #13)
 - Updated documentations (PR #13)
