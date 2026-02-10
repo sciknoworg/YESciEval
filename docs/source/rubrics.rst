@@ -15,7 +15,7 @@ A total of **22** evaluation rubrics were defined as part of the YESciEval test 
                               Integration, Cohesion, Readability, Conciseness,
                               MechanisticUnderstanding, CausalReasoning, TemporalPrecision, GapIdentification,
                               ContextCoverage, MethodCoverage, DimensionCoverage, ScopeCoverage, ScaleCoverage,
-                              StatisticalSophistication, CitationPractices, UncertaintyAcknowledgment,
+                              EpistemicCalibration, QuantitativeEvidenceAndUncertainty, ExplicitUncertainty,
                               StateOfTheArtAndNovelty
 
     The rubrics are presented as following:
@@ -162,11 +162,11 @@ Following ``Scientific Rigor Assessment`` assesses the evidentiary and methodolo
 
    * - Evaluation Rubric
      - Description
-   * - **18. Statistical Sophistication:**
-     - Does the answer use statistical methods or analyses, showing quantitative rigor and depth?
-   * - **19. Citation Practices:**
-     - Does the answer properly cite sources, using parenthetical or narrative citations (e.g., “(Smith et al., 2021)”)?
-   * - **20. Uncertainty Acknowledgment:**
+   * - **18. Epistemic Calibration:**
+     - Does the answer align claim strength with evidence and clearly mark uncertainty or limitations where relevant?
+   * - **19. Quantitative Evidence And Uncertainty:**
+     - Does the answer use and interpret relevant quantitative evidence and uncertainty appropriately, or clearly justify when it is not applicable?
+   * - **20. Explicit Uncertainty:**
      - Does the answer explicitly mention limitations or uncertainty, using terms like “unknown,” “limited evidence,” or “unclear”?
 
 Innovation Capacity Assessment

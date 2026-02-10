@@ -17,7 +17,10 @@ class VocabularyInjector(ABC):
         "{SCOPE_VOCAB}": "scope_coverage_vocab_block",
         "{SCALE_VOCAB}": "scale_coverage_vocab_block",
         "{GAP_IDENTIFICATION_VOCAB}": "gap_identification_vocab_block",
-        "{NOVELTY_INDICATORS_VOCAB}": "novelty_indicators_vocab_block"    
+        "{NOVELTY_INDICATORS_VOCAB}": "novelty_indicators_vocab_block",
+        "{EPISTEMIC_CALIBRATION_VOCAB}": "epistemic_calibration_vocab_block",
+        "{QUANT_UNCERTAINTY_VOCAB}": "quant_uncertainty_vocab_block",
+        "{UNCERTAINTY_VOCAB}": "uncertainty_vocab_block"   
     }
     
     def _clean_terms(self, terms) -> List[str]:
