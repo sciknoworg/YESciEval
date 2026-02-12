@@ -120,11 +120,11 @@ Following ``Research Depth Assessment`` quantifies the mechanistic and analytica
    * - Evaluation Rubric
      - Description
    * - **10. Mechanistic Understanding:**
-     - Does the answer show understanding of ecological processes, using indicators like “feedback,” “nutrient cycling,” or “trophic cascade”?
+     - Is the answer explaining how and why the described outcomes occur by detailing underlying processes, interactions, or pathways, rather than only stating what happens?
    * - **11. Causal Reasoning:**
-     - Does the answer show clear cause-effect relationships using words like “because,” “results in,” or “drives”?
+     - Is the answer explicitly describing cause-effect relationships, rather than only reporting associations or trends?
    * - **12. Temporal Precision:**
-     - Does the answer include specific time references, like intervals (“within 6 months”) or dates (“1990–2020”)?
+     - Is the answer using specific and meaningful time references, rather than vague temporal markers?
 
 
 Research Breadth Assessment
@@ -140,15 +140,15 @@ Following ``Research Breadth Assessment`` evaluates the diversity of evidence ac
    * - Evaluation Rubric
      - Description
    * - **13. Context Coverage:**
-     - Does the answer demonstrate breadth by addressing several distinct and relevant contexts related to the research question?
+     - Is the answer covering several distinct and relevant contexts related to the research question?
    * - **14. Method Coverage:**
-     - Does the answer address multiple distinct methods or interventions relevant to the research question?
+     - Is the answer addressing multiple distinct methods or interventions relevant to the research question?
    * - **15. Dimension Coverage:**
-     - Does the answer distribute attention across multiple distinct descriptive or evaluative dimensions relevant to the research question?
+     - Is the answer distributing attention across multiple distinct descriptive or evaluative dimensions relevant to the research question?
    * - **16. Scope Coverage:**
-     - Does the answer distribute attention across multiple distinct scopes of applicability or impact relevant to the research question?
+     - Is the answer distributing attention across multiple distinct scopes of applicability or impact relevant to the research question?
    * - **17. Scale Coverage:**
-     - Does the answer distribute attention across multiple distinct scales relevant to the research question?
+     - Is the answer distributing attention across multiple distinct scales of analysis, organization, or application relevant to the research question?
 
 Scientific Rigor Assessment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -163,11 +163,11 @@ Following ``Scientific Rigor Assessment`` assesses the evidentiary and methodolo
    * - Evaluation Rubric
      - Description
    * - **18. Epistemic Calibration:**
-     - Does the answer align claim strength with evidence and clearly mark uncertainty or limitations where relevant?
+     - Is the answer aligning claim strength with evidence and clearly marking uncertainty or limitations where relevant?
    * - **19. Quantitative Evidence And Uncertainty:**
-     - Does the answer use and interpret relevant quantitative evidence and uncertainty appropriately, or clearly justify when it is not applicable?
+     - Is the answer using and interpreting relevant quantitative evidence and uncertainty appropriately, or justifying when it is not applicable?
    * - **20. Explicit Uncertainty:**
-     - Does the answer explicitly mention limitations or uncertainty, using terms like “unknown,” “limited evidence,” or “unclear”?
+     - Is the answer explicitly mentioning limitations or uncertainty, using terms like “unknown,” “limited evidence,” or “unclear”?
 
 Innovation Capacity Assessment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -182,7 +182,7 @@ Following ``Innovation Capacity Assessment`` evaluates the novelty of the synthe
    * - Evaluation Rubric
      - Description
    * - **21. State Of The Art And Novelty:**
-     - Does the response identify specific state-of-the-art and/or novel contributions relevant to the research question, using terms like “novel,” “state-of-the-art”?
+     - Is the answer identifying specific state-of-the-art and/or novel contributions relevant to the research question, using terms like “novel,” “state-of-the-art”?
 
 Research Gap Assessment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -197,7 +197,7 @@ Following ``Research Gap Assessment`` detects explicit acknowledgment of unanswe
    * - Evaluation Rubric
      - Description
    * - **22. Gap Identification:**
-     - Does the answer point out unanswered questions or understudied areas, using terms like “research gap” or “understudied”?
+     - Is the answer pointing out unanswered questions or understudied areas, using terms like “research gap” or “understudied”?
 
 
 Usage
