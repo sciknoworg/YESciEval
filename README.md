@@ -98,7 +98,7 @@ from yescieval import Informativeness, Correctness, Completeness, Coherence, Rel
                       Integration, Cohesion, Readability, Conciseness,\
                       MechanisticUnderstanding, CausalReasoning, TemporalPrecision, GapIdentification,\
                       ContextCoverage, MethodCoverage, DimensionCoverage, ScaleCoverage, ScopeCoverage,\
-                      StatisticalSophistication, CitationPractices, UncertaintyAcknowledgment,\
+                      EpistemicCalibration, QuantitativeEvidenceAndUncertainty, ExplicitUncertainty,\
                       StateOfTheArtAndNovelty
 ```
 

@@ -7,7 +7,7 @@ from .rubric import (Informativeness, Correctness, Completeness, Coherence, Rele
                     Integration, Cohesion, Readability, Conciseness,
                     ScaleCoverage, ContextCoverage, ScopeCoverage, MethodCoverage, DimensionCoverage,
                     MechanisticUnderstanding, CausalReasoning, TemporalPrecision, GapIdentification, 
-                    StatisticalSophistication, CitationPractices, UncertaintyAcknowledgment, 
+                    EpistemicCalibration, QuantitativeEvidenceAndUncertainty, ExplicitUncertainty, 
                     StateOfTheArtAndNovelty)
 from .injector import ExampleInjector, VocabularyInjector
 from .judge import AutoJudge, AskAutoJudge, BioASQAutoJudge, CustomAutoJudge, GPTCustomAutoJudge
