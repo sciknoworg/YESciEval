@@ -1,4 +1,4 @@
-from ..base import Rubric
+from ...base import Rubric
 
 gap_identification_prompt = """<Context>
 Scientific question answering and synthesis often require more than listing findings: high-quality scientific writing identifies what remains unknown, insufficiently addressed, or unresolved in existing research. This is commonly expressed through gap identification, where the text specifies limitations, missing knowledge, unresolved inconsistencies, or missing connections in prior work and explains why they matter for the research question.
