@@ -114,7 +114,7 @@ Usage
 
 .. code-block:: python
 
-    from yescieval.pointwise.structural import Coherence
+    from yescieval.rubric.pointwise.structural import Coherence
 
     papers = {
         "Paper 1 title": "abstract of paper 1 ...",
@@ -242,7 +242,7 @@ Here is how to define the deep research rubric:
 
 .. code-block:: python
 
-   from yescieval.pointwise.depth import MechanisticUnderstanding
+   from yescieval.rubric.pointwise.depth import MechanisticUnderstanding
 
    rubric = MechanisticUnderstanding(
        papers=papers,
@@ -284,7 +284,7 @@ Here is an complete example of how evaluation on can be done:
 .. code-block:: python
 
    from yescieval import CustomAutoJudge, ExampleInjector, VocabularyInjector
-   from yescieval.pointwise.depth import MechanisticUnderstanding
+   from yescieval.rubric.pointwise.depth import MechanisticUnderstanding
 
    # Step 1: Create a rubric
    rubric = MechanisticUnderstanding(papers=papers,

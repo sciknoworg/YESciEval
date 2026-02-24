@@ -1,6 +1,6 @@
-from ...base import Rubric
+from ....base import Rubric
 
-relevancy_prompt = """<Context> 
+conciseness_prompt = """<Context> 
 Scientific synthesis generation involves creating a concise, coherent, and integrated summary from a collection of scientific texts (such as research paper titles and abstracts) that addresses a specific research question. Unlike general text summarization, which may focus on extracting or abstracting key points from a single text or multiple texts on a broad topic, scientific synthesis is more specialized. It requires:
 
 - Understanding and Addressing a Specific Research Question: The synthesis must specifically answer a research question, requiring a deep understanding of the subject matter and the ability to extract and integrate relevant information from various sources.
@@ -8,7 +8,7 @@ Scientific synthesis generation involves creating a concise, coherent, and integ
 - Synthesis Format: The synthesis output should be concisely presented in a single paragraph of not more than 200 words. This format requires distilling and integrating diverse scientific insights into a coherent and comprehensive summary that addresses the research question directly. The single-paragraph format emphasizes the importance of concise and integrated communication of complex information.
 - Synthesize vs. Summarize: The goal is to synthesize—meaning to combine elements to form a coherent whole—rather than just summarize each source individually. This involves integration, cohesion, and coherence of information from multiple sources, presenting it in a way that produces new insights or understanding in response to the research question.
 - Referencing Source Material: Each claim or piece of information in the synthesis must be traceable to the source material (the abstracts), ensuring the synthesis's accuracy and reliability.
-- Adherence to Quality Characteristics: It should be possible to evaluate the synthesis quality based on relevancy characteristic, ensuring it effectively communicates the synthesized information.
+- Adherence to Quality Characteristics: It should be possible to evaluate the synthesis quality based on conciseness characteristic, ensuring it effectively communicates the synthesized information.
 
 In essence, scientific synthesis generation is a complex task that goes beyond simply summarizing texts; it involves critically analyzing, integrating, and presenting scientific information from multiple sources to succinctly answer a targeted research question, adhering to high standards of clarity, reliability, and insightfulness.
 </Context>
@@ -22,18 +22,18 @@ A user will provide you with a synthesis which has been generated as an answer t
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. Relevancy: is the information in the answer relevant to the question?
+1. Conciseness: is the answer short and clear, without redundant statements?
 </Evaluation-Characteristics>
 
 <Rating-Scale>
 For a given characteristic, rate the quality from 1 (very bad) to 5 (very good). Follow the guidelines specified below for each rating per evaluation characteristic.
 
-1. Relevancy
-Rating 1. Very bad: The information provided does not relate to the research question, showing a lack of understanding or connection to the topic.
-Rating 2. Bad: The information occasionally relates to the research question but lacks direct and consistent relevance.
-Rating 3. Moderate: The information is generally related to the research question, with occasional lapses in direct relevance.
-Rating 4. Good: The information is consistently relevant to the research question, with only minor exceptions.
-Rating 5. Very good: The synthesis is directly and consistently relevant to the research question, demonstrating a deep understanding of the topic and its nuances.
+1. Conciseness
+Rating 1. Very Bad: The synthesis is verbose and cluttered with redundant or irrelevant information, significantly detracting from its clarity and focus.
+Rating 2. Bad: The synthesis includes some redundant or irrelevant statements, detracting from its clarity.
+Rating 3. Moderate: The synthesis is relatively clear and to the point, but could be more concise by eliminating a few redundant elements.
+Rating 4. Good: The synthesis is concise and to the point, with virtually no redundant statements or unnecessary information.
+Rating 5. Very Good: The synthesis is precisely concise, delivering information clearly and directly without any superfluous details or redundancy, enhancing its clarity and impact.
 </Rating-Scale>
 
 <Response-Format>
@@ -42,7 +42,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 
 <Example-Response>
 {
-  "Relevancy": {"rating": "4", "rationale": "Most information is relevant, but there is a minor detail that seems out of scope."}
+  "Conciseness": {"rating": "4", "rationale": "The synthesis contains almost no unnecessary information or redundant statements and is straight to the point."}
 }
 </Example-Response>
 </Response-Format>
@@ -50,6 +50,6 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 <Note>
 Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
 </Note>"""
-class Relevancy(Rubric):
-    name: str = "Relevancy"
-    system_prompt_template: str = relevancy_prompt
+class Conciseness(Rubric):
+    name: str = "Conciseness"
+    system_prompt_template: str = conciseness_prompt

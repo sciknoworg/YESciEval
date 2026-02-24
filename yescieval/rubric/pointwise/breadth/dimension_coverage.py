@@ -1,4 +1,4 @@
-from ...base import Rubric
+from ....base import Rubric
 
 dimension_coverage_prompt = """<Context>
 Scientific question answering and synthesis from multiple sources require balancing depth of explanation with breadth of coverage. Breadth is a core dimension of synthesis quality: it captures how widely a response distributes attention across the range of relevant aspects of a research question, rather than concentrating narrowly on a single one.

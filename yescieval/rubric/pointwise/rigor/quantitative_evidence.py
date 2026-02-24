@@ -1,4 +1,4 @@
-from ...base import Rubric
+from ....base import Rubric
 
 quantitative_evidence_and_uncertainty_prompt = """<Context>
 Scientific question answering and synthesis often require more than listing findings: high-quality scientific writing demonstrates rigorous reasoning using quantitative evidence and an appropriate treatment of uncertainty. In synthesis settings (e.g., reports that summarize multiple papers), this is commonly expressed through careful use and interpretation of source-reported quantitative results (e.g., effect sizes, confidence intervals, variability measures), and through explicit reasoning about robustness, heterogeneity, and limitations of the evidence base.

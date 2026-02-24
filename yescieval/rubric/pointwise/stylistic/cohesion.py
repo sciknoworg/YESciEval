@@ -1,4 +1,4 @@
-from ...base import Rubric
+from ....base import Rubric
 
 cohesion_prompt = """<Context> 
 Scientific synthesis generation involves creating a concise, coherent, and integrated summary from a collection of scientific texts (such as research paper titles and abstracts) that addresses a specific research question. Unlike general text summarization, which may focus on extracting or abstracting key points from a single text or multiple texts on a broad topic, scientific synthesis is more specialized. It requires:

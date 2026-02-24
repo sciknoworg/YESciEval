@@ -1,4 +1,4 @@
-from ...base import Rubric
+from ....base import Rubric
 
 explicit_uncertainty_prompt =  """<Context>
 Scientific question answering and synthesis often require more than listing findings: high-quality scientific writing communicates to the reader when conclusions or underlying knowledge remain uncertain, unclear, or unknown.

@@ -1,6 +1,6 @@
-from ...base import Rubric
+from ....base import Rubric
 
-informativeness_prompt = """<Context> 
+coherence_prompt = """<Context> 
 Scientific synthesis generation involves creating a concise, coherent, and integrated summary from a collection of scientific texts (such as research paper titles and abstracts) that addresses a specific research question. Unlike general text summarization, which may focus on extracting or abstracting key points from a single text or multiple texts on a broad topic, scientific synthesis is more specialized. It requires:
 
 - Understanding and Addressing a Specific Research Question: The synthesis must specifically answer a research question, requiring a deep understanding of the subject matter and the ability to extract and integrate relevant information from various sources.
@@ -8,7 +8,7 @@ Scientific synthesis generation involves creating a concise, coherent, and integ
 - Synthesis Format: The synthesis output should be concisely presented in a single paragraph of not more than 200 words. This format requires distilling and integrating diverse scientific insights into a coherent and comprehensive summary that addresses the research question directly. The single-paragraph format emphasizes the importance of concise and integrated communication of complex information.
 - Synthesize vs. Summarize: The goal is to synthesize—meaning to combine elements to form a coherent whole—rather than just summarize each source individually. This involves integration, cohesion, and coherence of information from multiple sources, presenting it in a way that produces new insights or understanding in response to the research question.
 - Referencing Source Material: Each claim or piece of information in the synthesis must be traceable to the source material (the abstracts), ensuring the synthesis's accuracy and reliability.
-- Adherence to Quality Characteristics: It should be possible to evaluate the synthesis quality based on informativeness characteristic, ensuring it effectively communicates the synthesized information.
+- Adherence to Quality Characteristics: It should be possible to evaluate the synthesis quality based on coherence characteristic, ensuring it effectively communicates the synthesized information.
 
 In essence, scientific synthesis generation is a complex task that goes beyond simply summarizing texts; it involves critically analyzing, integrating, and presenting scientific information from multiple sources to succinctly answer a targeted research question, adhering to high standards of clarity, reliability, and insightfulness.
 </Context>
@@ -22,18 +22,18 @@ A user will provide you with a synthesis which has been generated as an answer t
 </Task-Description>
 
 <Evaluation-Characteristics>
-1. Informativeness: is the answer a useful and informative reply to the question?
+1. Coherence: are the ideas connected in a sound and logical manner?
 </Evaluation-Characteristics>
 
 <Rating-Scale>
 For a given characteristic, rate the quality from 1 (very bad) to 5 (very good). Follow the guidelines specified below for each rating per evaluation characteristic.
 
-1. Informativeness
-Rating 1. Very bad: The synthesis offers no valuable insights or useful information in response to the research question, lacking depth and utility.
-Rating 2. Bad: The answer provides limited new insights or useful information in response to the research question.
-Rating 3. Moderate: The answer is somewhat informative, offering insights or useful information but not in a comprehensive or detailed manner.
-Rating 4. Good: The answer is informative and insightful, providing comprehensive information in response to the research question.
-Rating 5. Very good: The synthesis is highly informative, providing valuable insights and detailed information that thoroughly addresses the research question.
+1. Coherence
+Rating 1. Very bad: The synthesis lacks logical connection between ideas, leading to a narrative that is confusing and difficult to follow.
+Rating 2. Bad: The ideas are not always logically connected, leading to a somewhat confusing narrative.
+Rating 3. Moderate: The ideas are logically connected for the most part, but the narrative could be strengthened for better clarity.
+Rating 4. Good: The ideas are logically and soundly connected, offering a clear and understandable narrative.
+Rating 5. Very good: The ideas within the synthesis are connected in a logical and sound manner, forming a coherent and compelling narrative that is easy to follow.
 </Rating-Scale>
 
 <Response-Format>
@@ -42,7 +42,7 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 
 <Example-Response>
 {
-  "Informativeness": {"rating": "4", "rationale": "Most information is informative for the research question."}
+  "Coherence": {"rating": "4", "rationale": "The ideation is soundly connected with clear narrative."}
 }
 </Example-Response>
 </Response-Format>
@@ -50,6 +50,6 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 <Note>
 Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
 </Note>"""
-class Informativeness(Rubric):
-    name: str = "Informativeness"
-    system_prompt_template: str = informativeness_prompt
+class Coherence(Rubric):
+    name: str = "Coherence"
+    system_prompt_template: str = coherence_prompt

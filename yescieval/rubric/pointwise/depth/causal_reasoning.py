@@ -1,7 +1,7 @@
-from ...base import Rubric
+from ....base import Rubric
 
 causal_reasoning_prompt = """<Context>
-Scientific question answering and synthesis often require more than listing findings: high-quality scientific writing explains not only what is believed to be true, but also how and why it may be true. One important aspect of this is causal reasoning, where the text articulates cause–effect relationships, conditions, mediators, moderators, and causal chains, rather than only describing associations or co-occurrences.
+Scientific question answering and synthesis often require more than listing findings: high-quality scientific writing explains not only what is believed to be true, but also how and why it may be true. One important aspect of this is causal reasoning, where the text articulates cause-effect relationships, conditions, mediators, moderators, and causal chains, rather than only describing associations or co-occurrences.
 
 The response may be a single paragraph or a long-form report with multiple sections. There are no strict requirements on length or formatting; causal reasoning should be evaluated independently of presentation style.
 

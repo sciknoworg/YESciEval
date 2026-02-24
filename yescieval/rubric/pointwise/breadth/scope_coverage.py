@@ -1,4 +1,4 @@
-from ...base import Rubric
+from ....base import Rubric
 
 
 scope_coverage_prompt = """<Context>

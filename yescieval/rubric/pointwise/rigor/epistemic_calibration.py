@@ -1,4 +1,4 @@
-from ...base import Rubric
+from ....base import Rubric
 
 epistemic_calibration_prompt = """<Context>
 Scientific question answering and synthesis often require more than listing findings: high-quality scientific writing is epistemically calibrated. It distinguishes what is well-supported by evidence from what is uncertain, inferred, assumed, or hypothetical. In synthesis settings (e.g., reports summarizing multiple papers), this includes (i) clearly marking speculative or low-confidence claims, and (ii) appropriately qualifying conclusions when evidence is limited, mixed, indirect, or not comparable.

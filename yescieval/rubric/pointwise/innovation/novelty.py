@@ -1,4 +1,4 @@
-from ...base import Rubric
+from ....base import Rubric
 
 state_of_the_art_and_novelty_prompt = """<Context>
 Scientific question answering and synthesis often require more than listing findings: high-quality scientific writing can surface what is genuinely innovative in the literature and explain how it differs from prior or established approaches. In synthesis settings (e.g., reports summarizing multiple papers), this is expressed by identifying specific novel contributions (e.g., new methods, new datasets, new capabilities, new theoretical framings, proof-of-concept results) and situating them relative to an implicit or explicit baseline (what was done before, what limitation is addressed, what capability is newly enabled).
