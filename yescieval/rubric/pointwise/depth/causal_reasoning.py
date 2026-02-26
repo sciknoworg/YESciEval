@@ -20,9 +20,9 @@ A user will provide you with:
 You must evaluate the response using the evaluation characteristic below. Focus on whether the response expresses causal relationships relevant to the research question (cause-effect, mediators/moderators, conditions), rather than only descriptive or correlational statements. Your judgment should be based solely on the provided question and response.
 </Task-Description>
 
-<Evaluation-Characteristics>
+<Evaluation-Characteristic>
 CausalReasoning: Does the response demonstrate causal reasoning relevant to the research question by explicitly articulating cause-effect relationships (including causal chains, mediators, moderators, or conditional causal statements), rather than only reporting associations, trends, or co-occurrences?
-</Evaluation-Characteristics>
+</Evaluation-Characteristic>
 
 <Domain-Vocabulary-Examples>
 Below are examples of causal connectives and expressions that often signal causal reasoning (across domains). They are examples only: their presence is not required, and their presence alone is not sufficient for a high score.

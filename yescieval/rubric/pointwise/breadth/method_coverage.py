@@ -20,9 +20,9 @@ A user will provide you with:
 You must evaluate the response using the evaluation characteristic below. Focus on whether the response covers a range of distinct methods, interventions, or settings relevant to the research question, rather than elaborating repeatedly on a single method. Your judgment should be based solely on the provided question and response.
 </Task-Description>
 
-<Evaluation-Characteristics>
+<Evaluation-Characteristic>
 MethodCoverage: Does the response distribute attention across multiple distinct methods, interventions, or experimental/operational settings relevant to the research question?
-</Evaluation-Characteristics>
+</Evaluation-Characteristic>
 
 <Domain-Vocabulary-Examples>
 Below are domain-specific examples of terms that often signal different methods or interventions. They are examples only: their presence is not required, and repetition of the same method does not increase the score.

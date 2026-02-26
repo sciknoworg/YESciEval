@@ -22,9 +22,9 @@ A user will provide you with:
 You must evaluate the response using the evaluation characteristic below. Focus on whether the response identifies and contextualizes innovation in a concrete, relevant way (what is new, relative to what, and why it matters), rather than relying on vague novelty indicators or merely repeating established knowledge. Your judgment should be based solely on the provided question and response.
 </Task-Description>
 
-<Evaluation-Characteristics>
+<Evaluation-Characteristic>
 StateOfTheArtAndNovelty: Does the response identify specific state-of-the-art and/or novel contributions relevant to the research question (e.g., new methods, datasets, capabilities, theoretical framings, proof-of-concept results), and meaningfully contextualize them relative to prior or established work (i.e., new relative to what, and why it matters)? If novelty emphasis is not central to the question, does the response avoid forced novelty and (optionally) state that the evidence base is mature or that innovation is not the focus?
-</Evaluation-Characteristics>
+</Evaluation-Characteristic>
 
 <Domain-Vocabulary-Examples>
 Below are terms and phrases that often co-occur with innovation claims. They are examples only: their presence is not required, and their presence alone is not sufficient for a high score.

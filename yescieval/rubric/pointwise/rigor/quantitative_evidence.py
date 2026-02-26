@@ -22,9 +22,9 @@ A user will provide you with:
 You must evaluate the response using the evaluation characteristic below. Focus on whether the response demonstrates rigorous quantitative reasoning and uncertainty awareness appropriate to the research question and the type of synthesis, rather than merely reporting outcomes or sprinkling statistical jargon. Your judgment should be based solely on the provided question and response.
 </Task-Description>
 
-<Evaluation-Characteristics>
+<Evaluation-Characteristic>
 QuantitativeEvidenceAndUncertainty: Does the response appropriately use and interpret quantitative evidence and uncertainty (e.g., effect sizes, confidence intervals, variability, robustness, heterogeneity) in a way that is relevant to the research question? If such quantitative treatment is not needed or not supported by the evidence base, does the response explicitly and reasonably justify why?
-</Evaluation-Characteristics>
+</Evaluation-Characteristic>
 
 <Domain-Vocabulary-Examples>
 Below are domain-specific terms and phrases that often signal quantitative evidence handling and uncertainty reasoning. They are examples only: their presence is not required, and their presence alone is not sufficient for a high score.

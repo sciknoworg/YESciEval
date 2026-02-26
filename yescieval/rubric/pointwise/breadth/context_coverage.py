@@ -20,9 +20,9 @@ A user will provide you with:
 You must evaluate the response using the evaluation characteristic below. Focus on whether the response covers multiple distinct contexts relevant to the research question, rather than repeatedly elaborating on a single context. Your judgment should be based solely on the provided question and response.
 </Task-Description>
 
-<Evaluation-Characteristics>
+<Evaluation-Characteristic>
 ContextCoverage: Does the response distribute attention across multiple distinct and relevant contexts (rather than concentrating narrowly on one), thereby demonstrating breadth of coverage with respect to the research question?
-</Evaluation-Characteristics>
+</Evaluation-Characteristic>
 
 <Domain-Vocabulary-Examples>
 Below are domain-specific examples of terms that often signal different contexts. They are examples only: their presence is not required, and repetition of the same context does not increase the score.

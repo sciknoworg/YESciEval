@@ -23,9 +23,9 @@ A user will provide you with:
 You must evaluate the response using the evaluation characteristic below. Focus on whether the response covers a range of distinct scopes relevant to the research question (e.g., different beneficiary groups, functional roles, or applicability ranges), rather than elaborating repeatedly on a single scope. Your judgment should be based solely on the provided question and response.
 </Task-Description>
 
-<Evaluation-Characteristics>
+<Evaluation-Characteristic>
 ScopeCoverage: Does the response distribute attention across multiple distinct scopes of applicability, impact, or relevance associated with the research question?
-</Evaluation-Characteristics>
+</Evaluation-Characteristic>
 
 <Domain-Vocabulary-Examples>
 Below are domain-specific examples of terms that often signal different scopes. They are examples only: their presence is not required, and repetition of the same scope does not increase the score.

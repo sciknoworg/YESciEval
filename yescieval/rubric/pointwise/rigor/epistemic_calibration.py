@@ -22,9 +22,9 @@ A user will provide you with:
 You must evaluate the response using the evaluation characteristic below. Focus on whether the response appropriately calibrates claim strength by clearly marking uncertainty, assumptions, hypotheses, and evidence limitations relevant to the research question, rather than presenting all claims as established facts or relying on vague hedging. Your judgment should be based solely on the provided question and response.
 </Task-Description>
 
-<Evaluation-Characteristics>
+<Evaluation-Characteristic>
 EpistemicCalibration: Does the response appropriately calibrate claim strength by clearly distinguishing well-supported claims from uncertain, inferred, assumed, or hypothetical content, and by explicitly and meaningfully marking uncertainty/limitations where relevant to the research question?
-</Evaluation-Characteristics>
+</Evaluation-Characteristic>
 
 <Domain-Vocabulary-Examples>
 Below are terms and phrases that often signal epistemic calibration. They are examples only: their presence is not required, and their presence alone is not sufficient for a high score.

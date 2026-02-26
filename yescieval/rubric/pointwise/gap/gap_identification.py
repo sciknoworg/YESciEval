@@ -22,9 +22,9 @@ A user will provide you with:
 You must evaluate the response using the evaluation characteristic below. Focus on whether the response identifies what is missing or unresolved in the evidence base relevant to the research question, rather than only describing existing findings. Your judgment should be based solely on the provided question and response.
 </Task-Description>
 
-<Evaluation-Characteristics>
+<Evaluation-Characteristic>
 GapIdentification: Does the response identify gaps relevant to the research question by specifying limitations, missing knowledge, unresolved issues, or missing connections in prior work (preferably at the evidence-base/field level), rather than only describing existing findings?
-</Evaluation-Characteristics>
+</Evaluation-Characteristic>
 
 <Domain-Vocabulary-Examples>
 Below are terms and phrases that often signal gap identification. They are examples only: their presence is not required, and their presence alone is not sufficient for a high score.

@@ -20,9 +20,9 @@ A user will provide you with:
 You must evaluate the response using the evaluation characteristic below. Focus on whether the response offers mechanistic understanding (how/why explanations) rather than only descriptive statements (what/that). Your judgment should be based solely on the provided question and response.
 </Task-Description>
 
-<Evaluation-Characteristics>
+<Evaluation-Characteristic>
 MechanisticUnderstanding: Does the response explain mechanisms relevant to the research question by describing processes, interactions, intermediate steps, or pathways (i.e., “how/why”), rather than only stating observations or outcomes (“what”)?
-</Evaluation-Characteristics>
+</Evaluation-Characteristic>
 
 <Domain-Vocabulary-Examples>
 Below are domain-specific terms and phrases that often signal mechanistic discussion. They are examples only: their presence is not required, and their presence alone is not sufficient for a high score.

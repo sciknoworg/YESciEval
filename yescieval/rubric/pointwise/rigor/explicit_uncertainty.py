@@ -20,9 +20,9 @@ A user will provide you with:
 You must evaluate the response using the evaluation characteristic below. Focus on the explicit indication of uncertainty, unclear points, or unknown aspects, rather than on fully resolved statements. Your judgment should be based solely on the provided question and response.
 </Task-Description>
 
-<Evaluation-Characteristics>
+<Evaluation-Characteristic>
 ExplicitUncertainty: Does the response clearly indicate what is uncertain, unclear, or unknown in relation to the research question, rather than presenting all findings as settled or certain?
-</Evaluation-Characteristics>
+</Evaluation-Characteristic>
 
 <Domain-Vocabulary-Examples>
 Below are domain-specific terms and phrases that often signal uncertainty discussion. They are examples only: their presence is not required, and their presence alone is not sufficient for a high score.

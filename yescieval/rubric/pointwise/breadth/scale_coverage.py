@@ -22,9 +22,9 @@ A user will provide you with:
 You must evaluate the response using the evaluation characteristic below. Focus on whether the response covers a range of distinct scales relevant to the research question (e.g., from fine-grained to coarse-grained levels), rather than elaborating repeatedly on a single scale. Your judgment should be based solely on the provided question and response.
 </Task-Description>
 
-<Evaluation-Characteristics>
+<Evaluation-Characteristic>
 ScaleCoverage: Does the response distribute attention across multiple distinct scales of analysis, organization, or application relevant to the research question?
-</Evaluation-Characteristics>
+</Evaluation-Characteristic>
 
 <Domain-Vocabulary-Examples>
 Below are domain-specific examples of terms that often signal different scales. They are examples only: their presence is not required, and repetition of the same scale does not increase the score.

@@ -20,9 +20,9 @@ A user will provide you with:
 You must evaluate the response using the evaluation characteristic below. Focus on whether the response uses specific, bounded temporal expressions when making temporally-relevant statements, rather than relying on vague time markers. Your judgment should be based solely on the provided question and response.
 </Task-Description>
 
-<Evaluation-Characteristics>
+<Evaluation-Characteristic>
 TemporalPrecision: Does the response use specific, bounded, and meaningful temporal expressions (e.g., dates, durations, intervals, year ranges) when discussing time-relevant aspects of the research question, rather than vague temporal markers?
-</Evaluation-Characteristics>
+</Evaluation-Characteristic>
 
 <Domain-Vocabulary-Examples>
 Below are examples of temporal expressions. They are examples only: their presence is not required, and their presence alone is not sufficient for a high score.
