@@ -49,7 +49,6 @@ vocabulary = {
     ],
     "speculative_terms": ["speculative", "hypothetical", "flagged"],
     "gap_terms": ["research gap", "knowledge gap", "data gap"],
-    "uncertainty_terms": ["uncertain", "unclear", "unknown"],
     "stats_terms": [
         "mean", "median", "variance", "standard deviation", "standard error", "confidence interval", "ci",
         "p-value", "significant", "regression", "anova", "t-test", "chi-square", "effect size", "meta-analysis",
@@ -75,6 +74,24 @@ vocabulary = {
         "hierarchical model", "Bayesian", "causal inference", "counterfactual", "difference-in-differences", "instrumental variable",
         "meta-analysis", "systematic review", "scenario analysis", "climate projection", "compared to previous studies",
         "unlike prior work", "addresses a limitation"
+    ],
+    "epistemic_calibration": [
+        "may", "might", "could", "possibly", "potentially", "plausibly", "suggests", "consistent with", "unlikely", "likely",
+        "uncertain", "inconclusive", "mixed evidence", "limited evidence", "assumption", "we assume", "hypothesis", "speculate",
+        "extrapolate", "understudied", "warrants further research", "future work", "limitation", "caveat", "confounding", "bias"
+    ],
+    "quant_uncertainty_vocab": [
+        "effect size", "odds ratio", "risk ratio", "hazard ratio", "confidence interval", "CI", "credible interval",
+        "standard error", "SE", "standard deviation", "SD", "variance", "p-value", "sample size", "n =",
+        "regression", "mixed-effects", "random effects", "GLMM", "AIC", "model comparison", "R-squared",
+        "meta-analysis", "heterogeneity", "I-squared", "sensitivity analysis"
+    ],
+    "uncertainty_terms": [
+        "uncertain", "unclear", "unknown", "not known", "not clear", "poorly understood",
+        "remains unclear", "remains unknown", "open question", "open problem",
+        "inconclusive", "ambiguous", "lack of evidence", "limited evidence",
+        "insufficient data", "data is limited", "not well understood", "not fully understood",
+        "hard to determine", "difficult to assess"
     ]
 }
 
@@ -186,6 +203,38 @@ example_responses = {
                 "rationale": "The response identifies concrete state-of-the-art or novel ecological contributions (e.g., new datasets, long-term or high-resolution data, remote sensing such as satellite or LiDAR, eDNA/metabarcoding, or new modeling or monitoring approaches) and briefly explains what improvement or new capability they provide, with minor gaps in comparison or detail."
             }
         ]
+    },
+    "Rigor": { 
+        "EpistemicCalibration": [ 
+            {
+                "rating": "1",
+                "rationale": "The response makes strong claims about ecological findings or implications without acknowledging any uncertainty, limitations, assumptions, or alternative explanations."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response demonstrates good epistemic calibration by acknowledging uncertainty, limitations, assumptions, and alternative explanations relevant to the ecological findings or implications, uses appropriately qualified language; minor gaps or occasional vague hedging may remain."
+            }
+        ],
+        "QuantitativeEvidenceAndUncertainty": [
+            {
+                "rating": "1",
+                "rationale": "The response summarizes ecological patterns in qualitative terms (e.g., species declined or abundance increased) without providing or interpreting any quantitative measures such as population change rates, effect sizes, or variability, and does not address uncertainty, sampling limitations, or heterogeneity across sites."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response uses relevant quantitative evidence (e.g., percentage changes in population abundance, reported confidence intervals, or variation across sites) and links these to the research question; it discusses uncertainty and limitations (e.g., short time series, site-specific variability, or mixed results across studies) and avoids overgeneralization, with only minor gaps in robustness or comparability discussion."
+            }      
+        ],
+        "ExplicitUncertainty": [ 
+            {
+                "rating": "1",
+                "rationale": "The response does not explicitly acknowledge any uncertainty, limitations, or assumptions related to the ecological findings or implications."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response explicitly acknowledges uncertainty, limitations, and assumptions related to the ecological findings or implications, using clear language to identify areas of ambiguity, unresolved questions, or potential confounding factors."
+            }
+        ] 
     }
 }
 
@@ -199,7 +248,10 @@ vocab_block_specs = {
     "scope_coverage_vocab_block": {"label": "Scope Coverage", "keys": ["ecosystem_services"]},
     "scale_coverage_vocab_block": {"label": "Scale Coverage", "keys": ["scale_terms"]},
     "gap_identification_vocab_block": {"label": "Gap Identification", "keys": ["gap_identification"]},
-    "novelty_indicators_vocab_block": {"label": "State of the Art and Novelty Indicators", "keys": ["novelty_indicators"]}
+    "novelty_indicators_vocab_block": {"label": "State of the Art and Novelty Indicators", "keys": ["novelty_indicators"]},
+    "epistemic_calibration_vocab_block": {"label": "Epistemic Calibration", "keys": ["epistemic_calibration"]},
+    "quant_uncertainty_vocab_block": {"label": "Quantitative Evidence and Uncertainty", "keys": ["quant_uncertainty_vocab"]},
+    "uncertainty_vocab_block": {"label": "Explicit Uncertainty", "keys": ["uncertainty_terms"]}
 }
 
 class Ecology(Domain):

@@ -54,9 +54,6 @@ vocabulary = {
       "p-value", "confidence interval", "t-test", "anova", "regression", "effect size", "variance",
       "standard deviation", "standard error", "r-squared"
     ],
-    "uncertainty_terms": [
-      "uncertain", "unclear", "unknown"
-    ],
     "innovation_terms": [
       "novel", "innovative", "breakthrough", "pioneering", "cutting-edge", "emerging", "frontier", "state-of-the-art",
       "advanced", "experimental", "proof-of-concept", "first", "unprecedented"
@@ -85,6 +82,23 @@ vocabulary = {
       "retrieval-augmented", "RAG", "agentic", "tool use", "function calling", "multimodal", 
       "vision-language", "few-shot", "zero-shot", "scaling law", "parameter-efficient", "LoRA",
       "distillation", "quantization", "compared to baselines", "outperforms prior work", "improves over", "ablation"
+    ],
+    "epistemic_calibration": [
+        "may", "might", "could", "possibly", "potentially", "plausibly", "suggests", "consistent with", "unlikely", "likely",
+        "uncertain", "inconclusive", "mixed evidence", "limited evidence", "assumption", "we assume", "hypothesis", "speculate",
+        "extrapolate", "understudied", "warrants further research", "future work", "limitation", "caveat", "confounding", "bias"
+    ],
+    "quant_uncertainty_vocab": [
+        "mean", "median", "standard deviation", "std", "standard error", "SE", "confidence interval", "CI", "bootstrap",
+        "p-value", "paired t-test", "McNemar", "Wilcoxon", "cross-validation", "held-out", "train/dev/test",
+        "across seeds", "random seed", "mean±std", "ablation", "robustness", "OOD"
+    ],
+    "uncertainty_terms": [
+        "uncertain", "unclear", "unknown", "not known", "not clear", "poorly understood",
+        "remains unclear", "remains unknown", "open question", "open problem",
+        "inconclusive", "ambiguous", "lack of evidence", "limited evidence",
+        "insufficient data", "data is limited", "not well understood", "not fully understood",
+        "hard to determine", "difficult to assess"
     ]
 }
 
@@ -196,6 +210,38 @@ example_responses = {
                 "rationale": "The response identifies concrete state-of-the-art or novel NLP contributions (e.g., a new dataset or benchmark, a new or modified model architecture, RAG, instruction tuning, RLHF/DPO, multimodal models, or parameter-efficient methods like LoRA) and briefly explains what improvement or new capability they provide, with minor gaps in comparison or detail."
             }
         ]
+    },
+    "Rigor": {
+        "EpistemicCalibration": [
+            {
+                "rating": "1",
+                "rationale": "The response presents claims as definitive throughout, with no meaningful qualification, uncertainty marking, or acknowledgment of assumptions/limitations, even when such caution is warranted."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response generally calibrates claim strength, distinguishing supported results from uncertain ones (e.g., performance improves on English benchmarks, but generalization to multilingual settings remains unclear due to limited evaluation), with only minor vague hedging in a few places."
+            }   
+        ],
+        "QuantitativeEvidenceAndUncertainty": [
+            {
+                "rating": "1",
+                "rationale": "The response does not provide any quantitative evidence or statistical analysis to support claims, and it does not acknowledge uncertainty or variability in the results."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response appropriately uses quantitative results (e.g., reports F1 score improvements over baselines and notes variance across datasets) and connects them to the research question; it also acknowledges uncertainty and limitations (e.g., performance drops on out-of-domain data and results are based on a limited set of benchmarks), with only minor gaps in cross-study comparison or robustness analysis."
+            }
+        ],
+        "ExplicitUncertainty": [
+            {
+                "rating": "1",
+                "rationale": "The response does not explicitly acknowledge any uncertainty, unknowns, or open questions related to the research question; it presents findings as definitive and well-established."
+            },
+            {
+                "rating": "4",
+                "rationale": "The response explicitly acknowledges uncertainty, unknowns, or open questions related to the research question; it uses clear language to indicate what is not known or understood, and it highlights areas where evidence is limited or inconclusive, with only minor gaps in explicit acknowledgment of uncertainty."
+            }  
+        ]   
     }
 }
 
@@ -209,7 +255,10 @@ vocab_block_specs = {
     "scope_coverage_vocab_block": {"label": "Scope Coverage", "keys": ["languages"]},
     "scale_coverage_vocab_block": {"label": "Scale Coverage", "keys": ["compute_terms"]},
     "gap_identification_vocab_block": {"label": "Gap Identification", "keys": ["gap_identification"]},
-    "novelty_indicators_vocab_block": {"label": "State of the Art and Novelty Indicators", "keys": ["novelty_indicators"]}
+    "novelty_indicators_vocab_block": {"label": "State of the Art and Novelty Indicators", "keys": ["novelty_indicators"]},
+    "epistemic_calibration_vocab_block": {"label": "Epistemic Calibration", "keys": ["epistemic_calibration"]},
+    "quant_uncertainty_vocab_block": {"label": "Quantitative Evidence and Uncertainty", "keys": ["quant_uncertainty_vocab"]},
+    "uncertainty_vocab_block": {"label": "Explicit Uncertainty", "keys": ["uncertainty_terms"]}
 }
 
 class NLP(Domain):

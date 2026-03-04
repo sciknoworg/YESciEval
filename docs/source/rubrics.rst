@@ -1,207 +1,417 @@
-
 Rubrics
-===================
+=======
 
-A total of **22** evaluation rubrics were defined as part of the YESciEval test framework within two categories presented as following:
+A total of **22** evaluation rubrics are defined as part of the YESciEval test framework,
+organised into sub-categories under **Pointwise Evaluation**.
+
+Each rubric can be used in two ways:
+
+- **Basic** – pass only ``papers``, ``question``, and ``answer``.
+- **With Injectors** – additionally pass a ``domain`` and one or both injectors
+  (``VocabularyInjector``, ``ExampleInjector``) to augment the prompt with
+  domain-specific terminology and curated example responses.
 
 .. hint::
 
-
-    Here is a simple example of how to import rubrics in your code:
+    Quick import of all rubrics:
 
     .. code-block:: python
 
-        from yescieval import Informativeness, Correctness, Completeness, Coherence, Relevancy,
-                              Integration, Cohesion, Readability, Conciseness,
-                              MechanisticUnderstanding, CausalReasoning, TemporalPrecision, GapIdentification,
-                              ContextCoverage, MethodCoverage, DimensionCoverage, ScopeCoverage, ScaleCoverage,
-                              StatisticalSophistication, CitationPractices, UncertaintyAcknowledgment,
-                              StateOfTheArtAndNovelty
+        from yescieval import (
+	            Informativeness, Correctness, Completeness,
+	            Coherence, Relevancy, Integration,
+	            Cohesion, Readability, Conciseness,
+	            MechanisticUnderstanding, CausalReasoning, TemporalPrecision,
+	            GapIdentification, ContextCoverage, MethodCoverage,
+	            DimensionCoverage, ScopeCoverage, ScaleCoverage,
+	            EpistemicCalibration, QuantitativeEvidenceAndUncertainty,
+	            ExplicitUncertainty, StateOfTheArtAndNovelty,
+        )
 
-    The rubrics are presented as following:
 
+Pointwise Evaluation
+--------------------
 
-Question Answering
----------------------------------
+Pointwise evaluation is a rubric-based scoring method in which a judge assigns a
+numerical score and a rationale to an answer for a given question under a specific rubric.
+
+An example rating for pointwise evaluation is as follows:
+
+.. code-block:: json
+
+   {
+     "rating": 4,
+     "rationale": "The answer covers key aspects of how AI is applied in healthcare,
+                   such as diagnostics and personalised medicine."
+   }
+
+For each rating level from 1 to 5, the rubric provides concrete definitions of what
+each score means in context.  The LLM is expected to:
+
+1. Provide a numerical score.
+2. Provide a rationale explaining its decision.
+
+----
 
 Linguistic & Stylistic Quality
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Following ``Linguistic & Stylistic Quality`` concerns grammar, clarity, and adherence to academic writing conventions.
-
+Concerns grammar, clarity, and adherence to academic writing conventions.
 
 .. list-table::
    :header-rows: 1
    :widths: 20 80
 
-   * - Evaluation Rubric
+   * - Rubric
      - Description
-   * - **1. Cohesion:**
+   * - **1. Cohesion**
      - Are the sentences connected appropriately to make the resulting synthesis cohesive?
-   * - **2. Conciseness:**
+   * - **2. Conciseness**
      - Is the answer short and clear, without redundant statements?
-   * - **3. Readability:**
-     - Does the answer follow appropriate style and structure conventions for academic writing, particularly for readability?
+   * - **3. Readability**
+     - Does the answer follow appropriate style and structure conventions for academic writing,
+       particularly for readability?
+
+
+
+.. tab:: Usage
+
+  .. code-block:: python
+
+     from yescieval.rubric.pointwise.stylistic import Cohesion
+
+     papers = {
+         "Paper 1 title": "abstract of paper 1 ...",
+         "Paper 2 title": "abstract of paper 2 ...",
+     }
+     question = "What are the key findings on AI in these papers?"
+     answer   = "The synthesis answer summarising the papers."
+
+     rubric      = Cohesion(papers=papers, question=question, answer=answer)
+     instruction = rubric.instruct()
+
+
 
 Logical & Structural Integrity
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Following ``Logical & Structural Integrity`` focuses on the reasoning and organization of information.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Focuses on the reasoning and organisation of information.
 
 .. list-table::
    :header-rows: 1
    :widths: 20 80
 
-   * - Evaluation Rubric
+   * - Rubric
      - Description
-   * - **4. Coherence:**
+   * - **4. Coherence**
      - Are the ideas connected soundly and logically?
-   * - **5. Integration:**
-     - Are the sources structurally and linguistically well-integrated, using appropriate markers of provenance/quotation and logical connectors for each reference?
-   * - **6. Relevancy:**
+   * - **5. Integration**
+     - Are the sources structurally and linguistically well-integrated, using appropriate
+       markers of provenance/quotation and logical connectors for each reference?
+   * - **6. Relevancy**
      - Is the information in the answer relevant to the problem?
 
+
+
+.. tab:: Usage
+
+  .. code-block:: python
+
+     from yescieval.rubric.pointwise.structural import Coherence
+
+     rubric      = Coherence(papers=papers, question=question, answer=answer)
+     instruction = rubric.instruct()
+
+
 Evidence Fidelity
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
-Following ``Evidence Fidelity`` ensures that the response is both correct and useful.
-
+Ensures that the response is both correct and useful.
 
 .. list-table::
    :header-rows: 1
    :widths: 20 80
 
-   * - Evaluation Rubric
+   * - Rubric
      - Description
-   * - **7. Correctness:**
-     - Is the information in the answer a correct representation of the content of the provided abstracts?
-   * - **8. Completeness:**
-     - Is the answer a comprehensive encapsulation of the relevant information in the provided abstracts?
-   * - **9. Informativeness:**
+   * - **7. Correctness**
+     - Is the information in the answer a correct representation of the content of the
+       provided abstracts?
+   * - **8. Completeness**
+     - Is the answer a comprehensive encapsulation of the relevant information in the
+       provided abstracts?
+   * - **9. Informativeness**
      - Is the answer a useful and informative reply to the problem?
 
-Usage
-~~~~~~~~~~~~~~~~~
 
-.. code-block:: python
+.. tab:: Usage
 
-    from yescieval import Coherence
+  .. code-block:: python
 
-    papers = {
-        "Paper 1 title": "abstract of paper 1 ...",
-        "Paper 2 title": "abstract of paper 2 ...",
-        "Paper 3 title": "abstract of paper 3 ...",
-        "Paper 4 title": "abstract of paper 4 ...",
-        "Paper 5 title": "abstract of paper 5 ..."
-    }
-    question = "What are the key findings on AI in these papers?"
-    answer = "The synthesis answer summarizing the papers."
+     from yescieval.rubric.pointwise.fidelity import Correctness
 
-    # Instantiate a rubric, e.g. Coherence
-    rubric = Coherence(papers=papers, question=question, answer=answer)
-    instruction = rubric.instruct()
-
-    print(instruction)
-    print(rubric.name)
-
-
-Deep Research
--------------------
+     rubric      = Correctness(papers=papers, question=question, answer=answer)
+     instruction = rubric.instruct()
 
 Research Depth Assessment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Following ``Research Depth Assessment`` quantifies the mechanistic and analytical sophistication of synthesis outputs.
-
+Quantifies the mechanistic and analytical sophistication of synthesis outputs.
 
 .. list-table::
    :header-rows: 1
    :widths: 20 80
 
-   * - Evaluation Rubric
+   * - Rubric
      - Description
-   * - **10. Mechanistic Understanding:**
-     - Does the answer show understanding of ecological processes, using indicators like “feedback,” “nutrient cycling,” or “trophic cascade”?
-   * - **11. Causal Reasoning:**
-     - Does the answer show clear cause-effect relationships using words like “because,” “results in,” or “drives”?
-   * - **12. Temporal Precision:**
-     - Does the answer include specific time references, like intervals (“within 6 months”) or dates (“1990–2020”)?
+   * - **10. Mechanistic Understanding**
+     - Is the answer explaining *how* and *why* the described outcomes occur by detailing
+       underlying processes, interactions, or pathways, rather than only stating what happens?
+   * - **11. Causal Reasoning**
+     - Is the answer explicitly describing cause-effect relationships, rather than only
+       reporting associations or trends?
+   * - **12. Temporal Precision**
+     - Is the answer using specific and meaningful time references, rather than vague
+       temporal markers?
+
+
+
+.. tab:: Basic Usage
+
+  .. code-block:: python
+
+     from yescieval.rubric.pointwise.depth import MechanisticUnderstanding
+
+     rubric      = MechanisticUnderstanding(papers=papers, question=question, answer=answer)
+     instruction = rubric.instruct()
+
+     print(instruction)
+     print(rubric.name)
+
+.. tab:: Usage with Example and Vocabulary Injectors
+
+  .. code-block:: python
+
+     from yescieval import ExampleInjector, VocabularyInjector
+     from yescieval.rubric.pointwise.depth import MechanisticUnderstanding
+
+     # Step 1: Create a rubric with injectors
+     rubric = MechanisticUnderstanding(
+         papers=papers,
+         question=question,
+         answer=answer,
+         domain="nlp",
+         vocabulary=VocabularyInjector(),
+         example=ExampleInjector(),
+     )
+     instruction_prompt = rubric.instruct()
 
 
 Research Breadth Assessment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Following ``Research Breadth Assessment`` evaluates the diversity of evidence across dimensions, scope, and methodological contexts.
-
+Evaluates the diversity of evidence across dimensions, scope, and methodological contexts.
 
 .. list-table::
    :header-rows: 1
    :widths: 20 80
 
-   * - Evaluation Rubric
+   * - Rubric
      - Description
-   * - **13. Context Coverage:**
-     - Does the answer demonstrate breadth by addressing several distinct and relevant contexts related to the research question?
-   * - **14. Method Coverage:**
-     - Does the answer address multiple distinct methods or interventions relevant to the research question?
-   * - **15. Dimension Coverage:**
-     - Does the answer distribute attention across multiple distinct descriptive or evaluative dimensions relevant to the research question?
-   * - **16. Scope Coverage:**
-     - Does the answer distribute attention across multiple distinct scopes of applicability or impact relevant to the research question?
-   * - **17. Scale Coverage:**
-     - Does the answer distribute attention across multiple distinct scales relevant to the research question?
+   * - **13. Context Coverage**
+     - Is the answer covering several distinct and relevant contexts related to the
+       research question?
+   * - **14. Method Coverage**
+     - Is the answer addressing multiple distinct methods or interventions relevant to
+       the research question?
+   * - **15. Dimension Coverage**
+     - Is the answer distributing attention across multiple distinct descriptive or
+       evaluative dimensions relevant to the research question?
+   * - **16. Scope Coverage**
+     - Is the answer distributing attention across multiple distinct scopes of
+       applicability or impact relevant to the research question?
+   * - **17. Scale Coverage**
+     - Is the answer distributing attention across multiple distinct scales of analysis,
+       organisation, or application relevant to the research question?
+
+.. tab:: Basic Usage
+
+  .. code-block:: python
+
+     from yescieval.rubric.pointwise.breath import ContextCoverage
+
+     rubric      = ContextCoverage(papers=papers, question=question, answer=answer)
+     instruction = rubric.instruct()
+
+     print(instruction)
+     print(rubric.name)
+
+.. tab:: Usage with Example and Vocabulary Injectors
+
+  .. code-block:: python
+
+     from yescieval import ExampleInjector, VocabularyInjector
+     from yescieval.rubric.pointwise.breath import ContextCoverage
+
+     rubric = ContextCoverage(
+         papers=papers,
+         question=question,
+         answer=answer,
+         domain="ecology",
+         vocabulary=VocabularyInjector(),
+         example=ExampleInjector(),
+     )
+     instruction = rubric.instruct()
+
 
 Scientific Rigor Assessment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Following ``Scientific Rigor Assessment`` assesses the evidentiary and methodological integrity of the synthesis.
-
+Assesses the evidentiary and methodological integrity of the synthesis.
 
 .. list-table::
    :header-rows: 1
    :widths: 20 80
 
-   * - Evaluation Rubric
+   * - Rubric
      - Description
-   * - **18. Statistical Sophistication:**
-     - Does the answer use statistical methods or analyses, showing quantitative rigor and depth?
-   * - **19. Citation Practices:**
-     - Does the answer properly cite sources, using parenthetical or narrative citations (e.g., “(Smith et al., 2021)”)?
-   * - **20. Uncertainty Acknowledgment:**
-     - Does the answer explicitly mention limitations or uncertainty, using terms like “unknown,” “limited evidence,” or “unclear”?
+   * - **18. Epistemic Calibration**
+     - Is the answer aligning claim strength with evidence and clearly marking
+       uncertainty or limitations where relevant?
+   * - **19. Quantitative Evidence And Uncertainty**
+     - Is the answer using and interpreting relevant quantitative evidence and
+       uncertainty appropriately, or justifying when it is not applicable?
+   * - **20. Explicit Uncertainty**
+     - Is the answer explicitly mentioning limitations or uncertainty, using terms
+       like "unknown," "limited evidence," or "unclear"?
+
+
+.. tab:: Basic usage
+
+  .. code-block:: python
+
+     from yescieval.rubric.pointwise.rigor import EpistemicCalibration
+
+     rubric      = EpistemicCalibration(papers=papers, question=question, answer=answer)
+     instruction = rubric.instruct()
+
+     print(instruction)
+     print(rubric.name)
+
+.. tab::  Usage with Example and Vocabulary Injectors
+
+  .. code-block:: python
+
+     from yescieval import ExampleInjector, VocabularyInjector
+     from yescieval.rubric.pointwise.rigor import EpistemicCalibration
+
+     rubric = EpistemicCalibration(
+         papers=papers,
+         question=question,
+         answer=answer,
+         domain="nlp",
+         vocabulary=VocabularyInjector(),
+         example=ExampleInjector(),
+     )
+     instruction = rubric.instruct()
+
 
 Innovation Capacity Assessment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Following ``Innovation Capacity Assessment`` evaluates the novelty of the synthesis.
-
+Evaluates the novelty of the synthesis.
 
 .. list-table::
    :header-rows: 1
    :widths: 20 80
 
-   * - Evaluation Rubric
+   * - Rubric
      - Description
-   * - **21. State Of The Art And Novelty:**
-     - Does the response identify specific state-of-the-art and/or novel contributions relevant to the research question, using terms like “novel,” “state-of-the-art”?
+   * - **21. State Of The Art And Novelty**
+     - Is the answer identifying specific state-of-the-art and/or novel contributions
+       relevant to the research question, using terms like "novel," "state-of-the-art"?
+
+.. tab:: Basic Usage
+
+  .. code-block:: python
+
+     from yescieval.rubric.pointwise.innovation import StateOfTheArtAndNovelty
+
+     rubric      = StateOfTheArtAndNovelty(papers=papers, question=question, answer=answer)
+     instruction = rubric.instruct()
+
+     print(instruction)
+     print(rubric.name)
+
+.. tab:: Usage with Example and Vocabulary Injectors
+
+  .. code-block:: python
+
+     from yescieval import ExampleInjector, VocabularyInjector
+     from yescieval.rubric.pointwise.innovation import StateOfTheArtAndNovelty
+
+     rubric = StateOfTheArtAndNovelty(
+         papers=papers,
+         question=question,
+         answer=answer,
+         domain="nlp",
+         vocabulary=VocabularyInjector(),
+         example=ExampleInjector(),
+     )
+     instruction = rubric.instruct()
+
+
 
 Research Gap Assessment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 
-Following ``Research Gap Assessment`` detects explicit acknowledgment of unanswered questions or understudied areas in the synthesis.
-
+Detects explicit acknowledgment of unanswered questions or understudied areas.
 
 .. list-table::
    :header-rows: 1
    :widths: 20 80
 
-   * - Evaluation Rubric
+   * - Rubric
      - Description
-   * - **22. Gap Identification:**
-     - Does the answer point out unanswered questions or understudied areas, using terms like “research gap” or “understudied”?
+   * - **22. Gap Identification**
+     - Is the answer pointing out unanswered questions or understudied areas, using
+       terms like "research gap" or "understudied"?
 
 
-Usage
-~~~~~~~~~~~~~~
+
+
+.. tab:: Basic Usage
+
+  .. code-block:: python
+
+     from yescieval.rubric.pointwise.gap import GapIdentification
+
+     rubric      = GapIdentification(papers=papers, question=question, answer=answer)
+     instruction = rubric.instruct()
+
+     print(instruction)
+     print(rubric.name)
+
+.. tab:: Usage with Example and Vocabulary Injectors
+
+  .. code-block:: python
+
+     from yescieval import ExampleInjector, VocabularyInjector
+     from yescieval.rubric.pointwise.depth import GapIdentification
+
+     rubric = GapIdentification(
+         papers=papers,
+         question=question,
+         answer=answer,
+         domain="ecology",
+         vocabulary=VocabularyInjector(),
+         example=ExampleInjector(),
+     )
+     instruction = rubric.instruct()
+
+
+Injectors Reference
+-------------------
 
 Injectors allow you to augment rubric prompts with additional guidance, such as example responses or domain-specific vocabulary, to improve evaluation alignment. Each injector is rubric-specific, meaning different rubrics can receive different injected content. They are domain-dependent, so the examples and vocabulary injected are automatically selected based on the domain you specify (e.g., "nlp", "ecology"). Multiple injectors, such as examples and vocabulary, can be used together in a composable way. Available injectors are listed below:
 
@@ -212,7 +422,7 @@ Here is how to define the deep research rubric:
 
 .. code-block:: python
 
-   from yescieval import MechanisticUnderstanding
+   from yescieval.rubric.pointwise.depth import MechanisticUnderstanding
 
    rubric = MechanisticUnderstanding(
        papers=papers,
@@ -253,7 +463,8 @@ Here is an complete example of how evaluation on can be done:
 
 .. code-block:: python
 
-   from yescieval import MechanisticUnderstanding, CustomAutoJudge, ExampleInjector, VocabularyInjector
+   from yescieval import CustomAutoJudge, ExampleInjector, VocabularyInjector
+   from yescieval.rubric.pointwise.depth import MechanisticUnderstanding
 
    # Step 1: Create a rubric
    rubric = MechanisticUnderstanding(papers=papers,
