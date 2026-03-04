@@ -1,5 +1,10 @@
 ## Changelog
 
+### v0.7.0 (March 4, 2026)
+- Added prompts and integration for deep research dimension - Rigor  (Issue #17 #16) (PR #24)
+- Refactor rubrics structure by evaluation category (Pointwise / Pairwise) (Issue #25 & #7) (PR #27)
+- Updated documentations
+
 ### v0.6.0 (February 9, 2026)
 - Added prompt and integration for the GapIdentification rubric  (Issue #14) (PR #20)
 - Added prompt and integration for the StateOfTheArtAndNovelty rubric (Issue #15) (PR #21)
