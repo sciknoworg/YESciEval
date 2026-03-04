@@ -1,4 +1,4 @@
-from ..base import Rubric
+from ....base import Rubric
 
 state_of_the_art_and_novelty_prompt = """<Context>
 Scientific question answering and synthesis often require more than listing findings: high-quality scientific writing can surface what is genuinely innovative in the literature and explain how it differs from prior or established approaches. In synthesis settings (e.g., reports summarizing multiple papers), this is expressed by identifying specific novel contributions (e.g., new methods, new datasets, new capabilities, new theoretical framings, proof-of-concept results) and situating them relative to an implicit or explicit baseline (what was done before, what limitation is addressed, what capability is newly enabled).
@@ -22,9 +22,9 @@ A user will provide you with:
 You must evaluate the response using the evaluation characteristic below. Focus on whether the response identifies and contextualizes innovation in a concrete, relevant way (what is new, relative to what, and why it matters), rather than relying on vague novelty indicators or merely repeating established knowledge. Your judgment should be based solely on the provided question and response.
 </Task-Description>
 
-<Evaluation-Characteristics>
+<Evaluation-Characteristic>
 StateOfTheArtAndNovelty: Does the response identify specific state-of-the-art and/or novel contributions relevant to the research question (e.g., new methods, datasets, capabilities, theoretical framings, proof-of-concept results), and meaningfully contextualize them relative to prior or established work (i.e., new relative to what, and why it matters)? If novelty emphasis is not central to the question, does the response avoid forced novelty and (optionally) state that the evidence base is mature or that innovation is not the focus?
-</Evaluation-Characteristics>
+</Evaluation-Characteristic>
 
 <Domain-Vocabulary-Examples>
 Below are terms and phrases that often co-occur with innovation claims. They are examples only: their presence is not required, and their presence alone is not sufficient for a high score.

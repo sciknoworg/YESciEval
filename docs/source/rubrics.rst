@@ -20,12 +20,42 @@ A total of **22** evaluation rubrics were defined as part of the YESciEval test 
 
     The rubrics are presented as following:
 
+.. contents:: On this page
+   :local:
+   :depth: 2
+
+----
+
+Pointwise Evaluation
+--------------------
+
+Pointwise evaluation is a rubric-based scoring method in which a judge
+assigns a numerical score and a rationale to an answer for a given question under a specific rubric.
+
+An example rating for pointwise evaluation is as follows:
+
+.. code-block:: json
+
+   {
+     "rating": 4,
+     "rationale": "The answer covers key aspects of how AI is applied in healthcare, such as diagnostics and personalized medicine."
+   }
+
+
+For each rating level from 1 to 5, the rubric must provide concrete definitions
+of what each rating number means in the context of the rubric.
+
+The LLM is expected to:
+
+1. Provide a numerical score.
+2. Provide a rationale explaining its decision.
+
 
 Question Answering
----------------------------------
+~~~~~~~~~~~~~~~~~~
 
 Linguistic & Stylistic Quality
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Following ``Linguistic & Stylistic Quality`` concerns grammar, clarity, and adherence to academic writing conventions.
 
@@ -44,7 +74,7 @@ Following ``Linguistic & Stylistic Quality`` concerns grammar, clarity, and adhe
      - Does the answer follow appropriate style and structure conventions for academic writing, particularly for readability?
 
 Logical & Structural Integrity
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Following ``Logical & Structural Integrity`` focuses on the reasoning and organization of information.
 
 .. list-table::
@@ -61,7 +91,7 @@ Following ``Logical & Structural Integrity`` focuses on the reasoning and organi
      - Is the information in the answer relevant to the problem?
 
 Evidence Fidelity
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^
 
 Following ``Evidence Fidelity`` ensures that the response is both correct and useful.
 
@@ -80,11 +110,11 @@ Following ``Evidence Fidelity`` ensures that the response is both correct and us
      - Is the answer a useful and informative reply to the problem?
 
 Usage
-~~~~~~~~~~~~~~~~~
+^^^^^
 
 .. code-block:: python
 
-    from yescieval import Coherence
+    from yescieval.rubric.pointwise.structural import Coherence
 
     papers = {
         "Paper 1 title": "abstract of paper 1 ...",
@@ -105,10 +135,10 @@ Usage
 
 
 Deep Research
--------------------
+~~~~~~~~~~~~~
 
 Research Depth Assessment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Following ``Research Depth Assessment`` quantifies the mechanistic and analytical sophistication of synthesis outputs.
 
@@ -128,7 +158,7 @@ Following ``Research Depth Assessment`` quantifies the mechanistic and analytica
 
 
 Research Breadth Assessment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Following ``Research Breadth Assessment`` evaluates the diversity of evidence across dimensions, scope, and methodological contexts.
 
@@ -151,7 +181,7 @@ Following ``Research Breadth Assessment`` evaluates the diversity of evidence ac
      - Is the answer distributing attention across multiple distinct scales of analysis, organization, or application relevant to the research question?
 
 Scientific Rigor Assessment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Following ``Scientific Rigor Assessment`` assesses the evidentiary and methodological integrity of the synthesis.
 
@@ -170,7 +200,7 @@ Following ``Scientific Rigor Assessment`` assesses the evidentiary and methodolo
      - Is the answer explicitly mentioning limitations or uncertainty, using terms like “unknown,” “limited evidence,” or “unclear”?
 
 Innovation Capacity Assessment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Following ``Innovation Capacity Assessment`` evaluates the novelty of the synthesis.
 
@@ -185,7 +215,7 @@ Following ``Innovation Capacity Assessment`` evaluates the novelty of the synthe
      - Is the answer identifying specific state-of-the-art and/or novel contributions relevant to the research question, using terms like “novel,” “state-of-the-art”?
 
 Research Gap Assessment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Following ``Research Gap Assessment`` detects explicit acknowledgment of unanswered questions or understudied areas in the synthesis.
 
@@ -201,7 +231,7 @@ Following ``Research Gap Assessment`` detects explicit acknowledgment of unanswe
 
 
 Usage
-~~~~~~~~~~~~~~
+^^^^^
 
 Injectors allow you to augment rubric prompts with additional guidance, such as example responses or domain-specific vocabulary, to improve evaluation alignment. Each injector is rubric-specific, meaning different rubrics can receive different injected content. They are domain-dependent, so the examples and vocabulary injected are automatically selected based on the domain you specify (e.g., "nlp", "ecology"). Multiple injectors, such as examples and vocabulary, can be used together in a composable way. Available injectors are listed below:
 
@@ -212,7 +242,7 @@ Here is how to define the deep research rubric:
 
 .. code-block:: python
 
-   from yescieval import MechanisticUnderstanding
+   from yescieval.rubric.pointwise.depth import MechanisticUnderstanding
 
    rubric = MechanisticUnderstanding(
        papers=papers,
@@ -253,7 +283,8 @@ Here is an complete example of how evaluation on can be done:
 
 .. code-block:: python
 
-   from yescieval import MechanisticUnderstanding, CustomAutoJudge, ExampleInjector, VocabularyInjector
+   from yescieval import CustomAutoJudge, ExampleInjector, VocabularyInjector
+   from yescieval.rubric.pointwise.depth import MechanisticUnderstanding
 
    # Step 1: Create a rubric
    rubric = MechanisticUnderstanding(papers=papers,
