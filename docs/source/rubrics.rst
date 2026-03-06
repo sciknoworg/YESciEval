@@ -238,7 +238,7 @@ Evaluates the diversity of evidence across dimensions, scope, and methodological
 
   .. code-block:: python
 
-     from yescieval.rubric.pointwise.breath import ContextCoverage
+     from yescieval.rubric.pointwise.breadth import ContextCoverage
 
      rubric      = ContextCoverage(papers=papers, question=question, answer=answer)
      instruction = rubric.instruct()
@@ -251,7 +251,7 @@ Evaluates the diversity of evidence across dimensions, scope, and methodological
   .. code-block:: python
 
      from yescieval import ExampleInjector, VocabularyInjector
-     from yescieval.rubric.pointwise.breath import ContextCoverage
+     from yescieval.rubric.pointwise.breadth import ContextCoverage
 
      rubric = ContextCoverage(
          papers=papers,
@@ -397,7 +397,7 @@ Detects explicit acknowledgment of unanswered questions or understudied areas.
   .. code-block:: python
 
      from yescieval import ExampleInjector, VocabularyInjector
-     from yescieval.rubric.pointwise.depth import GapIdentification
+     from yescieval.rubric.pointwise.gap import GapIdentification
 
      rubric = GapIdentification(
          papers=papers,

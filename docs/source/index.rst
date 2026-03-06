@@ -3,7 +3,7 @@
 .. raw:: html
 
    <div align="center">
-     <img src="https://raw.githubusercontent.com/sciknoworg/YESciEval/main/images/logo.png" alt="OntoLearner Logo" width="500"/>
+     <img src="https://raw.githubusercontent.com/sciknoworg/YESciEval/main/images/logo.png" alt="YESciEval Logo" width="500"/>
    </div>
 
 .. raw:: html
@@ -25,7 +25,7 @@ YESciEval was created by `Scientific Knowledge Organization (SciKnowOrg group) <
 
 .. seealso::
 
-   See the `Quickstart <quickstart.html>`_ for more quick information on how to use OntoLearner.
+   See the `Quickstart <quickstart.html>`_ for more quick information on how to use YESciEval.
 
 
 

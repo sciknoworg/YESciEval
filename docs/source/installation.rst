@@ -9,7 +9,7 @@ Install with pip
 
 .. sidebar:: Verify the installation
 
-    Once the isntallation is done, verify the installation by:
+    Once the installation is done, verify the installation by:
 
     .. code-block:: python
 
@@ -27,7 +27,7 @@ Install with pip
 
 .. tab:: From GitHub
 
-    The following pip install will installs the latest version of OntoLearner from the `main` branch of the YESciEval at GitHub using `pip`.
+    The following pip install will install the latest version of YESciEval from the `main` branch of the YESciEval at GitHub using `pip`.
 
     ::
 
