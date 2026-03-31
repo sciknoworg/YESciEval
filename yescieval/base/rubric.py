@@ -13,9 +13,12 @@ class Rubric(BaseModel, ABC):
     papers: Dict[str, str]
     question: str
     answer: str
+    answer_b: Optional[str] = None 
+    eval_type: str = "pointwise" # or "pairwise"
     user_prompt_template: str = ("Evaluate and rate the quality of the following scientific synthesis "
                                  "according to the characteristics given in the system prompt.\n"
-                                 "\n<scientific-synthesis>{answer}</scientific-synthesis>\n"
+                                 "\n<{answer_tag}>{answer}</{answer_tag}>\n"
+                                 "{answer_b_block}"
                                  "\n<research-question>{question}</research-question>\n"
                                  "\n<paper-titles-and-abstracts>\n{content}</paper-titles-and-abstracts>\n\n###")
 
@@ -33,7 +36,15 @@ class Rubric(BaseModel, ABC):
         return paper_content
 
     def verbalize_user_prompt(self):
+        if self.eval_type == "pairwise":
+            answer_tag = "scientific-synthesis-A"
+            answer_b_block = f"<scientific-synthesis-B>{self.answer_b}</scientific-synthesis-B>\n\n"
+        else:
+            answer_tag = "scientific-synthesis"
+            answer_b_block = ""
         return self.user_prompt_template.format(answer=self.answer,
+                                                answer_tag=answer_tag,
+                                                answer_b_block=answer_b_block,
                                                 question=self.question,
                                                 content=self.render_papers())
 
@@ -45,7 +56,8 @@ class Rubric(BaseModel, ABC):
             if self.example:
                 system_prompt_template = self.example.format_prompt(prompt=system_prompt_template,
                                                                       domain=self.domain,
-                                                                      rubric_id=self.name)
+                                                                      rubric_id=self.name,
+                                                                      eval_type=self.eval_type)
         return system_prompt_template
 
     def instruct(self) -> List[Dict[str, str]]:

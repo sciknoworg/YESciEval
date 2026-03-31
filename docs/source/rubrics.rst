@@ -2,7 +2,8 @@ Rubrics
 =======
 
 A total of **22** evaluation rubrics are defined as part of the YESciEval test framework,
-organised into sub-categories under **Pointwise Evaluation**.
+organised into sub-categories under **Pointwise Evaluation**. The framework also supports
+**Pairwise Evaluation** for directly comparing two synthesis answers against each other.
 
 Each rubric can be used in two ways:
 
@@ -50,6 +51,49 @@ each score means in context.  The LLM is expected to:
 
 1. Provide a numerical score.
 2. Provide a rationale explaining its decision.
+
+----
+
+Pairwise Evaluation
+--------------------
+
+Pairwise evaluation is a comparison-based scoring method in which a judge is given two
+answers — **Response A** and **Response B** — and determines which one better satisfies
+a given rubric for a specific research question.
+
+An example rating for pairwise evaluation is as follows:
+
+.. code-block:: json
+
+   ResponseA: {
+     "rating": "4",
+     "rationale": "The response provides a detailed mechanistic explanation by tracing the pathways through which AI improves diagnostics, personalizes treatment plans, and aids in medical imaging analysis, aligning with the research question and offering coherent intermediate steps and process-level linkages."
+   }
+   ResponseB: {
+     "rating": "1",
+     "rationale": "The response lists observed outcomes (diagnosis, prediction, treatment, personalized medicine, and imaging) without explaining the biological or physical mechanisms behind these outcomes, failing to articulate how AI processes or technologies drive these changes."
+   }
+
+The LLM is expected to:
+
+1. Provide a numerical score.
+2. Provide a rationale explaining its decision.
+
+Any rubric can be used in pairwise mode by passing ``answer_b`` and setting
+``eval_type="pairwise"``
+
+.. code-block:: python
+
+   from yescieval.rubric.pairwise.depth import MechanisticUnderstanding
+
+   rubric = MechanisticUnderstanding(
+       papers=papers,
+       question=question,
+       answer=answer,        
+       answer_b=answer_b,    
+       eval_type="pairwise",
+   )
+   instruction = rubric.instruct()
 
 ----
 
@@ -484,6 +528,8 @@ Here is an complete example of how evaluation on can be done:
    print("Raw Evaluation Output:")
    print(result)
 
+The same judge can be used for pairwise evaluation by passing ``eval_type="pairwise"``
+and an ``answer_b`` to the rubric — no changes to the judge are needed.
 
 .. hint::
 
