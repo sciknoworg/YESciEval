@@ -13,22 +13,32 @@ Each rubric can be used in two ways:
   domain-specific terminology and curated example responses.
 
 .. hint::
-
+ 
     Quick import of all rubrics:
-
+ 
     .. code-block:: python
-
+ 
         from yescieval import (
 	            Informativeness, Correctness, Completeness,
 	            Coherence, Relevancy, Integration,
 	            Cohesion, Readability, Conciseness,
-	            MechanisticUnderstanding, CausalReasoning, TemporalPrecision,
 	            GapIdentification, ContextCoverage, MethodCoverage,
 	            DimensionCoverage, ScopeCoverage, ScaleCoverage,
 	            EpistemicCalibration, QuantitativeEvidenceAndUncertainty,
 	            ExplicitUncertainty, StateOfTheArtAndNovelty,
         )
-
+ 
+    These rubrics exist in both
+    pointwise and pairwise variants and must be imported directly from their submodule:
+ 
+    .. code-block:: python
+ 
+        # Pointwise
+        from yescieval.rubric.pointwise.depth import MechanisticUnderstanding, CausalReasoning, TemporalPrecision
+ 
+        # Pairwise
+        from yescieval.rubric.pairwise.depth import MechanisticUnderstanding, CausalReasoning, TemporalPrecision
+ 
 
 Pointwise Evaluation
 --------------------
@@ -282,7 +292,7 @@ Evaluates the diversity of evidence across dimensions, scope, and methodological
 
   .. code-block:: python
 
-     from yescieval.rubric.pointwise.breath import ContextCoverage
+     from yescieval.rubric.pointwise.breadth import ContextCoverage
 
      rubric      = ContextCoverage(papers=papers, question=question, answer=answer)
      instruction = rubric.instruct()
@@ -295,7 +305,7 @@ Evaluates the diversity of evidence across dimensions, scope, and methodological
   .. code-block:: python
 
      from yescieval import ExampleInjector, VocabularyInjector
-     from yescieval.rubric.pointwise.breath import ContextCoverage
+     from yescieval.rubric.pointwise.breadth import ContextCoverage
 
      rubric = ContextCoverage(
          papers=papers,
@@ -441,7 +451,7 @@ Detects explicit acknowledgment of unanswered questions or understudied areas.
   .. code-block:: python
 
      from yescieval import ExampleInjector, VocabularyInjector
-     from yescieval.rubric.pointwise.depth import GapIdentification
+     from yescieval.rubric.pointwise.gap import GapIdentification
 
      rubric = GapIdentification(
          papers=papers,
