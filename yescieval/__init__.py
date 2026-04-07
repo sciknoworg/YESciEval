@@ -14,4 +14,3 @@ from .rubric.pointwise.innovation import StateOfTheArtAndNovelty
 from .rubric.pointwise.rigor import EpistemicCalibration, QuantitativeEvidenceAndUncertainty, ExplicitUncertainty
 from .rubric.pointwise.structural import Coherence, Integration, Relevancy
 from .rubric.pointwise.stylistic import Cohesion, Readability, Conciseness
-from .rubric.pairwise.depth import MechanisticUnderstanding, CausalReasoning, TemporalPrecision
