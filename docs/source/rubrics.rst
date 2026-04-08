@@ -13,56 +13,42 @@ Each rubric can be used in two ways:
   domain-specific terminology and curated example responses.
 
 .. hint::
- 
-    Quick import of all rubrics:
- 
+
+    Rubrics must be imported directly from their submodule. Quick import of all rubrics:
+
     .. code-block:: python
- 
-        from yescieval import (
-	            Informativeness, Correctness, Completeness,
-	            Coherence, Relevancy, Integration,
-	            Cohesion, Readability, Conciseness,
-	            GapIdentification, ContextCoverage, MethodCoverage,
-	            DimensionCoverage, ScopeCoverage, ScaleCoverage,
-	            EpistemicCalibration, QuantitativeEvidenceAndUncertainty,
-	            ExplicitUncertainty, StateOfTheArtAndNovelty,
-        )
- 
-    These rubrics exist in both
-    pointwise and pairwise variants and must be imported directly from their submodule:
- 
-    .. code-block:: python
- 
-        # Pointwise
+
+        # Fidelity rubrics
+        from yescieval.rubric.pointwise.fidelity import Informativeness, Correctness, Completeness
+
+        # Structural rubrics
+        from yescieval.rubric.pointwise.structural import Coherence, Relevancy, Integration
+
+        # Stylistic rubrics
+        from yescieval.rubric.pointwise.stylistic import Cohesion, Readability, Conciseness
+
+        # Depth rubrics
         from yescieval.rubric.pointwise.depth import MechanisticUnderstanding, CausalReasoning, TemporalPrecision
- 
-        # Pairwise
+
+        # Gap rubric
+        from yescieval.rubric.pointwise.gap import GapIdentification
+
+        # Breadth rubrics
+        from yescieval.rubric.pointwise.breadth import ContextCoverage, MethodCoverage, DimensionCoverage, ScaleCoverage, ScopeCoverage
+
+        # Rigor rubrics
+        from yescieval.rubric.pointwise.rigor import EpistemicCalibration, QuantitativeEvidenceAndUncertainty, ExplicitUncertainty
+
+        # Innovation rubric
+        from yescieval.rubric.pointwise.innovation import StateOfTheArtAndNovelty
+
+    For pairwise evaluation, use the ``yescieval.rubric.pairwise`` submodule:
+
+    .. code-block:: python
+
+        # Pairwise depth rubrics
         from yescieval.rubric.pairwise.depth import MechanisticUnderstanding, CausalReasoning, TemporalPrecision
- 
 
-Pointwise Evaluation
---------------------
-
-Pointwise evaluation is a rubric-based scoring method in which a judge assigns a
-numerical score and a rationale to an answer for a given question under a specific rubric.
-
-An example rating for pointwise evaluation is as follows:
-
-.. code-block:: json
-
-   {
-     "rating": 4,
-     "rationale": "The answer covers key aspects of how AI is applied in healthcare,
-                   such as diagnostics and personalised medicine."
-   }
-
-For each rating level from 1 to 5, the rubric provides concrete definitions of what
-each score means in context.  The LLM is expected to:
-
-1. Provide a numerical score.
-2. Provide a rationale explaining its decision.
-
-----
 
 Pairwise Evaluation
 --------------------
@@ -104,6 +90,30 @@ Any rubric can be used in pairwise mode by passing ``answer_b`` and setting
        eval_type="pairwise",
    )
    instruction = rubric.instruct()
+
+----
+
+Pointwise Evaluation
+--------------------
+
+Pointwise evaluation is a rubric-based scoring method in which a judge assigns a
+numerical score and a rationale to an answer for a given question under a specific rubric.
+
+An example rating for pointwise evaluation is as follows:
+
+.. code-block:: json
+
+   {
+     "rating": 4,
+     "rationale": "The answer covers key aspects of how AI is applied in healthcare,
+                   such as diagnostics and personalised medicine."
+   }
+
+For each rating level from 1 to 5, the rubric provides concrete definitions of what
+each score means in context.  The LLM is expected to:
+
+1. Provide a numerical score.
+2. Provide a rationale explaining its decision.
 
 ----
 
@@ -230,11 +240,23 @@ Quantifies the mechanistic and analytical sophistication of synthesis outputs.
 
 
 
-.. tab:: Basic Usage
+.. tab:: Pointwise Usage
 
   .. code-block:: python
 
      from yescieval.rubric.pointwise.depth import MechanisticUnderstanding
+
+     rubric      = MechanisticUnderstanding(papers=papers, question=question, answer=answer)
+     instruction = rubric.instruct()
+
+     print(instruction)
+     print(rubric.name)
+
+.. tab:: Pairwise Usage
+
+  .. code-block:: python
+
+     from yescieval.rubric.pairwise.depth import MechanisticUnderstanding
 
      rubric      = MechanisticUnderstanding(papers=papers, question=question, answer=answer)
      instruction = rubric.instruct()
@@ -247,13 +269,28 @@ Quantifies the mechanistic and analytical sophistication of synthesis outputs.
   .. code-block:: python
 
      from yescieval import ExampleInjector, VocabularyInjector
-     from yescieval.rubric.pointwise.depth import MechanisticUnderstanding
+     from yescieval.rubric.pointwise.depth import MechanisticUnderstanding as MechanisticUnderstandingPointwise
+     from yescieval.rubric.pairwise.depth import MechanisticUnderstanding as MechanisticUnderstandingPairwise
 
-     # Step 1: Create a rubric with injectors
-     rubric = MechanisticUnderstanding(
+     # Pointwise
+     rubric = MechanisticUnderstandingPointwise(
          papers=papers,
          question=question,
          answer=answer,
+         domain="nlp",
+         eval_type="pointwise",
+         vocabulary=VocabularyInjector(),
+         example=ExampleInjector(),
+     )
+     instruction_prompt = rubric.instruct()
+
+     # Pairwise
+     rubric = MechanisticUnderstandingPairwise(
+         papers=papers,
+         question=question,
+         answer=answer,
+         answer_b=answer_b,
+         eval_type="pairwise",
          domain="nlp",
          vocabulary=VocabularyInjector(),
          example=ExampleInjector(),
@@ -311,6 +348,7 @@ Evaluates the diversity of evidence across dimensions, scope, and methodological
          papers=papers,
          question=question,
          answer=answer,
+         eval_type="pointwise",
          domain="ecology",
          vocabulary=VocabularyInjector(),
          example=ExampleInjector(),
@@ -363,6 +401,7 @@ Assesses the evidentiary and methodological integrity of the synthesis.
          papers=papers,
          question=question,
          answer=answer,
+         eval_type="pointwise",
          domain="nlp",
          vocabulary=VocabularyInjector(),
          example=ExampleInjector(),
@@ -408,6 +447,7 @@ Evaluates the novelty of the synthesis.
          papers=papers,
          question=question,
          answer=answer,
+         eval_type="pointwise",
          domain="nlp",
          vocabulary=VocabularyInjector(),
          example=ExampleInjector(),
@@ -458,6 +498,7 @@ Detects explicit acknowledgment of unanswered questions or understudied areas.
          question=question,
          answer=answer,
          domain="ecology",
+         eval_type="pointwise",
          vocabulary=VocabularyInjector(),
          example=ExampleInjector(),
      )
@@ -483,6 +524,7 @@ Here is how to define the deep research rubric:
        question=question,
        answer=answer,
        domain="nlp",
+       eval_type="pointwise",
        vocabulary=VocabularyInjector(),
        example=ExampleInjector()
    )
@@ -513,7 +555,7 @@ In this example, ``VocabularyInjector`` and ``ExampleInjector`` provide content 
 	      "distillation", "curriculum", "data augmentation", "continual learning"
 	   ]
 
-Here is an complete example of how evaluation on can be done:
+Here is a complete example of how a pointwise evaluation can be done:
 
 .. code-block:: python
 
@@ -525,6 +567,7 @@ Here is an complete example of how evaluation on can be done:
                                      question=question,
                                      answer=answer,
                                      domain="nlp",
+                                     eval_type="pointwise",
                                      vocabulary=VocabularyInjector(),
                                      example=ExampleInjector())
    instruction_prompt = rubric.instruct()
