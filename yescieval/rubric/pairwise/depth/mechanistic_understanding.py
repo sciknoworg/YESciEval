@@ -79,4 +79,6 @@ Your evaluation must be based solely on the provided research question and respo
 
 class MechanisticUnderstanding(Rubric):
     name: str = "MechanisticUnderstanding"
+    eval_type: str = "pairwise"
     system_prompt_template: str = mechanistic_understanding_pairwise_prompt
+    

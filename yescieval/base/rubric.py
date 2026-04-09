@@ -14,7 +14,7 @@ class Rubric(BaseModel, ABC):
     question: str
     answer: str
     answer_b: Optional[str] = None 
-    eval_type: str = "pointwise" # or "pairwise"
+    eval_type: str
     user_prompt_template: str = ("Evaluate and rate the quality of the following scientific synthesis "
                                  "according to the characteristics given in the system prompt.\n"
                                  "\n<{answer_tag}>{answer}</{answer_tag}>\n"

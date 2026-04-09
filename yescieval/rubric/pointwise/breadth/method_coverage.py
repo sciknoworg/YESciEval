@@ -60,4 +60,5 @@ Your evaluation must be based solely on the provided research question and respo
 
 class MethodCoverage(Rubric):
     name: str = "MethodCoverage"
+    eval_type: str = "pointwise"
     system_prompt_template: str = method_coverage_prompt

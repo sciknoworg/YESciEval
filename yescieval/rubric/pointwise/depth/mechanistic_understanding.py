@@ -60,4 +60,5 @@ Your evaluation must be based solely on the provided research question and respo
 
 class MechanisticUnderstanding(Rubric):
     name: str = "MechanisticUnderstanding"
+    eval_type: str = "pointwise"
     system_prompt_template: str = mechanistic_understanding_prompt

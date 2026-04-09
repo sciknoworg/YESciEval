@@ -62,4 +62,5 @@ Your evaluation must be based solely on the provided research question and respo
 
 class GapIdentification(Rubric):
     name: str = "GapIdentification"
+    eval_type: str = "pointwise"
     system_prompt_template: str = gap_identification_prompt

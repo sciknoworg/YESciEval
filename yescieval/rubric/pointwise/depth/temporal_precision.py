@@ -60,4 +60,5 @@ Your evaluation must be based solely on the provided research question and respo
 
 class TemporalPrecision(Rubric):
     name: str = "TemporalPrecision"
+    eval_type: str = "pointwise"
     system_prompt_template: str = temporal_precision_prompt

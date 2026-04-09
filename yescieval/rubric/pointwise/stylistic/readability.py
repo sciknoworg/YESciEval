@@ -52,4 +52,5 @@ Your evaluation should be based solely on the content of the provided synthesis 
 </Note>"""
 class Readability(Rubric):
     name: str = "Readability"
+    eval_type: str = "pointwise"
     system_prompt_template: str = readability_prompt

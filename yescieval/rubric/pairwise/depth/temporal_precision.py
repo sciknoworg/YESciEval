@@ -81,4 +81,6 @@ Your evaluation must be based solely on the provided research question and respo
 
 class TemporalPrecision(Rubric):
     name: str = "TemporalPrecision"
+    eval_type: str = "pairwise"
     system_prompt_template: str = temporal_precision_pairwise_prompt
+    
