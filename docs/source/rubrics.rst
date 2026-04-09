@@ -20,25 +20,18 @@ Each rubric can be used in two ways:
 
         # Fidelity rubrics
         from yescieval.rubric.pointwise.fidelity import Informativeness, Correctness, Completeness
-
         # Structural rubrics
         from yescieval.rubric.pointwise.structural import Coherence, Relevancy, Integration
-
         # Stylistic rubrics
         from yescieval.rubric.pointwise.stylistic import Cohesion, Readability, Conciseness
-
         # Depth rubrics
         from yescieval.rubric.pointwise.depth import MechanisticUnderstanding, CausalReasoning, TemporalPrecision
-
         # Gap rubric
         from yescieval.rubric.pointwise.gap import GapIdentification
-
         # Breadth rubrics
         from yescieval.rubric.pointwise.breadth import ContextCoverage, MethodCoverage, DimensionCoverage, ScaleCoverage, ScopeCoverage
-
         # Rigor rubrics
         from yescieval.rubric.pointwise.rigor import EpistemicCalibration, QuantitativeEvidenceAndUncertainty, ExplicitUncertainty
-
         # Innovation rubric
         from yescieval.rubric.pointwise.innovation import StateOfTheArtAndNovelty
 
@@ -75,8 +68,7 @@ The LLM is expected to:
 1. Provide a numerical score.
 2. Provide a rationale explaining its decision.
 
-Any rubric can be used in pairwise mode by passing ``answer_b`` and setting
-``eval_type="pairwise"``
+Any rubric can be used in pairwise mode by passing ``answer_b``
 
 .. code-block:: python
 
@@ -86,8 +78,7 @@ Any rubric can be used in pairwise mode by passing ``answer_b`` and setting
        papers=papers,
        question=question,
        answer=answer,        
-       answer_b=answer_b,    
-       eval_type="pairwise",
+       answer_b=answer_b
    )
    instruction = rubric.instruct()
 
@@ -269,34 +260,17 @@ Quantifies the mechanistic and analytical sophistication of synthesis outputs.
   .. code-block:: python
 
      from yescieval import ExampleInjector, VocabularyInjector
-     from yescieval.rubric.pointwise.depth import MechanisticUnderstanding as MechanisticUnderstandingPointwise
-     from yescieval.rubric.pairwise.depth import MechanisticUnderstanding as MechanisticUnderstandingPairwise
+     from yescieval.rubric.pointwise.depth import MechanisticUnderstanding
 
-     # Pointwise
-     rubric = MechanisticUnderstandingPointwise(
+     rubric = MechanisticUnderstanding(
          papers=papers,
          question=question,
          answer=answer,
-         domain="nlp",
-         eval_type="pointwise",
-         vocabulary=VocabularyInjector(),
-         example=ExampleInjector(),
-     )
-     instruction_prompt = rubric.instruct()
-
-     # Pairwise
-     rubric = MechanisticUnderstandingPairwise(
-         papers=papers,
-         question=question,
-         answer=answer,
-         answer_b=answer_b,
-         eval_type="pairwise",
          domain="nlp",
          vocabulary=VocabularyInjector(),
          example=ExampleInjector(),
      )
      instruction_prompt = rubric.instruct()
-
 
 Research Breadth Assessment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -348,7 +322,6 @@ Evaluates the diversity of evidence across dimensions, scope, and methodological
          papers=papers,
          question=question,
          answer=answer,
-         eval_type="pointwise",
          domain="ecology",
          vocabulary=VocabularyInjector(),
          example=ExampleInjector(),
@@ -401,7 +374,6 @@ Assesses the evidentiary and methodological integrity of the synthesis.
          papers=papers,
          question=question,
          answer=answer,
-         eval_type="pointwise",
          domain="nlp",
          vocabulary=VocabularyInjector(),
          example=ExampleInjector(),
@@ -447,7 +419,6 @@ Evaluates the novelty of the synthesis.
          papers=papers,
          question=question,
          answer=answer,
-         eval_type="pointwise",
          domain="nlp",
          vocabulary=VocabularyInjector(),
          example=ExampleInjector(),
@@ -498,7 +469,6 @@ Detects explicit acknowledgment of unanswered questions or understudied areas.
          question=question,
          answer=answer,
          domain="ecology",
-         eval_type="pointwise",
          vocabulary=VocabularyInjector(),
          example=ExampleInjector(),
      )
@@ -524,7 +494,6 @@ Here is how to define the deep research rubric:
        question=question,
        answer=answer,
        domain="nlp",
-       eval_type="pointwise",
        vocabulary=VocabularyInjector(),
        example=ExampleInjector()
    )
@@ -567,7 +536,6 @@ Here is a complete example of how a pointwise evaluation can be done:
                                      question=question,
                                      answer=answer,
                                      domain="nlp",
-                                     eval_type="pointwise",
                                      vocabulary=VocabularyInjector(),
                                      example=ExampleInjector())
    instruction_prompt = rubric.instruct()
@@ -581,8 +549,7 @@ Here is a complete example of how a pointwise evaluation can be done:
    print("Raw Evaluation Output:")
    print(result)
 
-The same judge can be used for pairwise evaluation by passing ``eval_type="pairwise"``
-and an ``answer_b`` to the rubric — no changes to the judge are needed.
+The same judge can be used for pairwise evaluation by passing an ``answer_b`` to the rubric — no changes to the judge are needed.
 
 .. hint::
 
