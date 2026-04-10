@@ -63,7 +63,7 @@ The following example shows the how to run a ``AskAutoJudge`` on ``Informativene
    print("Parsed Output:")
    print(parsed.model_dump())
 
-Expected outputfFormat is:
+Expected output format is:
 
 .. code-block:: json
 

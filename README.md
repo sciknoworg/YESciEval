@@ -125,7 +125,6 @@ from yescieval.rubric.pointwise.innovation import StateOfTheArtAndNovelty
 **Pairwise**
 
 ```python
-# Depth rubrics
 from yescieval.rubric.pairwise.depth import MechanisticUnderstanding, CausalReasoning, TemporalPrecision
 ```
 

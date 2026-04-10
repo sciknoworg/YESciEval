@@ -100,7 +100,7 @@ You can use it to evaluate a rubric by providing your OpenAI API key and specify
 
 .. code-block:: python
 
-    # Initialize and load a custom model by specifying its Hugging Face model ID
+    # Initialize and load a custom model by specifying the GPT model ID
     judge = GPTCustomAutoJudge()
     judge.from_pretrained(model_id="gpt-5.2", token=OPEN_AI_API_KEY)
 
@@ -109,7 +109,7 @@ You can use it to evaluate a rubric by providing your OpenAI API key and specify
 
     print(result.model_dump())
 
-as a result output will be in the following format
+The output will be in the following format:
 
 .. code-block:: json
 
