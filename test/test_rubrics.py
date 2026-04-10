@@ -1,5 +1,5 @@
 import unittest
-from yescieval import Informativeness
+from yescieval.rubric.pointwise.fidelity import Informativeness
 
 class TestRubric(unittest.TestCase):
 

@@ -20,7 +20,8 @@ The following example demonstrates how to create an evaluation rubric, load a ju
 
 .. code-block:: python
 
-    from yescieval import Readability, AutoJudge
+    from yescieval import AutoJudge
+    from yescieval.rubric.pointwise.stylistic import Readability
 
     papers = {
         "A Study on AI": "This paper discusses recent advances in artificial intelligence, including deep learning.",

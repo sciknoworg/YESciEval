@@ -58,4 +58,5 @@ Your evaluation must be based solely on the provided research question and respo
 
 class ExplicitUncertainty(Rubric):
     name: str = "Explicit Uncertainty"
+    eval_type: str = "pointwise"
     system_prompt_template: str = explicit_uncertainty_prompt

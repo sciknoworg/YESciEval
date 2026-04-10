@@ -62,4 +62,5 @@ Your evaluation must be based solely on the provided research question and respo
 
 class StateOfTheArtAndNovelty(Rubric):
     name: str = "StateOfTheArtAndNovelty"
+    eval_type: str = "pointwise"
     system_prompt_template: str = state_of_the_art_and_novelty_prompt

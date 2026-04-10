@@ -1,23 +1,29 @@
 from ....base import Rubric
 
-temporal_precision_prompt = """<Context>
+temporal_precision_pairwise_prompt = """<Context>
 Scientific question answering and synthesis often require more than listing findings: high-quality scientific writing is precise about time when time matters. Temporal precision refers to how clearly the text specifies when something occurs, over what duration, or across what interval. Precise temporal expressions include calendar dates, numeric durations, bounded year ranges, or clearly delimited intervals; vague temporal markers include expressions like “historically”, “recently”, “long-term”, or “soon” without further specification.
 
-The response may be a single paragraph or a long-form report with multiple sections. There are no strict requirements on length or formatting; temporal precision should be evaluated independently of presentation style.
+The responses may be short paragraphs or long-form reports. Temporal precision should be evaluated independently of presentation style or length.
 
-This rubric focuses exclusively on the presence and quality of temporal precision within the provided text, emphasizing specific and bounded time expressions (when/for how long/over what interval) rather than vague temporal language. Other aspects of scientific quality (such as factual accuracy, evidential grounding, or completeness) are intentionally outside its scope and are assessed by separate evaluation criteria.
+This rubric focuses exclusively on the presence and quality of temporal precision within the provided text of two responses that are compared, emphasizing specific and bounded time expressions (when/for how long/over what interval) rather than vague temporal language. Other aspects of scientific quality (such as factual accuracy, evidential grounding, or completeness) are intentionally outside its scope.
 </Context>
 
 <Role>
-You are tasked as a scientific writing quality evaluator.
+You are tasked as a scientific writing quality evaluator performing a pairwise comparison between two texts.
 </Role>
 
 <Task-Description>
-A user will provide you with:
+A user will provide:
 1) a research question, and
-2) a written response intended to address that question.
+2) two written responses (Response A and Response B) intended to address that question.
 
-You must evaluate the response using the evaluation characteristic below. Focus on whether the response uses specific, bounded temporal expressions when making temporally-relevant statements, rather than relying on vague time markers. Your judgment should be based solely on the provided question and response.
+Your task is to:
+- First, independently evaluate each response using the evaluation characteristic below.
+- Then perform a pairwise comparison of the two responses using the evaluation characteristic below.
+- Then grade each response with a comparative rating from 1 (very bad) to 5 (very good) compared to the other response and a subsequent rationale for each comparative response rating.
+- Note that it is possible for both responses to receive the same rating, if they are equally comparably clear with reasonable temporal precision and provide complementary or identical insights.
+
+Your judgment must be based solely on the provided question and comparing the two responses w.r.t. addressing the question and w.r.t. each other.
 </Task-Description>
 
 <Evaluation-Characteristic>
@@ -42,23 +48,39 @@ Rating 5. Very good: The response is consistently temporally precise wherever ti
 </Rating-Scale>
 
 <Response-Format>
-Rate the quality from 1 (very bad) to 5 (very good). Provide a short rationale that points to specific parts of the response demonstrating temporal specificity or vagueness.
+Return your evaluation strictly in JSON format:
 
-Return your response in JSON format:
 {
-  "TemporalPrecision": {"rating": "", "rationale": ""}
+  "TemporalPrecision": {
+    "ResponseA": {
+      "rating": "",
+      "rationale": ""
+    },
+    "ResponseB": {
+      "rating": "",
+      "rationale": ""
+    }
+  }
 }
+
+where:
+- "rating" is a number from 1 to 5.
+- "rationale" is the comparative evaluation rating justification.
+
 </Response-Format>
+
 
 <Example-Responses>
 {EXAMPLE_RESPONSES}
 </Example-Responses>
 
 <Note>
-Your evaluation must be based solely on the provided research question and response. Do not reward length by itself; reward specificity of temporal expressions and clarity of temporal sequencing when time is relevant. This rubric does not assess factual correctness, evidential grounding, or completeness.
-</Note>"""
+Your evaluation must be based solely on the provided research question and responses. Do not reward length by itself; reward specificity of temporal expressions and clarity of temporal sequencing when time is relevant. This rubric does not assess factual correctness, evidential grounding, or completeness.
+</Note>
+"""
 
 class TemporalPrecision(Rubric):
     name: str = "TemporalPrecision"
-    eval_type: str = "pointwise"
-    system_prompt_template: str = temporal_precision_prompt
+    eval_type: str = "pairwise"
+    system_prompt_template: str = temporal_precision_pairwise_prompt
+    

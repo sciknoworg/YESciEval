@@ -53,4 +53,5 @@ Your evaluation should be based solely on the content of the provided synthesis 
 
 class Cohesion(Rubric):
     name: str = "Cohesion"
+    eval_type: str = "pointwise"
     system_prompt_template: str = cohesion_prompt

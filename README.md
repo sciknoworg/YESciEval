@@ -46,7 +46,8 @@ Get started with YESciEval in just a few lines of code. This guide demonstrates 
 
 
 ```python
-from yescieval import Readability, AutoJudge
+from yescieval.rubric.pointwise.stylistic import Readability
+from yescieval import AutoJudge
 
 # Sample papers
 papers = {
@@ -91,15 +92,40 @@ Judges within YESciEval are defined as follows:
 | `GPTCustomAutoJudge`| Custom GPT-based LLM that can be used as a judge within YESciEval                     |
 
 
-A total of **22** evaluation rubrics were defined as part of the YESciEval test framework and can be used via ``yescieval``. Following simple example shows how to import rubrics in your code:
+A total of **22** evaluation rubrics were defined as part of the YESciEval test framework and can be used via ``yescieval``. Rubrics are available for both **pointwise** and **pairwise** evaluation and must be imported directly from their respective submodule.
+
+**Pointwise**
 
 ```python
-from yescieval import Informativeness, Correctness, Completeness, Coherence, Relevancy, \
-                      Integration, Cohesion, Readability, Conciseness, \
-                      MechanisticUnderstanding, CausalReasoning, TemporalPrecision, GapIdentification, \
-                      ContextCoverage, MethodCoverage, DimensionCoverage, ScaleCoverage, ScopeCoverage, \
-                      EpistemicCalibration, QuantitativeEvidenceAndUncertainty, ExplicitUncertainty, \
-                      StateOfTheArtAndNovelty
+# Fidelity rubrics
+from yescieval.rubric.pointwise.fidelity import Informativeness, Correctness, Completeness
+
+# Structural rubrics
+from yescieval.rubric.pointwise.structural import Coherence, Relevancy, Integration
+
+# Stylistic rubrics
+from yescieval.rubric.pointwise.stylistic import Cohesion, Readability, Conciseness
+
+# Depth rubrics
+from yescieval.rubric.pointwise.depth import MechanisticUnderstanding, CausalReasoning, TemporalPrecision
+
+# Gap rubrics
+from yescieval.rubric.pointwise.gap import GapIdentification
+
+# Breadth rubrics
+from yescieval.rubric.pointwise.breadth import ContextCoverage, MethodCoverage, DimensionCoverage, ScaleCoverage, ScopeCoverage
+
+# Rigor rubrics
+from yescieval.rubric.pointwise.rigor import EpistemicCalibration, QuantitativeEvidenceAndUncertainty, ExplicitUncertainty
+
+# Innovation rubrics
+from yescieval.rubric.pointwise.innovation import StateOfTheArtAndNovelty
+```
+
+**Pairwise**
+
+```python
+from yescieval.rubric.pairwise.depth import MechanisticUnderstanding, CausalReasoning, TemporalPrecision
 ```
 
 A complete list of rubrics are available at YESciEval [📚 Rubrics](https://yescieval.readthedocs.io/rubrics.html) page.

@@ -62,4 +62,5 @@ Your evaluation must be based solely on the provided research question and respo
 
 class QuantitativeEvidenceAndUncertainty(Rubric):
     name: str = "QuantitativeEvidenceAndUncertainty"
+    eval_type: str = "pointwise"
     system_prompt_template: str = quantitative_evidence_and_uncertainty_prompt

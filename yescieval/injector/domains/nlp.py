@@ -103,147 +103,222 @@ vocabulary = {
 }
 
 example_responses = {
-    "Depth": {
-        "MechanisticUnderstanding": [
-            {
-                "rating": "1",
-                "rationale": "The response reports results or model performance but does not explain how the model architecture or training process leads to those outcomes."
+    "pointwise": {
+        "Depth": {
+            "MechanisticUnderstanding": [
+                {
+                    "rating": "1",
+                    "rationale": "The response reports results or model performance but does not explain how the model architecture or training process leads to those outcomes."
+                },
+                {
+                    "rating": "4",
+                    "rationale": "The response provides a clear mechanistic explanation of how the model works, describing the role of transformer-based architectures, the effects of pretraining and fine-tuning, and insights from ablation studies that show how specific components contribute to performance."
+                }
+            ],
+            "CausalReasoning": [
+                {
+                    "rating": "1",
+                    "rationale": "The response reports results or observations but does not provide explicit cause-effect explanations linking methods or design choices to outcomes."
+                },
+                {
+                    "rating": "4",
+                    "rationale": "The response provides structured cause-effect reasoning, explaining how architectural or training choices lead to performance differences, for example noting that improvements occur because certain components modulate information flow, which consequently drives better generalization through specific training mechanisms."
+                }
+            ],
+            "TemporalPrecision": [
+                {
+                    "rating": "1",
+                    "rationale": "The response mentions time only in broad or unspecific ways and does not provide clear dates, durations, or intervals relevant to the discussion."
+                },
+                {
+                    "rating": "4",
+                    "rationale": "The response includes precise temporal details, such as model behavior observed after 3 months of training, performance changes within 2-5 years of development, or evaluations conducted every 2 weeks, with references to specific time ranges like 1998-2004 or June 2012."
+                }
+            ]
+        },
+        "Breadth": {
+            "ContextCoverage": [
+                {
+                    "rating": "1",
+                    "rationale": "The response focuses entirely on a single NLP task or application setting and does not mention any alternative tasks relevant to the research question."
+                },
+                {
+                    "rating": "4",
+                    "rationale": "The response addresses multiple distinct NLP tasks or application settings and distributes attention across them rather than concentrating on a single task."
+                }
+            ],
+            "MethodCoverage": [
+                {
+                    "rating": "1",
+                    "rationale": "The response focuses entirely on a single training or modeling approach (e.g., fine-tuning) and does not mention any alternative methods or settings relevant to the research question."
+                },
+                {
+                    "rating": "4",
+                    "rationale": "The response addresses multiple distinct methods or settings, such as pretraining, fine-tuning, instruction tuning, and reinforcement learning from human feedback, rather than concentrating on a single approach."
+                }
+            ],
+            "DimensionCoverage": [
+                {
+                    "rating": "1",
+                    "rationale": "The response relies on a single evaluation dimension and does not indicate consideration of alternative evaluation perspectives."
+                },
+                {
+                    "rating": "4",
+                    "rationale": "The response evaluates performance across multiple dimensions, using metrics such as accuracy, precision, recall, F1, BLEU, ROUGE, and perplexity, providing a more complete assessment rather than relying on a single metric."
+                }
+            ],
+            "ScopeCoverage": [
+                {
+                    "rating": "1",
+                    "rationale": "The response is limited to a single, narrowly defined scope and does not indicate that the findings generalize across different linguistic settings or usage scenarios."
+                },
+                {
+                    "rating": "4",
+                    "rationale": "The response covers a wide range of linguistic scopes, including multiple languages such as English, German, French, and Chinese, as well as multilingual, cross-lingual, and low-resource settings, distributing attention across these distinct applicability scopes with only minor omissions."
+                }
+            ],
+            "ScaleCoverage": [
+                {
+                    "rating": "1",
+                    "rationale": "The response considers only a single computational scale and does not indicate how the approach behaves under different resource or deployment settings."
+                },
+                {
+                    "rating": "4",
+                    "rationale": "The response discusses multiple computational scales, including model size in terms of parameters and billion-parameter regimes, compute resources such as GPUs and TPUs, and efficiency-related aspects like inference time, latency, throughput, and memory footprint, providing a multi-scale perspective."
+                }
+            ]
+        },
+        "Gap": {
+            "GapIdentification": [
+                {
+                    "rating": "1",
+                    "rationale": "The response is purely descriptive, summarizing existing findings or benchmark results (e.g., model architectures, datasets, or reported scores) with no identification of missing, unknown, inconsistent, or unresolved aspects relevant to the research question."
+                },
+                {
+                    "rating": "4",
+                    "rationale": "The response clearly identifies specific gaps or limitations in the evidence base that are relevant to the research question (e.g., missing evaluations, underexplored domains or tasks, lack of ablation studies, limited robustness or generalization analysis, dataset biases, or conflicting benchmark results) and provides some explanation of why these gaps matter; minor ambiguity or imprecision may remain."
+                }
+            ]
+        },
+        "Innovation": {
+            "StateOfTheArtAndNovelty": [
+                {
+                    "rating": "1",
+                    "rationale": "The response gives a generic overview of common NLP methods without identifying any specific state-of-the-art systems or novel contributions; or it uses buzzwords like SOTA or state of the art without explaining what is new."
+                },
+                {
+                    "rating": "4",
+                    "rationale": "The response identifies concrete state-of-the-art or novel NLP contributions (e.g., a new dataset or benchmark, a new or modified model architecture, RAG, instruction tuning, RLHF/DPO, multimodal models, or parameter-efficient methods like LoRA) and briefly explains what improvement or new capability they provide, with minor gaps in comparison or detail."
+                }
+            ]
+        },
+        "Rigor": {
+            "EpistemicCalibration": [
+                {
+                    "rating": "1",
+                    "rationale": "The response presents claims as definitive throughout, with no meaningful qualification, uncertainty marking, or acknowledgment of assumptions/limitations, even when such caution is warranted."
+                },
+                {
+                    "rating": "4",
+                    "rationale": "The response generally calibrates claim strength, distinguishing supported results from uncertain ones (e.g., performance improves on English benchmarks, but generalization to multilingual settings remains unclear due to limited evaluation), with only minor vague hedging in a few places."
+                }   
+            ],
+            "QuantitativeEvidenceAndUncertainty": [
+                {
+                    "rating": "1",
+                    "rationale": "The response does not provide any quantitative evidence or statistical analysis to support claims, and it does not acknowledge uncertainty or variability in the results."
+                },
+                {
+                    "rating": "4",
+                    "rationale": "The response appropriately uses quantitative results (e.g., reports F1 score improvements over baselines and notes variance across datasets) and connects them to the research question; it also acknowledges uncertainty and limitations (e.g., performance drops on out-of-domain data and results are based on a limited set of benchmarks), with only minor gaps in cross-study comparison or robustness analysis."
+                }
+            ],
+            "ExplicitUncertainty": [
+                {
+                    "rating": "1",
+                    "rationale": "The response does not explicitly acknowledge any uncertainty, unknowns, or open questions related to the research question; it presents findings as definitive and well-established."
+                },
+                {
+                    "rating": "4",
+                    "rationale": "The response explicitly acknowledges uncertainty, unknowns, or open questions related to the research question; it uses clear language to indicate what is not known or understood, and it highlights areas where evidence is limited or inconclusive, with only minor gaps in explicit acknowledgment of uncertainty."
+                }  
+            ]   
+        }
+ },
+    "pairwise": { 
+        "Depth": {
+            "MechanisticUnderstanding": {
+                "ResponseA": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response reports NLP model outputs or benchmark scores but does not explain how components such as attention mechanisms, embeddings, or training objectives produce those results."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response explains how transformer components like self-attention, positional encoding, and layer normalization interact during forward and backward passes, and how pretraining objectives and fine-tuning shape representation learning and downstream task performance."
+                    }
+                ],
+                "ResponseB": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response describes improvements in NLP tasks such as translation or classification without explaining the internal processes or architectural factors responsible for those improvements."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response traces how tokenization, embedding spaces, and multi-head attention enable contextual representation, and explains how gradient updates during fine-tuning adjust weights to capture task-specific linguistic patterns."
+                    }
+                ]
             },
-            {
-                "rating": "4",
-                "rationale": "The response provides a clear mechanistic explanation of how the model works, describing the role of transformer-based architectures, the effects of pretraining and fine-tuning, and insights from ablation studies that show how specific components contribute to performance."
+            "CausalReasoning": {
+                "ResponseA": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response presents correlations between model design choices and performance metrics but does not explain causal relationships between them."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response explicitly explains how increasing model depth or attention heads improves context modeling, which in turn leads to better sequence understanding and higher task accuracy."
+                    }
+                ],
+                "ResponseB": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response lists observed improvements in NLP benchmarks without establishing how specific training or architectural decisions caused those changes."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response uses clear cause-effect reasoning to show how pretraining on large corpora enables transfer learning, which subsequently improves performance on low-resource downstream tasks due to richer contextual representations."
+                    }
+                ]
+            },
+            "TemporalPrecision": {
+                "ResponseA": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response refers to training or evaluation timeframes vaguely, such as after training or over time, without specifying exact durations or intervals."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response specifies detailed timelines, such as training conducted over 3 epochs lasting 48 hours, with evaluations every 1,000 steps and fine-tuning completed within a 2-week period."
+                    }
+                ],
+                "ResponseB": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response describes temporal aspects of model development or evaluation in general terms like early stages or later phases without concrete timing details."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response provides precise temporal markers, such as pretraining performed between January and March 2023, followed by fine-tuning over 10 days and evaluation checkpoints recorded every 500 iterations."
+                    }
+                ]
             }
-        ],
-        "CausalReasoning": [
-            {
-                "rating": "1",
-                "rationale": "The response reports results or observations but does not provide explicit cause-effect explanations linking methods or design choices to outcomes."
-            },
-            {
-                "rating": "4",
-                "rationale": "The response provides structured cause-effect reasoning, explaining how architectural or training choices lead to performance differences, for example noting that improvements occur because certain components modulate information flow, which consequently drives better generalization through specific training mechanisms."
-            }
-        ],
-        "TemporalPrecision": [
-            {
-                "rating": "1",
-                "rationale": "The response mentions time only in broad or unspecific ways and does not provide clear dates, durations, or intervals relevant to the discussion."
-            },
-            {
-                "rating": "4",
-                "rationale": "The response includes precise temporal details, such as model behavior observed after 3 months of training, performance changes within 2-5 years of development, or evaluations conducted every 2 weeks, with references to specific time ranges like 1998-2004 or June 2012."
-            }
-        ]
-    },
-    "Breadth": {
-        "ContextCoverage": [
-            {
-                "rating": "1",
-                "rationale": "The response focuses entirely on a single NLP task or application setting and does not mention any alternative tasks relevant to the research question."
-            },
-            {
-                "rating": "4",
-                "rationale": "The response addresses multiple distinct NLP tasks or application settings and distributes attention across them rather than concentrating on a single task."
-            }
-        ],
-        "MethodCoverage": [
-            {
-                "rating": "1",
-                "rationale": "The response focuses entirely on a single training or modeling approach (e.g., fine-tuning) and does not mention any alternative methods or settings relevant to the research question."
-            },
-            {
-                "rating": "4",
-                "rationale": "The response addresses multiple distinct methods or settings, such as pretraining, fine-tuning, instruction tuning, and reinforcement learning from human feedback, rather than concentrating on a single approach."
-            }
-        ],
-        "DimensionCoverage": [
-            {
-                "rating": "1",
-                "rationale": "The response relies on a single evaluation dimension and does not indicate consideration of alternative evaluation perspectives."
-            },
-            {
-                "rating": "4",
-                "rationale": "The response evaluates performance across multiple dimensions, using metrics such as accuracy, precision, recall, F1, BLEU, ROUGE, and perplexity, providing a more complete assessment rather than relying on a single metric."
-            }
-        ],
-        "ScopeCoverage": [
-            {
-                "rating": "1",
-                "rationale": "The response is limited to a single, narrowly defined scope and does not indicate that the findings generalize across different linguistic settings or usage scenarios."
-            },
-            {
-                "rating": "4",
-                "rationale": "The response covers a wide range of linguistic scopes, including multiple languages such as English, German, French, and Chinese, as well as multilingual, cross-lingual, and low-resource settings, distributing attention across these distinct applicability scopes with only minor omissions."
-            }
-        ],
-        "ScaleCoverage": [
-            {
-                "rating": "1",
-                "rationale": "The response considers only a single computational scale and does not indicate how the approach behaves under different resource or deployment settings."
-            },
-            {
-                "rating": "4",
-                "rationale": "The response discusses multiple computational scales, including model size in terms of parameters and billion-parameter regimes, compute resources such as GPUs and TPUs, and efficiency-related aspects like inference time, latency, throughput, and memory footprint, providing a multi-scale perspective."
-            }
-        ]
-    },
-    "Gap": {
-        "GapIdentification": [
-            {
-                "rating": "1",
-                "rationale": "The response is purely descriptive, summarizing existing findings or benchmark results (e.g., model architectures, datasets, or reported scores) with no identification of missing, unknown, inconsistent, or unresolved aspects relevant to the research question."
-            },
-            {
-                "rating": "4",
-                "rationale": "The response clearly identifies specific gaps or limitations in the evidence base that are relevant to the research question (e.g., missing evaluations, underexplored domains or tasks, lack of ablation studies, limited robustness or generalization analysis, dataset biases, or conflicting benchmark results) and provides some explanation of why these gaps matter; minor ambiguity or imprecision may remain."
-            }
-        ]
-    },
-    "Innovation": {
-        "StateOfTheArtAndNovelty": [
-            {
-                "rating": "1",
-                "rationale": "The response gives a generic overview of common NLP methods without identifying any specific state-of-the-art systems or novel contributions; or it uses buzzwords like SOTA or state of the art without explaining what is new."
-            },
-            {
-                "rating": "4",
-                "rationale": "The response identifies concrete state-of-the-art or novel NLP contributions (e.g., a new dataset or benchmark, a new or modified model architecture, RAG, instruction tuning, RLHF/DPO, multimodal models, or parameter-efficient methods like LoRA) and briefly explains what improvement or new capability they provide, with minor gaps in comparison or detail."
-            }
-        ]
-    },
-    "Rigor": {
-        "EpistemicCalibration": [
-            {
-                "rating": "1",
-                "rationale": "The response presents claims as definitive throughout, with no meaningful qualification, uncertainty marking, or acknowledgment of assumptions/limitations, even when such caution is warranted."
-            },
-            {
-                "rating": "4",
-                "rationale": "The response generally calibrates claim strength, distinguishing supported results from uncertain ones (e.g., performance improves on English benchmarks, but generalization to multilingual settings remains unclear due to limited evaluation), with only minor vague hedging in a few places."
-            }   
-        ],
-        "QuantitativeEvidenceAndUncertainty": [
-            {
-                "rating": "1",
-                "rationale": "The response does not provide any quantitative evidence or statistical analysis to support claims, and it does not acknowledge uncertainty or variability in the results."
-            },
-            {
-                "rating": "4",
-                "rationale": "The response appropriately uses quantitative results (e.g., reports F1 score improvements over baselines and notes variance across datasets) and connects them to the research question; it also acknowledges uncertainty and limitations (e.g., performance drops on out-of-domain data and results are based on a limited set of benchmarks), with only minor gaps in cross-study comparison or robustness analysis."
-            }
-        ],
-        "ExplicitUncertainty": [
-            {
-                "rating": "1",
-                "rationale": "The response does not explicitly acknowledge any uncertainty, unknowns, or open questions related to the research question; it presents findings as definitive and well-established."
-            },
-            {
-                "rating": "4",
-                "rationale": "The response explicitly acknowledges uncertainty, unknowns, or open questions related to the research question; it uses clear language to indicate what is not known or understood, and it highlights areas where evidence is limited or inconclusive, with only minor gaps in explicit acknowledgment of uncertainty."
-            }  
-        ]   
-    }
+        }         
+        
+        }
 }
+
+
 
 vocab_block_specs = {
     "mechanistic_vocab_block": {"label": "Mechanistic terms", "keys": ["training_terms", "arch_terms", "ablation_terms"]},
@@ -262,7 +337,7 @@ vocab_block_specs = {
 }
 
 class NLP(Domain):
-    examples: Dict[str, Dict]  = example_responses
+    examples: Dict[str, Dict] = example_responses
     vocab: Dict[str, Dict] = vocabulary
     ID: str = 'nlp'
     verbalized: str = "NLP"

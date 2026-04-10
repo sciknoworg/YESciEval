@@ -62,4 +62,5 @@ Your evaluation must be based solely on the provided research question and respo
 
 class ScaleCoverage(Rubric):
     name: str = "ScaleCoverage"
+    eval_type: str = "pointwise"
     system_prompt_template: str = scale_coverage_prompt

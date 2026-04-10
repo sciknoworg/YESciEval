@@ -95,148 +95,222 @@ vocabulary = {
     ]
 }
 
+
 example_responses = {
-    "Depth": {
-        "MechanisticUnderstanding": [
-            {
-                "rating": "1",
-                "rationale": "The response mainly describes outcomes or observations and does not explain the underlying mechanisms or processes driving them."
+    "pointwise": {
+        "Depth": {
+            "MechanisticUnderstanding": [
+                {
+                    "rating": "1",
+                    "rationale": "The response mainly describes outcomes or observations and does not explain the underlying mechanisms or processes driving them."
+                },
+                {
+                    "rating": "4",
+                    "rationale": "The response explains ecological mechanisms by describing pathways and feedbacks such as nutrient cycling and energy flow, and how interactions like predation, competition, and mutualism influence ecosystem dynamics, resilience, and responses to disturbance."
+                }
+            ],
+            "CausalReasoning": [
+                {
+                    "rating": "1",
+                    "rationale": "The response describes ecological patterns or outcomes but does not clearly explain why they occur or how one factor leads to another."
+                },
+                {
+                    "rating": "4",
+                    "rationale": "The response presents clear cause-effect reasoning, explaining how changes in ecological factors drive outcomes, for example describing how disturbances lead to shifts in community structure, which consequently regulate ecosystem processes through specific mediating interactions."
+                }
+            ],
+            "TemporalPrecision": [
+                {
+                    "rating": "1",
+                    "rationale": "The response refers to timing only in vague terms, such as long-term or historical trends, without specifying concrete dates, durations, or time intervals."
+                },
+                {
+                    "rating": "4",
+                    "rationale": "The response uses specific and bounded temporal expressions, for example describing changes occurring within 2-5 years, after 3 months, or every 2 weeks, and referencing defined time periods such as 1998-2004 or June 2012."
+                }
+            ]
+        },
+        "Breadth": {
+            "ContextCoverage": [
+                {
+                    "rating": "1",
+                    "rationale": "The response discusses only a single ecological setting and does not reference any alternative regions or biomes relevant to the research question."
+                },
+                {
+                    "rating": "4",
+                    "rationale": "The response covers multiple distinct ecological contexts, such as different regions and ecosystem types, and distributes attention across them rather than focusing on a single setting."
+                }
+            ],
+            "MethodCoverage": [
+                {
+                    "rating": "1",
+                    "rationale": "The response focuses exclusively on a single management or intervention approach (e.g., controlled burning) and does not reference any alternative methods relevant to the research question."
+                },
+                {
+                    "rating": "4",
+                    "rationale": "The response discusses multiple distinct interventions or management approaches, such as controlled burning, grazing management, habitat restoration, and protected areas, distributing attention across them rather than focusing on a single method."
+                }
+            ],
+            "DimensionCoverage": [
+                {
+                    "rating": "1",
+                    "rationale": "The response focuses on a single ecological dimension and does not meaningfully address other relevant dimensions."
+                },
+                {
+                    "rating": "4",
+                    "rationale": "The response covers multiple ecological dimensions, including taxonomic, functional, and phylogenetic diversity, as well as measures such as species richness, evenness, abundance, and genetic and structural diversity, rather than focusing on just one single dimension."
+                }
+            ],
+            "ScopeCoverage": [
+                {
+                    "rating": "1",
+                    "rationale": "The response addresses only a very narrow aspect of ecological impact and remains vague, providing little indication that the findings apply beyond a single, limited scope."
+                },
+                {
+                    "rating": "4",
+                    "rationale": "The response discusses several types of ecosystem services, from provisioning and regulating services to supporting and cultural services, rather than focusing on just one single, limited scope"
+                }
+            ],
+            "ScaleCoverage": [
+                {
+                    "rating": "1",
+                    "rationale": "The response focuses on a single ecological scale and does not meaningfully consider how the findings apply at other relevant scales."
+                },
+                {
+                    "rating": "4",
+                    "rationale": "The response addresses multiple ecological scales, ranging from the individual and population level to community and ecosystem scales, and also considers broader spatial scales such as local, regional, and global contexts, rather than focusing on just one scale."
+                }
+            ]
+        },
+        "Gap": {
+            "GapIdentification": [
+                {
+                    "rating": "1",
+                    "rationale": "The response is purely descriptive, summarizing existing ecological findings, observations, or reported patterns (e.g., species distributions, biodiversity metrics, or observed correlations) without identifying any missing, unknown, inconsistent, or unresolved aspects relevant to the research question."
+                },
+                {
+                    "rating": "4",
+                    "rationale": "The response clearly identifies specific gaps or limitations in the ecological evidence base that are relevant to the research question (e.g., missing data for certain regions, taxa, or time periods; limited experimental studies; or conflicting empirical findings) and provides some explanation of why these gaps matter; minor ambiguity or imprecision may remain."
+                }
+            ]
+        },
+        "Innovation": {
+            "StateOfTheArtAndNovelty": [
+                {
+                    "rating": "1",
+                    "rationale": "The response gives a generic overview of known ecological findings or methods without identifying any specific state-of-the-art approaches or novel contributions; or it uses buzzwords like state of the art or cutting-edge without explaining what is new."
+                },
+                {
+                    "rating": "4",
+                    "rationale": "The response identifies concrete state-of-the-art or novel ecological contributions (e.g., new datasets, long-term or high-resolution data, remote sensing such as satellite or LiDAR, eDNA/metabarcoding, or new modeling or monitoring approaches) and briefly explains what improvement or new capability they provide, with minor gaps in comparison or detail."
+                }
+            ]
+        },
+        "Rigor": { 
+            "EpistemicCalibration": [ 
+                {
+                    "rating": "1",
+                    "rationale": "The response makes strong claims about ecological findings or implications without acknowledging any uncertainty, limitations, assumptions, or alternative explanations."
+                },
+                {
+                    "rating": "4",
+                    "rationale": "The response demonstrates good epistemic calibration by acknowledging uncertainty, limitations, assumptions, and alternative explanations relevant to the ecological findings or implications, uses appropriately qualified language; minor gaps or occasional vague hedging may remain."
+                }
+            ],
+            "QuantitativeEvidenceAndUncertainty": [
+                {
+                    "rating": "1",
+                    "rationale": "The response summarizes ecological patterns in qualitative terms (e.g., species declined or abundance increased) without providing or interpreting any quantitative measures such as population change rates, effect sizes, or variability, and does not address uncertainty, sampling limitations, or heterogeneity across sites."
+                },
+                {
+                    "rating": "4",
+                    "rationale": "The response uses relevant quantitative evidence (e.g., percentage changes in population abundance, reported confidence intervals, or variation across sites) and links these to the research question; it discusses uncertainty and limitations (e.g., short time series, site-specific variability, or mixed results across studies) and avoids overgeneralization, with only minor gaps in robustness or comparability discussion."
+                }      
+            ],
+            "ExplicitUncertainty": [ 
+                {
+                    "rating": "1",
+                    "rationale": "The response does not explicitly acknowledge any uncertainty, limitations, or assumptions related to the ecological findings or implications."
+                },
+                {
+                    "rating": "4",
+                    "rationale": "The response explicitly acknowledges uncertainty, limitations, and assumptions related to the ecological findings or implications, using clear language to identify areas of ambiguity, unresolved questions, or potential confounding factors."
+                }
+            ] 
+        }
+        },
+    "pairwise": {
+        "Depth": {
+            "MechanisticUnderstanding": {
+                "ResponseA": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response lists observed changes in species abundance or community composition but does not explain the ecological processes or mechanisms responsible for those changes."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response explains how trophic interactions and nutrient cycling feedbacks drive changes in community structure, linking predation pressure and competition to shifts in ecosystem resilience and energy flow."
+                    }
+                ],
+                "ResponseB": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response describes the outcomes of an ecological intervention but offers no explanation of the biological or physical pathways through which those outcomes arise."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response traces the mechanistic pathway from disturbance through successional stages, describing how facilitation and inhibition among species regulate decomposition, mineralization, and the restoration of ecosystem function."
+                    }
+                ]
             },
-            {
-                "rating": "4",
-                "rationale": "The response explains ecological mechanisms by describing pathways and feedbacks such as nutrient cycling and energy flow, and how interactions like predation, competition, and mutualism influence ecosystem dynamics, resilience, and responses to disturbance."
+            "CausalReasoning": {
+                "ResponseA": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response notes associations between ecological variables but does not articulate any causal direction or explain how one factor produces or constrains another."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response explicitly states how reductions in keystone predator populations trigger trophic cascades, which consequently lead to overgrazing, soil erosion, and loss of structural diversity."
+                    }
+                ],
+                "ResponseB": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response describes co-occurring ecological trends without establishing whether or how they are causally linked."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response uses causal language to explain how altered hydrological regimes drive changes in nutrient retention, which in turn modulates primary productivity and regulates downstream water quality."
+                    }
+                ]
+            },
+            "TemporalPrecision": {
+                "ResponseA": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response refers only to broad timescales such as over decades or in recent years without specifying any concrete dates, durations, or intervals."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response anchors ecological changes to defined periods, noting that recovery was observed within 2-5 years post-restoration and that monitoring was conducted every 2 weeks between 1998 and 2004."
+                    }
+                ],
+                "ResponseB": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response describes temporal dynamics in qualitative terms only, such as gradual or rapid change, without providing any specific dates or time intervals."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response specifies that population recovery lagged approximately 6 months behind habitat restoration and references a defined monitoring window beginning in June 2012 and running for 12 weeks post-intervention."
+                    }
+                ]
             }
-        ],
-        "CausalReasoning": [
-            {
-                "rating": "1",
-                "rationale": "The response describes ecological patterns or outcomes but does not clearly explain why they occur or how one factor leads to another."
-            },
-            {
-                "rating": "4",
-                "rationale": "The response presents clear cause-effect reasoning, explaining how changes in ecological factors drive outcomes, for example describing how disturbances lead to shifts in community structure, which consequently regulate ecosystem processes through specific mediating interactions."
-            }
-        ],
-        "TemporalPrecision": [
-            {
-                "rating": "1",
-                "rationale": "The response refers to timing only in vague terms, such as long-term or historical trends, without specifying concrete dates, durations, or time intervals."
-            },
-            {
-                "rating": "4",
-                "rationale": "The response uses specific and bounded temporal expressions, for example describing changes occurring within 2-5 years, after 3 months, or every 2 weeks, and referencing defined time periods such as 1998-2004 or June 2012."
-            }
-        ]
-    },
-    "Breadth": {
-        "ContextCoverage": [
-            {
-                "rating": "1",
-                "rationale": "The response discusses only a single ecological setting and does not reference any alternative regions or biomes relevant to the research question."
-            },
-            {
-                "rating": "4",
-                "rationale": "The response covers multiple distinct ecological contexts, such as different regions and ecosystem types, and distributes attention across them rather than focusing on a single setting."
-            }
-        ],
-        "MethodCoverage": [
-            {
-                "rating": "1",
-                "rationale": "The response focuses exclusively on a single management or intervention approach (e.g., controlled burning) and does not reference any alternative methods relevant to the research question."
-            },
-            {
-                "rating": "4",
-                "rationale": "The response discusses multiple distinct interventions or management approaches, such as controlled burning, grazing management, habitat restoration, and protected areas, distributing attention across them rather than focusing on a single method."
-            }
-        ],
-        "DimensionCoverage": [
-            {
-                "rating": "1",
-                "rationale": "The response focuses on a single ecological dimension and does not meaningfully address other relevant dimensions."
-            },
-            {
-                "rating": "4",
-                "rationale": "The response covers multiple ecological dimensions, including taxonomic, functional, and phylogenetic diversity, as well as measures such as species richness, evenness, abundance, and genetic and structural diversity, rather than focusing on just one single dimension."
-            }
-        ],
-        "ScopeCoverage": [
-            {
-                "rating": "1",
-                "rationale": "The response addresses only a very narrow aspect of ecological impact and remains vague, providing little indication that the findings apply beyond a single, limited scope."
-            },
-            {
-                "rating": "4",
-                "rationale": "The response discusses several types of ecosystem services, from provisioning and regulating services to supporting and cultural services, rather than focusing on just one single, limited scope"
-            }
-        ],
-        "ScaleCoverage": [
-            {
-                "rating": "1",
-                "rationale": "The response focuses on a single ecological scale and does not meaningfully consider how the findings apply at other relevant scales."
-            },
-            {
-                "rating": "4",
-                "rationale": "The response addresses multiple ecological scales, ranging from the individual and population level to community and ecosystem scales, and also considers broader spatial scales such as local, regional, and global contexts, rather than focusing on just one scale."
-            }
-        ]
-    },
-    "Gap": {
-        "GapIdentification": [
-            {
-                "rating": "1",
-                "rationale": "The response is purely descriptive, summarizing existing ecological findings, observations, or reported patterns (e.g., species distributions, biodiversity metrics, or observed correlations) without identifying any missing, unknown, inconsistent, or unresolved aspects relevant to the research question."
-            },
-            {
-                "rating": "4",
-                "rationale": "The response clearly identifies specific gaps or limitations in the ecological evidence base that are relevant to the research question (e.g., missing data for certain regions, taxa, or time periods; limited experimental studies; or conflicting empirical findings) and provides some explanation of why these gaps matter; minor ambiguity or imprecision may remain."
-            }
-        ]
-    },
-    "Innovation": {
-        "StateOfTheArtAndNovelty": [
-            {
-                "rating": "1",
-                "rationale": "The response gives a generic overview of known ecological findings or methods without identifying any specific state-of-the-art approaches or novel contributions; or it uses buzzwords like state of the art or cutting-edge without explaining what is new."
-            },
-            {
-                "rating": "4",
-                "rationale": "The response identifies concrete state-of-the-art or novel ecological contributions (e.g., new datasets, long-term or high-resolution data, remote sensing such as satellite or LiDAR, eDNA/metabarcoding, or new modeling or monitoring approaches) and briefly explains what improvement or new capability they provide, with minor gaps in comparison or detail."
-            }
-        ]
-    },
-    "Rigor": { 
-        "EpistemicCalibration": [ 
-            {
-                "rating": "1",
-                "rationale": "The response makes strong claims about ecological findings or implications without acknowledging any uncertainty, limitations, assumptions, or alternative explanations."
-            },
-            {
-                "rating": "4",
-                "rationale": "The response demonstrates good epistemic calibration by acknowledging uncertainty, limitations, assumptions, and alternative explanations relevant to the ecological findings or implications, uses appropriately qualified language; minor gaps or occasional vague hedging may remain."
-            }
-        ],
-        "QuantitativeEvidenceAndUncertainty": [
-            {
-                "rating": "1",
-                "rationale": "The response summarizes ecological patterns in qualitative terms (e.g., species declined or abundance increased) without providing or interpreting any quantitative measures such as population change rates, effect sizes, or variability, and does not address uncertainty, sampling limitations, or heterogeneity across sites."
-            },
-            {
-                "rating": "4",
-                "rationale": "The response uses relevant quantitative evidence (e.g., percentage changes in population abundance, reported confidence intervals, or variation across sites) and links these to the research question; it discusses uncertainty and limitations (e.g., short time series, site-specific variability, or mixed results across studies) and avoids overgeneralization, with only minor gaps in robustness or comparability discussion."
-            }      
-        ],
-        "ExplicitUncertainty": [ 
-            {
-                "rating": "1",
-                "rationale": "The response does not explicitly acknowledge any uncertainty, limitations, or assumptions related to the ecological findings or implications."
-            },
-            {
-                "rating": "4",
-                "rationale": "The response explicitly acknowledges uncertainty, limitations, and assumptions related to the ecological findings or implications, using clear language to identify areas of ambiguity, unresolved questions, or potential confounding factors."
-            }
-        ] 
+        }    
     }
 }
+
 
 vocab_block_specs = {
     "mechanistic_vocab_block": {"label": "Mechanistic terms", "keys": ["mechanistic_terms"]},
