@@ -62,4 +62,5 @@ Your evaluation must be based solely on the provided research question and respo
 
 class DimensionCoverage(Rubric):
     name: str = "DimensionCoverage"
+    eval_type: str = "pointwise"
     system_prompt_template: str = dimension_coverage_prompt

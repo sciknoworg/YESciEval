@@ -62,4 +62,5 @@ Your evaluation must be based solely on the provided research question and respo
 
 class EpistemicCalibration(Rubric):
     name: str = "EpistemicCalibration"
+    eval_type: str = "pointwise"
     system_prompt_template: str = epistemic_calibration_prompt

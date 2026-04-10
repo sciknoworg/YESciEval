@@ -52,4 +52,5 @@ Your evaluation should be based solely on the content of the provided synthesis 
 </Note>"""
 class Integration(Rubric):
     name: str = "Integration"
+    eval_type: str = "pointwise"
     system_prompt_template: str = integration_prompt

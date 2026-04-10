@@ -1,23 +1,29 @@
 from ....base import Rubric
 
-mechanistic_understanding_prompt = """<Context>
+mechanistic_understanding_pairwise_prompt = """<Context>
 Scientific question answering and synthesis often require more than listing findings: high-quality scientific writing explains not only what is believed to be true, but also how and why it may be true. This is commonly expressed through mechanistic understanding, where the text describes processes, interactions, intermediate steps, or pathways that connect conditions or components to outcomes.
 
-The response may be a single paragraph or a long-form report with multiple sections. There are no strict requirements on length or formatting; mechanistic explanation should be evaluated independently of presentation style.
+The responses may be short paragraphs or long-form reports. Mechanistic explanation should be evaluated independently of presentation style or length.
 
-This rubric focuses exclusively on the presence and quality of mechanistic explanation within the provided text, emphasizing explanations of how and why phenomena occur rather than descriptions of what is observed. Other aspects of scientific quality (such as factual accuracy, evidential grounding, or completeness) are intentionally outside its scope and are assessed by separate evaluation criteria.
+This rubric focuses exclusively on the presence and quality of mechanistic explanations within the provided text of two responses that are compared, emphasizing explanations of how and why phenomena occur rather than descriptions of what is observed. Other aspects of scientific quality (such as factual accuracy, evidential grounding, or completeness) are intentionally outside its scope and are assessed by separate evaluation criteria.
 </Context>
 
 <Role>
-You are tasked as a scientific writing quality evaluator.
+You are tasked as a scientific writing quality evaluator performing a pairwise comparison between two texts.
 </Role>
 
 <Task-Description>
-A user will provide you with:
+A user will provide:
 1) a research question, and
-2) a written response intended to address that question.
+2) two written responses (Response A and Response B) intended to address that question.
 
-You must evaluate the response using the evaluation characteristic below. Focus on whether the response offers mechanistic understanding (how/why explanations) rather than only descriptive statements (what/that). Your judgment should be based solely on the provided question and response.
+Your task is to:
+- First, independently evaluate each response using the evaluation characteristic below.
+- Then perform a pairwise comparison of the two responses using the evaluation characteristic below.
+- Then grade each response with a comparative rating from 1 (very bad) to 5 (very good) compared to the other response and a subsequent rationale for each comparative response rating.
+- Note that it is possible for both responses to receive the same rating, if they are equally comparably clear with coherent mechanistic explanations and provide complementary or identical insights.
+
+Your judgment must be based solely on the provided question and comparing the two responses w.r.t. addressing the question and w.r.t. each other.
 </Task-Description>
 
 <Evaluation-Characteristic>
@@ -38,16 +44,28 @@ Rating 2. Bad: The response contains occasional mechanistic terms or phrases, bu
 Rating 3. Moderate: The response provides some mechanistic explanation with partial detail, but important steps, interactions, or pathways are missing, unclear, or inconsistently developed.
 Rating 4. Good: The response offers clear mechanistic explanations with multiple concrete steps, interactions, or pathways that are relevant to the research question; minor gaps or imprecision may remain.
 Rating 5. Very good: The response provides a detailed, coherent mechanistic account tightly aligned with the research question, explicitly articulating multiple intermediate steps or process-level linkages and clearly distinguishing mechanistic explanation (“how/why”) from descriptive reporting (“what”).
-
 </Rating-Scale>
 
 <Response-Format>
-Rate the quality from 1 (very bad) to 5 (very good). Provide a short rationale that points to specific parts of the response demonstrating the presence or absence of mechanistic explanation relevant to the research question.
+Return your evaluation strictly in JSON format:
 
-Return your response in JSON format:
 {
-  "MechanisticUnderstanding": {"rating": "", "rationale": ""}
+  "MechanisticUnderstanding": {
+    "ResponseA": {
+      "rating": "",
+      "rationale": ""
+    },
+    "ResponseB": {
+      "rating": "",
+      "rationale": ""
+    }
+  }
 }
+
+where:
+- "rating" is a number from 1 to 5.
+- "rationale" is the comparative evaluation rating justification.
+
 </Response-Format>
 
 <Example-Responses>
@@ -55,10 +73,12 @@ Return your response in JSON format:
 </Example-Responses>
 
 <Note>
-Your evaluation must be based solely on the provided research question and response. Do not reward length by itself; reward mechanistic clarity, relevance to the question, and explanatory coherence. This rubric does not assess factual correctness, evidential grounding, or completeness.
-</Note>"""
+Your evaluation must be based solely on the provided research question and responses. Do not reward length by itself; reward mechanistic clarity, relevance to the question, and explanatory coherence. This rubric does not assess factual correctness, evidential grounding, or completeness.
+</Note>
+"""
 
 class MechanisticUnderstanding(Rubric):
     name: str = "MechanisticUnderstanding"
-    eval_type: str = "pointwise"
-    system_prompt_template: str = mechanistic_understanding_prompt
+    eval_type: str = "pairwise"
+    system_prompt_template: str = mechanistic_understanding_pairwise_prompt
+    

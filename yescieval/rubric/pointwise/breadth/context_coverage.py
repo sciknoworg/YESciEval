@@ -60,5 +60,6 @@ Your evaluation must be based solely on the provided research question and respo
 
 class ContextCoverage(Rubric):
     name: str = "ContextCoverage"
+    eval_type: str = "pointwise"
     system_prompt_template: str = context_coverage_prompt
 

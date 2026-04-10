@@ -60,4 +60,5 @@ Your evaluation must be based solely on the provided research question and respo
 
 class CausalReasoning(Rubric):
     name: str = "CausalReasoning"
+    eval_type: str = "pointwise"
     system_prompt_template: str = causal_reasoning_prompt

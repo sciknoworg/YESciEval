@@ -2,7 +2,8 @@ Rubrics
 =======
 
 A total of **22** evaluation rubrics are defined as part of the YESciEval test framework,
-organised into sub-categories under **Pointwise Evaluation**.
+organised into sub-categories under **Pointwise Evaluation**. The framework also supports
+**Pairwise Evaluation** for directly comparing two synthesis answers against each other.
 
 Each rubric can be used in two ways:
 
@@ -13,21 +14,75 @@ Each rubric can be used in two ways:
 
 .. hint::
 
-    Quick import of all rubrics:
+    Rubrics must be imported directly from their submodule. Quick import of all rubrics:
 
     .. code-block:: python
 
-        from yescieval import (
-	            Informativeness, Correctness, Completeness,
-	            Coherence, Relevancy, Integration,
-	            Cohesion, Readability, Conciseness,
-	            MechanisticUnderstanding, CausalReasoning, TemporalPrecision,
-	            GapIdentification, ContextCoverage, MethodCoverage,
-	            DimensionCoverage, ScopeCoverage, ScaleCoverage,
-	            EpistemicCalibration, QuantitativeEvidenceAndUncertainty,
-	            ExplicitUncertainty, StateOfTheArtAndNovelty,
-        )
+        # Fidelity rubrics
+        from yescieval.rubric.pointwise.fidelity import Informativeness, Correctness, Completeness
+        # Structural rubrics
+        from yescieval.rubric.pointwise.structural import Coherence, Relevancy, Integration
+        # Stylistic rubrics
+        from yescieval.rubric.pointwise.stylistic import Cohesion, Readability, Conciseness
+        # Depth rubrics
+        from yescieval.rubric.pointwise.depth import MechanisticUnderstanding, CausalReasoning, TemporalPrecision
+        # Gap rubric
+        from yescieval.rubric.pointwise.gap import GapIdentification
+        # Breadth rubrics
+        from yescieval.rubric.pointwise.breadth import ContextCoverage, MethodCoverage, DimensionCoverage, ScaleCoverage, ScopeCoverage
+        # Rigor rubrics
+        from yescieval.rubric.pointwise.rigor import EpistemicCalibration, QuantitativeEvidenceAndUncertainty, ExplicitUncertainty
+        # Innovation rubric
+        from yescieval.rubric.pointwise.innovation import StateOfTheArtAndNovelty
 
+    For pairwise evaluation, use the ``yescieval.rubric.pairwise`` submodule:
+
+    .. code-block:: python
+
+        # Pairwise depth rubrics
+        from yescieval.rubric.pairwise.depth import MechanisticUnderstanding, CausalReasoning, TemporalPrecision
+
+
+Pairwise Evaluation
+--------------------
+
+Pairwise evaluation is a comparison-based scoring method in which a judge is given two
+answers — **Response A** and **Response B** — and determines which one better satisfies
+a given rubric for a specific research question.
+
+An example rating for pairwise evaluation is as follows:
+
+.. code-block:: json
+
+   ResponseA: {
+     "rating": "4",
+     "rationale": "The response provides a detailed mechanistic explanation by tracing the pathways through which AI improves diagnostics, personalizes treatment plans, and aids in medical imaging analysis, aligning with the research question and offering coherent intermediate steps and process-level linkages."
+   }
+   ResponseB: {
+     "rating": "1",
+     "rationale": "The response lists observed outcomes (diagnosis, prediction, treatment, personalized medicine, and imaging) without explaining the biological or physical mechanisms behind these outcomes, failing to articulate how AI processes or technologies drive these changes."
+   }
+
+The LLM is expected to:
+
+1. Provide a numerical score.
+2. Provide a rationale explaining its decision.
+
+Any rubric can be used in pairwise mode by passing ``answer_b``
+
+.. code-block:: python
+
+   from yescieval.rubric.pairwise.depth import MechanisticUnderstanding
+
+   rubric = MechanisticUnderstanding(
+       papers=papers,
+       question=question,
+       answer=answer,        
+       answer_b=answer_b
+   )
+   instruction = rubric.instruct()
+
+----
 
 Pointwise Evaluation
 --------------------
@@ -176,11 +231,23 @@ Quantifies the mechanistic and analytical sophistication of synthesis outputs.
 
 
 
-.. tab:: Basic Usage
+.. tab:: Pointwise Usage
 
   .. code-block:: python
 
      from yescieval.rubric.pointwise.depth import MechanisticUnderstanding
+
+     rubric      = MechanisticUnderstanding(papers=papers, question=question, answer=answer)
+     instruction = rubric.instruct()
+
+     print(instruction)
+     print(rubric.name)
+
+.. tab:: Pairwise Usage
+
+  .. code-block:: python
+
+     from yescieval.rubric.pairwise.depth import MechanisticUnderstanding
 
      rubric      = MechanisticUnderstanding(papers=papers, question=question, answer=answer)
      instruction = rubric.instruct()
@@ -195,7 +262,6 @@ Quantifies the mechanistic and analytical sophistication of synthesis outputs.
      from yescieval import ExampleInjector, VocabularyInjector
      from yescieval.rubric.pointwise.depth import MechanisticUnderstanding
 
-     # Step 1: Create a rubric with injectors
      rubric = MechanisticUnderstanding(
          papers=papers,
          question=question,
@@ -205,7 +271,6 @@ Quantifies the mechanistic and analytical sophistication of synthesis outputs.
          example=ExampleInjector(),
      )
      instruction_prompt = rubric.instruct()
-
 
 Research Breadth Assessment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -238,7 +303,7 @@ Evaluates the diversity of evidence across dimensions, scope, and methodological
 
   .. code-block:: python
 
-     from yescieval.rubric.pointwise.breath import ContextCoverage
+     from yescieval.rubric.pointwise.breadth import ContextCoverage
 
      rubric      = ContextCoverage(papers=papers, question=question, answer=answer)
      instruction = rubric.instruct()
@@ -251,7 +316,7 @@ Evaluates the diversity of evidence across dimensions, scope, and methodological
   .. code-block:: python
 
      from yescieval import ExampleInjector, VocabularyInjector
-     from yescieval.rubric.pointwise.breath import ContextCoverage
+     from yescieval.rubric.pointwise.breadth import ContextCoverage
 
      rubric = ContextCoverage(
          papers=papers,
@@ -397,7 +462,7 @@ Detects explicit acknowledgment of unanswered questions or understudied areas.
   .. code-block:: python
 
      from yescieval import ExampleInjector, VocabularyInjector
-     from yescieval.rubric.pointwise.depth import GapIdentification
+     from yescieval.rubric.pointwise.gap import GapIdentification
 
      rubric = GapIdentification(
          papers=papers,
@@ -459,7 +524,7 @@ In this example, ``VocabularyInjector`` and ``ExampleInjector`` provide content 
 	      "distillation", "curriculum", "data augmentation", "continual learning"
 	   ]
 
-Here is an complete example of how evaluation on can be done:
+Here is a complete example of how a pointwise evaluation can be done:
 
 .. code-block:: python
 
@@ -484,6 +549,7 @@ Here is an complete example of how evaluation on can be done:
    print("Raw Evaluation Output:")
    print(result)
 
+The same judge can be used for pairwise evaluation by passing an ``answer_b`` to the rubric — no changes to the judge are needed.
 
 .. hint::
 

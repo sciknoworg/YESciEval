@@ -52,4 +52,5 @@ Your evaluation should be based solely on the content of the provided synthesis 
 </Note>"""
 class Completeness(Rubric):
     name: str = "Completeness"
+    eval_type: str = "pointwise"
     system_prompt_template: str = completeness_prompt

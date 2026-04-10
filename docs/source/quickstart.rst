@@ -9,7 +9,8 @@ The following example shows the how to run a ``AskAutoJudge`` on ``Informativene
 
 .. code-block:: python
 
-   from yescieval import Informativeness, AskAutoJudge, GPTParser
+   from yescieval import AskAutoJudge, GPTParser
+   from yescieval.rubric.pointwise.fidelity import Informativeness
 
    # Sample papers used in form of {"title": "abstract", ... }
    papers = {
