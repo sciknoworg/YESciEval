@@ -1,5 +1,14 @@
 ## Changelog
 
+### v0.8.0 (April 10, 2026)
+- added pairwise evaluation support for the dimension - Depth (Issue [#28]) (PR [#36])
+- Updated documentations for structure changes in the package.
+- minor bug fixing and refactoring.
+- refactor injectors and examplers.
+- update readme.
+- imporvement to rubric base prompt to support pointwise and pairwise rubrics.
+- added `eval_type` variable to rubrics for supporting pointwise and pairwise evaluation.
+
 ### v0.7.0 (March 4, 2026)
 - Added prompts and integration for deep research dimension - Rigor  (Issue #17 #16) (PR #24)
 - Refactor rubrics structure by evaluation category (Pointwise / Pairwise) (Issue #25 & #7) (PR #27)
