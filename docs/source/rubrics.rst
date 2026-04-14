@@ -251,7 +251,7 @@ Quantifies the mechanistic and analytical sophistication of synthesis outputs.
 
      from yescieval.rubric.pairwise.depth import MechanisticUnderstanding
 
-     rubric      = MechanisticUnderstanding(papers=papers, question=question, answer=answer)
+     rubric      = MechanisticUnderstanding(papers=papers, question=question, answer=answer_a, answer_b=answer_b)
      instruction = rubric.instruct()
 
      print(instruction)
@@ -301,13 +301,25 @@ Evaluates the diversity of evidence across dimensions, scope, and methodological
      - Is the answer distributing attention across multiple distinct scales of analysis,
        organisation, or application relevant to the research question?
 
-.. tab:: Basic Usage
+.. tab:: Pointwise Usage
 
   .. code-block:: python
 
      from yescieval.rubric.pointwise.breadth import ContextCoverage
 
      rubric      = ContextCoverage(papers=papers, question=question, answer=answer)
+     instruction = rubric.instruct()
+
+     print(instruction)
+     print(rubric.name)
+
+.. tab:: Pairwise Usage
+
+  .. code-block:: python
+
+     from yescieval.rubric.pairwise.breadth import ContextCoverage
+
+     rubric      = ContextCoverage(papers=papers, question=question, answer=answer_a, answer_b=answer_b)
      instruction = rubric.instruct()
 
      print(instruction)
