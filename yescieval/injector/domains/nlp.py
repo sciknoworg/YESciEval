@@ -313,7 +313,119 @@ example_responses = {
                     }
                 ]
             }
-        }         
+        },
+        "Breadth": {
+            "ContextCoverage": {
+                "ResponseA": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response focuses exclusively on a single NLP task (e.g., machine translation) and does not reference any other related tasks or application settings such as summarization, question answering, or sentiment analysis, resulting in very limited contextual breadth."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response covers multiple NLP tasks and application settings, such as machine translation, text summarization, question answering, and sentiment analysis, and distributes discussion across them rather than concentrating on a single task."
+                    }
+                ],
+                "ResponseB": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response is restricted to one specific NLP application setting (e.g., named entity recognition in a single domain) and does not consider alternative NLP tasks or broader application contexts, leading to narrow contextual coverage."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response spans multiple NLP application settings across different problem types, including sequence labeling tasks (e.g., NER), generation tasks (e.g., summarization), and understanding tasks (e.g., question answering), demonstrating broad contextual coverage across NLP."
+                    }
+                ]
+            },
+            "MethodCoverage": {
+                "ResponseA": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response relies exclusively on a single NLP modeling approach, such as fine-tuning a pretrained transformer, without considering alternative training paradigms or learning strategies relevant to the task."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response covers multiple NLP training and modeling approaches, including pretraining, supervised fine-tuning, instruction tuning, transfer learning, and reinforcement learning from human feedback, demonstrating broad methodological coverage."
+                    }
+                ],
+                "ResponseB": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response is limited to a single modeling strategy, such as zero-shot prompting with a large language model, and does not consider other training or adaptation methods, resulting in narrow methodological breadth."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response integrates a diverse set of NLP methods, including pretraining, fine-tuning, instruction tuning, parameter-efficient fine-tuning (e.g., LoRA/adapters), and reinforcement learning from human feedback, and contrasts their roles across different NLP tasks."
+                    }
+                ]
+            },
+            "DimensionCoverage": {
+                "ResponseA": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response evaluates model performance using only a single evaluation metric, such as accuracy, without considering other NLP evaluation dimensions like precision, recall, F1-score, or generation quality metrics."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response evaluates model performance across multiple NLP evaluation dimensions, including classification metrics (accuracy, precision, recall, F1-score) and generation metrics (BLEU, ROUGE, perplexity), providing a broader assessment of model quality."
+                    }
+                ],
+                "ResponseB": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response relies on a single evaluation perspective, such as BLEU score for all tasks, without incorporating complementary evaluation dimensions or task-specific metrics."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response integrates multiple evaluation dimensions across NLP tasks, including token-level metrics (precision, recall, F1), sequence-level metrics (BLEU, ROUGE), and probabilistic measures (perplexity), offering a comprehensive multi-perspective evaluation."
+                    }
+                ]
+            },
+            "ScopeCoverage": {
+                "ResponseA": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response is limited to a single linguistic setting, such as evaluating only English-language NLP data, and does not consider how the findings generalize to other languages or cross-lingual scenarios."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response covers multiple linguistic scopes, including high-resource languages (e.g., English and German), medium-resource languages (e.g., French), and low-resource settings, as well as multilingual and cross-lingual transfer scenarios, demonstrating broad applicability across language conditions."
+                    }
+                ],
+                "ResponseB": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response is restricted to a single language and domain setting (e.g., English news classification) and does not explore performance variation across other linguistic or domain-specific contexts, resulting in narrow scope coverage."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response spans diverse linguistic and domain scopes, including multiple languages (e.g., English, German, French, and Chinese), different domains (e.g., news, biomedical, and social media text), and cross-lingual transfer settings, reflecting comprehensive scope coverage."
+                    }
+                ]
+            },
+            "ScaleCoverage": {
+                "ResponseA": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response considers only a single computational scale, such as evaluating a fixed-size language model under one deployment setting, without examining how performance varies with model size or computational constraints."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response covers multiple computational scales in NLP, including small, medium, and large language models, and analyzes how performance and efficiency change with model size, compute resources (e.g., GPUs/TPUs), and deployment constraints such as latency and memory usage."
+                    }
+                ],
+                "ResponseB": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response evaluates the model under a single inference setting, such as cloud-based deployment only, without considering other computational environments or scaling conditions."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response integrates multiple computational scales in NLP, including training-scale variation (small vs. large parameter models), deployment environments (edge devices, cloud servers), and efficiency considerations such as throughput, latency, and memory consumption across these settings."
+                    }
+                ]
+            }
+}        
         
         }
 }

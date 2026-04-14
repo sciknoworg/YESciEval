@@ -307,7 +307,119 @@ example_responses = {
                     }
                 ]
             }
-        }    
+        },
+        "Breadth": {
+            "ContextCoverage": {
+                "ResponseA": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response is narrowly scoped to a single ecological context (e.g., one biome or geographic region) and does not acknowledge variation across other relevant ecosystems, limiting its applicability to broader ecological conditions."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response spans multiple ecological contexts, incorporating examples from different biomes (e.g., tropical, temperate, and arid systems) and geographic regions, demonstrating an effort to generalize findings across diverse environmental settings."
+                    }
+                ],
+                "ResponseB": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response focuses on a localized or case-specific ecological scenario without extending the discussion to comparable systems or alternative environmental conditions, resulting in minimal contextual breadth."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response integrates a wide range of ecological settings, including variations in climate zones, habitat types, and spatial scales, and explicitly contrasts these contexts to highlight differences and commonalities."
+                    }
+                ]
+            },
+            "MethodCoverage": {
+                "ResponseA": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response is restricted to a single ecological intervention or management strategy (e.g., only habitat restoration) and does not acknowledge alternative methods, limiting the scope of possible approaches relevant to the problem."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response covers a diverse set of ecological methods, including multiple intervention strategies (e.g., restoration, conservation zoning, species reintroduction, and land-use management), demonstrating broad awareness of different approaches applicable across ecological contexts."
+                    }
+                ],
+                "ResponseB": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response centers on one specific methodological approach without considering other viable ecological interventions or management strategies, resulting in a narrow and methodologically limited perspective."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response incorporates a wide spectrum of ecological methods and not only lists them but also differentiates their roles, trade-offs, and suitability across scenarios (e.g., comparing passive vs. active restoration, or policy-based vs. field-based interventions), reflecting comprehensive methodological breadth."
+                    }
+                ]
+            },
+            "DimensionCoverage": {
+                "ResponseA": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response is limited to a single ecological dimension (e.g., only species richness) and does not extend the analysis to other relevant dimensions such as functional traits, genetic variation, or ecosystem structure, resulting in a narrow perspective."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response addresses multiple ecological dimensions, including taxonomic, functional, and structural aspects of biodiversity (e.g., species richness, trait diversity, and habitat complexity), demonstrating broad consideration of different ways ecological systems can be characterized."
+                    }
+                ],
+                "ResponseB": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response focuses exclusively on one dimension of ecological analysis without incorporating complementary dimensions, thereby overlooking the multidimensional nature of ecological systems."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response integrates a comprehensive set of ecological dimensions—such as taxonomic, functional, phylogenetic, and genetic diversity—and explicitly relates them to different ecological processes and scales, highlighting their complementary roles in understanding ecosystem complexity."
+                    }
+                ]
+            },
+            "ScopeCoverage": {
+                "ResponseA": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response is confined to a narrowly defined aspect of ecological impact (e.g., a single ecosystem service or outcome) and does not extend the discussion to broader system-level implications, limiting its overall scope."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response spans a broad range of ecological impacts, covering multiple categories of ecosystem services (e.g., provisioning, regulating, and supporting) and demonstrating awareness of diverse ecological outcomes beyond a single focus area."
+                    }
+                ],
+                "ResponseB": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response addresses a highly specific or localized ecological outcome without situating it within a wider set of impacts or system-level considerations, resulting in minimal scope coverage."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response adopts a wide ecological scope by integrating multiple types of ecosystem services (provisioning, regulating, supporting, and cultural) and explicitly linking them to broader ecological and socio-ecological systems, reflecting comprehensive coverage of impacts."
+                    }
+                ]
+            },
+            "ScaleCoverage": {
+                "ResponseA": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response is limited to a single ecological scale (e.g., only population-level dynamics) and does not consider how processes or patterns may differ across other biological or spatial scales, resulting in restricted breadth."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response encompasses multiple ecological scales, including organismal, population, community, and ecosystem levels, as well as different spatial extents (e.g., local and regional), demonstrating broad coverage across scales."
+                    }
+                ],
+                "ResponseB": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response focuses narrowly on one scale of analysis without acknowledging cross-scale interactions or broader spatial and temporal dimensions, limiting its overall scope."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response integrates a wide range of ecological scales—from individual to ecosystem and from local to global—and explicitly considers cross-scale interactions and temporal dynamics (e.g., short-term vs. long-term processes), reflecting comprehensive scale coverage."
+                    }
+                ]
+            }
+}    
     }
 }
 

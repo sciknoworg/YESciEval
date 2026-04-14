@@ -41,6 +41,8 @@ Each rubric can be used in two ways:
 
         # Pairwise depth rubrics
         from yescieval.rubric.pairwise.depth import MechanisticUnderstanding, CausalReasoning, TemporalPrecision
+        # Pairwise breadth rubrics
+        from yescieval.rubric.pairwise.breadth import ContextCoverage, MethodCoverage, DimensionCoverage, ScaleCoverage, ScopeCoverage
 
 
 Pairwise Evaluation

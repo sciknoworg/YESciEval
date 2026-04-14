@@ -125,7 +125,11 @@ from yescieval.rubric.pointwise.innovation import StateOfTheArtAndNovelty
 **Pairwise**
 
 ```python
+# Depth rubrics
 from yescieval.rubric.pairwise.depth import MechanisticUnderstanding, CausalReasoning, TemporalPrecision
+
+# Breadth rubrics
+from yescieval.rubric.pairwise.breadth import ContextCoverage, MethodCoverage, DimensionCoverage, ScaleCoverage, ScopeCoverage
 ```
 
 A complete list of rubrics are available at YESciEval [📚 Rubrics](https://yescieval.readthedocs.io/rubrics.html) page.
