@@ -33,13 +33,13 @@ The following example demonstrates how to create an evaluation rubric, load a ju
 
     # Input question and synthesized answer
     question = "How is AI used in modern healthcare systems?"
-    answer = (
+    example_answer_a = (
         "AI is being used in healthcare for diagnosing diseases, predicting patient outcomes, "
         "and assisting in treatment planning. It also supports personalized medicine and medical imaging."
     )
 
     # Step 1: Create a rubric
-    rubric = Readability(papers=papers, question=question, answer=answer)
+    rubric = Readability(papers=papers, question=question, answer=example_answer_a)
     instruction_prompt = rubric.instruct()
 
     # Step 2: Load the evaluation model (judge)
