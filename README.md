@@ -99,25 +99,18 @@ A total of **22** evaluation rubrics were defined as part of the YESciEval test 
 ```python
 # Fidelity rubrics
 from yescieval.rubric.pointwise.fidelity import Informativeness, Correctness, Completeness
-
 # Structural rubrics
 from yescieval.rubric.pointwise.structural import Coherence, Relevancy, Integration
-
 # Stylistic rubrics
 from yescieval.rubric.pointwise.stylistic import Cohesion, Readability, Conciseness
-
 # Depth rubrics
 from yescieval.rubric.pointwise.depth import MechanisticUnderstanding, CausalReasoning, TemporalPrecision
-
 # Gap rubrics
 from yescieval.rubric.pointwise.gap import GapIdentification
-
 # Breadth rubrics
 from yescieval.rubric.pointwise.breadth import ContextCoverage, MethodCoverage, DimensionCoverage, ScaleCoverage, ScopeCoverage
-
 # Rigor rubrics
 from yescieval.rubric.pointwise.rigor import EpistemicCalibration, QuantitativeEvidenceAndUncertainty, ExplicitUncertainty
-
 # Innovation rubrics
 from yescieval.rubric.pointwise.innovation import StateOfTheArtAndNovelty
 ```
@@ -127,7 +120,6 @@ from yescieval.rubric.pointwise.innovation import StateOfTheArtAndNovelty
 ```python
 # Depth rubrics
 from yescieval.rubric.pairwise.depth import MechanisticUnderstanding, CausalReasoning, TemporalPrecision
-
 # Breadth rubrics
 from yescieval.rubric.pairwise.breadth import ContextCoverage, MethodCoverage, DimensionCoverage, ScaleCoverage, ScopeCoverage
 ```
