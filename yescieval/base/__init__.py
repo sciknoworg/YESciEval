@@ -1,9 +1,7 @@
-from .rubric import Rubric
+from .rubric import Rubric, PointwiseRubric, PairwiseRubric
 from .domain import Domain
 from .parser import Parser, RubricLikertScale
 from .judge import Judge
-from .pointwise_rubric import PointwiseRubric
-from .pairwise_rubric import PairwiseRubric
 
 __all__ = [
     "Rubric",
