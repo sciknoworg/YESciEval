@@ -1,4 +1,4 @@
-from ....base import Rubric
+from ....base import PairwiseRubric
 
 context_coverage_pairwise_prompt = """<Context>
 Scientific question answering and synthesis from multiple sources require balancing depth with breadth of coverage. Breadth captures how widely a response distributes attention across the range of contexts relevant to a research question, rather than concentrating narrowly on a single setting.
@@ -77,8 +77,7 @@ Your evaluation must be based solely on the provided research question and respo
 </Note>
 """
 
-class ContextCoverage(Rubric):
+class ContextCoverage(PairwiseRubric):
     name: str = "ContextCoverage"
-    eval_type: str = "pairwise"
     system_prompt_template: str = context_coverage_pairwise_prompt
 

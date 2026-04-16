@@ -1,4 +1,4 @@
-from ....base import Rubric
+from ....base import PointwiseRubric
 
 method_coverage_prompt = """<Context>
 Scientific question answering and synthesis from multiple sources require balancing depth of explanation with breadth of coverage. Breadth is a core dimension of synthesis quality: it captures how widely a response distributes attention across the range of relevant aspects of a research question, rather than concentrating narrowly on a single one.
@@ -58,7 +58,6 @@ Return your response in JSON format:
 Your evaluation must be based solely on the provided research question and response. Do not reward repetition or verbosity; reward the number of distinct methods or interventions covered. A single sentence may contribute to multiple methods if it clearly references them.
 </Note>"""
 
-class MethodCoverage(Rubric):
+class MethodCoverage(PointwiseRubric):
     name: str = "MethodCoverage"
-    eval_type: str = "pointwise"
     system_prompt_template: str = method_coverage_prompt

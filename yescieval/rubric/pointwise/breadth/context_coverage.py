@@ -1,4 +1,4 @@
-from ....base import Rubric
+from ....base import PointwiseRubric
 
 context_coverage_prompt = """<Context>
 Scientific question answering and synthesis from multiple sources require balancing depth of explanation with breadth of coverage. Breadth is a core dimension of synthesis quality: it captures how widely a response distributes attention across the range of contexts that are relevant to a research question, rather than concentrating narrowly on a single setting.
@@ -58,8 +58,7 @@ Return your response in JSON format:
 Your evaluation must be based solely on the provided research question and response. Do not reward repetition or verbosity; reward the number of distinct contexts covered. A single sentence may contribute to multiple contexts if it clearly references them. This rubric does not assess correctness, evidential grounding, or explanatory depth.
 </Note>"""
 
-class ContextCoverage(Rubric):
+class ContextCoverage(PointwiseRubric):
     name: str = "ContextCoverage"
-    eval_type: str = "pointwise"
     system_prompt_template: str = context_coverage_prompt
 

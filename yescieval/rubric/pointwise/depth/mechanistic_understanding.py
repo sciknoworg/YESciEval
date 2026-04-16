@@ -1,4 +1,4 @@
-from ....base import Rubric
+from ....base import PointwiseRubric
 
 mechanistic_understanding_prompt = """<Context>
 Scientific question answering and synthesis often require more than listing findings: high-quality scientific writing explains not only what is believed to be true, but also how and why it may be true. This is commonly expressed through mechanistic understanding, where the text describes processes, interactions, intermediate steps, or pathways that connect conditions or components to outcomes.
@@ -58,7 +58,6 @@ Return your response in JSON format:
 Your evaluation must be based solely on the provided research question and response. Do not reward length by itself; reward mechanistic clarity, relevance to the question, and explanatory coherence. This rubric does not assess factual correctness, evidential grounding, or completeness.
 </Note>"""
 
-class MechanisticUnderstanding(Rubric):
+class MechanisticUnderstanding(PointwiseRubric):
     name: str = "MechanisticUnderstanding"
-    eval_type: str = "pointwise"
     system_prompt_template: str = mechanistic_understanding_prompt

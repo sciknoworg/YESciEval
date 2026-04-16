@@ -1,4 +1,4 @@
-from ....base import Rubric
+from ....base import PairwiseRubric
 
 dimension_coverage_pairwise_prompt = """<Context>
 Scientific question answering and synthesis from multiple sources require balancing depth with breadth of coverage. Breadth captures how widely a response distributes attention across the range of relevant descriptive or evaluative dimensions of a research question, rather than concentrating narrowly on a single one.
@@ -77,7 +77,6 @@ Your evaluation must be based solely on the provided research question and respo
 </Note>
 """
 
-class DimensionCoverage(Rubric):
+class DimensionCoverage(PairwiseRubric):
     name: str = "DimensionCoverage"
-    eval_type: str = "pairwise"
     system_prompt_template: str = dimension_coverage_pairwise_prompt
