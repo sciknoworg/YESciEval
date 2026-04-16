@@ -66,7 +66,7 @@ answer = (
 )
 
 # Step 1: Create a rubric
-rubric = Readability(papers=papers, question=question, example_answer_a=answer)
+rubric = Readability(papers=papers, question=question, answer=answer)
 
 # Step 2: Load a judge model (Ask Judge by default)
 judge = AutoJudge()

@@ -39,7 +39,7 @@ The following example demonstrates how to create an evaluation rubric, load a ju
     )
 
     # Step 1: Create a rubric
-    rubric = Readability(papers=papers, question=question, example_answer_a=answer)
+    rubric = Readability(papers=papers, question=question, answer=answer)
     instruction_prompt = rubric.instruct()
 
     # Step 2: Load the evaluation model (judge)

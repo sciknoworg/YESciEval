@@ -70,7 +70,7 @@ The LLM is expected to:
 1. Provide a numerical score.
 2. Provide a rationale explaining its decision.
 
-Any rubric can be used in pairwise mode by passing ``example_answer_b``
+Any rubric can be used in pairwise mode by passing ``answer_a`` and ``answer_b``
 
 .. code-block:: python
 
@@ -79,8 +79,8 @@ Any rubric can be used in pairwise mode by passing ``example_answer_b``
    rubric = MechanisticUnderstanding(
        papers=papers,
        question=question,
-       example_answer_a=answer_a,        
-       example_answer_b=answer_b
+       answer_a=answer_a,        
+       answer_b=answer_b
    )
    instruction = rubric.instruct()
 
@@ -142,9 +142,9 @@ Concerns grammar, clarity, and adherence to academic writing conventions.
          "Paper 2 title": "abstract of paper 2 ...",
      }
      question = "What are the key findings on AI in these papers?"
-     answer_a   = "The synthesis answer summarising the papers."
+     answer   = "The synthesis answer summarising the papers."
 
-     rubric      = Cohesion(papers=papers, question=question, example_answer_a=answer_a)
+     rubric      = Cohesion(papers=papers, question=question, answer=answer)
      instruction = rubric.instruct()
 
 
@@ -176,7 +176,7 @@ Focuses on the reasoning and organisation of information.
 
      from yescieval.rubric.pointwise.structural import Coherence
 
-     rubric      = Coherence(papers=papers, question=question, example_answer_a=answer_a)
+     rubric      = Coherence(papers=papers, question=question, answer=answer)
      instruction = rubric.instruct()
 
 
@@ -207,7 +207,7 @@ Ensures that the response is both correct and useful.
     
      from yescieval.rubric.pointwise.fidelity import Correctness
 
-     rubric      = Correctness(papers=papers, question=question, example_answer_a=answer_a)
+     rubric      = Correctness(papers=papers, question=question, answer=answer)
      instruction = rubric.instruct()
 
 Research Depth Assessment
@@ -239,7 +239,7 @@ Quantifies the mechanistic and analytical sophistication of synthesis outputs.
 
      from yescieval.rubric.pointwise.depth import MechanisticUnderstanding
 
-     rubric      = MechanisticUnderstanding(papers=papers, question=question, example_answer_a=answer_a)
+     rubric      = MechanisticUnderstanding(papers=papers, question=question, answer=answer)
      instruction = rubric.instruct()
 
      print(instruction)
@@ -251,7 +251,7 @@ Quantifies the mechanistic and analytical sophistication of synthesis outputs.
 
      from yescieval.rubric.pairwise.depth import MechanisticUnderstanding
 
-     rubric      = MechanisticUnderstanding(papers=papers, question=question, example_answer_a=answer_a, example_answer_b=answer_b)
+     rubric      = MechanisticUnderstanding(papers=papers, question=question, answer_a=answer_a, answer_b=answer_b)
      instruction = rubric.instruct()
 
      print(instruction)
@@ -267,7 +267,7 @@ Quantifies the mechanistic and analytical sophistication of synthesis outputs.
      rubric = MechanisticUnderstanding(
          papers=papers,
          question=question,
-         example_answer_a=answer_a,
+         answer=answer,
          domain="nlp",
          vocabulary=VocabularyInjector(),
          example=ExampleInjector(),
@@ -307,7 +307,7 @@ Evaluates the diversity of evidence across dimensions, scope, and methodological
 
      from yescieval.rubric.pointwise.breadth import ContextCoverage
 
-     rubric      = ContextCoverage(papers=papers, question=question, example_answer_a=answer_a)
+     rubric      = ContextCoverage(papers=papers, question=question, answer=answer)
      instruction = rubric.instruct()
 
      print(instruction)
@@ -319,7 +319,7 @@ Evaluates the diversity of evidence across dimensions, scope, and methodological
 
      from yescieval.rubric.pairwise.breadth import ContextCoverage
 
-     rubric      = ContextCoverage(papers=papers, question=question, example_answer_a=answer_a, example_answer_b=answer_b)
+     rubric      = ContextCoverage(papers=papers, question=question, answer_a=answer_a, answer_b=answer_b)
      instruction = rubric.instruct()
 
      print(instruction)
@@ -335,7 +335,7 @@ Evaluates the diversity of evidence across dimensions, scope, and methodological
      rubric = ContextCoverage(
          papers=papers,
          question=question,
-         example_answer_a=answer_a,
+         answer=answer,
          domain="ecology",
          vocabulary=VocabularyInjector(),
          example=ExampleInjector(),
@@ -371,7 +371,7 @@ Assesses the evidentiary and methodological integrity of the synthesis.
 
      from yescieval.rubric.pointwise.rigor import EpistemicCalibration
 
-     rubric      = EpistemicCalibration(papers=papers, question=question, example_answer_a=answer_a)
+     rubric      = EpistemicCalibration(papers=papers, question=question, answer=answer)
      instruction = rubric.instruct()
 
      print(instruction)
@@ -387,7 +387,7 @@ Assesses the evidentiary and methodological integrity of the synthesis.
      rubric = EpistemicCalibration(
          papers=papers,
          question=question,
-         example_answer_a=answer_a,
+         answer=answer,
          domain="nlp",
          vocabulary=VocabularyInjector(),
          example=ExampleInjector(),
@@ -416,7 +416,7 @@ Evaluates the novelty of the synthesis.
 
      from yescieval.rubric.pointwise.innovation import StateOfTheArtAndNovelty
 
-     rubric      = StateOfTheArtAndNovelty(papers=papers, question=question, example_answer_a=answer_a)
+     rubric      = StateOfTheArtAndNovelty(papers=papers, question=question, answer=answer)
      instruction = rubric.instruct()
 
      print(instruction)
@@ -432,7 +432,7 @@ Evaluates the novelty of the synthesis.
      rubric = StateOfTheArtAndNovelty(
          papers=papers,
          question=question,
-         example_answer_a=answer_a,
+         answer=answer,
          domain="nlp",
          vocabulary=VocabularyInjector(),
          example=ExampleInjector(),
@@ -465,7 +465,7 @@ Detects explicit acknowledgment of unanswered questions or understudied areas.
 
      from yescieval.rubric.pointwise.gap import GapIdentification
 
-     rubric      = GapIdentification(papers=papers, question=question, example_answer_a=answer_a)
+     rubric      = GapIdentification(papers=papers, question=question, answer=answer)
      instruction = rubric.instruct()
 
      print(instruction)
@@ -481,7 +481,7 @@ Detects explicit acknowledgment of unanswered questions or understudied areas.
      rubric = GapIdentification(
          papers=papers,
          question=question,
-         example_answer_a=answer_a,
+         answer=answer,
          domain="ecology",
          vocabulary=VocabularyInjector(),
          example=ExampleInjector(),
@@ -506,7 +506,7 @@ Here is how to define the deep research rubric:
    rubric = MechanisticUnderstanding(
        papers=papers,
        question=question,
-       example_answer_a=answer_a,
+       answer=answer,
        domain="nlp",
        vocabulary=VocabularyInjector(),
        example=ExampleInjector()
@@ -548,7 +548,7 @@ Here is a complete example of how a pointwise evaluation can be done:
    # Step 1: Create a rubric
    rubric = MechanisticUnderstanding(papers=papers,
                                      question=question,
-                                     example_answer_a=answer_a,
+                                     answer=answer,
                                      domain="nlp",
                                      vocabulary=VocabularyInjector(),
                                      example=ExampleInjector())
@@ -563,7 +563,7 @@ Here is a complete example of how a pointwise evaluation can be done:
    print("Raw Evaluation Output:")
    print(result)
 
-The same judge can be used for pairwise evaluation by passing an ``answer_b`` to the rubric — no changes to the judge are needed.
+The same judge can be used for pairwise evaluation by passing an ``answer_a`` and ``answer_b`` to the rubric — no changes to the judge are needed.
 
 .. hint::
 

@@ -29,7 +29,7 @@ The following example shows the how to run a ``AskAutoJudge`` on ``Informativene
    )
 
    # Step 1: Create a rubric
-   rubric = Informativeness(papers=papers, question=question, example_answer_a=answer)
+   rubric = Informativeness(papers=papers, question=question, answer=answer)
    instruction_prompt = rubric.instruct()
 
    # Step 2: Load the evaluation model (judge)
