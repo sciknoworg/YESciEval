@@ -12,13 +12,7 @@ class Rubric(BaseModel, ABC):
     name: str = "Rubric"
     papers: Dict[str, str]
     question: str
-    example_answer_a: str
-    user_prompt_template: str = ("Evaluate and rate the quality of the following scientific synthesis "
-                                 "according to the characteristics given in the system prompt.\n"
-                                 "\n<{answer_tag}>{example_answer_a}</{answer_tag}>\n"
-                                 "{example_answer_b_block}"
-                                 "\n<research-question>{question}</research-question>\n"
-                                 "\n<paper-titles-and-abstracts>\n{content}</paper-titles-and-abstracts>\n\n###")
+    user_prompt_template: str
 
     domain: Optional[str] = None
     vocabulary: Optional[VocabularyInjector] = None
@@ -62,13 +56,17 @@ class PointwiseRubric(Rubric):
     Evaluates a single answer against a research question and set of papers.
     """
     eval_type: str = "pointwise"
- 
+    answer: str
+    user_prompt_template: str = ("Evaluate and rate the quality of the following scientific synthesis "
+                                 "according to the characteristics given in the system prompt.\n"
+                                 "\n<scientific-synthesis>\n{answer}\n</scientific-synthesis>\n"
+                                 "\n<research-question>\n{question}\n</research-question>\n"
+                                 "\n<paper-titles-and-abstracts>\n{content}\n</paper-titles-and-abstracts>\n\n###")
+
     def verbalize_user_prompt(self) -> str:
         return self.user_prompt_template.format(
-            example_answer_a=self.example_answer_a,
-            answer_tag="scientific-synthesis",
-            example_answer_b_block="",
             question=self.question,
+            answer=self.answer,
             content=self.render_papers(),
         )
  
@@ -79,15 +77,20 @@ class PairwiseRubric(Rubric):
     Evaluates two answers (A and B) against a research question and set of papers.
     """
     eval_type: str = "pairwise"
-    example_answer_b: str
+    answer_a: str
+    answer_b: str
+    user_prompt_template: str = ("Evaluate and rate the quality of the following scientific synthesis "
+                                 "according to the characteristics given in the system prompt.\n"
+                                 "\n<scientific-synthesis-A>\n{answer_a}\n</scientific-synthesis-A>\n"
+                                 "\n<scientific-synthesis-B>\n{answer_b}\n</scientific-synthesis-B>\n"
+                                 "\n<research-question>\n{question}\n</research-question>\n"
+                                 "\n<paper-titles-and-abstracts>\n{content}\n</paper-titles-and-abstracts>\n\n###")
  
     def verbalize_user_prompt(self) -> str:
-        example_answer_b_block = f"<scientific-synthesis-B>{self.example_answer_b}</scientific-synthesis-B>\n\n"
         return self.user_prompt_template.format(
-            example_answer_a=self.example_answer_a,
-            answer_tag="scientific-synthesis-A",
-            example_answer_b_block=example_answer_b_block,
             question=self.question,
+            answer_a=self.answer_a,
+            answer_b=self.answer_b,
             content=self.render_papers(),
         )
  
