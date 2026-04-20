@@ -1,5 +1,13 @@
 ## Changelog
 
+### v0.9.0 (April 20, 2026)
+* Documentation fix
+* Fix to variable names for answer
+* Added new parent class for rubric categories
+* Added new rubric category (pairwise/breadth)
+* Readme fixes
+* Added unittests
+
 ### v0.8.0 (April 10, 2026)
 - added pairwise evaluation support for the dimension - Depth (Issue [#28]) (PR [#36])
 - Updated documentations for structure changes in the package.
