@@ -1,4 +1,4 @@
-from ....base import Rubric
+from ....base import PointwiseRubric
 
 quantitative_evidence_and_uncertainty_prompt = """<Context>
 Scientific question answering and synthesis often require more than listing findings: high-quality scientific writing demonstrates rigorous reasoning using quantitative evidence and an appropriate treatment of uncertainty. In synthesis settings (e.g., reports that summarize multiple papers), this is commonly expressed through careful use and interpretation of source-reported quantitative results (e.g., effect sizes, confidence intervals, variability measures), and through explicit reasoning about robustness, heterogeneity, and limitations of the evidence base.
@@ -60,7 +60,6 @@ Return your response in JSON format:
 Your evaluation must be based solely on the provided research question and response. Do not reward verbosity or statistical jargon by itself; reward relevant quantitative interpretation, uncertainty/robustness awareness, appropriate caveats, and clarity in connecting quantitative evidence to conclusions. This rubric does not assess mechanistic understanding, factual correctness, evidential grounding, or completeness.
 </Note>"""
 
-class QuantitativeEvidenceAndUncertainty(Rubric):
+class QuantitativeEvidenceAndUncertainty(PointwiseRubric):
     name: str = "QuantitativeEvidenceAndUncertainty"
-    eval_type: str = "pointwise"
     system_prompt_template: str = quantitative_evidence_and_uncertainty_prompt

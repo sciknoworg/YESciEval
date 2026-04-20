@@ -1,4 +1,4 @@
-from ....base import Rubric
+from ....base import PointwiseRubric
 
 temporal_precision_prompt = """<Context>
 Scientific question answering and synthesis often require more than listing findings: high-quality scientific writing is precise about time when time matters. Temporal precision refers to how clearly the text specifies when something occurs, over what duration, or across what interval. Precise temporal expressions include calendar dates, numeric durations, bounded year ranges, or clearly delimited intervals; vague temporal markers include expressions like “historically”, “recently”, “long-term”, or “soon” without further specification.
@@ -58,7 +58,6 @@ Return your response in JSON format:
 Your evaluation must be based solely on the provided research question and response. Do not reward length by itself; reward specificity of temporal expressions and clarity of temporal sequencing when time is relevant. This rubric does not assess factual correctness, evidential grounding, or completeness.
 </Note>"""
 
-class TemporalPrecision(Rubric):
+class TemporalPrecision(PointwiseRubric):
     name: str = "TemporalPrecision"
-    eval_type: str = "pointwise"
     system_prompt_template: str = temporal_precision_prompt
