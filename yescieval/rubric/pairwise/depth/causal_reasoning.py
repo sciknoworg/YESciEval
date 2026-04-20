@@ -1,4 +1,4 @@
-from ....base import Rubric
+from ....base import PairwiseRubric
 
 causal_reasoning_pairwise_prompt = """<Context>
 Scientific question answering and synthesis often require more than listing findings: high-quality scientific writing explains not only what is believed to be true, but also why it may be true. One important aspect of this is causal reasoning, where the text articulates cause-effect relationships, conditions, mediators, moderators, and causal chains, rather than only describing associations or co-occurrences.
@@ -78,8 +78,7 @@ Your evaluation must be based solely on the provided research question and respo
 </Note>
 """
 
-class CausalReasoning(Rubric):
+class CausalReasoning(PairwiseRubric):
     name: str = "CausalReasoning"
-    eval_type: str = "pairwise"
     system_prompt_template: str = causal_reasoning_pairwise_prompt
     

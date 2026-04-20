@@ -1,4 +1,4 @@
-from ....base import Rubric
+from ....base import PointwiseRubric
 
 epistemic_calibration_prompt = """<Context>
 Scientific question answering and synthesis often require more than listing findings: high-quality scientific writing is epistemically calibrated. It distinguishes what is well-supported by evidence from what is uncertain, inferred, assumed, or hypothetical. In synthesis settings (e.g., reports summarizing multiple papers), this includes (i) clearly marking speculative or low-confidence claims, and (ii) appropriately qualifying conclusions when evidence is limited, mixed, indirect, or not comparable.
@@ -60,7 +60,6 @@ Return your response in JSON format:
 Your evaluation must be based solely on the provided research question and response. Do not reward verbosity or hedge words alone; reward meaningful, well-scoped calibration of claims, clear marking of uncertainty/assumptions/limitations, and appropriate alignment between language strength and support. This rubric does not assess factual correctness, evidential grounding, mechanistic understanding, or completeness.
 </Note>"""
 
-class EpistemicCalibration(Rubric):
+class EpistemicCalibration(PointwiseRubric):
     name: str = "EpistemicCalibration"
-    eval_type: str = "pointwise"
     system_prompt_template: str = epistemic_calibration_prompt

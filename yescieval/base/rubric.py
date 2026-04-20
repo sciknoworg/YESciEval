@@ -12,15 +12,7 @@ class Rubric(BaseModel, ABC):
     name: str = "Rubric"
     papers: Dict[str, str]
     question: str
-    answer: str
-    answer_b: Optional[str] = None 
-    eval_type: str
-    user_prompt_template: str = ("Evaluate and rate the quality of the following scientific synthesis "
-                                 "according to the characteristics given in the system prompt.\n"
-                                 "\n<{answer_tag}>{answer}</{answer_tag}>\n"
-                                 "{answer_b_block}"
-                                 "\n<research-question>{question}</research-question>\n"
-                                 "\n<paper-titles-and-abstracts>\n{content}</paper-titles-and-abstracts>\n\n###")
+    user_prompt_template: str
 
     domain: Optional[str] = None
     vocabulary: Optional[VocabularyInjector] = None
@@ -36,17 +28,7 @@ class Rubric(BaseModel, ABC):
         return paper_content
 
     def verbalize_user_prompt(self):
-        if self.eval_type == "pairwise":
-            answer_tag = "scientific-synthesis-A"
-            answer_b_block = f"<scientific-synthesis-B>{self.answer_b}</scientific-synthesis-B>\n\n"
-        else:
-            answer_tag = "scientific-synthesis"
-            answer_b_block = ""
-        return self.user_prompt_template.format(answer=self.answer,
-                                                answer_tag=answer_tag,
-                                                answer_b_block=answer_b_block,
-                                                question=self.question,
-                                                content=self.render_papers())
+        raise NotImplementedError
 
     def verbalize_system_prompt(self):
         system_prompt_template = self.system_prompt_template
@@ -67,3 +49,48 @@ class Rubric(BaseModel, ABC):
         ]
         return message
 
+
+class PointwiseRubric(Rubric):
+    """
+    Base class for pointwise (single-answer) evaluation rubrics.
+    Evaluates a single answer against a research question and set of papers.
+    """
+    eval_type: str = "pointwise"
+    answer: str
+    user_prompt_template: str = ("Evaluate and rate the quality of the following scientific synthesis "
+                                 "according to the characteristics given in the system prompt.\n"
+                                 "\n<scientific-synthesis>\n{answer}\n</scientific-synthesis>\n"
+                                 "\n<research-question>\n{question}\n</research-question>\n"
+                                 "\n<paper-titles-and-abstracts>\n{content}\n</paper-titles-and-abstracts>\n\n###")
+
+    def verbalize_user_prompt(self) -> str:
+        return self.user_prompt_template.format(
+            question=self.question,
+            answer=self.answer,
+            content=self.render_papers(),
+        )
+ 
+ 
+class PairwiseRubric(Rubric):
+    """
+    Base class for pairwise (two-answer comparison) evaluation rubrics.
+    Evaluates two answers (A and B) against a research question and set of papers.
+    """
+    eval_type: str = "pairwise"
+    answer_a: str
+    answer_b: str
+    user_prompt_template: str = ("Evaluate and rate the quality of the following scientific synthesis "
+                                 "according to the characteristics given in the system prompt.\n"
+                                 "\n<scientific-synthesis-A>\n{answer_a}\n</scientific-synthesis-A>\n"
+                                 "\n<scientific-synthesis-B>\n{answer_b}\n</scientific-synthesis-B>\n"
+                                 "\n<research-question>\n{question}\n</research-question>\n"
+                                 "\n<paper-titles-and-abstracts>\n{content}\n</paper-titles-and-abstracts>\n\n###")
+ 
+    def verbalize_user_prompt(self) -> str:
+        return self.user_prompt_template.format(
+            question=self.question,
+            answer_a=self.answer_a,
+            answer_b=self.answer_b,
+            content=self.render_papers(),
+        )
+ 

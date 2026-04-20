@@ -1,4 +1,4 @@
-from ....base import Rubric
+from ....base import PointwiseRubric
 
 explicit_uncertainty_prompt =  """<Context>
 Scientific question answering and synthesis often require more than listing findings: high-quality scientific writing communicates to the reader when conclusions or underlying knowledge remain uncertain, unclear, or unknown.
@@ -56,7 +56,6 @@ Return your response in JSON format:
 Your evaluation must be based solely on the provided research question and response. Do not reward length by itself; reward clear and relevant identification of what is uncertain, unclear, or unknown. This rubric does not assess factual completeness, causal reasoning, or relevancy.
 </Note>"""
 
-class ExplicitUncertainty(Rubric):
+class ExplicitUncertainty(PointwiseRubric):
     name: str = "Explicit Uncertainty"
-    eval_type: str = "pointwise"
     system_prompt_template: str = explicit_uncertainty_prompt

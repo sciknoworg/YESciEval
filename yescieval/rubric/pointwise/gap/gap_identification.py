@@ -1,4 +1,4 @@
-from ....base import Rubric
+from ....base import PointwiseRubric
 
 gap_identification_prompt = """<Context>
 Scientific question answering and synthesis often require more than listing findings: high-quality scientific writing identifies what remains unknown, insufficiently addressed, or unresolved in existing research. This is commonly expressed through gap identification, where the text specifies limitations, missing knowledge, unresolved inconsistencies, or missing connections in prior work and explains why they matter for the research question.
@@ -60,7 +60,6 @@ Return your response in JSON format:
 Your evaluation must be based solely on the provided research question and response. Do not reward keyword mentions; reward distinct, clearly described gaps in existing knowledge that are relevant to the research question and scoped appropriately. This rubric does not assess factual correctness, evidential grounding, completeness, or innovation.
 </Note>"""
 
-class GapIdentification(Rubric):
+class GapIdentification(PointwiseRubric):
     name: str = "GapIdentification"
-    eval_type: str = "pointwise"
     system_prompt_template: str = gap_identification_prompt

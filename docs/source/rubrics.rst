@@ -41,6 +41,8 @@ Each rubric can be used in two ways:
 
         # Pairwise depth rubrics
         from yescieval.rubric.pairwise.depth import MechanisticUnderstanding, CausalReasoning, TemporalPrecision
+        # Pairwise breadth rubrics
+        from yescieval.rubric.pairwise.breadth import ContextCoverage, MethodCoverage, DimensionCoverage, ScaleCoverage, ScopeCoverage
 
 
 Pairwise Evaluation
@@ -68,7 +70,7 @@ The LLM is expected to:
 1. Provide a numerical score.
 2. Provide a rationale explaining its decision.
 
-Any rubric can be used in pairwise mode by passing ``answer_b``
+Any rubric can be used in pairwise mode by passing ``answer_a`` and ``answer_b``
 
 .. code-block:: python
 
@@ -77,7 +79,7 @@ Any rubric can be used in pairwise mode by passing ``answer_b``
    rubric = MechanisticUnderstanding(
        papers=papers,
        question=question,
-       answer=answer,        
+       answer_a=answer_a,        
        answer_b=answer_b
    )
    instruction = rubric.instruct()
@@ -202,7 +204,7 @@ Ensures that the response is both correct and useful.
 .. tab:: Usage
 
   .. code-block:: python
-
+    
      from yescieval.rubric.pointwise.fidelity import Correctness
 
      rubric      = Correctness(papers=papers, question=question, answer=answer)
@@ -249,7 +251,7 @@ Quantifies the mechanistic and analytical sophistication of synthesis outputs.
 
      from yescieval.rubric.pairwise.depth import MechanisticUnderstanding
 
-     rubric      = MechanisticUnderstanding(papers=papers, question=question, answer=answer)
+     rubric      = MechanisticUnderstanding(papers=papers, question=question, answer_a=answer_a, answer_b=answer_b)
      instruction = rubric.instruct()
 
      print(instruction)
@@ -299,13 +301,25 @@ Evaluates the diversity of evidence across dimensions, scope, and methodological
      - Is the answer distributing attention across multiple distinct scales of analysis,
        organisation, or application relevant to the research question?
 
-.. tab:: Basic Usage
+.. tab:: Pointwise Usage
 
   .. code-block:: python
 
      from yescieval.rubric.pointwise.breadth import ContextCoverage
 
      rubric      = ContextCoverage(papers=papers, question=question, answer=answer)
+     instruction = rubric.instruct()
+
+     print(instruction)
+     print(rubric.name)
+
+.. tab:: Pairwise Usage
+
+  .. code-block:: python
+
+     from yescieval.rubric.pairwise.breadth import ContextCoverage
+
+     rubric      = ContextCoverage(papers=papers, question=question, answer_a=answer_a, answer_b=answer_b)
      instruction = rubric.instruct()
 
      print(instruction)
@@ -362,7 +376,7 @@ Assesses the evidentiary and methodological integrity of the synthesis.
 
      print(instruction)
      print(rubric.name)
-
+  
 .. tab::  Usage with Example and Vocabulary Injectors
 
   .. code-block:: python
@@ -549,7 +563,7 @@ Here is a complete example of how a pointwise evaluation can be done:
    print("Raw Evaluation Output:")
    print(result)
 
-The same judge can be used for pairwise evaluation by passing an ``answer_b`` to the rubric — no changes to the judge are needed.
+The same judge can be used for pairwise evaluation by passing an ``answer_a`` and ``answer_b`` to the rubric — no changes to the judge are needed.
 
 .. hint::
 

@@ -1,4 +1,4 @@
-from ....base import Rubric
+from ....base import PointwiseRubric
 
 integration_prompt = """<Context> 
 Scientific synthesis generation involves creating a concise, coherent, and integrated summary from a collection of scientific texts (such as research paper titles and abstracts) that addresses a specific research question. Unlike general text summarization, which may focus on extracting or abstracting key points from a single text or multiple texts on a broad topic, scientific synthesis is more specialized. It requires:
@@ -50,7 +50,6 @@ Return your response in JSON format: {characteristic : {‘rating’ : ‘’, �
 <Note>
 Your evaluation should be based solely on the content of the provided synthesis and abstracts. Ensure your rationale is objective and backed by specific examples from the provided material.
 </Note>"""
-class Integration(Rubric):
+class Integration(PointwiseRubric):
     name: str = "Integration"
-    eval_type: str = "pointwise"
     system_prompt_template: str = integration_prompt

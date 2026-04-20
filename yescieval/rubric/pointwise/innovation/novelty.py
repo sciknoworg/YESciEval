@@ -1,4 +1,4 @@
-from ....base import Rubric
+from ....base import PointwiseRubric
 
 state_of_the_art_and_novelty_prompt = """<Context>
 Scientific question answering and synthesis often require more than listing findings: high-quality scientific writing can surface what is genuinely innovative in the literature and explain how it differs from prior or established approaches. In synthesis settings (e.g., reports summarizing multiple papers), this is expressed by identifying specific novel contributions (e.g., new methods, new datasets, new capabilities, new theoretical framings, proof-of-concept results) and situating them relative to an implicit or explicit baseline (what was done before, what limitation is addressed, what capability is newly enabled).
@@ -60,7 +60,6 @@ Return your response in JSON format:
 Your evaluation must be based solely on the provided research question and response. Do not reward novelty buzzwords by themselves; reward specific, relevant identification of what is new, contextualization relative to prior work (“new compared to what”), and appropriate scoping of innovation claims. This rubric does not assess factual correctness, evidential grounding, completeness, or mechanistic depth.
 </Note>"""
 
-class StateOfTheArtAndNovelty(Rubric):
+class StateOfTheArtAndNovelty(PointwiseRubric):
     name: str = "StateOfTheArtAndNovelty"
-    eval_type: str = "pointwise"
     system_prompt_template: str = state_of_the_art_and_novelty_prompt
