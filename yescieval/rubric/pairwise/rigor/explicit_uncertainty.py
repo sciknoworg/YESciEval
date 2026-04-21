@@ -77,5 +77,5 @@ Your evaluation must be based solely on the provided research question and respo
 """
 
 class ExplicitUncertainty(PairwiseRubric):
-    name: str = "Explicit Uncertainty"
+    name: str = "ExplicitUncertainty"
     system_prompt_template: str = explicit_uncertainty_pairwise_prompt

@@ -244,7 +244,7 @@ example_responses = {
                 }  
             ]   
         }
- },
+    },
     "pairwise": { 
         "Depth": {
             "MechanisticUnderstanding": {
@@ -425,9 +425,76 @@ example_responses = {
                     }
                 ]
             }
-}        
-        
-        }
+        }, 
+        "Rigor": {
+            "EpistemicCalibration": {
+                "ResponseA": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response presents claims as definitive throughout, with no meaningful qualification, uncertainty marking, or acknowledgment of assumptions or limitations. For example, it asserts that a model architecture universally outperforms others or that benchmark results directly reflect real-world performance, without noting dataset-specific conditions, evaluation constraints, or reproducibility concerns."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response generally calibrates claim strength well, distinguishing supported results from uncertain ones (e.g., noting that performance improvements hold on standard English benchmarks but that generalization to low-resource or multilingual settings remains unclear due to limited evaluation). Appropriate hedging language is used throughout, with only minor instances of vague qualification."
+                    }
+                ],
+                "ResponseB": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response makes sweeping, unqualified assertions about model capabilities or findings (e.g., claiming a fine-tuned model definitively solves a task or that a particular training approach always leads to better generalization) without acknowledging data limitations, architectural assumptions, benchmark constraints, or alternative interpretations of results."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response is well-calibrated, consistently qualifying claims with appropriate uncertainty (e.g., 'results suggest,' 'under these evaluation conditions,' 'performance may degrade on out-of-domain data') and acknowledging the limitations of cited benchmarks, training data, or model assumptions. Distinctions between in-distribution and out-of-distribution performance are noted where relevant, with only minor gaps in hedging."
+                    }
+                ]
+            },
+            "QuantitativeEvidenceAndUncertainty": {
+                "ResponseA": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response does not provide any quantitative evidence or statistical analysis to support its claims (e.g., asserting that one model outperforms another without citing accuracy, F1 scores, or other metrics), and does not acknowledge uncertainty, variance across datasets, or limitations in the evaluation setup."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response appropriately uses quantitative results (e.g., reporting F1 score improvements over baselines and noting variance across datasets) and connects them to the research question. It acknowledges uncertainty and limitations such as performance drops on out-of-domain data or results being based on a limited set of benchmarks, with only minor gaps in cross-study comparison or robustness analysis."
+                    }
+                ],
+                "ResponseB": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response describes model performance using only vague qualitative language (e.g., 'the model performed better' or 'results improved significantly') without citing any quantitative metrics, confidence intervals, or statistical significance measures. Variability across tasks, datasets, or evaluation conditions is entirely absent, making it impossible to assess the reliability or generalizability of the reported findings."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response effectively integrates quantitative evidence (e.g., referencing BLEU score gains, precision-recall tradeoffs, or performance variance across benchmark datasets) and links these figures to the broader research question. Uncertainty is explicitly addressed through discussion of limitations such as restricted benchmark coverage, sensitivity to hyperparameter choices, or inconsistent results across languages or domains, and conclusions are appropriately hedged to avoid overgeneralization, with only minor omissions in robustness or cross-study comparability."
+                    }
+                ]
+            },
+            "ExplicitUncertainty": {
+                "ResponseA": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response does not explicitly acknowledge any uncertainty, unknowns, or open questions related to the research question. For example, it presents model performance results or architectural design choices as definitive and well-established without noting evaluation limitations, unresolved questions about generalization, or areas where the evidence remains inconclusive."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response explicitly acknowledges uncertainty, unknowns, and open questions related to the research question, using clear language to indicate what is not yet known or understood (e.g., noting that it remains unclear whether performance gains on English benchmarks transfer to low-resource languages, or that the mechanisms behind emergent model behaviors are not well understood). Areas where evidence is limited or inconclusive are highlighted, with only minor gaps in explicit acknowledgment of uncertainty."
+                    }
+                ],
+                "ResponseB": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response presents findings and conclusions as fully settled and definitive, with no explicit acknowledgment of uncertainty, open questions, or limitations in the current evidence. Claims about model capabilities, training procedures, or benchmark results are stated without flagging unresolved debates, dataset biases, or gaps in the literature that would warrant caution."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response clearly and explicitly flags uncertainty and open questions throughout, using direct language to identify what remains unresolved or poorly understood in the context (e.g., acknowledging that the robustness of fine-tuning approaches across diverse domains is still an open question, that evaluation on limited benchmarks leaves generalizability uncertain, or that conflicting results across studies have not yet been reconciled). Areas of limited or inconclusive evidence are named and their implications for interpreting the findings are discussed, with only minor gaps in explicit uncertainty acknowledgment."
+                    }
+                ]
+            }
+        }           
+    }
 }
 
 
