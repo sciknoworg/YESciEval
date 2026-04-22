@@ -238,7 +238,7 @@ example_responses = {
                 }
             ] 
         }
-        },
+},
     "pairwise": {
         "Depth": {
             "MechanisticUnderstanding": {
@@ -419,7 +419,75 @@ example_responses = {
                     }
                 ]
             }
-}    
+        },
+        "Rigor": {
+            "EpistemicCalibration": {
+                "ResponseA": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response makes strong, unqualified claims about ecological findings or implications without acknowledging any uncertainty, limitations, assumptions, or alternative explanations. No hedging language is used, and the response presents contested or context-dependent ecological conclusions as established fact."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response demonstrates good epistemic calibration by acknowledging uncertainty, limitations, assumptions, and alternative explanations relevant to the ecological findings or implications. It uses appropriately qualified language (e.g., 'evidence suggests,' 'under these conditions,' 'one possible explanation') when discussing population dynamics, species interactions, or environmental impacts, though minor gaps or occasional vague hedging may remain."
+                    }
+                ],
+                "ResponseB": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response presents ecological claims with unwarranted confidence, asserting definitive cause-effect relationships between species populations and environmental factors without acknowledging data limitations, methodological assumptions, or competing explanations, giving the impression that findings are more settled than they are."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response is well-calibrated, consistently qualifying ecological claims with appropriate uncertainty (e.g., 'current evidence indicates,' 'this may vary by context,' 'alternative mechanisms could include') and acknowledging the limitations of cited studies or models. Cross-scale and context-dependent nuances are noted where relevant, with only minor instances of vague or missing hedging."
+                    }
+                ]
+            },
+            "QuantitativeEvidenceAndUncertainty": {
+                "ResponseA": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response summarizes ecological patterns in purely qualitative terms (e.g., 'species declined' or 'abundance increased') without providing or interpreting any quantitative measures such as population change rates, effect sizes, or variability estimates. No uncertainty, sampling limitations, or heterogeneity across sites or time periods is addressed, leaving the ecological claims unsubstantiated and imprecise."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response uses relevant quantitative evidence (e.g., percentage changes in population abundance, reported confidence intervals, or effect sizes across sites) and links these figures to the research question. It discusses uncertainty and limitations such as short time series, site-specific variability, or mixed results across studies, and avoids overgeneralization, with only minor gaps in robustness or comparability discussion."
+                    }
+                ],
+                "ResponseB": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response describes ecological findings using only vague directional language (e.g., 'populations were lower' or 'diversity improved') without citing any quantitative data, statistical measures, or confidence ranges. Sampling limitations, measurement uncertainty, and cross-site heterogeneity are entirely absent, making it impossible to assess the strength or reliability of the ecological claims."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response integrates quantitative evidence effectively (e.g., referencing reported rates of habitat loss, species richness indices, or variation across study sites) and connects these to the broader ecological question. Uncertainty is explicitly acknowledged through discussion of data limitations such as short monitoring periods, uneven sampling effort, or inconsistent results across regions, and conclusions are appropriately hedged to avoid overgeneralization, with only minor omissions in comparability or robustness."
+                    }
+                ]
+            },
+            "ExplicitUncertainty": {
+                "ResponseA": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response does not explicitly acknowledge any uncertainty, limitations, or assumptions related to the ecological findings or implications. For example, it presents conclusions about species population trends or habitat dynamics as fully settled without noting data gaps, confounding environmental variables, or the site-specific nature of the findings."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response explicitly acknowledges uncertainty, limitations, and assumptions related to the ecological findings or implications, using clear language to identify areas of ambiguity, unresolved questions, or potential confounding factors (e.g., noting that observed population declines may reflect sampling artifacts, that results are contingent on local climate conditions, or that long-term trends remain unclear due to short monitoring periods)."
+                    }
+                ],
+                "ResponseB": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response presents ecological claims and implications without explicitly identifying any limitations, assumptions, or areas of uncertainty. Findings related to ecosystem dynamics, species interactions, or environmental impacts are stated as definitive conclusions, with no mention of confounding factors, measurement limitations, or unresolved ecological questions."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response clearly and explicitly flags uncertainty, limitations, and assumptions throughout, using direct language to identify ambiguous or unresolved aspects of the ecological findings (e.g., acknowledging that causal mechanisms between disturbance regimes and biodiversity loss remain debated, that extrapolation across biomes may not be valid, or that study designs preclude ruling out alternative explanations). Potential confounding factors are named and their implications for interpreting results are discussed."
+                    }
+                ]
+            }
+        }    
     }
 }
 

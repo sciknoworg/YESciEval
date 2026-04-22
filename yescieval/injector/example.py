@@ -12,7 +12,7 @@ class ExampleInjector(ABC):
     examples_placeholder = "{EXAMPLE_RESPONSES}"
     empty_placeholder = "{}"
 
-    def format_example(self, domain: str, rubric_id: str, eval_type: str = "pointwise") -> Any:
+    def format_example(self, domain: str, rubric_id: str, eval_type: str) -> Any:
         """
         Returns:
             {rubric_id: <example_object>} if found,
@@ -22,7 +22,7 @@ class ExampleInjector(ABC):
         domain_data = example_responses.get(domain_id, {})
         if not domain_data:
             return None
-        eval_data = domain_data.get(eval_type, {}) # pointwise or pairwise
+        eval_data = domain_data.get(eval_type, {}) 
         if not eval_data:
             return None
         for _, rubrics in eval_data.items():
@@ -31,7 +31,7 @@ class ExampleInjector(ABC):
         return None
 
 
-    def format_prompt(self, prompt: str, domain: str, rubric_id: str, eval_type: str = "pointwise") -> str:
+    def format_prompt(self, prompt: str, domain: str, rubric_id: str, eval_type: str) -> str:
         """
         Injects example responses JSON into the template.
         """
