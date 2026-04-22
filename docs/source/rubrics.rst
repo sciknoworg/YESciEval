@@ -43,6 +43,8 @@ Each rubric can be used in two ways:
         from yescieval.rubric.pairwise.depth import MechanisticUnderstanding, CausalReasoning, TemporalPrecision
         # Pairwise breadth rubrics
         from yescieval.rubric.pairwise.breadth import ContextCoverage, MethodCoverage, DimensionCoverage, ScaleCoverage, ScopeCoverage
+        # Pairwise rigor rubrics
+        from yescieval.rubric.pairwise.rigor import EpistemicCalibration, QuantitativeEvidenceAndUncertainty, ExplicitUncertainty
 
 
 Pairwise Evaluation
@@ -365,13 +367,25 @@ Assesses the evidentiary and methodological integrity of the synthesis.
        like "unknown," "limited evidence," or "unclear"?
 
 
-.. tab:: Basic usage
+.. tab:: Pointwise usage
 
   .. code-block:: python
 
      from yescieval.rubric.pointwise.rigor import EpistemicCalibration
 
      rubric      = EpistemicCalibration(papers=papers, question=question, answer=answer)
+     instruction = rubric.instruct()
+
+     print(instruction)
+     print(rubric.name)
+
+.. tab:: Pairwise Usage
+
+  .. code-block:: python
+
+     from yescieval.rubric.pairwise.rigor import EpistemicCalibration
+
+     rubric      = EpistemicCalibration(papers=papers, question=question, answer_a=answer_a, answer_b=answer_b)
      instruction = rubric.instruct()
 
      print(instruction)
