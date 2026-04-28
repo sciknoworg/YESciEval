@@ -493,6 +493,30 @@ example_responses = {
                     }
                 ]
             }
+        },
+        "Gap": {
+            "GapIdentification": {
+                "ResponseA": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response is purely descriptive, summarizing reported benchmark scores and model architecture details across several tasks such as named entity recognition and machine translation. It does not identify any missing evaluations, underexplored domains, or unresolved questions relevant to the research question. No mention is made of dataset biases, lack of ablation studies, or conflicting results across benchmarks."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response clearly identifies several meaningful gaps in the evidence base: it notes that most evaluations of large language models are conducted on high-resource languages leaving low-resource and morphologically complex languages largely underrepresented, that existing benchmarks for dialogue systems lack coverage of multi-turn reasoning under ambiguity, and that conflicting results across GLUE and SuperGLUE variants suggest evaluation inconsistencies that remain unresolved. The response explains why these gaps limit claims about generalizability, though it slightly overgeneralizes when attributing all performance variance to dataset bias without considering architectural differences."
+                    }
+                ],
+                "ResponseB": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response describes existing approaches to coreference resolution and summarization, reporting model performance figures and dataset characteristics without identifying any limitations, missing analyses, or unresolved aspects of the research question. Findings are presented as comprehensive and conclusive, with no acknowledgment of underexplored tasks, missing robustness evaluations, or gaps in the comparative analysis across model families."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response identifies concrete gaps in the evidence base, such as the absence of out-of-domain generalization evaluations for transformer-based models fine-tuned on narrow corpora, the lack of ablation studies isolating the contribution of pretraining data size versus architectural choices, and the underrepresentation of spoken or informal language registers in standard NLP benchmarks. It explains that these gaps undermine the reliability of conclusions drawn from current leaderboard comparisons, though it could have been more specific about which model families or task categories are most critically affected."
+                    }
+                ]
+            }
         }           
     }
 }
