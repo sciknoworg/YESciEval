@@ -487,6 +487,30 @@ example_responses = {
                     }
                 ]
             }
+        },
+        "Gap": {
+            "GapIdentification": {
+                "ResponseA": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response only describes known ecological patterns and findings. It does not point out any missing data, unanswered questions, or limitations. It also does not mention underrepresented species, regions, or conflicting results."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response clearly identifies important gaps, such as missing long-term data for soil invertebrates in semi-arid regions, limited studies in tropical and boreal systems, and conflicting results on predator reintroduction. It explains why these gaps matter, though one point slightly mixes data gaps with methodological issues."
+                    }
+                ],
+                "ResponseB": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response gives general observations about deforestation and habitat fragmentation but does not identify any missing information, open questions, or conflicting evidence. It assumes the existing knowledge is complete."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response identifies clear gaps, such as lack of controlled studies on edge effects in freshwater areas, missing long-term data for migratory invertebrates, and differences between remote sensing and field data. It explains how these gaps affect conclusions, though it could be more specific about affected species or regions."
+                    }
+                ]
+            }
         }    
     }
 }

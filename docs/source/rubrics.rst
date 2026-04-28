@@ -45,6 +45,8 @@ Each rubric can be used in two ways:
         from yescieval.rubric.pairwise.breadth import ContextCoverage, MethodCoverage, DimensionCoverage, ScaleCoverage, ScopeCoverage
         # Pairwise rigor rubrics
         from yescieval.rubric.pairwise.rigor import EpistemicCalibration, QuantitativeEvidenceAndUncertainty, ExplicitUncertainty
+        # Pairwise Gap rubric
+        from yescieval.rubric.pairwise.gap import GapIdentification
 
 
 Pairwise Evaluation
@@ -471,9 +473,7 @@ Detects explicit acknowledgment of unanswered questions or understudied areas.
        terms like "research gap" or "understudied"?
 
 
-
-
-.. tab:: Basic Usage
+.. tab:: Pointwise Usage
 
   .. code-block:: python
 
@@ -484,6 +484,19 @@ Detects explicit acknowledgment of unanswered questions or understudied areas.
 
      print(instruction)
      print(rubric.name)
+
+.. tab:: Pairwise Usage
+
+  .. code-block:: python
+
+     from yescieval.rubric.pairwise.gap import GapIdentification
+
+     rubric      = GapIdentification(papers=papers, question=question, answer_a=answer_a, answer_b=answer_b)
+     instruction = rubric.instruct()
+
+     print(instruction)
+     print(rubric.name)
+  
 
 .. tab:: Usage with Example and Vocabulary Injectors
 
