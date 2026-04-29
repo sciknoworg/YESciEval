@@ -105,13 +105,13 @@ from yescieval.rubric.pointwise.structural import Coherence, Relevancy, Integrat
 from yescieval.rubric.pointwise.stylistic import Cohesion, Readability, Conciseness
 # Depth rubrics
 from yescieval.rubric.pointwise.depth import MechanisticUnderstanding, CausalReasoning, TemporalPrecision
-# Gap rubrics
+# Gap rubric
 from yescieval.rubric.pointwise.gap import GapIdentification
 # Breadth rubrics
 from yescieval.rubric.pointwise.breadth import ContextCoverage, MethodCoverage, DimensionCoverage, ScaleCoverage, ScopeCoverage
 # Rigor rubrics
 from yescieval.rubric.pointwise.rigor import EpistemicCalibration, QuantitativeEvidenceAndUncertainty, ExplicitUncertainty
-# Innovation rubrics
+# Innovation rubric
 from yescieval.rubric.pointwise.innovation import StateOfTheArtAndNovelty
 ```
 
@@ -124,8 +124,10 @@ from yescieval.rubric.pairwise.depth import MechanisticUnderstanding, CausalReas
 from yescieval.rubric.pairwise.breadth import ContextCoverage, MethodCoverage, DimensionCoverage, ScaleCoverage, ScopeCoverage
 # Rigor rubrics
 from yescieval.rubric.pairiwise.rigor import EpistemicCalibration, QuantitativeEvidenceAndUncertainty, ExplicitUncertainty
-# Gap rubrics
+# Gap rubric
 from yescieval.rubric.pairwise.gap import GapIdentification
+# Innovation rubric
+from yescieval.rubric.pairwise.innovation import StateOfTheArtAndNovelty
 ```
 
 A complete list of rubrics are available at YESciEval [📚 Rubrics](https://yescieval.readthedocs.io/rubrics.html) page.
