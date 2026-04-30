@@ -517,6 +517,30 @@ example_responses = {
                     }
                 ]
             }
+        },
+        "Innovation": {      
+            "StateOfTheArtAndNovelty": {
+                "ResponseA": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response provides a general overview of NLP techniques such as tokenization, word embeddings, and neural networks. It does not mention any specific state-of-the-art models or recent innovations and uses vague terms like 'modern approaches' without explaining what makes them new or how they improve performance."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response identifies concrete state-of-the-art NLP contributions, including transformer-based architectures, instruction tuning, and parameter-efficient fine-tuning methods such as LoRA. It explains how these approaches reduce training cost, improve adaptability to downstream tasks, and enable efficient deployment, although it lacks detailed comparison with earlier baselines."
+                    }
+                ],
+                "ResponseB": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response discusses NLP applications like machine translation and sentiment analysis but does not identify any novel methods or recent advancements. It relies on generic descriptions and mentions 'cutting-edge models' without specifying what they are or what improvements they bring."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response highlights specific innovations such as retrieval-augmented generation (RAG), reinforcement learning from human feedback (RLHF/DPO), and multimodal models that combine text and images. It explains how these methods improve factual grounding, alignment with user intent, and cross-modal understanding, though the explanation of trade-offs and benchmarks is somewhat limited."
+                    }
+                ]
+            }
         }           
     }
 }

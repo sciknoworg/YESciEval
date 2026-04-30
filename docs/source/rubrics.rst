@@ -45,8 +45,10 @@ Each rubric can be used in two ways:
         from yescieval.rubric.pairwise.breadth import ContextCoverage, MethodCoverage, DimensionCoverage, ScaleCoverage, ScopeCoverage
         # Pairwise rigor rubrics
         from yescieval.rubric.pairwise.rigor import EpistemicCalibration, QuantitativeEvidenceAndUncertainty, ExplicitUncertainty
-        # Pairwise Gap rubric
+        # Pairwise gap rubric
         from yescieval.rubric.pairwise.gap import GapIdentification
+        # Pairwise innovation rubric
+        from yescieval.rubric.pairwise.innovation import StateOfTheArtAndNovelty
 
 
 Pairwise Evaluation
@@ -426,7 +428,7 @@ Evaluates the novelty of the synthesis.
      - Is the answer identifying specific state-of-the-art and/or novel contributions
        relevant to the research question, using terms like "novel," "state-of-the-art"?
 
-.. tab:: Basic Usage
+.. tab:: Pointwise Usage
 
   .. code-block:: python
 
@@ -438,6 +440,18 @@ Evaluates the novelty of the synthesis.
      print(instruction)
      print(rubric.name)
 
+.. tab:: Pairwise Usage
+
+  .. code-block:: python
+
+     from yescieval.rubric.pairwise.innovation import StateOfTheArtAndNovelty
+
+     rubric      = StateOfTheArtAndNovelty(papers=papers, question=question, answer_a=answer_a, answer_b=answer_b)
+     instruction = rubric.instruct()
+
+     print(instruction)
+     print(rubric.name)
+  
 .. tab:: Usage with Example and Vocabulary Injectors
 
   .. code-block:: python
