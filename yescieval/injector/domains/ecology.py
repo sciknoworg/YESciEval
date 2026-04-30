@@ -511,7 +511,31 @@ example_responses = {
                     }
                 ]
             }
-        }    
+        },
+        "Innovation": {
+            "StateOfTheArtAndNovelty": {
+                "ResponseA": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response provides a general overview of ecological research and mentions common practices like field surveys and biodiversity monitoring. It does not identify any specific state-of-the-art methods or novel contributions and uses vague terms such as 'advanced techniques' without explaining their significance."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response identifies specific state-of-the-art ecological approaches, such as the use of satellite remote sensing, LiDAR for vegetation structure analysis, and eDNA/metabarcoding for biodiversity assessment. It explains how these methods improve spatial resolution, allow non-invasive monitoring, and enhance detection of cryptic species, though comparisons to traditional baselines could be more detailed."
+                    }
+                ],
+                "ResponseB": [
+                    {
+                        "rating": "1",
+                        "rationale": "The response discusses ecological concepts like ecosystem balance and conservation strategies but does not mention any concrete state-of-the-art tools or innovative methods. It relies on generic statements and does not explain what is new or improved in current research."
+                    },
+                    {
+                        "rating": "4",
+                        "rationale": "The response highlights modern ecological innovations, including machine learning models for ecosystem prediction, high-frequency sensor networks for real-time monitoring, and integration of multi-source data (e.g., remote sensing and field data). It explains how these approaches improve predictive accuracy and temporal coverage, although it provides limited detail on specific benchmarks or comparisons."
+                    }
+                ]
+            }
+        }   
     }
 }
 
