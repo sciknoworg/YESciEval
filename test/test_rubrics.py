@@ -1,5 +1,7 @@
 import unittest
-from yescieval import ExampleInjector, VocabularyInjector
+from pydantic import ValidationError
+from yescieval import ExampleInjector, PairwiseRubric, PointwiseRubric, Rubric, VocabularyInjector
+from yescieval.base.rubric import SynthesisRubric
 from yescieval.rubric.pointwise.fidelity import Informativeness
 from yescieval.rubric.pointwise.depth import CausalReasoning
 from yescieval.rubric.pairwise.breadth import MethodCoverage
@@ -117,6 +119,83 @@ class TestInjectors(unittest.TestCase):
         output = rubric.instruct()
         self.assertIsInstance(output, list)
         self.assertTrue(len(output) > 0)
+
+class MinimalRubric(Rubric):
+    """Test rubric inheriting directly from `Rubric` with no synthesis inputs."""
+
+    system_prompt_template: str = "You are a test judge."
+    user_prompt_template: str = "Evaluate: {text}"
+    text: str
+
+    def verbalize_user_prompt(self) -> str:
+        return self.user_prompt_template.format(text=self.text)
+
+
+class TestRubricHierarchy(unittest.TestCase):
+
+    def setUp(self):
+        self.papers = {
+            "Paper One": "Abstract one.",
+            "Paper Two": "Abstract two.",
+        }
+        self.question = "What is studied?"
+        self.rendered_papers = "1. Paper One\n\nAbstract one.\n\n2. Paper Two\n\nAbstract two.\n\n"
+
+    def test_base_rubric_has_no_synthesis_fields(self):
+        self.assertNotIn("papers", Rubric.model_fields)
+        self.assertNotIn("question", Rubric.model_fields)
+
+    def test_synthesis_rubric_declares_shared_inputs(self):
+        self.assertTrue(issubclass(SynthesisRubric, Rubric))
+        self.assertIn("papers", SynthesisRubric.model_fields)
+        self.assertIn("question", SynthesisRubric.model_fields)
+        self.assertTrue(issubclass(PointwiseRubric, SynthesisRubric))
+        self.assertTrue(issubclass(PairwiseRubric, SynthesisRubric))
+
+    def test_minimal_rubric_without_papers_or_question(self):
+        rubric = MinimalRubric(text="some evidence")
+        self.assertEqual(rubric.instruct(), [
+            {"role": "system", "content": "You are a test judge."},
+            {"role": "user", "content": "Evaluate: some evidence"},
+        ])
+
+    def test_pointwise_requires_papers_and_question(self):
+        for missing in ("papers", "question"):
+            kwargs = {"papers": self.papers, "question": self.question, "answer": "ans"}
+            del kwargs[missing]
+            with self.assertRaises(ValidationError):
+                Informativeness(**kwargs)
+
+    def test_pairwise_requires_papers_and_question(self):
+        for missing in ("papers", "question"):
+            kwargs = {"papers": self.papers, "question": self.question, "answer_a": "a", "answer_b": "b"}
+            del kwargs[missing]
+            with self.assertRaises(ValidationError):
+                MethodCoverage(**kwargs)
+
+    def test_pointwise_user_prompt_unchanged(self):
+        rubric = Informativeness(papers=self.papers, question=self.question, answer="ans")
+        self.assertEqual(rubric.render_papers(), self.rendered_papers)
+        self.assertEqual(rubric.instruct()[1]["content"], (
+            "Evaluate and rate the quality of the following scientific synthesis "
+            "according to the characteristics given in the system prompt.\n"
+            "\n<scientific-synthesis>\nans\n</scientific-synthesis>\n"
+            "\n<research-question>\nWhat is studied?\n</research-question>\n"
+            f"\n<paper-titles-and-abstracts>\n{self.rendered_papers}\n</paper-titles-and-abstracts>\n\n###"
+        ))
+
+    def test_pairwise_user_prompt_unchanged(self):
+        rubric = MethodCoverage(papers=self.papers, question=self.question, answer_a="a", answer_b="b")
+        self.assertEqual(rubric.render_papers(), self.rendered_papers)
+        self.assertEqual(rubric.instruct()[1]["content"], (
+            "Evaluate and rate the quality of the following scientific synthesis "
+            "according to the characteristics given in the system prompt.\n"
+            "\n<scientific-synthesis-A>\na\n</scientific-synthesis-A>\n"
+            "\n<scientific-synthesis-B>\nb\n</scientific-synthesis-B>\n"
+            "\n<research-question>\nWhat is studied?\n</research-question>\n"
+            f"\n<paper-titles-and-abstracts>\n{self.rendered_papers}\n</paper-titles-and-abstracts>\n\n###"
+        ))
+
 
 if __name__ == '__main__':
     unittest.main()

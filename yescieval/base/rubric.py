@@ -6,12 +6,12 @@ from ..injector import ExampleInjector, VocabularyInjector
 class Rubric(BaseModel, ABC):
     """
     Abstract base class for evaluation rubrics.
-    Subclasses must implement `verbalize`.
+
+    Holds only behavior shared by all evaluation tasks; task-specific inputs
+    are declared by subclasses. Subclasses must implement `verbalize_user_prompt`.
     """
     system_prompt_template: str
     name: str = "Rubric"
-    papers: Dict[str, str]
-    question: str
     user_prompt_template: str
 
     domain: Optional[str] = None
@@ -20,12 +20,6 @@ class Rubric(BaseModel, ABC):
 
     model_config = {"arbitrary_types_allowed": True} # Not used in the class but unable to generate
                                                      # pydantic-core schema for vocab and example injectors
-
-    def render_papers(self) -> str:
-        paper_content = ""
-        for idx, (title, abstract) in enumerate(self.papers.items()):
-            paper_content += f"{idx + 1}. {title}\n\n{abstract}\n\n"
-        return paper_content
 
     def verbalize_user_prompt(self):
         raise NotImplementedError
@@ -50,7 +44,22 @@ class Rubric(BaseModel, ABC):
         return message
 
 
-class PointwiseRubric(Rubric):
+class SynthesisRubric(Rubric):
+    """
+    Base class for scientific-synthesis rubrics.
+    Declares the research question and source papers shared by pointwise and pairwise rubrics.
+    """
+    papers: Dict[str, str]
+    question: str
+
+    def render_papers(self) -> str:
+        paper_content = ""
+        for idx, (title, abstract) in enumerate(self.papers.items()):
+            paper_content += f"{idx + 1}. {title}\n\n{abstract}\n\n"
+        return paper_content
+
+
+class PointwiseRubric(SynthesisRubric):
     """
     Base class for pointwise (single-answer) evaluation rubrics.
     Evaluates a single answer against a research question and set of papers.
@@ -71,7 +80,7 @@ class PointwiseRubric(Rubric):
         )
  
  
-class PairwiseRubric(Rubric):
+class PairwiseRubric(SynthesisRubric):
     """
     Base class for pairwise (two-answer comparison) evaluation rubrics.
     Evaluates two answers (A and B) against a research question and set of papers.
