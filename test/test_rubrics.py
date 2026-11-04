@@ -1,6 +1,7 @@
 import unittest
 from pydantic import ValidationError
-from yescieval import ExampleInjector, Rubric, VocabularyInjector
+from yescieval import ExampleInjector, PairwiseRubric, PointwiseRubric, Rubric, VocabularyInjector
+from yescieval.base.rubric import SynthesisRubric
 from yescieval.rubric.pointwise.fidelity import Informativeness
 from yescieval.rubric.pointwise.depth import CausalReasoning
 from yescieval.rubric.pairwise.breadth import MethodCoverage
@@ -143,6 +144,13 @@ class TestRubricHierarchy(unittest.TestCase):
     def test_base_rubric_has_no_synthesis_fields(self):
         self.assertNotIn("papers", Rubric.model_fields)
         self.assertNotIn("question", Rubric.model_fields)
+
+    def test_synthesis_rubric_declares_shared_inputs(self):
+        self.assertTrue(issubclass(SynthesisRubric, Rubric))
+        self.assertIn("papers", SynthesisRubric.model_fields)
+        self.assertIn("question", SynthesisRubric.model_fields)
+        self.assertTrue(issubclass(PointwiseRubric, SynthesisRubric))
+        self.assertTrue(issubclass(PairwiseRubric, SynthesisRubric))
 
     def test_minimal_rubric_without_papers_or_question(self):
         rubric = MinimalRubric(text="some evidence")

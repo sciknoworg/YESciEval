@@ -44,8 +44,13 @@ class Rubric(BaseModel, ABC):
         return message
 
 
-class _PaperRendering:
-    """Shared paper rendering for rubrics that declare a `papers` field."""
+class SynthesisRubric(Rubric):
+    """
+    Base class for scientific-synthesis rubrics.
+    Declares the research question and source papers shared by pointwise and pairwise rubrics.
+    """
+    papers: Dict[str, str]
+    question: str
 
     def render_papers(self) -> str:
         paper_content = ""
@@ -54,14 +59,12 @@ class _PaperRendering:
         return paper_content
 
 
-class PointwiseRubric(_PaperRendering, Rubric):
+class PointwiseRubric(SynthesisRubric):
     """
     Base class for pointwise (single-answer) evaluation rubrics.
     Evaluates a single answer against a research question and set of papers.
     """
     eval_type: str = "pointwise"
-    papers: Dict[str, str]
-    question: str
     answer: str
     user_prompt_template: str = ("Evaluate and rate the quality of the following scientific synthesis "
                                  "according to the characteristics given in the system prompt.\n"
@@ -77,14 +80,12 @@ class PointwiseRubric(_PaperRendering, Rubric):
         )
  
  
-class PairwiseRubric(_PaperRendering, Rubric):
+class PairwiseRubric(SynthesisRubric):
     """
     Base class for pairwise (two-answer comparison) evaluation rubrics.
     Evaluates two answers (A and B) against a research question and set of papers.
     """
     eval_type: str = "pairwise"
-    papers: Dict[str, str]
-    question: str
     answer_a: str
     answer_b: str
     user_prompt_template: str = ("Evaluate and rate the quality of the following scientific synthesis "
