@@ -1,3 +1,4 @@
+from enum import Enum
 from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
@@ -69,3 +70,52 @@ class RoB2EvaluationInput(BaseModel):
         if duplicates:
             raise ValueError(f"duplicate document_id values: {', '.join(duplicates)}")
         return self
+
+
+class RoB2SignalingResponse(str, Enum):
+    """RoB 2 response options for one signaling question."""
+
+    Y = "Y"
+    PY = "PY"
+    PN = "PN"
+    N = "N"
+    NI = "NI"
+    NA = "NA"
+
+
+class EvidenceSpan(BaseModel):
+    """
+    A passage quoted from one evidence document to support a signaling-question response.
+
+    `document_id` and `quoted_text` must contain non-whitespace text; values are kept unchanged.
+    """
+    model_config = ConfigDict(extra="forbid")
+
+    document_id: str
+    quoted_text: str
+
+    @field_validator("document_id", "quoted_text")
+    @classmethod
+    def _reject_blank(cls, value: str) -> str:
+        return _require_text(value)
+
+
+class RoB2SignalingResult(BaseModel):
+    """
+    The result of evaluating one RoB 2 signaling question.
+
+    `rubric_id` and `rationale` must contain non-whitespace text; values are kept unchanged.
+    `evidence` may be empty, e.g. for `NI` responses or workflow-generated `NA` results.
+    Rubric-specific checks, such as allowed responses, are applied by the rubric's `validate_result()`.
+    """
+    model_config = ConfigDict(extra="forbid")
+
+    rubric_id: str
+    response: RoB2SignalingResponse
+    rationale: str
+    evidence: list[EvidenceSpan]
+
+    @field_validator("rubric_id", "rationale")
+    @classmethod
+    def _reject_blank(cls, value: str) -> str:
+        return _require_text(value)

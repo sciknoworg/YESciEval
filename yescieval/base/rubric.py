@@ -1,7 +1,8 @@
 from abc import ABC
 from pydantic import BaseModel
-from typing import Dict, List, Optional
+from typing import ClassVar, Dict, List, Optional, Type
 from ..injector import ExampleInjector, VocabularyInjector
+from .parser import RubricLikertScale
 
 class Rubric(BaseModel, ABC):
     """
@@ -9,7 +10,12 @@ class Rubric(BaseModel, ABC):
 
     Holds only behavior shared by all evaluation tasks; task-specific inputs
     are declared by subclasses. Subclasses must implement `verbalize_user_prompt`.
+
+    `response_model` declares the Pydantic model of one evaluation result;
+    subclasses with a different result format override it at class level.
     """
+    response_model: ClassVar[Type[BaseModel]] = RubricLikertScale
+
     system_prompt_template: str
     name: str = "Rubric"
     user_prompt_template: str
@@ -23,6 +29,15 @@ class Rubric(BaseModel, ABC):
 
     def verbalize_user_prompt(self):
         raise NotImplementedError
+
+    def validate_result(self, result: BaseModel) -> BaseModel:
+        """
+        Apply rubric-specific checks to a result already validated against `response_model`.
+
+        The default accepts every result unchanged. Subclasses override this to reject
+        results that are valid for the schema but not for the rubric, by raising `ValueError`.
+        """
+        return result
 
     def verbalize_system_prompt(self):
         system_prompt_template = self.system_prompt_template
