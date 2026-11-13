@@ -1,9 +1,10 @@
-from ..base import Judge, Rubric, RubricLikertScale
+from ..base import Judge, Rubric
+from ..base.response import call_with_retries, parse_response, response_schema
 from .judges import AutoJudge
 
-import time
-from typing import Dict, List
+from typing import Dict, List, Type
 from openai import OpenAI
+from pydantic import BaseModel
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 import logging
@@ -27,6 +28,18 @@ class CustomAutoJudge(AutoJudge):
 
 
 class GPTCustomAutoJudge(Judge):
+    """
+    Judge backed by an OpenAI chat model.
+
+    The result format is the rubric's `response_model`; each result is validated against it and
+    then checked by `rubric.validate_result()`. Failed API calls or invalid results are retried
+    up to `max_attempts` times, waiting `retry_delay` seconds between attempts.
+    """
+
+    def __init__(self, max_attempts: int = 3, retry_delay: float = 5):
+        self.max_attempts = max_attempts
+        self.retry_delay = retry_delay
+        self.client = None
 
     def from_pretrained(self, model_id: str, device: str = "auto", token: str = ""):
         if not token:
@@ -41,57 +54,30 @@ class GPTCustomAutoJudge(Judge):
         )
         return any(self.model_name.startswith(prefix) for prefix in gpt_4_prefixes)
 
-    def _output_schema(self) -> List[Dict]:
-        return [
-            {
-                "name": "response_format",
-                "description": f"Return the `rating` and `rationale` only as a response.",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        'rating': {
-                                "type": "number",
-                                "description": "A numerical rating assigned to the characteristic.",
-                                "minimum": 1,
-                                "maximum": 5
-                        },
-                        "rationale": {
-                            "type": "string",
-                            "description": "The explanation for the assigned rating."
-                        },
-                    },
-                    "required": ["rating", "rationale"]
-                }
-            }
-        ]
+    def _output_schema(self, response_model: Type[BaseModel]) -> List[Dict]:
+        return [response_schema(response_model,
+                                name="response_format",
+                                description="Return the evaluation result only as a response.")]
 
-    def judge(self, rubric: Rubric, max_new_tokens: int = 150) -> RubricLikertScale:
+    def judge(self, rubric: Rubric, max_new_tokens: int = 150) -> BaseModel:
         if not self.client:
             raise ValueError("Model not initialized.")
-        messages = rubric.instruct()
+        response_model = rubric.response_model
         params = {
             "model": self.model_name,
-            "messages": messages
+            "messages": rubric.instruct()
         }
-        if self._supports_function_calling():
-            params["functions"] = self._output_schema()
+        use_function_calling = self._supports_function_calling()
+        if use_function_calling:
+            params["functions"] = self._output_schema(response_model)
+            params["function_call"] = {"name": "response_format"}
 
-        try_counter = 0
-        while True:
-            try:
-                try_counter += 1
-                response = self.client.chat.completions.create(**params)
-                message = response.choices[0].message
-                if self._supports_function_calling():
-                    parsed_output = eval(message.function_call.arguments)
-                else:
-                    parsed_output = eval(message.content)[rubric.name]
-                evaluation = RubricLikertScale(rating=parsed_output['rating'], rationale=parsed_output['rationale'])
-                return evaluation
+        def evaluate() -> BaseModel:
+            message = self.client.chat.completions.create(**params).choices[0].message
+            raw_output = message.function_call.arguments if use_function_calling else message.content
+            return parse_response(raw_output,
+                                  response_model,
+                                  wrapper_key=rubric.name,
+                                  validator=rubric.validate_result)
 
-            except Exception as e:
-                logger.error(f"{try_counter} times failed attempt!")
-                logger.warning(f"API call failed, retrying in 4 seconds: {e}")
-                time.sleep(5)
-
-
+        return call_with_retries(evaluate, max_attempts=self.max_attempts, retry_delay=self.retry_delay)
