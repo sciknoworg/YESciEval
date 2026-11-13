@@ -6,7 +6,7 @@ assignment-to-intervention path. Whether a question is asked is decided here,
 not by a judge; skipped questions get an NA result written by the workflow.
 """
 
-from typing import Dict, List, Literal, Mapping, Optional, Set, Tuple, Type
+from typing import Any, Dict, List, Literal, Mapping, Optional, Set, Tuple, Type
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
@@ -197,13 +197,34 @@ def check_effect_of_interest(evaluation_input: RoB2EvaluationInput) -> None:
 
 
 class RoB2DomainRunner:
-    """Ask the applicable questions of one domain and keep explicit NA records for skipped ones."""
+    """
+    Ask the applicable questions of one domain and keep explicit NA records for skipped ones.
+
+    `parser` turns raw judge text (e.g. from HF judges) into a `RoB2SignalingResult`;
+    it is not needed for judges that already return one (e.g. `GPTCustomAutoJudge`).
+    """
 
     def __init__(self, parser: Optional[Parser] = None, max_new_tokens: int = 1024):
         if not isinstance(max_new_tokens, int) or isinstance(max_new_tokens, bool) or max_new_tokens < 1:
             raise ValueError("max_new_tokens must be a positive integer")
         self.parser = parser
         self.max_new_tokens = max_new_tokens
+
+    def _to_result(self, output: Any, rubric: RoB2Rubric) -> RoB2SignalingResult:
+        """Use a response-model instance as is; parse raw text with the parser."""
+        if isinstance(output, rubric.response_model):
+            return output
+        if isinstance(output, str):
+            if self.parser is None:
+                raise ValueError(
+                    f"Judge returned raw text for question {rubric.rubric_id}; pass a parser to parse it, "
+                    "e.g. RoB2AssessmentRunner(parser=GPTParser(openai_key=...))"
+                )
+            return self.parser.parse(output, rubric=rubric)
+        raise TypeError(
+            f"Judge returned {type(output).__name__} for question {rubric.rubric_id}; "
+            f"expected {rubric.response_model.__name__} or raw text"
+        )
 
     def run(self,
             workflow: RoB2DomainWorkflow,
@@ -214,8 +235,8 @@ class RoB2DomainRunner:
 
         A question whose applicability rule does not hold is not asked; it gets an NA result.
         Each asked question receives the earlier results of its domain as `prior_results`.
-        The judge must return a validated `RoB2SignalingResult` (see `RoB2Rubric.response_model`);
-        it is used as returned.
+        A judge result that is already a `RoB2SignalingResult` (validated by the judge, see
+        `RoB2Rubric.response_model`) is used as returned; raw text is parsed with `parser`.
         """
         if workflow.domain_id == "D2":
             check_effect_of_interest(evaluation_input)
@@ -232,7 +253,6 @@ class RoB2DomainRunner:
                 )
                 continue
             rubric = criterion(evaluation_input=evaluation_input, prior_results=dict(results))
-            # TODO(rob2): HF judges return raw text; parse it with self.parser into rubric.response_model
-            #  once GPTParser supports rubric response models (#56)
-            results[rubric_id] = judge.judge(rubric, max_new_tokens=self.max_new_tokens)
+            output = judge.judge(rubric, max_new_tokens=self.max_new_tokens)
+            results[rubric_id] = self._to_result(output, rubric)
         return results
