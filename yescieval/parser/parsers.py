@@ -3,6 +3,7 @@ from ..base import Parser, RubricLikertScale
 import time
 from openai import OpenAI
 
+# TODO(rob2): generalize GPTParser to rubric response models (#56)
 class GPTParser(Parser):
     """
     Abstract base class for parsing model outputs into structured characteristic evaluations.
