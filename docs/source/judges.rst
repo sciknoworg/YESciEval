@@ -118,4 +118,51 @@ The output will be in the following format:
      "rationale": "rationale-text"
    }
 
+The output format is defined by the rubric's ``response_model``. All built-in rubrics use ``RubricLikertScale``
+(the format shown above), so ``result.rating`` and ``result.rationale`` work as before. The judge builds the
+function-calling schema from this model, validates each response against it, and then applies the rubric's
+``validate_result()`` check. Model output is only decoded as JSON, never executed.
+
+If a request fails or returns an invalid result, the judge retries it, by default up to 3 attempts with
+5 seconds between them, and then raises the last error. Both values can be set when creating the judge:
+
+.. code-block:: python
+
+    judge = GPTCustomAutoJudge(max_attempts=5, retry_delay=2)
+    judge.from_pretrained(model_id="gpt-4o-mini", token=OPEN_AI_API_KEY)
+
+**Rubrics with their own result format**: a rubric can declare another Pydantic model as its ``response_model``
+and reject results that are valid for the model but not for the rubric by overriding ``validate_result()``
+(raise ``ValueError``; the judge then retries). ``GPTCustomAutoJudge`` then returns an instance of that model:
+
+.. code-block:: python
+
+    from typing import ClassVar, Literal, Type
+    from pydantic import BaseModel
+    from yescieval import Rubric
+
+    class SupportResult(BaseModel):
+        label: Literal["supported", "not_supported", "unclear"]
+        rationale: str
+
+    class ClaimSupport(Rubric):
+        response_model: ClassVar[Type[BaseModel]] = SupportResult
+
+        name: str = "ClaimSupport"
+        system_prompt_template: str = "You decide whether a claim is supported by the given abstract."
+        user_prompt_template: str = "Claim: {claim}\nAbstract: {abstract}"
+        claim: str
+        abstract: str
+
+        def verbalize_user_prompt(self) -> str:
+            return self.user_prompt_template.format(claim=self.claim, abstract=self.abstract)
+
+        def validate_result(self, result: SupportResult) -> SupportResult:
+            if result.label == "unclear":
+                raise ValueError("A clear label is required.")
+            return result
+
+    result = judge.judge(rubric=ClaimSupport(claim="...", abstract="..."))
+    print(result.label, result.rationale)
+
 This allows you to leverage the capabilities of OpenAI's GPT models for scientific text evaluation.

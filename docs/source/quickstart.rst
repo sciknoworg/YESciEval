@@ -96,6 +96,23 @@ The output schema is as a following (if you do not prefer to use ``.model_dump()
 		'type': 'object'
 	}
 
+``RubricLikertScale`` is the default result format, so ``parser.parse(raw_output=raw_output)`` works as shown above.
+To parse another format, pass its Pydantic model. Or pass the rubric that produced the output: the parser then uses
+the rubric's ``response_model`` (it takes precedence over ``response_model``) and applies its ``validate_result()``
+check:
+
+.. code-block:: python
+
+   parsed = parser.parse(raw_output=raw_output, response_model=MyResultModel)
+   parsed = parser.parse(raw_output=raw_output, rubric=rubric)
+
+Failed requests and invalid results are retried, by default up to 3 attempts with 3 seconds between them, and then
+the last error is raised. Both values can be set when creating the parser:
+
+.. code-block:: python
+
+   parser = GPTParser(openai_key="your_openai_key", parser_model="gpt-4o-mini", max_attempts=5, retry_delay=1)
+
 
 .. hint:: Key Components
 
