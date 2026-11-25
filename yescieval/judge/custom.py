@@ -1,5 +1,5 @@
 from ..base import Judge, Rubric
-from ..base.response import call_with_retries, parse_response, response_schema
+from ..utils import call_with_retries, parse_response, response_schema
 from .judges import AutoJudge
 
 from typing import Dict, List, Type

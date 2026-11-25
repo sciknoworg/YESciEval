@@ -126,7 +126,7 @@ class RoB2Judgment(str, Enum):
     HIGH = "high"
 
 
-class _JudgmentResult(BaseModel):
+class JudgmentResult(BaseModel):
     """Suggested judgment plus an optional, justified human override."""
 
     suggested_judgment: RoB2Judgment
@@ -145,7 +145,7 @@ class _JudgmentResult(BaseModel):
         return self
 
 
-class RoB2DomainResult(_JudgmentResult):
+class RoB2DomainResult(JudgmentResult):
     """Domain judgment with all asked and skipped (NA) signalling results."""
 
     # TODO(rob2): check that signaling_results keys match their rubric_id and domain
@@ -153,7 +153,7 @@ class RoB2DomainResult(_JudgmentResult):
     signaling_results: Dict[str, RoB2SignalingResult]
 
 
-class RoB2OverallResult(_JudgmentResult):
+class RoB2OverallResult(JudgmentResult):
     """Complete assessment: the five domain results and the overall judgment."""
 
     domains: Dict[str, RoB2DomainResult]

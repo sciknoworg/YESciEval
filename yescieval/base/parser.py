@@ -1,9 +1,6 @@
 from abc import ABC, abstractmethod
-from typing import TYPE_CHECKING, Optional, Type
+from typing import Optional, Type
 from pydantic import BaseModel, Field
-
-if TYPE_CHECKING:
-    from .rubric import Rubric
 
 
 class RubricLikertScale(BaseModel):
@@ -21,7 +18,7 @@ class Parser(ABC):
     def parse(self,
               raw_output: str,
               response_model: Type[BaseModel] = RubricLikertScale,
-              rubric: Optional["Rubric"] = None) -> BaseModel:
+              rubric: Optional[BaseModel] = None) -> BaseModel:
         """
         Parse the raw model output into a validated evaluation result.
 

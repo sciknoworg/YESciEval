@@ -1,12 +1,9 @@
 
-from typing import TYPE_CHECKING, Optional, Type
-from ..base import Parser, RubricLikertScale
-from ..base.response import call_with_retries, parse_response, response_schema
+from typing import Optional, Type
+from ..base import Parser, Rubric, RubricLikertScale
+from ..utils import call_with_retries, parse_response, response_schema
 from openai import OpenAI
 from pydantic import BaseModel
-
-if TYPE_CHECKING:
-    from ..base import Rubric
 
 
 class GPTParser(Parser):
@@ -26,7 +23,7 @@ class GPTParser(Parser):
     def parse(self,
               raw_output: str,
               response_model: Type[BaseModel] = RubricLikertScale,
-              rubric: Optional["Rubric"] = None) -> BaseModel:
+              rubric: Optional[Rubric] = None) -> BaseModel:
         """
         Parse the raw model output into a validated evaluation result.
 
