@@ -1,6 +1,7 @@
 import unittest
 from pydantic import ValidationError
 from yescieval import ExampleInjector, PairwiseRubric, PointwiseRubric, Rubric, VocabularyInjector
+from yescieval.base import RubricLikertScale
 from yescieval.base.rubric import SynthesisRubric
 from yescieval.rubric.pointwise.fidelity import Informativeness
 from yescieval.rubric.pointwise.depth import CausalReasoning
@@ -195,6 +196,27 @@ class TestRubricHierarchy(unittest.TestCase):
             "\n<research-question>\nWhat is studied?\n</research-question>\n"
             f"\n<paper-titles-and-abstracts>\n{self.rendered_papers}\n</paper-titles-and-abstracts>\n\n###"
         ))
+
+
+class TestResponseModelContract(unittest.TestCase):
+
+    def test_existing_rubrics_default_to_likert_scale(self):
+        for rubric_class in (Rubric, SynthesisRubric, PointwiseRubric, PairwiseRubric,
+                             Informativeness, CausalReasoning, MethodCoverage, MinimalRubric):
+            self.assertIs(rubric_class.response_model, RubricLikertScale)
+
+    def test_instance_resolves_response_model(self):
+        rubric = Informativeness(papers={"T": "A"}, question="q", answer="ans")
+        self.assertIs(rubric.response_model, RubricLikertScale)
+
+    def test_response_model_is_not_a_constructor_field(self):
+        self.assertNotIn("response_model", Rubric.model_fields)
+        self.assertNotIn("response_model", Informativeness.model_fields)
+
+    def test_default_validate_result_returns_result_unchanged(self):
+        rubric = MinimalRubric(text="some evidence")
+        result = RubricLikertScale(rating=3, rationale="Adequate.")
+        self.assertIs(rubric.validate_result(result), result)
 
 
 if __name__ == '__main__':
